@@ -15,15 +15,7 @@ namespace GameCamera
         {
             Vector3 transformPosition = gameObject.transform.position;
             
-            if (Input.GetKey(KeyCode.D))
-            {
-                transformPosition.x += 5 * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                transformPosition.x -= 5 * Time.deltaTime;
-            }
+            //transformPosition.z += 5 * Time.deltaTime;
 
             gameObject.transform.position = transformPosition;
         }
