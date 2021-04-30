@@ -7,6 +7,9 @@ namespace GameCamera
 {
     public class CameraRig : MonoBehaviour
     {
+        public Camera RigCamera { get; private set; }
+        public List<GameObject> Targets { get; private set; }
+        
         [SerializeField] private Camera camera;
         [SerializeField] private List<GameObject> targets;
         
@@ -20,7 +23,12 @@ namespace GameCamera
             {
                 Debug.LogError("NO CAMERA HAS BEEN FOUND");
             }
+            else
+            {
+                RigCamera = camera;
+            }
 
+            Targets = targets;
             transform.position = DetermineTargetPosition(new Vector3());
         }
 
@@ -77,7 +85,7 @@ namespace GameCamera
                 newPosition.z = FollowAxisPosition(targetPosition.z, rigPosition.z);    
             }
 
-            transform.position = newPosition;
+            transform.position = Vector3.Lerp(rigPosition, newPosition, 5);;
             
             camera.transform.LookAt(pTargetPosition);
         }
