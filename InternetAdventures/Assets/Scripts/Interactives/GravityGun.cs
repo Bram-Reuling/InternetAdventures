@@ -10,10 +10,12 @@ public class GravityGun : Interactable
     [SerializeField] private float range;
     [SerializeField] private float gravityRadius;
     [SerializeField] private float attractionSpeed;
+    [SerializeField] private float minAttractionDistance;
     private List<GameObject> _pickedUpObjects = new List<GameObject>();
     
     private void Start()
     {
+        //Setup input
         _playerInput = transform.parent.GetComponent<PlayerInput>();
         _playerInput.actions.FindAction("Interactable").started += ShootGun;
         _playerInput.actions.FindAction("Interactable").canceled += ReleaseObjects;
@@ -21,16 +23,13 @@ public class GravityGun : Interactable
 
     private void Update()
     {
+        //Move objects towards player only if there's at least one.
         if (_pickedUpObjects.Count > 0)
         {
             foreach (var pickedObject in _pickedUpObjects)
             {
                 Vector3 movementDirection = transform.parent.position - pickedObject.transform.position;
-                //Quaternion necessaryRotation =
-                    //Quaternion.FromToRotation(movementDirection, transform.parent.rotation * movementDirection);
-                //pickedObject.transform.position = transform.parent.position + necessaryRotation * movementDirection;
-                
-                if(movementDirection.magnitude > 3.0f)
+                if(movementDirection.magnitude > minAttractionDistance)
                     pickedObject.transform.Translate( attractionSpeed * Time.deltaTime * movementDirection, Space.World);
             }
         }
@@ -38,6 +37,7 @@ public class GravityGun : Interactable
 
     private void ShootGun(InputAction.CallbackContext pCallback)
     {
+        //Shoots raycast, creates sphere collider, adds collision references to list and set the character as their parent.
         if (Physics.Raycast(transform.position, transform.forward, out var raycastHit, range))
         {
             Vector3 hitPosition = raycastHit.point;
@@ -46,8 +46,8 @@ public class GravityGun : Interactable
             {
                 if (objectInCollider.TryGetComponent(typeof(Rigidbody), out var objectRigidbody))
                 {
-                    Destroy(objectRigidbody);
                     _pickedUpObjects.Add(objectInCollider.gameObject);
+                    objectInCollider.transform.SetParent(transform.parent);
                 }
             }
         }
@@ -55,9 +55,10 @@ public class GravityGun : Interactable
 
     private void ReleaseObjects(InputAction.CallbackContext pCallback)
     {
+        //Sets parent to null again and clears list.
         foreach (var pickedObject in _pickedUpObjects)
         {
-            pickedObject.AddComponent<Rigidbody>();
+            pickedObject.transform.SetParent(null);
         }
 
         _pickedUpObjects.Clear();
