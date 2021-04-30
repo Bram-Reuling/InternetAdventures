@@ -30,7 +30,7 @@ public class CharacterMovement : MonoBehaviour
         _movement *= 0.8f;
         if (!_characterController.isGrounded) _movement.y += Physics.gravity.y * gravityMultiplier;
         _characterController.Move(_movement * Time.deltaTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 0.1f);
+        if(_movement.magnitude > 5.0f) transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, _movement.magnitude * 0.5f);
     }
     
     private void OnJump(InputAction.CallbackContext pObj)
