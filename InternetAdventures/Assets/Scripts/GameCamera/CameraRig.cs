@@ -29,7 +29,7 @@ namespace GameCamera
                 RigCamera = camera;
             }
 
-            Target = target;
+            //Target = target;
             transform.position = DetermineTargetPosition(new Vector3());
         }
 
