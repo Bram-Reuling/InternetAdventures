@@ -4,6 +4,8 @@ namespace GameCamera
 {
     public class TestCube : MonoBehaviour
     {
+        public bool goesPositive = false;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -13,17 +15,16 @@ namespace GameCamera
         // Update is called once per frame
         void Update()
         {
+            int multiplier = 1;
+            
+            if (!goesPositive)
+            {
+                multiplier *= -1;
+            }
+            
             Vector3 transformPosition = gameObject.transform.position;
             
-            if (Input.GetKey(KeyCode.D))
-            {
-                transformPosition.x += 5 * Time.deltaTime;
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                transformPosition.x -= 5 * Time.deltaTime;
-            }
+            transformPosition.x += 5 * Time.deltaTime * multiplier;
 
             gameObject.transform.position = transformPosition;
         }
