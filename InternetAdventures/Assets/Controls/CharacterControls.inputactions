@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "9b3584da-0577-4dda-ad03-c51e9afb59ab",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -38,17 +46,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "CharacterWASD",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "71950c8c-8059-40be-bb0e-6bffd31a975e",
-                    "path": "<Keyboard>/rightCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CharacterArrows",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -66,33 +63,11 @@
                 },
                 {
                     "name": "up",
-                    "id": "505d5f67-260d-4a98-a678-86ccc58cb6a8",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CharacterArrows",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "up",
                     "id": "94ebee0b-feef-473f-80c1-b4aecc6cf3a8",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "CharacterWASD",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "946f6f3a-11bd-4980-9e5b-d1c9f4ebfa94",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CharacterArrows",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -110,33 +85,11 @@
                 },
                 {
                     "name": "left",
-                    "id": "963a033f-d45a-47d0-b7b8-7520dfe71638",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CharacterArrows",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
                     "id": "6cc46499-412c-41ee-8b8c-b98e09a9d7b3",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "CharacterWASD",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "960340e2-33e7-4a07-bf5f-1899bf969d0d",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CharacterArrows",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -154,23 +107,23 @@
                 },
                 {
                     "name": "",
-                    "id": "86a83549-7e39-4fe7-9da0-2464fce5cf35",
-                    "path": "<Keyboard>/rightShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "CharacterArrows",
-                    "action": "Interactable",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "55c92dda-0419-4852-a2f8-5b9de96095dd",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "CharacterWASD",
                     "action": "Interactable",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4eb3e564-7dfd-4940-ad35-8e3209d41a3f",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CharacterWASD",
+                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -189,17 +142,6 @@
                 },
                 {
                     "devicePath": "<Mouse>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "CharacterArrows",
-            "bindingGroup": "CharacterArrows",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }

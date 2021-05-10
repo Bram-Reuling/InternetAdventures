@@ -16,6 +16,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float jumpHeight;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float gravityMultiplier;
+    [SerializeField] private float rotationOnMovementMultiplier;
     [SerializeField] private float deceleration;
 
     private void Start()
@@ -32,9 +33,22 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         //Decelerate
-        _movement *= deceleration;
+        if (_inputMovement.magnitude <= 0.1f)
+        {
+            _movement.x *= deceleration;
+            _movement.z *= deceleration;
+        }
         //Add current input movement to actual movement
         _movement += _inputMovement;
+        
+        Vector3 XZMovement = new Vector3(_movement.x, 0, _movement.z);
+        if(XZMovement.magnitude > movementSpeed)
+        {
+            XZMovement.Normalize();
+            XZMovement *= movementSpeed;
+            _movement.x = XZMovement.x;
+            _movement.z = XZMovement.z;
+        }
         //Apply jump force only when character is grounded.
         if (!_characterController.isGrounded) _movement.y += Physics.gravity.y * gravityMultiplier;
         //Move character controller
@@ -42,7 +56,8 @@ public class CharacterMovement : MonoBehaviour
         //Add rotation to the character controller based on the current movement speed, so the character
         //does not rotate when not walking. The threshold is there to prevent false movement since movement has a magnitude even when
         //standing still.
-        if(_movement.magnitude > 5.0f) transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, _movement.magnitude * 0.5f);
+        if(XZMovement.magnitude > 2.0f) transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 
+            XZMovement.magnitude * rotationOnMovementMultiplier);
     }
     
     private void OnJump(InputAction.CallbackContext pObj)
