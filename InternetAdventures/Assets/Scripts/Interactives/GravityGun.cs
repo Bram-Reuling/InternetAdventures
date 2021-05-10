@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using UnityEngine.Animations;
 
 public class GravityGun : Interactable
 {
@@ -11,14 +10,16 @@ public class GravityGun : Interactable
     [SerializeField] private float gravityRadius;
     [SerializeField] private float attractionSpeed;
     [SerializeField] private float minAttractionDistance;
+    [SerializeField] private bool showDebugInfo;
     private List<GameObject> _pickedUpObjects = new List<GameObject>();
-    
+
     private void Start()
     {
         //Setup input
         _playerInput = transform.parent.GetComponent<PlayerInput>();
         _playerInput.actions.FindAction("Interactable").started += ShootGun;
         _playerInput.actions.FindAction("Interactable").canceled += ReleaseObjects;
+        _playerInput.actions.FindAction("Scroll").performed += ChangeAttractionDistance;
     }
 
     private void Update()
@@ -29,28 +30,36 @@ public class GravityGun : Interactable
             foreach (var pickedObject in _pickedUpObjects)
             {
                 Vector3 movementDirection = transform.parent.position - pickedObject.transform.position;
-                if(movementDirection.magnitude > minAttractionDistance)
-                    pickedObject.transform.Translate( attractionSpeed * Time.deltaTime * movementDirection, Space.World);
+                float distanceDelta = movementDirection.magnitude - minAttractionDistance;
+                if (Mathf.Abs(distanceDelta) > 0.5f)
+                {
+                    pickedObject.transform.Translate( attractionSpeed * Time.deltaTime * movementDirection * distanceDelta, Space.World);
+                }
             }
         }
+        if(showDebugInfo) ShowDebugInformation();
     }
 
     private void ShootGun(InputAction.CallbackContext pCallback)
     {
-        //Shoots raycast, creates sphere collider, adds collision references to list and set the character as their parent.
-        if (Physics.Raycast(transform.position, transform.forward, out var raycastHit, range))
+        LayerMask layerMask = LayerMask.GetMask("Enemy");
+        RaycastHit[] test = Physics.SphereCastAll(transform.position, gravityRadius, transform.forward, range, layerMask);
+        if (test.Length > 0)
         {
-            Vector3 hitPosition = raycastHit.point;
-            Collider[] collidersInRange = Physics.OverlapSphere(hitPosition, gravityRadius);
-            foreach (var objectInCollider in collidersInRange)
+            foreach (var intersectingObject in test)
             {
-                if (objectInCollider.TryGetComponent(typeof(Rigidbody), out var objectRigidbody))
-                {
-                    _pickedUpObjects.Add(objectInCollider.gameObject);
-                    objectInCollider.transform.SetParent(transform.parent);
-                }
+                GameObject intersectingGameObject = intersectingObject.collider.gameObject;
+                _pickedUpObjects.Add(intersectingGameObject);
+                intersectingGameObject.transform.SetParent(transform.parent);
+                intersectingObject.transform.GetComponent<Rigidbody>().useGravity = false;
             }
         }
+    }
+
+    private void ChangeAttractionDistance(InputAction.CallbackContext pCallback)
+    {
+        minAttractionDistance += pCallback.ReadValue<Vector2>().y * 0.01f;
+        Debug.Log(minAttractionDistance);
     }
 
     private void ReleaseObjects(InputAction.CallbackContext pCallback)
@@ -59,8 +68,14 @@ public class GravityGun : Interactable
         foreach (var pickedObject in _pickedUpObjects)
         {
             pickedObject.transform.SetParent(null);
+            pickedObject.transform.GetComponent<Rigidbody>().useGravity = true;
         }
 
         _pickedUpObjects.Clear();
+    }
+
+    private void ShowDebugInformation()
+    {
+        Debug.DrawRay(transform.position, transform.forward * range, Color.magenta);
     }
 }
