@@ -1,18 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectInteraction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private float pushForce;
+    public LayerMask interactableLayers;
+
+    public void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        
+        if(hit.rigidbody != null)
+            hit.rigidbody.AddForce((hit.transform.position - transform.position) * pushForce);
     }
 }

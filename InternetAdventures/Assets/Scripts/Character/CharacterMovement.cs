@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 _movement;
     private Vector3 _inputMovement;
     private Quaternion newRotation;
-    
+
     //Public attributes
     [SerializeField] private float jumpHeight;
     [SerializeField] private float movementSpeed;
@@ -64,6 +64,8 @@ public class CharacterMovement : MonoBehaviour
     {
         //Apply jump force
         if(_characterController.isGrounded) _movement.y = jumpHeight;
+        
+        
     }
     
     private void OnMoveDown(InputAction.CallbackContext pInputValue)
