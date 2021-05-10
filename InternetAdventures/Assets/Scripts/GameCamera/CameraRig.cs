@@ -63,35 +63,24 @@ namespace GameCamera
 
             if (canMoveOnXAxis)
             {
-                //newPosition.x = FollowAxisPosition(targetPosition.x, rigPosition.x);
                 newPosition.x += (targetPosition.x - rigPosition.x) * moveWeight;
             }
 
             if (canMoveOnYAxis)
             {
-                //newPosition.y = FollowAxisPosition(targetPosition.y, rigPosition.y);
                 newPosition.y += (targetPosition.y - rigPosition.y) * moveWeight;
             }
 
             if (canMoveOnZAxis)
             {
-                //newPosition.z = FollowAxisPosition(targetPosition.z, rigPosition.z);    
                 newPosition.z += (targetPosition.z - rigPosition.z) * moveWeight;    
             }
-
-            //transform.position = Vector3.Lerp(rigPosition, newPosition, 5);
             transform.position = newPosition;
 
             if (useLookAt)
             {
                 camera.transform.LookAt(pTargetPosition);   
             }
-        }
-
-        private float FollowAxisPosition(float pTargetAxisValue, float pRigAxisValue)
-        {
-            pRigAxisValue += (pTargetAxisValue - pRigAxisValue) * 0.1f;
-            return pRigAxisValue;
         }
     }
 }
