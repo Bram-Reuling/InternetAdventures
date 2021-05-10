@@ -9,7 +9,8 @@ public class GravityGun : Interactable
     [SerializeField] private float range;
     [SerializeField] private float gravityRadius;
     [SerializeField] private float attractionSpeed;
-    [SerializeField] private float minAttractionDistance;
+    private float currentAttractionDistance;
+    [SerializeField] private float AttractionDistance;
     [SerializeField] private bool showDebugInfo;
     private List<GameObject> _pickedUpObjects = new List<GameObject>();
 
@@ -30,10 +31,13 @@ public class GravityGun : Interactable
             foreach (var pickedObject in _pickedUpObjects)
             {
                 Vector3 movementDirection = transform.parent.position - pickedObject.transform.position;
-                float distanceDelta = movementDirection.magnitude - minAttractionDistance;
-                if (Mathf.Abs(distanceDelta) > 0.5f)
+                float distanceDelta = movementDirection.magnitude - currentAttractionDistance;
+                if (Mathf.Abs(distanceDelta) > 0.1f)
                 {
-                    pickedObject.transform.Translate( attractionSpeed * Time.deltaTime * movementDirection * distanceDelta, Space.World);
+                    if (distanceDelta > 0 && movementDirection.magnitude <= 4.0f) continue;
+                    pickedObject.transform.Translate( attractionSpeed * distanceDelta * Time.deltaTime * movementDirection, Space.World);
+                    pickedObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    pickedObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 }
             }
         }
@@ -42,6 +46,7 @@ public class GravityGun : Interactable
 
     private void ShootGun(InputAction.CallbackContext pCallback)
     {
+        currentAttractionDistance = AttractionDistance;
         LayerMask layerMask = LayerMask.GetMask("Enemy");
         RaycastHit[] test = Physics.SphereCastAll(transform.position, gravityRadius, transform.forward, range, layerMask);
         if (test.Length > 0)
@@ -58,8 +63,7 @@ public class GravityGun : Interactable
 
     private void ChangeAttractionDistance(InputAction.CallbackContext pCallback)
     {
-        minAttractionDistance += pCallback.ReadValue<Vector2>().y * 0.01f;
-        Debug.Log(minAttractionDistance);
+        currentAttractionDistance += pCallback.ReadValue<Vector2>().y * 0.01f;
     }
 
     private void ReleaseObjects(InputAction.CallbackContext pCallback)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 11196159}
   - component: {fileID: 11196158}
   - component: {fileID: 11196157}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 108856696}
   - component: {fileID: 108856695}
   - component: {fileID: 108856694}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 1189249897}
   - component: {fileID: 1189249896}
   - component: {fileID: 1189249895}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,6 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefab: {fileID: 4270987649124312461, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
+  cameraRigPrefab: {fileID: 0}
 --- !u!1 &1232742757
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +955,7 @@ GameObject:
   - component: {fileID: 1232742760}
   - component: {fileID: 1232742759}
   - component: {fileID: 1232742758}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1068,7 +1069,7 @@ GameObject:
   - component: {fileID: 1409667072}
   - component: {fileID: 1409667071}
   - component: {fileID: 1409667070}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1182,7 +1183,7 @@ GameObject:
   - component: {fileID: 1511279002}
   - component: {fileID: 1511279001}
   - component: {fileID: 1511279000}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1296,7 +1297,7 @@ GameObject:
   - component: {fileID: 1618626438}
   - component: {fileID: 1618626437}
   - component: {fileID: 1618626436}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,6 +1679,10 @@ PrefabInstance:
       propertyPath: gravityMultiplier
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4270987649124312460, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
+      propertyPath: rotationOnMovementMultiplier
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4270987649124312461, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
       propertyPath: m_Name
       value: Character
@@ -1766,7 +1771,7 @@ GameObject:
   - component: {fileID: 2107932207}
   - component: {fileID: 2107932206}
   - component: {fileID: 2107932205}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Capsule (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
