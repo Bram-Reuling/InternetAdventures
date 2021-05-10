@@ -1,0 +1,45 @@
+{
+    "name": "PlayerManagerControls",
+    "maps": [
+        {
+            "name": "Manager",
+            "id": "a58c09d8-e035-46b2-8dcc-ca1ab892a79a",
+            "actions": [
+                {
+                    "name": "Switch",
+                    "type": "Button",
+                    "id": "66d743b9-afd2-4a20-9d78-17ac3a60d894",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "94342e55-43d6-4538-b89e-1f7dd5de6fcc",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "SwitchScheme",
+                    "action": "Switch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "SwitchScheme",
+            "bindingGroup": "SwitchScheme",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
