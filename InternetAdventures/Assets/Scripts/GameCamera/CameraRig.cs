@@ -15,8 +15,10 @@ namespace GameCamera
         [SerializeField] private bool canMoveOnZAxis;
 
         [SerializeField] private bool useLookAt = true;
-        
+
         [SerializeField] private float moveWeight = 0.01f;
+
+        public bool setTargetExternally = false;
 
         private void Start()
         {
@@ -29,7 +31,11 @@ namespace GameCamera
                 RigCamera = camera;
             }
 
-            Target = target;
+            if (!setTargetExternally)
+            {
+                Target = target;    
+            }
+            
             transform.position = DetermineTargetPosition(new Vector3());
         }
 
@@ -57,35 +63,24 @@ namespace GameCamera
 
             if (canMoveOnXAxis)
             {
-                //newPosition.x = FollowAxisPosition(targetPosition.x, rigPosition.x);
                 newPosition.x += (targetPosition.x - rigPosition.x) * moveWeight;
             }
 
             if (canMoveOnYAxis)
             {
-                //newPosition.y = FollowAxisPosition(targetPosition.y, rigPosition.y);
                 newPosition.y += (targetPosition.y - rigPosition.y) * moveWeight;
             }
 
             if (canMoveOnZAxis)
             {
-                //newPosition.z = FollowAxisPosition(targetPosition.z, rigPosition.z);    
                 newPosition.z += (targetPosition.z - rigPosition.z) * moveWeight;    
             }
-
-            //transform.position = Vector3.Lerp(rigPosition, newPosition, 5);
             transform.position = newPosition;
 
             if (useLookAt)
             {
                 camera.transform.LookAt(pTargetPosition);   
             }
-        }
-
-        private float FollowAxisPosition(float pTargetAxisValue, float pRigAxisValue)
-        {
-            pRigAxisValue += (pTargetAxisValue - pRigAxisValue) * 0.1f;
-            return pRigAxisValue;
         }
     }
 }
