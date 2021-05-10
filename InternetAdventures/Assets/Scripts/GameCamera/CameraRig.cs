@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace GameCamera
@@ -8,14 +5,18 @@ namespace GameCamera
     public class CameraRig : MonoBehaviour
     {
         public Camera RigCamera { get; private set; }
-        public List<GameObject> Targets { get; private set; }
+        public GameObject Target { get; set; }
         
         [SerializeField] private Camera camera;
-        [SerializeField] private List<GameObject> targets;
+        [SerializeField] private GameObject target;
         
         [SerializeField] private bool canMoveOnXAxis;
         [SerializeField] private bool canMoveOnYAxis;
         [SerializeField] private bool canMoveOnZAxis;
+
+        [SerializeField] private bool useLookAt = true;
+        
+        [SerializeField] private float moveWeight = 0.01f;
 
         private void Start()
         {
@@ -28,7 +29,7 @@ namespace GameCamera
                 RigCamera = camera;
             }
 
-            Targets = targets;
+            //Target = target;
             transform.position = DetermineTargetPosition(new Vector3());
         }
 
@@ -43,23 +44,7 @@ namespace GameCamera
 
         private Vector3 DetermineTargetPosition(Vector3 targetPosition)
         {
-            if (targets.Count > 1)
-            {
-                foreach (GameObject target in targets)
-                {
-                    targetPosition += target.gameObject.transform.position;
-                }
-
-                targetPosition /= targets.Count;
-            }
-            else if (targets.Count == 1)
-            {
-                targetPosition = targets[0].gameObject.transform.position;
-            }
-            else
-            {
-                targetPosition = Vector3.zero;
-            }
+            targetPosition = Target ? Target.gameObject.transform.position : Vector3.zero;
 
             return targetPosition;
         }
@@ -72,27 +57,35 @@ namespace GameCamera
 
             if (canMoveOnXAxis)
             {
-                newPosition.x = FollowAxisPosition(targetPosition.x, rigPosition.x);
+                //newPosition.x = FollowAxisPosition(targetPosition.x, rigPosition.x);
+                newPosition.x += (targetPosition.x - rigPosition.x) * moveWeight;
             }
 
             if (canMoveOnYAxis)
             {
-                newPosition.y = FollowAxisPosition(targetPosition.y, rigPosition.y);
+                //newPosition.y = FollowAxisPosition(targetPosition.y, rigPosition.y);
+                newPosition.y += (targetPosition.y - rigPosition.y) * moveWeight;
             }
 
             if (canMoveOnZAxis)
             {
-                newPosition.z = FollowAxisPosition(targetPosition.z, rigPosition.z);    
+                //newPosition.z = FollowAxisPosition(targetPosition.z, rigPosition.z);    
+                newPosition.z += (targetPosition.z - rigPosition.z) * moveWeight;    
             }
 
-            transform.position = Vector3.Lerp(rigPosition, newPosition, 5);;
-            
-            camera.transform.LookAt(pTargetPosition);
+            //transform.position = Vector3.Lerp(rigPosition, newPosition, 5);
+            transform.position = newPosition;
+
+            if (useLookAt)
+            {
+                camera.transform.LookAt(pTargetPosition);   
+            }
         }
 
         private float FollowAxisPosition(float pTargetAxisValue, float pRigAxisValue)
         {
-            return pRigAxisValue + pTargetAxisValue - pRigAxisValue;
+            pRigAxisValue += (pTargetAxisValue - pRigAxisValue) * 0.1f;
+            return pRigAxisValue;
         }
     }
 }
