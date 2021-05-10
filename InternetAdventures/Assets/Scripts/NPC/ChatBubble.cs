@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ChatBubble : MonoBehaviour
+namespace NPC
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ChatBubble : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
