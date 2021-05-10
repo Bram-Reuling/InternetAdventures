@@ -15,8 +15,10 @@ namespace GameCamera
         [SerializeField] private bool canMoveOnZAxis;
 
         [SerializeField] private bool useLookAt = true;
-        
+
         [SerializeField] private float moveWeight = 0.01f;
+
+        public bool setTargetExternally = false;
 
         private void Start()
         {
@@ -29,7 +31,11 @@ namespace GameCamera
                 RigCamera = camera;
             }
 
-            Target = target;
+            if (!setTargetExternally)
+            {
+                Target = target;    
+            }
+            
             transform.position = DetermineTargetPosition(new Vector3());
         }
 
