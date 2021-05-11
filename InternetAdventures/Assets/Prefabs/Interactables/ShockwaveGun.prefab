@@ -179,5 +179,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 100
-  shockwaveStrength: 15
+  shockwaveStrength: 500
   shockwaveRadius: 4
+  possibleHitRadius: 0.5
+  drawDebugInfo: 1
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 2048

@@ -48,10 +48,10 @@ public class GravityGun : Interactable
     {
         currentAttractionDistance = AttractionDistance;
         LayerMask layerMask = LayerMask.GetMask("Enemy");
-        RaycastHit[] test = Physics.SphereCastAll(transform.position, gravityRadius, transform.forward, range, layerMask);
-        if (test.Length > 0)
+        RaycastHit[] overlapColliders = Physics.SphereCastAll(transform.position, gravityRadius, transform.forward, range, layerMask);
+        if (overlapColliders.Length > 0)
         {
-            foreach (var intersectingObject in test)
+            foreach (var intersectingObject in overlapColliders)
             {
                 GameObject intersectingGameObject = intersectingObject.collider.gameObject;
                 _pickedUpObjects.Add(intersectingGameObject);
