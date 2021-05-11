@@ -15,6 +15,7 @@ public class Hands : Interactable
     [SerializeField] private HandMode handMode;
     private List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
     [SerializeField] private LayerMask _grabableLayers;
+    private CharacterMovement _characterMovement;
     
     private void Start()
     {
@@ -22,6 +23,8 @@ public class Hands : Interactable
         _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
         _playerInput.actions.FindAction("Interactable").started += GrabObjectInFront;
         _playerInput.actions.FindAction("Interactable").canceled += ReleaseObject;
+
+        _characterMovement = transform.parent.parent.GetComponent<CharacterMovement>();
     }
 
     private void FixedUpdate()
@@ -82,7 +85,11 @@ public class Hands : Interactable
         if (_grabbedObject == null) return;
         _grabbedObject.transform.parent = null;
         if (handMode == HandMode.Pickup)
-            _grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        {
+            Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
+            objectRigidbody.constraints = RigidbodyConstraints.None;
+            objectRigidbody.AddForce(_characterMovement.GetCurrentVelocity() * 50);
+        }
         _grabbedObject = null;   
     }
 }

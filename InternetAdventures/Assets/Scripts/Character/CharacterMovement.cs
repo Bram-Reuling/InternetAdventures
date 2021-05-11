@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 _inputMovement;
     private Quaternion newRotation;
     public static bool onZipline;
+    public static bool weaponInUse;
 
     //Public attributes
     [SerializeField] private float jumpHeight;
@@ -89,5 +91,10 @@ public class CharacterMovement : MonoBehaviour
         //since the new input system does not continuously call 'performed' when button is held down.
         Vector2 movementVector = pInputValue.ReadValue<Vector2>();
         _inputMovement = new Vector3(movementVector.x, 0, movementVector.y) * movementSpeed;
+    }
+
+    public Vector3 GetCurrentVelocity()
+    {
+        return _movement;
     }
 }

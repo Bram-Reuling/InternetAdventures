@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class GravityGun : Interactable
 {
@@ -57,6 +58,8 @@ public class GravityGun : Interactable
                 _pickedUpObjects.Add(intersectingGameObject);
                 intersectingGameObject.transform.SetParent(transform.parent);
                 intersectingObject.transform.GetComponent<Rigidbody>().useGravity = false;
+                intersectingObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                CharacterMovement.weaponInUse = true;
             }
         }
     }
@@ -73,9 +76,11 @@ public class GravityGun : Interactable
         {
             pickedObject.transform.SetParent(null);
             pickedObject.transform.GetComponent<Rigidbody>().useGravity = true;
+            pickedObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
 
         _pickedUpObjects.Clear();
+        CharacterMovement.weaponInUse = false;
     }
 
     private void ShowDebugInformation()
