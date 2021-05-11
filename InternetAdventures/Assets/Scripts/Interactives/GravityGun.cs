@@ -13,11 +13,12 @@ public class GravityGun : Interactable
     [SerializeField] private float AttractionDistance;
     [SerializeField] private bool showDebugInfo;
     private List<GameObject> _pickedUpObjects = new List<GameObject>();
+    [SerializeField] private LayerMask interactableLayers;
 
     private void Start()
     {
         //Setup input
-        _playerInput = transform.parent.GetComponent<PlayerInput>();
+        _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
         _playerInput.actions.FindAction("Interactable").started += ShootGun;
         _playerInput.actions.FindAction("Interactable").canceled += ReleaseObjects;
         _playerInput.actions.FindAction("Scroll").performed += ChangeAttractionDistance;
@@ -47,11 +48,10 @@ public class GravityGun : Interactable
     private void ShootGun(InputAction.CallbackContext pCallback)
     {
         currentAttractionDistance = AttractionDistance;
-        LayerMask layerMask = LayerMask.GetMask("Enemy");
-        RaycastHit[] test = Physics.SphereCastAll(transform.position, gravityRadius, transform.forward, range, layerMask);
-        if (test.Length > 0)
+        RaycastHit[] overlapColliders = Physics.SphereCastAll(transform.position, gravityRadius, transform.forward, range, interactableLayers);
+        if (overlapColliders.Length > 0)
         {
-            foreach (var intersectingObject in test)
+            foreach (var intersectingObject in overlapColliders)
             {
                 GameObject intersectingGameObject = intersectingObject.collider.gameObject;
                 _pickedUpObjects.Add(intersectingGameObject);
