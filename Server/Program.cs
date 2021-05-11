@@ -1,4 +1,5 @@
 ﻿using System;
+using BLog;
 
 namespace Server
 {
@@ -6,7 +7,9 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Logger logger = new Logger();
+            
+            logger.Log(LogType.Error, "Yeet");
         }
     }
 }

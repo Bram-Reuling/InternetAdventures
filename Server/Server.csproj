@@ -11,4 +11,12 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="BRLog" Version="1.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="src" />
+    </ItemGroup>
+
 </Project>
