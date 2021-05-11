@@ -162,9 +162,10 @@ GameObject:
   - component: {fileID: 4270987649124312463}
   - component: {fileID: 4270987649124312460}
   - component: {fileID: -6574377211359727472}
+  - component: {fileID: 5524989798615053561}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,9 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52785c8ff260876439c59dd0e1bae568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 20
+  jumpHeight: 16
   movementSpeed: 5
-  gravityMultiplier: 0.11
+  gravityMultiplier: 0.1
   rotationOnMovementMultiplier: 0.8
   deceleration: 0.9
 --- !u!114 &-6574377211359727472
@@ -300,6 +301,19 @@ MonoBehaviour:
   m_DefaultActionMap: Character
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5524989798615053561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270987649124312461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8485aaa77adbb364f9dfb743c2bfe3b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistanceToZipline: 2
 --- !u!1 &5039303818751739820
 GameObject:
   m_ObjectHideFlags: 0
