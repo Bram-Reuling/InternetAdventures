@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Zipline
   - Character
+  - Interactable
   layers:
   - Default
   - TransparentFX

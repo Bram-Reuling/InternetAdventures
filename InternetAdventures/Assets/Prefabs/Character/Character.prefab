@@ -123,6 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4270987647658236902}
+  - component: {fileID: 3238406044825734075}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
@@ -148,6 +149,19 @@ Transform:
   m_Father: {fileID: 4270987649124312459}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3238406044825734075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270987647658236903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5debcbc76fa5549a6e8c6420e00834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialInteractable: {fileID: 3774784377293377780}
 --- !u!1 &4270987649124312461
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +177,7 @@ GameObject:
   - component: {fileID: 4270987649124312460}
   - component: {fileID: -6574377211359727472}
   - component: {fileID: 5524989798615053561}
+  - component: {fileID: 2029496109880511380}
   m_Layer: 0
   m_Name: Character
   m_TagString: Character
@@ -251,7 +266,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4270987649124312460
@@ -266,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52785c8ff260876439c59dd0e1bae568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 16
+  jumpHeight: 20
   movementSpeed: 5
   gravityMultiplier: 0.1
   rotationOnMovementMultiplier: 0.8
@@ -314,6 +329,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistanceToZipline: 2
+--- !u!114 &2029496109880511380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270987649124312461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1b3525d7d315a47ba223574283f713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushForce: 10
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &5039303818751739820
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +698,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
+--- !u!1 &3774784377293377780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5155732482347536873, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
+  m_PrefabInstance: {fileID: 8353734224494231837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8170181427438532365 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 183589566303122960, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}

@@ -7,10 +7,11 @@ public class Zipline : MonoBehaviour
 {
     [SerializeField] private GameObject _post1, _post2;
     [SerializeField] private Vector3 yOffset;
+    [SerializeField] private bool drawDebugInfo;
     
     private void Update()
     {
-        DrawDebugInfo();
+        if(drawDebugInfo) DrawDebugInfo();
     }
     
     public Vector3 GetDirectionVector()
