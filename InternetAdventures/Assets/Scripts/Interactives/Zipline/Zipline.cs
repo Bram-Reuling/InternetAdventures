@@ -6,13 +6,8 @@ using UnityEngine;
 public class Zipline : MonoBehaviour
 {
     [SerializeField] private GameObject _post1, _post2;
-    [SerializeField] private float yOffset;
+    [SerializeField] private Vector3 yOffset;
     
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
         DrawDebugInfo();
@@ -20,7 +15,7 @@ public class Zipline : MonoBehaviour
     
     public Vector3 GetDirectionVector()
     {
-        return _post2.transform.position - _post1.transform.position;
+        return _post2.transform.position + yOffset - _post1.transform.position + yOffset;
     }
 
     public Vector3 GetNormalizedDirectionVector()
@@ -30,6 +25,6 @@ public class Zipline : MonoBehaviour
 
     private void DrawDebugInfo()
     {
-        Debug.DrawLine(_post2.transform.position, _post1.transform.position, Color.magenta);
+        Debug.DrawLine(_post2.transform.position + yOffset, _post1.transform.position + yOffset, Color.magenta);
     }
 }

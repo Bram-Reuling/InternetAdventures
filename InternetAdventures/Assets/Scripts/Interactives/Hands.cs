@@ -19,7 +19,7 @@ public class Hands : Interactable
     private void Start()
     {
         //Setup input
-        _playerInput = transform.parent.GetComponent<PlayerInput>();
+        _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
         _playerInput.actions.FindAction("Interactable").started += GrabObjectInFront;
         _playerInput.actions.FindAction("Interactable").canceled += ReleaseObject;
     }
