@@ -10,7 +10,7 @@ public class ShockwaveGun : Interactable
     private PlayerInput _playerInput;
     private void Start()
     {
-        _playerInput = transform.parent.GetComponent<PlayerInput>();
+        _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
         _playerInput.actions.FindAction("Interactable").performed += ShootGun;
     }
 
