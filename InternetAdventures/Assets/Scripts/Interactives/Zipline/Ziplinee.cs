@@ -28,7 +28,7 @@ public class Ziplinee : MonoBehaviour
         if (_ziplineVector != Vector3.zero)
         {
             _characterController.Move(Time.deltaTime * 10 * _ziplineVector);
-            if(!_currentZipline.ZiplineUsable(transform.position)) DetachFromZipline();
+            if(!_currentZipline.ZiplineMovementValid(transform.position)) DetachFromZipline();
         }
     }
 

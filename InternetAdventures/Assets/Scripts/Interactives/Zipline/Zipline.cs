@@ -26,17 +26,28 @@ public class Zipline : MonoBehaviour
 
     public Vector3 GetShortestVectorToLine(in Vector3 pPlayerPosition)
     {
-        float scalarProjection = Vector3.Dot(GetNormalizedDirectionVector(), pPlayerPosition - transform.TransformDirection(_post1.transform.position + yOffset));
+        float scalarProjection = GetScalarProjection(pPlayerPosition);
         Vector3 vecOnLine = transform.TransformDirection(_post1.transform.position + yOffset) + GetNormalizedDirectionVector() * scalarProjection;
         Vector3 vecToPlayer = pPlayerPosition - vecOnLine;
         Debug.DrawRay(vecOnLine, vecToPlayer, Color.blue);
         return vecToPlayer;
     }
 
+    private float GetScalarProjection(in Vector3 pPlayerPosition)
+    {
+        return Vector3.Dot(GetNormalizedDirectionVector(), pPlayerPosition - transform.TransformDirection(_post1.transform.position + yOffset));
+    }
+
     public bool ZiplineUsable(in Vector3 pPlayerPosition)
     {
-        float scalarProjection = Vector3.Dot(GetNormalizedDirectionVector(), pPlayerPosition - transform.TransformDirection(_post1.transform.position + yOffset));
+        float scalarProjection = GetScalarProjection(pPlayerPosition);
         return scalarProjection > 0 && scalarProjection < GetDirectionVector().magnitude;
+    }
+    
+    public bool ZiplineMovementValid(in Vector3 pPlayerPosition)
+    {
+        float scalarProjection = GetScalarProjection(pPlayerPosition);
+        return scalarProjection > 1 && scalarProjection < GetDirectionVector().magnitude - 1;
     }
 
     private void DrawDebugInfo()
