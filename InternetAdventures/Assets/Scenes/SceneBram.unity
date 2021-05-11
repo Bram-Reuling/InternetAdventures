@@ -2127,14 +2127,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028209618}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.25, y: 1.5, z: -6.9}
+  m_LocalRotation: {x: -0, y: 0.68330884, z: -0, w: 0.73012954}
+  m_LocalPosition: {x: -2.8, y: 1.5, z: 8.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1587185982}
   m_Father: {fileID: 0}
   m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 86.206, z: 0}
 --- !u!114 &1028209623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2147,6 +2147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ac504aa28d98f4b91731a9ca4d8b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emojiContainer: {fileID: 11400000, guid: 7cba528cf0735f3448898ed1e31d4abd, type: 2}
+  minimalTimeForImageChange: 5
+  maximalTimeForImageChange: 10
+  imageSlot: {fileID: 1915866957}
 --- !u!114 &1028209624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2159,7 +2163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1113e447f28cb45ad78edca67751bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumLookRange: 10
+  minimumTriggerSpan: 10
+  cameraRig: {fileID: 1974332038}
 --- !u!1 &1119097160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2878,7 +2883,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915866955}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
