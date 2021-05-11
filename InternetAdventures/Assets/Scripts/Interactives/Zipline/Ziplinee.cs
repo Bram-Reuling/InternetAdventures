@@ -44,10 +44,6 @@ public class Ziplinee : MonoBehaviour
                 Vector3 PlayerToLineVec = currentZipline.GetShortestVectorToLine(transform.position);
                 if (PlayerToLineVec.magnitude <= minDistanceToZipline)
                 {
-                    Debug.Log("Attach to zipline!");
-                    Debug.Log("Distance was " + PlayerToLineVec.magnitude);
-                    
-                    
                     _ziplineVector = currentZipline.GetNormalizedDirectionVector();
                     _ziplineVector *= Mathf.Sign(Vector3.Dot(transform.forward, _ziplineVector));
                     
