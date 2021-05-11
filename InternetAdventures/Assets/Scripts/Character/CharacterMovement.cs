@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 _movement;
     private Vector3 _inputMovement;
     private Quaternion newRotation;
+    public static bool onZipline;
 
     //Public attributes
     [SerializeField] private float jumpHeight;
@@ -52,7 +53,7 @@ public class CharacterMovement : MonoBehaviour
         //Apply jump force only when character is grounded.
         if (!_characterController.isGrounded) _movement.y += Physics.gravity.y * gravityMultiplier;
         //Move character controller
-        _characterController.Move(_movement * Time.deltaTime);
+        if(!onZipline) _characterController.Move(_movement * Time.deltaTime);
         //Add rotation to the character controller based on the current movement speed, so the character
         //does not rotate when not walking. The threshold is there to prevent false movement since movement has a magnitude even when
         //standing still.
@@ -64,8 +65,12 @@ public class CharacterMovement : MonoBehaviour
     {
         //Apply jump force
         if(_characterController.isGrounded) _movement.y = jumpHeight;
-        
-        
+    }
+    
+    public void AddJumpForce()
+    {
+        //Apply jump force
+        _movement.y = jumpHeight;
     }
     
     private void OnMoveDown(InputAction.CallbackContext pInputValue)
