@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EventBroker : MonoBehaviour
+public static class EventBroker
 {
     // Custom Delegates
     public delegate void ExampleDelegate(int pValue);
@@ -9,7 +9,7 @@ public class EventBroker : MonoBehaviour
     public static event ExampleDelegate ExampleEvent;
 
     // Functions
-    private static void CallExampleEvent(int pValue)
+    public static void CallExampleEvent(int pValue)
     {
         ExampleEvent?.Invoke(pValue);
     }
