@@ -30,14 +30,14 @@ namespace NPC
             imageSlot.enabled = true;
             StartCoroutine(EmojiCoroutine());
             triggeredFunction = true;
-            Debug.Log("Enabled Emojis");
+            //Debug.Log("Enabled Emojis");
         }
 
         private IEnumerator EmojiCoroutine()
         {
             while (displayImages)
             {
-                Debug.Log("YUUUP");
+                //Debug.Log("YUUUP");
                 SetSprite();
                 yield return new WaitForSeconds(Random.Range(minimalTimeForImageChange, maximalTimeForImageChange));
             }
@@ -50,7 +50,7 @@ namespace NPC
             StopCoroutine(EmojiCoroutine());
             triggeredFunction = false;
             imageSlot.enabled = false;
-            Debug.Log("Disabled Emojis");
+            //Debug.Log("Disabled Emojis");
         }
 
         private void SetSprite()
@@ -61,12 +61,12 @@ namespace NPC
 
                 if (pictureIndex == lastImageIndex)
                 {
-                    Debug.Log("Same as last");
+                    //Debug.Log("Same as last");
                     SetSprite();
                 }
                 else
                 {
-                    Debug.Log("Unique");
+                    //Debug.Log("Unique");
                     lastImageIndex = pictureIndex;
                     imageSlot.sprite = emojiContainer.emojis[pictureIndex];   
                 }
