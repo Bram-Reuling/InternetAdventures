@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,7 @@ public class Hands : Interactable
     private List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
     [SerializeField] private LayerMask _grabableLayers;
     private CharacterMovement _characterMovement;
+    private Transform _initialParent;
     
     private void Start()
     {
@@ -46,7 +48,7 @@ public class Hands : Interactable
 
     private void GrabObjectInFront(InputAction.CallbackContext pCallback)
     {
-        if(_gameObjectsInTrigger.Count == 0) return;
+        if(_gameObjectsInTrigger.Count == 0 && !gameObject.activeSelf) return;
         float shortestDistanceGameObject = float.PositiveInfinity;
         foreach (var currentGameObject in _gameObjectsInTrigger)
         {
@@ -60,6 +62,7 @@ public class Hands : Interactable
         if (_grabbedObject == null) return;
         if (handMode == HandMode.Pickup)
         {
+            _initialParent = _grabbedObject.transform.parent;
             _grabbedObject.transform.parent = transform;
             _grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -83,7 +86,7 @@ public class Hands : Interactable
     private void ReleaseObject(InputAction.CallbackContext pCallback)
     {
         if (_grabbedObject == null) return;
-        _grabbedObject.transform.parent = null;
+        _grabbedObject.transform.parent = _initialParent;
         if (handMode == HandMode.Pickup)
         {
             Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();

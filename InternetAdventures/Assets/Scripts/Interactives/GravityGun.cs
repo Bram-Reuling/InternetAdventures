@@ -13,7 +13,7 @@ public class GravityGun : Interactable
     private float currentAttractionDistance;
     [SerializeField] private float AttractionDistance;
     [SerializeField] private bool showDebugInfo;
-    private List<GameObject> _pickedUpObjects = new List<GameObject>();
+    private Dictionary<GameObject, Transform> _pickedUpObjects = new Dictionary<GameObject, Transform>();
     [SerializeField] private LayerMask interactableLayers;
 
     private void Start()
@@ -30,7 +30,7 @@ public class GravityGun : Interactable
         //Move objects towards player only if there's at least one.
         if (_pickedUpObjects.Count > 0)
         {
-            foreach (var pickedObject in _pickedUpObjects)
+            foreach (var pickedObject in _pickedUpObjects.Keys)
             {
                 Vector3 movementDirection = transform.parent.position - pickedObject.transform.position;
                 float distanceDelta = movementDirection.magnitude - currentAttractionDistance;
@@ -48,6 +48,7 @@ public class GravityGun : Interactable
 
     private void ShootGun(InputAction.CallbackContext pCallback)
     {
+        if (!gameObject.activeSelf) return;
         currentAttractionDistance = AttractionDistance;
         RaycastHit[] overlapColliders = Physics.SphereCastAll(transform.position, gravityRadius, transform.forward, range, interactableLayers);
         if (overlapColliders.Length > 0)
@@ -55,7 +56,7 @@ public class GravityGun : Interactable
             foreach (var intersectingObject in overlapColliders)
             {
                 GameObject intersectingGameObject = intersectingObject.collider.gameObject;
-                _pickedUpObjects.Add(intersectingGameObject);
+                _pickedUpObjects.Add(intersectingGameObject, intersectingObject.collider.transform.parent);
                 intersectingGameObject.transform.SetParent(transform.parent);
                 intersectingObject.transform.GetComponent<Rigidbody>().useGravity = false;
                 intersectingObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -72,11 +73,12 @@ public class GravityGun : Interactable
     private void ReleaseObjects(InputAction.CallbackContext pCallback)
     {
         //Sets parent to null again and clears list.
-        foreach (var pickedObject in _pickedUpObjects)
+        foreach (var pickedObject in _pickedUpObjects.Keys)
         {
             pickedObject.transform.SetParent(null);
             pickedObject.transform.GetComponent<Rigidbody>().useGravity = true;
             pickedObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            pickedObject.transform.parent = _pickedUpObjects[pickedObject];
         }
 
         _pickedUpObjects.Clear();
