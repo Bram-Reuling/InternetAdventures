@@ -24,6 +24,7 @@ public class ShockwaveGun : Interactable
 
     private void ShootGun(InputAction.CallbackContext pCallback)
     {
+        if (!gameObject.activeSelf) return;
         RaycastHit[] overlapColliders =
             Physics.SphereCastAll(transform.position, possibleHitRadius, transform.forward, range, interactableLayers);
 

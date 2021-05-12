@@ -24,15 +24,14 @@ public class WeaponSwitcher : MonoBehaviour
             GameObject currentGameObject = transform.GetChild(i).gameObject;
             if (currentGameObject.tag.Equals("Interactable"))
             {
-                currentGameObject.SetActive(currentGameObject == initialInteractable);
                 if (currentGameObject == initialInteractable)
                 {
                     _activeGameobject = currentGameObject;
+                    _currentIndexInList = currentIndex;
                     currentGameObject.SetActive(true);
                 }
                 else currentGameObject.SetActive(false);
                 _interactables.Add(currentGameObject);
-                _currentIndexInList = currentIndex;
                 currentIndex++;
             }
         }
