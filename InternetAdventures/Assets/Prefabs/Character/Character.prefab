@@ -174,8 +174,8 @@ GameObject:
   - component: {fileID: 4270987649124312456}
   - component: {fileID: 4270987649124312457}
   - component: {fileID: 4270987649124312463}
-  - component: {fileID: 4270987649124312460}
   - component: {fileID: -6574377211359727472}
+  - component: {fileID: 4270987649124312460}
   - component: {fileID: 5524989798615053561}
   - component: {fileID: 2029496109880511380}
   m_Layer: 0
@@ -269,23 +269,6 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4270987649124312460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4270987649124312461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52785c8ff260876439c59dd0e1bae568, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpHeight: 8
-  movementSpeed: 5
-  gravityMultiplier: 3
-  rotationOnMovementMultiplier: 0.8
-  deceleration: 0.9
 --- !u!114 &-6574377211359727472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +299,23 @@ MonoBehaviour:
   m_DefaultActionMap: Character
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4270987649124312460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270987649124312461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52785c8ff260876439c59dd0e1bae568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 8
+  movementSpeed: 5
+  gravityMultiplier: 3
+  rotationOnMovementMultiplier: 0.8
+  deceleration: 0.9
 --- !u!114 &5524989798615053561
 MonoBehaviour:
   m_ObjectHideFlags: 0
