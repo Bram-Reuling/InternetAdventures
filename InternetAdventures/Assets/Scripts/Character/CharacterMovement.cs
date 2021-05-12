@@ -53,7 +53,7 @@ public class CharacterMovement : MonoBehaviour
             _movement.z = XZMovement.z;
         }
         //Apply jump force only when character is grounded.
-        if (!_characterController.isGrounded) _movement.y += Physics.gravity.y * gravityMultiplier;
+        if (!_characterController.isGrounded) _movement.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
         //Move character controller
         if(!onZipline) _characterController.Move(_movement * Time.deltaTime);
         //Add rotation to the character controller based on the current movement speed, so the character

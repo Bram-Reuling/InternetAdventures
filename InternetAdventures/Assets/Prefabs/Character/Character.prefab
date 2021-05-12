@@ -281,9 +281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52785c8ff260876439c59dd0e1bae568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 20
+  jumpHeight: 8
   movementSpeed: 5
-  gravityMultiplier: 0.1
+  gravityMultiplier: 3
   rotationOnMovementMultiplier: 0.8
   deceleration: 0.9
 --- !u!114 &-6574377211359727472
