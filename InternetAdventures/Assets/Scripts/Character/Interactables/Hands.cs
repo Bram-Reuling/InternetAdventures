@@ -38,7 +38,7 @@ public class Hands : Interactable
                 Vector3 directionVector = transform.parent.position - _grabbedObject.transform.position;
                 if (directionVector.magnitude > 3.0f)
                 {
-                    Vector3 forceToBeApplied = 20.0f * directionVector.normalized;
+                    Vector3 forceToBeApplied = 30.0f * directionVector.normalized;
                     _grabbedObject.GetComponent<Rigidbody>().AddForce(forceToBeApplied, ForceMode.Force);
                 }
                 else _grabbedObject.GetComponent<Rigidbody>().velocity *= 0.95f;
@@ -91,7 +91,7 @@ public class Hands : Interactable
         {
             Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
             objectRigidbody.constraints = RigidbodyConstraints.None;
-            objectRigidbody.AddForce(_characterMovement.GetCurrentVelocity() * 50);
+            objectRigidbody.AddForce(_characterMovement.GetVelocity() * 50);
         }
         _grabbedObject = null;   
     }

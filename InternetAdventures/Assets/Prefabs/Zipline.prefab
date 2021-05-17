@@ -15,7 +15,7 @@ GameObject:
   m_Layer: 0
   m_Name: Post_2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -143,7 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _post1: {fileID: 7543503768969856933}
   _post2: {fileID: 7543503767127363423}
+  throwoffDistance: 0
   yOffset: {x: 0, y: 0, z: 0}
+  drawDebugInfo: 0
 --- !u!1 &7543503768969856933
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +161,7 @@ GameObject:
   m_Layer: 0
   m_Name: Post_1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

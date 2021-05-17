@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WeaponSwitcher : MonoBehaviour
+public class InteractableHandler : MonoBehaviour
 {
     private List<GameObject> _interactables = new List<GameObject>();
     private int _currentIndexInList;
@@ -15,9 +15,11 @@ public class WeaponSwitcher : MonoBehaviour
     
     private void Start()
     {
+        //Setup input
         _playerInput = transform.parent.GetComponent<PlayerInput>();
         _playerInput.actions.FindAction("Scroll").performed += ChangeInteractable;
 
+        //Iterates through all children and saves all with the tag 'Interactable' in a list to scroll through
         int currentIndex = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -39,9 +41,11 @@ public class WeaponSwitcher : MonoBehaviour
 
     private void ChangeInteractable(InputAction.CallbackContext pCallback)
     {
+        //Info: Checks whether a weapon is currently in use and changes if not.
         if (CharacterMovement.weaponInUse) return;
         _currentScrollValue = pCallback.ReadValue<Vector2>().y;
         _currentIndexInList += _currentScrollValue < 0 ? -1 : 1;
+        //This is a quick check to avoid IndexOutOfRange's
         if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
         else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;
         _activeGameobject.SetActive(false);

@@ -175,9 +175,9 @@ GameObject:
   - component: {fileID: 4270987649124312457}
   - component: {fileID: 4270987649124312463}
   - component: {fileID: -6574377211359727472}
-  - component: {fileID: 4270987649124312460}
-  - component: {fileID: 5524989798615053561}
-  - component: {fileID: 2029496109880511380}
+  - component: {fileID: 8335792541561737402}
+  - component: {fileID: 4997865184777629712}
+  - component: {fileID: 13570335880824447}
   m_Layer: 0
   m_Name: Character
   m_TagString: Character
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_DefaultActionMap: Character
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4270987649124312460
+--- !u!114 &8335792541561737402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,25 +311,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52785c8ff260876439c59dd0e1bae568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 8
+  UserInputAllowed: 0
+  jumpHeight: 10
   movementSpeed: 5
   gravityMultiplier: 3
-  rotationOnMovementMultiplier: 0.8
-  deceleration: 0.9
---- !u!114 &5524989798615053561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4270987649124312461}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8485aaa77adbb364f9dfb743c2bfe3b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minDistanceToZipline: 2
---- !u!114 &2029496109880511380
+  rotationOnMovementMultiplier: 0.7
+  deceleration: 0.92
+--- !u!114 &4997865184777629712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,10 +329,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1b3525d7d315a47ba223574283f713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 10
+  pushForce: 20
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2048
+--- !u!114 &13570335880824447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270987649124312461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8485aaa77adbb364f9dfb743c2bfe3b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistanceToZipline: 1.5
+  ziplineSpeed: 5
 --- !u!1 &5039303818751739820
 GameObject:
   m_ObjectHideFlags: 0

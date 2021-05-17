@@ -1,78 +1,64 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Timers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
-    private CharacterController _characterController;
-    private PlayerInput _playerInput;
-    private Vector3 _movement;
-    private Vector3 _inputMovement;
-    private Quaternion newRotation;
-    public static bool onZipline;
-    public static bool weaponInUse;
-
-    //Public attributes
+    //Public
+    [HideInInspector] public bool UserInputAllowed;
+    
+    //Private - Inspector
     [SerializeField] private float jumpHeight;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float gravityMultiplier;
     [SerializeField] private float rotationOnMovementMultiplier;
     [SerializeField] private float deceleration;
+    
+    //Private
+    private Vector3 _velocity;
+    private Vector3 _inputMovement;
+    private Quaternion _newRotation;
+    
+    public static bool weaponInUse;
+    
+    //Other components
+    private CharacterController _characterController;
+    private PlayerInput _playerInput;
 
     private void Start()
     {
         //Get components
         _characterController = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
+        
         //Setup input
-        _playerInput.actions.FindAction("Jump").performed += OnJump;
+        //Movement
         _playerInput.actions.FindAction("Movement").performed += OnMoveDown;
         _playerInput.actions.FindAction("Movement").canceled += OnMoveUp;
+        //Jump
+        _playerInput.actions.FindAction("Jump").performed += OnJump;
+        
+        //Initialize values
+        UserInputAllowed = true;
     }
     
     private void Update()
     {
-        //Decelerate
-        if (_inputMovement.magnitude <= 0.1f)
-        {
-            _movement.x *= deceleration;
-            _movement.z *= deceleration;
-        }
+        Decelerate();
         //Add current input movement to actual movement
-        _movement += _inputMovement;
-        
-        Vector3 XZMovement = new Vector3(_movement.x, 0, _movement.z);
-        if(XZMovement.magnitude > movementSpeed)
-        {
-            XZMovement.Normalize();
-            XZMovement *= movementSpeed;
-            _movement.x = XZMovement.x;
-            _movement.z = XZMovement.z;
-        }
+        _velocity += _inputMovement;
+        Vector3 XZMovement = ConstrainXZMovement();
         //Apply jump force only when character is grounded.
-        if (!_characterController.isGrounded) _movement.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+        if (!_characterController.isGrounded) AddJumpForce();
         //Move character controller
-        if(!onZipline) _characterController.Move(_movement * Time.deltaTime);
+        if(UserInputAllowed) _characterController.Move(_velocity * Time.deltaTime);
         //Add rotation to the character controller based on the current movement speed, so the character
         //does not rotate when not walking. The threshold is there to prevent false movement since movement has a magnitude even when
         //standing still.
-        if(XZMovement.magnitude > 2.0f) transform.rotation = Quaternion.RotateTowards(transform.rotation, newRotation, 
+        if(XZMovement.magnitude > 2.0f) transform.rotation = Quaternion.RotateTowards(transform.rotation, _newRotation, 
             XZMovement.magnitude * rotationOnMovementMultiplier);
-    }
-    
-    private void OnJump(InputAction.CallbackContext pObj)
-    {
-        //Apply jump force
-        if(_characterController.isGrounded) _movement.y = jumpHeight;
-    }
-    
-    public void AddJumpForce()
-    {
-        //Apply jump force
-        _movement.y = jumpHeight;
     }
     
     private void OnMoveDown(InputAction.CallbackContext pInputValue)
@@ -80,7 +66,7 @@ public class CharacterMovement : MonoBehaviour
         //Read in new vector
         Vector2 movementVector = pInputValue.ReadValue<Vector2>();
         //Create new rotation from the given input
-        newRotation = Quaternion.LookRotation(new Vector3(movementVector.x,0, movementVector.y), Vector3.up);
+        _newRotation = Quaternion.LookRotation(new Vector3(movementVector.x,0, movementVector.y), Vector3.up);
         //Assign movement direction multiplied with the movement speed
         _inputMovement = new Vector3(movementVector.x, 0, movementVector.y) * movementSpeed;
     }
@@ -92,9 +78,43 @@ public class CharacterMovement : MonoBehaviour
         Vector2 movementVector = pInputValue.ReadValue<Vector2>();
         _inputMovement = new Vector3(movementVector.x, 0, movementVector.y) * movementSpeed;
     }
-
-    public Vector3 GetCurrentVelocity()
+    
+    private void OnJump(InputAction.CallbackContext pObj)
     {
-        return _movement;
+        //Apply jump force
+        if(_characterController.isGrounded) _velocity.y = jumpHeight;
+    }
+
+    private void Decelerate()
+    {
+        if (_inputMovement.magnitude <= 0.1f)
+        {
+            _velocity.x *= deceleration;
+            _velocity.z *= deceleration;
+        }
+    }
+
+    private Vector3 ConstrainXZMovement()
+    {
+        Vector3 XZMovement = new Vector3(_velocity.x, 0, _velocity.z);
+        if(XZMovement.magnitude > movementSpeed)
+        {
+            XZMovement.Normalize();
+            XZMovement *= movementSpeed;
+            _velocity.x = XZMovement.x;
+            _velocity.z = XZMovement.z;
+        }
+
+        return XZMovement;
+    }
+
+    public Vector3 GetVelocity()
+    {
+        return _velocity;
+    }
+
+    public void AddJumpForce()
+    {
+        _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
     }
 }
