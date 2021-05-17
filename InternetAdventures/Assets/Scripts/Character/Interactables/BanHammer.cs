@@ -19,9 +19,7 @@ public class BanHammer : Interactable
     {
         foreach (var gameObjectInReach in _gameObjectsInTrigger)
         {
-            Debug.Log("HAMMERED");
-            Transform transformGO = gameObjectInReach.transform;
-            transformGO.localScale -= new Vector3(0, transformGO.localScale.y - 0.2f, 0);
+            gameObjectInReach.transform.localScale -= new Vector3(0, gameObjectInReach.transform.localScale.y - 0.2f, 0);
             if (Physics.Raycast(gameObjectInReach.transform.position, Vector3.down, out var raycastHit,
                 float.PositiveInfinity))
             {
