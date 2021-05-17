@@ -1,4 +1,4 @@
-﻿namespace shared
+﻿namespace Shared
 {
 	/**
 	 * Send from SERVER to CLIENT to notify that the client has joined a specific room (i.e. that it should change state).

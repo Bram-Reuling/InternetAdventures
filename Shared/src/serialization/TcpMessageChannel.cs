@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
-namespace shared {
+namespace Shared {
 
     /**
      * TcpMessageChannel is sort of a facade around a TcpClient, Packets & the StreamUtil class.

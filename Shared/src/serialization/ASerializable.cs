@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace shared
+namespace Shared
 {
     /**
      * Classes that extend ASerializable can (de)serialize themselves into/out of a Packet instance. 

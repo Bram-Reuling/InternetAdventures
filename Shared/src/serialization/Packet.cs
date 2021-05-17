@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace shared
+namespace Shared
 {
 	/**
 	 * The Packet class provides a simple wrapper around an array of bytes (in the form of a MemoryStream), 
