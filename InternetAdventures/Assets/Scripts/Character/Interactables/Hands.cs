@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +10,7 @@ public class Hands : Interactable
     [SerializeField] private float grabDistance;
     private GameObject _grabbedObject;
     [SerializeField] private HandMode handMode;
-    private List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
+    private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
     [SerializeField] private LayerMask _grabableLayers;
     private CharacterMovement _characterMovement;
     private Transform _initialParent;

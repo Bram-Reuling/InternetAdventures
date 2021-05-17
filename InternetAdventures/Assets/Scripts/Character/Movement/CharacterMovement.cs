@@ -19,7 +19,9 @@ public class CharacterMovement : MonoBehaviour
     //Private
     private Vector3 _velocity;
     private Vector3 _inputMovement;
+    private Vector3 _externalMovement = Vector3.zero;
     private Quaternion _newRotation;
+    private GameObject _lastCollidedGameObject;
     
     public static bool weaponInUse;
     
@@ -51,9 +53,9 @@ public class CharacterMovement : MonoBehaviour
         _velocity += _inputMovement;
         Vector3 XZMovement = ConstrainXZMovement();
         //Apply jump force only when character is grounded.
-        if (!_characterController.isGrounded) AddJumpForce();
+        if (!_characterController.isGrounded) _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
         //Move character controller
-        if(UserInputAllowed) _characterController.Move(_velocity * Time.deltaTime);
+        if(UserInputAllowed) _characterController.Move((_velocity + _externalMovement) * Time.deltaTime);
         //Add rotation to the character controller based on the current movement speed, so the character
         //does not rotate when not walking. The threshold is there to prevent false movement since movement has a magnitude even when
         //standing still.
@@ -85,6 +87,11 @@ public class CharacterMovement : MonoBehaviour
         if(_characterController.isGrounded) _velocity.y = jumpHeight;
     }
 
+    public void AddJumpForce()
+    {
+        _velocity.y = jumpHeight;
+    }
+
     private void Decelerate()
     {
         if (_inputMovement.magnitude <= 0.1f)
@@ -112,9 +119,22 @@ public class CharacterMovement : MonoBehaviour
     {
         return _velocity;
     }
-
-    public void AddJumpForce()
+    
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+        switch (hit.transform.tag)
+        {
+            case "Platform":
+                if (_lastCollidedGameObject == null || _lastCollidedGameObject != hit.gameObject)
+                {
+                    _lastCollidedGameObject = hit.gameObject;
+                    _externalMovement = _lastCollidedGameObject.GetComponent<MovingPlatformInfo>().Movement;
+                }
+                break;
+            default:
+                transform.parent = null;
+                _lastCollidedGameObject = null;
+                break;
+        }
     }
 }
