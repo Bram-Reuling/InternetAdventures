@@ -6,15 +6,17 @@ public class MovingPlatformsHandler : MonoBehaviour
     [SerializeField] private GameObject platform;
     [SerializeField] private float duration;
     [SerializeField] private float spawnRate;
+    [SerializeField] private bool useRandomSpawnIntervals;
+    [SerializeField] private float minSpawnTime;
+    [SerializeField] private float maxSpawnTime;
+    
     private float timePassed;
     private Transform From, To;
-    private Vector3 _direction;
 
     private void Start()
     {
         From = transform.GetChild(0);
         To = transform.GetChild(1);
-        _direction = To.position - From.position;
     }
 
     private void Update()
@@ -25,6 +27,8 @@ public class MovingPlatformsHandler : MonoBehaviour
             LeanPool.Spawn(platform, From.position, Quaternion.identity, transform).GetComponent<MovingPlatform>()
                 .Initialize(To.position, duration);
             timePassed = 0;
+            if(useRandomSpawnIntervals) 
+                spawnRate = Random.Range(minSpawnTime, maxSpawnTime);
         }
     }
 }
