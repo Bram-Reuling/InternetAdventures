@@ -24,7 +24,7 @@ public class MovingPlatformsHandler : MonoBehaviour
         timePassed += Time.deltaTime;
         if (timePassed >= spawnRate)
         {
-            LeanPool.Spawn(platform, From.position, Quaternion.identity, transform).GetComponent<MovingPlatform>()
+            LeanPool.Spawn(platform, To.position, Quaternion.identity, transform).GetComponent<MovingPlatform>()
                 .Initialize(To.position, duration);
             timePassed = 0;
             if(useRandomSpawnIntervals) 
