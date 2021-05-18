@@ -11,6 +11,7 @@ public class ShockwaveGun : Interactable
     [SerializeField] private bool drawDebugInfo;
     [SerializeField] private LayerMask interactableLayers;
     private PlayerInput _playerInput;
+
     private void Start()
     {
         _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
@@ -19,7 +20,7 @@ public class ShockwaveGun : Interactable
 
     private void Update()
     {
-        if(drawDebugInfo) DrawDebug();
+        if (drawDebugInfo) DrawDebug();
     }
 
     private void ShootGun(InputAction.CallbackContext pCallback)
@@ -41,9 +42,9 @@ public class ShockwaveGun : Interactable
                 }
             }
         }
-        
+
         //Deprecated - uses only ray
-        
+
         // var raycastHit = new RaycastHit();
         // if (Physics.Raycast(transform.position, transform.forward, out raycastHit, range))
         // {

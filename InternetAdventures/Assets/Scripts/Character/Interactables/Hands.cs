@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +10,7 @@ public class Hands : Interactable
     [SerializeField] private float grabDistance;
     private GameObject _grabbedObject;
     [SerializeField] private HandMode handMode;
-    private List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
+    private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
     [SerializeField] private LayerMask _grabableLayers;
     private CharacterMovement _characterMovement;
     private Transform _initialParent;
@@ -38,7 +34,7 @@ public class Hands : Interactable
                 Vector3 directionVector = transform.parent.position - _grabbedObject.transform.position;
                 if (directionVector.magnitude > 3.0f)
                 {
-                    Vector3 forceToBeApplied = 20.0f * directionVector.normalized;
+                    Vector3 forceToBeApplied = 30.0f * directionVector.normalized;
                     _grabbedObject.GetComponent<Rigidbody>().AddForce(forceToBeApplied, ForceMode.Force);
                 }
                 else _grabbedObject.GetComponent<Rigidbody>().velocity *= 0.95f;
@@ -91,7 +87,7 @@ public class Hands : Interactable
         {
             Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
             objectRigidbody.constraints = RigidbodyConstraints.None;
-            objectRigidbody.AddForce(_characterMovement.GetCurrentVelocity() * 50);
+            objectRigidbody.AddForce(_characterMovement.GetVelocity() * 50);
         }
         _grabbedObject = null;   
     }
