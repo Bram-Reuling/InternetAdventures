@@ -132,6 +132,9 @@ public class CharacterMovement : MonoBehaviour
                     //_externalMovement = _lastCollidedGameObject.GetComponent<MovingPlatform>().Movement;
                 }
                 break;
+            case "PhysicsPlatform":
+                hit.transform.parent.GetComponent<PhysicsPlatformHandler>().OnActuation(hit.gameObject, gameObject);
+                break;
             default:
                 transform.parent = null;
                 _lastCollidedGameObject = null;
