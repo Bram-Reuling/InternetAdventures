@@ -35,6 +35,7 @@ namespace Shared
 		public void Write (int pInt)							{		writer.Write(pInt);			}
 		public void Write (string pString)						{		writer.Write(pString);		}
 		public void Write (bool pBool)							{		writer.Write(pBool);		}
+		public void Write (float pFloat)							{		writer.Write(pFloat);		}
 		
 		public void Write (ASerializable pSerializable)			{
 			//write the full classname into the stream first
@@ -48,6 +49,8 @@ namespace Shared
 		public int ReadInt() { return reader.ReadInt32(); }
 		public string ReadString() { return reader.ReadString(); }
 		public bool ReadBool() { return reader.ReadBoolean(); }
+
+		public float ReadFloat() { return (float)reader.ReadDecimal(); }
 
 		public ASerializable ReadObject() 
 		{

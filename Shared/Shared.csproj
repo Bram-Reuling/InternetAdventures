@@ -41,14 +41,14 @@
         <Compile Include="Class1.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="src\log\Log.cs" />
+        <Compile Include="src\model\PlayerInfo.cs" />
+        <Compile Include="src\model\SVector3.cs" />
+        <Compile Include="src\protocol\PlayerJoinedEvent.cs" />
         <Compile Include="src\protocol\RoomJoinedEvent.cs" />
         <Compile Include="src\serialization\ASerializable.cs" />
         <Compile Include="src\serialization\Packet.cs" />
         <Compile Include="src\serialization\StreamUtil.cs" />
         <Compile Include="src\serialization\TcpMessageChannel.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="src\model" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
