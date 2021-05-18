@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
 using UnityEngine;
+using Lean.Pool;
 
 public class MovingPlatformInfo : MonoBehaviour
 {
@@ -17,6 +15,6 @@ public class MovingPlatformInfo : MonoBehaviour
     private void Update()
     {
         transform.Translate(Movement * Time.deltaTime, Space.World);
-        if((_finish - transform.position).magnitude < 0.1f) Destroy(gameObject);
+        if((_finish - transform.position).magnitude < 0.1f) LeanPool.Despawn(gameObject);
     }
 }

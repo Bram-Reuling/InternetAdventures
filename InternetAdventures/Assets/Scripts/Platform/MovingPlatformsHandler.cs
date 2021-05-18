@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
+using Lean.Pool;
 
 public class MovingPlatformsHandler : MonoBehaviour
 {
@@ -25,7 +22,7 @@ public class MovingPlatformsHandler : MonoBehaviour
         timePassed += Time.deltaTime;
         if (timePassed >= spawnRate)
         {
-            Instantiate(platform, From.position, Quaternion.identity).GetComponent<MovingPlatformInfo>()
+            LeanPool.Spawn(platform, From.position, Quaternion.identity, transform).GetComponent<MovingPlatformInfo>()
                 .Initialize(_direction.normalized * movementSpeed, To.position);
             timePassed = 0;
         }
