@@ -128,7 +128,8 @@ public class CharacterMovement : MonoBehaviour
                 if (_lastCollidedGameObject == null || _lastCollidedGameObject != hit.gameObject)
                 {
                     _lastCollidedGameObject = hit.gameObject;
-                    _externalMovement = _lastCollidedGameObject.GetComponent<MovingPlatformInfo>().Movement;
+                    //Todo: calculate the movement speed from the platform and apply it to the character.
+                    //_externalMovement = _lastCollidedGameObject.GetComponent<MovingPlatform>().Movement;
                 }
                 break;
             default:
