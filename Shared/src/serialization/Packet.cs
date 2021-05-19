@@ -50,7 +50,7 @@ namespace Shared
 		public string ReadString() { return reader.ReadString(); }
 		public bool ReadBool() { return reader.ReadBoolean(); }
 
-		public float ReadFloat() { return (float)reader.ReadDecimal(); }
+		public float ReadFloat() { return reader.ReadSingle(); }
 
 		public ASerializable ReadObject() 
 		{
