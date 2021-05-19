@@ -76,8 +76,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 2919294032861913312, guid: 575f43fe6cadfbf4da4d0a1cac13c144, type: 3}
-  movementSpeed: 1
+  duration: 3
   spawnRate: 3
+  useRandomSpawnIntervals: 1
+  minSpawnTime: 1
+  maxSpawnTime: 4
 --- !u!1 &7765774886467196018
 GameObject:
   m_ObjectHideFlags: 0
