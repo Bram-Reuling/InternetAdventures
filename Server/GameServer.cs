@@ -53,7 +53,7 @@ namespace Server
 
                 foreach (KeyValuePair<TcpClient, PlayerInfo> pair in connectedPlayers)
                 {
-                    SendPlayerJoinedEvent(pair.Key);
+                    SendPlayerListUpdateEvent(pair.Key, PlayerListUpdateType.PlayerAdded);
                 }
             }
         }
@@ -74,23 +74,21 @@ namespace Server
             }
         }
 
-        private void SendPlayerJoinedEvent(TcpClient client)
+        private void SendPlayerListUpdateEvent(TcpClient client, PlayerListUpdateType pType)
         {
-            PlayerJoinedEvent playerJoinedEvent = new PlayerJoinedEvent();
+            PlayerListUpdateEvent playerListUpdateEvent = new PlayerListUpdateEvent();
 
-            List<PlayerInfo> playerData = new List<PlayerInfo>();
+            List<PlayerInfo> allPlayers = new List<PlayerInfo>();
 
              foreach (KeyValuePair<TcpClient,PlayerInfo> players in connectedPlayers)
              {
-                 playerData.Add(players.Value);
+                 allPlayers.Add(players.Value);
              }
 
-            playerJoinedEvent.players = playerData;
+            playerListUpdateEvent.updatedPlayerList = allPlayers;
 
-            //playerJoinedEvent.justANumber = 500;
-            
-            Log.LogInfo("Sending PlayerJoinedEvent!", this, ConsoleColor.White);
-            SendObject(client, playerJoinedEvent);
+            Log.LogInfo("Sending PlayerListUpdateEvent!", this, ConsoleColor.White);
+            SendObject(client, playerListUpdateEvent);
         }
 
         private void SendObject(TcpClient client, ASerializable pObject)
@@ -115,7 +113,7 @@ namespace Server
 
             foreach (KeyValuePair<TcpClient,PlayerInfo> player in connectedPlayers)
             {
-                // Send Player Removed Event
+                SendPlayerListUpdateEvent(player.Key, PlayerListUpdateType.PlayerRemoved);
             }
         }
     }
