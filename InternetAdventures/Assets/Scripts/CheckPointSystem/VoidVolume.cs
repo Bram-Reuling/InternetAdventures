@@ -9,7 +9,7 @@ public class VoidVolume : MonoBehaviour
     {
         if (other.CompareTag("Character"))
         {
-            Debug.Log("Player Collided with Void Volume");
+            //Debug.Log("Player Collided with Void Volume");
             EventBroker.CallRespawnCharacterEvent(other.name);
         }
     }

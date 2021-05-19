@@ -43,30 +43,30 @@ public class PlayerManager : MonoBehaviour
 
     private void RespawnCharacter(string pCharacterName)                                
     {
-        Debug.Log("Respawn Event");
+        //Debug.Log("Respawn Event");
         if (pCharacterName == playerOne.name)
         {
-            Debug.Log("Respawn Event P1");
+            //Debug.Log("Respawn Event P1");
             playerOneComponent.RespawnPlayer();
         }
         else if (pCharacterName == playerTwo.name)
         {
-            Debug.Log("Respawn Event P2");
+            //Debug.Log("Respawn Event P2");
             playerTwoComponent.RespawnPlayer();
         }
     }
 
     private void SetCheckPoint(Vector3 pPosition, string pCharacterName)
     {
-        Debug.Log("Checkpoint Event");
+        //Debug.Log("Checkpoint Event");
         if (pCharacterName == playerOne.name)
         {
             playerOneComponent.SetCheckPoint(pPosition);
-            Debug.Log("Checkpoint Event P1");
+            //Debug.Log("Checkpoint Event P1");
         }
         else if (pCharacterName == playerTwo.name)
         {
-            Debug.Log("Checkpoint Event P2");
+            //Debug.Log("Checkpoint Event P2");
             playerTwoComponent.SetCheckPoint(pPosition);
         }
     }

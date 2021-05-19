@@ -25,13 +25,13 @@ namespace Character
 
         public void SetCheckPoint(Vector3 pPosition)
         {
-            Debug.Log("Set Check Point to: " + pPosition.ToString());
+            //Debug.Log("Set Check Point to: " + pPosition.ToString());
             checkPoint = pPosition;
         }
 
         public void RespawnPlayer()
         {
-            Debug.Log("Respawning to: " + checkPoint.ToString());
+            //Debug.Log("Respawning to: " + checkPoint.ToString());
             
             SetComponentsActive(false);
             gameObject.transform.position = checkPoint;
