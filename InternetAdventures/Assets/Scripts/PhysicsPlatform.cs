@@ -12,6 +12,6 @@ public class PhysicsPlatform : MonoBehaviour
 
     private void OnCollisionExit(Collision other)
     {
-        //_physicsPlatformHandler.StopActuation();
+        
     }
 }
