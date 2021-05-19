@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1983,6 +1983,10 @@ PrefabInstance:
     - target: {fileID: 5039354558933765477, guid: f00944e76d65b2f4cbb25c94358c4585, type: 3}
       propertyPath: m_Name
       value: CheckPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039354558933765478, guid: f00944e76d65b2f4cbb25c94358c4585, type: 3}
+      propertyPath: m_Size.x
+      value: 96.91
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f00944e76d65b2f4cbb25c94358c4585, type: 3}
