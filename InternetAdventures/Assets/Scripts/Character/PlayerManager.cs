@@ -16,6 +16,9 @@ public class PlayerManager : MonoBehaviour
     private CharacterMovement playerOneMovement;
     private CharacterMovement playerTwoMovement;
 
+    private Player playerOneComponent;
+    private Player playerTwoComponent;
+
     public GameObject cameraRig;
     private CameraRig cameraRigComponent;
     
@@ -33,6 +36,39 @@ public class PlayerManager : MonoBehaviour
         }
 
         Initialize();
+        
+        EventBroker.SetCheckPointEvent += SetCheckPoint;
+        EventBroker.RespawnCharacterEvent += RespawnCharacter;
+    }
+
+    private void RespawnCharacter(string pCharacterName)                                
+    {
+        //Debug.Log("Respawn Event");
+        if (pCharacterName == playerOne.name)
+        {
+            //Debug.Log("Respawn Event P1");
+            playerOneComponent.RespawnPlayer();
+        }
+        else if (pCharacterName == playerTwo.name)
+        {
+            //Debug.Log("Respawn Event P2");
+            playerTwoComponent.RespawnPlayer();
+        }
+    }
+
+    private void SetCheckPoint(Vector3 pPosition, string pCharacterName)
+    {
+        //Debug.Log("Checkpoint Event");
+        if (pCharacterName == playerOne.name)
+        {
+            playerOneComponent.SetCheckPoint(pPosition);
+            //Debug.Log("Checkpoint Event P1");
+        }
+        else if (pCharacterName == playerTwo.name)
+        {
+            //Debug.Log("Checkpoint Event P2");
+            playerTwoComponent.SetCheckPoint(pPosition);
+        }
     }
 
     private void SpawnPlayers()
@@ -52,6 +88,9 @@ public class PlayerManager : MonoBehaviour
     {
         playerOneMovement = playerOne.GetComponent<CharacterMovement>();
         playerTwoMovement = playerTwo.GetComponent<CharacterMovement>();
+
+        playerOneComponent = playerOne.GetComponent<Player>();
+        playerTwoComponent = playerTwo.GetComponent<Player>();
 
         cameraRigComponent = cameraRig.GetComponent<CameraRig>();
         
