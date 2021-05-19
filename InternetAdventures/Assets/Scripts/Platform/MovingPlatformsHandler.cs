@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 using Lean.Pool;
 
 public class MovingPlatformsHandler : MonoBehaviour
@@ -7,28 +9,47 @@ public class MovingPlatformsHandler : MonoBehaviour
     [SerializeField] private float duration;
     [SerializeField] private float spawnRate;
     [SerializeField] private bool useRandomSpawnIntervals;
+    [SerializeField] private bool loopMovement;
     [SerializeField] private float minSpawnTime;
     [SerializeField] private float maxSpawnTime;
     
-    private float timePassed;
-    private Transform From, To;
+    private float _timePassed;
+    private int _maxPlatformAmount;
+    private int _currentPlatformAmount;
+    private readonly List<Transform> _platformStations = new List<Transform>();
 
     private void Start()
     {
-        From = transform.GetChild(0);
-        To = transform.GetChild(1);
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            _platformStations.Add(transform.GetChild(i).transform);
+        }
+        //Note: (transform.childCount * duration) / spawnRate gives the total amount of platforms that can be spawned
+        //properly.
+        _maxPlatformAmount = (int)(transform.childCount * duration / spawnRate);
+        
+        SpawnPlatform();
     }
 
     private void Update()
     {
-        timePassed += Time.deltaTime;
-        if (timePassed >= spawnRate)
+        _timePassed += Time.deltaTime;
+        if (_timePassed >= spawnRate)
         {
-            LeanPool.Spawn(platform, From.position, Quaternion.identity, transform).GetComponent<MovingPlatform>()
-                .Initialize(To.position, duration);
-            timePassed = 0;
-            if(useRandomSpawnIntervals) 
-                spawnRate = Random.Range(minSpawnTime, maxSpawnTime);
+            if (loopMovement)
+                if (_currentPlatformAmount >= _maxPlatformAmount) return;
+            SpawnPlatform();
         }
+    }
+
+    private void SpawnPlatform()
+    {
+        //Todo: Create a deep copy of the list, so individual scripts cannot mess up the list.
+        LeanPool.Spawn(platform, _platformStations.ElementAt(0).position, Quaternion.identity, transform).GetComponent<MovingPlatform>()
+            .Initialize(_platformStations, duration, loopMovement);
+        _timePassed = 0;
+        if(useRandomSpawnIntervals) 
+            spawnRate = Random.Range(minSpawnTime, maxSpawnTime);
+        _currentPlatformAmount++;
     }
 }
