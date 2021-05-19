@@ -60,6 +60,25 @@ namespace Server
         
         private void ProcessExistingClients()
         {
+            foreach (KeyValuePair<TcpClient,PlayerInfo> connectedPlayer in connectedPlayers)
+            {
+                if (connectedPlayer.Key.Available == 0) continue;
+
+                byte[] inBytes = StreamUtil.Read(connectedPlayer.Key.GetStream());
+                Packet inPacket = new Packet(inBytes);
+                ASerializable inObject = inPacket.ReadObject();
+                
+                Log.LogInfo("Received packet:" + inObject, this, ConsoleColor.DarkBlue);
+
+                if (inObject is PlayerMoveRequest playerMoveRequest)
+                {
+                    
+                }
+            }
+        }
+
+        private void HandlePlayerMoveRequest()
+        {
             
         }
         
