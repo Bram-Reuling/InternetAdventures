@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Numerics;
 using System.Threading;
 using Shared;
 
@@ -45,17 +46,31 @@ namespace Server
                 
                 TcpClient channel = listener.AcceptTcpClient();
 
-                PlayerInfo playerInfo = new PlayerInfo();
+                PlayerInfo playerInfo = new PlayerInfo {ID = GenerateRandomID() ,position = new Vector3()};
 
-                playerInfo.position = new SVector3();
-                
                 connectedPlayers.Add(channel, playerInfo);
 
+                Log.LogInfo("Accepted new client with ID: " + playerInfo.ID, this, ConsoleColor.White);
+                
                 foreach (KeyValuePair<TcpClient, PlayerInfo> pair in connectedPlayers)
                 {
                     SendPlayerListUpdateEvent(pair.Key, PlayerListUpdateType.PlayerAdded);
                 }
             }
+        }
+
+        private int GenerateRandomID()
+        {
+            List<int> allPlayerIds = connectedPlayers.Select(player => player.Value.ID).ToList();
+
+            int randomId = new Random().Next(0, 100000);
+
+            while (allPlayerIds.Contains(randomId))
+            {
+                randomId = new Random().Next(0, 100000);
+            }
+
+            return randomId;
         }
         
         private void ProcessExistingClients()
@@ -72,12 +87,12 @@ namespace Server
 
                 if (inObject is PlayerMoveRequest playerMoveRequest)
                 {
-                    
+                    HandlePlayerMoveRequest(playerMoveRequest, connectedPlayer.Value);
                 }
             }
         }
 
-        private void HandlePlayerMoveRequest()
+        private void HandlePlayerMoveRequest(PlayerMoveRequest pMoveRequest, PlayerInfo requestingPlayer)
         {
             
         }

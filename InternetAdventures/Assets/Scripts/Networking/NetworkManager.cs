@@ -15,6 +15,8 @@ namespace Networking
         private TcpClient client;
 
         private List<PlayerInfo> players;
+
+        private PlayerManager playerManager;
         
         private void Awake()
         {
