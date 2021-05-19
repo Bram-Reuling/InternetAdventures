@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -962,6 +962,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442973422}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &455977645 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1845939666019908358, guid: d7651de3315019c478c78a3b241ec211, type: 3}
+  m_PrefabInstance: {fileID: 1149571676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &521995406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,6 +1669,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2130360877718969642, guid: d7651de3315019c478c78a3b241ec211, type: 3}
+      propertyPath: duration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130360877718969642, guid: d7651de3315019c478c78a3b241ec211, type: 3}
+      propertyPath: spawnRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130360877718969642, guid: d7651de3315019c478c78a3b241ec211, type: 3}
+      propertyPath: loopMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130360877718969642, guid: d7651de3315019c478c78a3b241ec211, type: 3}
+      propertyPath: useRandomSpawnIntervals
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6666535317399980860, guid: d7651de3315019c478c78a3b241ec211, type: 3}
       propertyPath: m_Name
       value: MovingPlatforms
@@ -1678,6 +1699,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7651de3315019c478c78a3b241ec211, type: 3}
+--- !u!1 &1183249609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1183249610}
+  m_Layer: 0
+  m_Name: Station (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1183249610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183249609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.25, y: -7.25, z: 19.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 455977645}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1220404394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4270987647658236902, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
@@ -2503,6 +2554,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
+--- !u!1 &1696991204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1696991205}
+  m_Layer: 0
+  m_Name: Station (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1696991205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696991204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -0.5, z: 9.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 455977645}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1792077958
 GameObject:
   m_ObjectHideFlags: 0
@@ -2801,6 +2882,14 @@ PrefabInstance:
     - target: {fileID: 6858715738395456432, guid: 1c195209490dbbd4ca3f2f3f2e8fd451, type: 3}
       propertyPath: m_Name
       value: PhysicsPlatformHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858715738395456433, guid: 1c195209490dbbd4ca3f2f3f2e8fd451, type: 3}
+      propertyPath: movementDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858715738395456433, guid: 1c195209490dbbd4ca3f2f3f2e8fd451, type: 3}
+      propertyPath: movePlatformsBack
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6858715738395456434, guid: 1c195209490dbbd4ca3f2f3f2e8fd451, type: 3}
       propertyPath: m_RootOrder
