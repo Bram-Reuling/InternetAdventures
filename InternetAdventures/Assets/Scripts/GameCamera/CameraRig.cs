@@ -6,10 +6,10 @@ namespace GameCamera
     {
         public Camera RigCamera { get; private set; }
         public GameObject Target { get; set; }
-        
-        [SerializeField] private Camera camera;
+
+        [SerializeField] private Camera rigCamera;
         [SerializeField] private GameObject target;
-        
+
         [SerializeField] private bool canMoveOnXAxis;
         [SerializeField] private bool canMoveOnYAxis;
         [SerializeField] private bool canMoveOnZAxis;
@@ -22,20 +22,13 @@ namespace GameCamera
 
         private void Start()
         {
-            if (camera == null)
-            {
-                Debug.LogError("NO CAMERA HAS BEEN FOUND");
-            }
-            else
-            {
-                RigCamera = camera;
-            }
+            RigCamera = rigCamera;
 
             if (!setTargetExternally)
             {
-                Target = target;    
+                Target = target;
             }
-            
+
             transform.position = DetermineTargetPosition(new Vector3());
         }
 
@@ -73,13 +66,14 @@ namespace GameCamera
 
             if (canMoveOnZAxis)
             {
-                newPosition.z += (targetPosition.z - rigPosition.z) * moveWeight;    
+                newPosition.z += (targetPosition.z - rigPosition.z) * moveWeight;
             }
+
             transform.position = newPosition;
 
             if (useLookAt)
             {
-                camera.transform.LookAt(pTargetPosition);   
+                rigCamera.transform.LookAt(pTargetPosition);
             }
         }
     }
