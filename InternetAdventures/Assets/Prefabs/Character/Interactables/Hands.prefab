@@ -58,11 +58,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda563190eb283541aca6f299afd4a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabDistance: 3
-  handMode: 1
-  _grabableLayers:
+  interactableLayers:
     serializedVersion: 2
     m_Bits: 2048
+  enableCameraShake: 0
+  cameraShakeStrength: 0.1
+  cameraShakeDuration: 1
+  playerInput: {fileID: 0}
+  handMode: 1
 --- !u!1 &6024748194640639824
 GameObject:
   m_ObjectHideFlags: 0

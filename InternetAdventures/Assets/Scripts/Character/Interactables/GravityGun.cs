@@ -50,7 +50,9 @@ public class GravityGun : Interactable
 
     private void ActivateGun(InputAction.CallbackContext pCallback)
     {
-        if(!SelfActiveAndCameraShake()) return;
+        if (!gameObject.activeSelf) return;
+        
+        ApplyCameraShake();
         
         int foundColliders = Physics.SphereCastNonAlloc(transform.position, gravityRadius, transform.forward, _overlappedColliders, range, interactableLayers);
         if (foundColliders > 0)

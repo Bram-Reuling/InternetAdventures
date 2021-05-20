@@ -646,6 +646,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3233229994015860528, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: -6574377211359727472}
     - target: {fileID: 8387275685348839173, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
       propertyPath: m_Name
       value: ShockwaveGun
@@ -790,6 +794,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6544693422178865410, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: -6574377211359727472}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
 --- !u!1 &3774784377293377780 stripped

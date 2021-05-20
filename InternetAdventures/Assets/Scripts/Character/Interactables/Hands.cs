@@ -6,21 +6,25 @@ using UnityEngine.InputSystem;
 
 public class Hands : Interactable
 {
-    private PlayerInput _playerInput;
-    private GameObject _grabbedObject;
+    [Header("Interactable-specific attributes")]
+    
+    //Public
     [SerializeField] private HandMode handMode;
-    private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
-    [SerializeField] private LayerMask _interactableLayers;
-    private CharacterMovement _characterMovement;
+    
+    //Private
+    private GameObject _grabbedObject;
     private Transform _initialParent;
+    private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
+    private CharacterMovement _characterMovement;
     
     private void Start()
     {
         //Setup input
-        _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
-        _playerInput.actions.FindAction("Interactable").started += GrabObjectInFront;
-        _playerInput.actions.FindAction("Interactable").canceled += ReleaseObject;
+        playerInput = transform.parent.parent.GetComponent<PlayerInput>();
+        playerInput.actions.FindAction("Interactable").started += GrabObjectInFront;
+        playerInput.actions.FindAction("Interactable").canceled += ReleaseObject;
 
+        //Get components
         _characterMovement = transform.parent.parent.GetComponent<CharacterMovement>();
     }
 
@@ -43,12 +47,11 @@ public class Hands : Interactable
 
     private void GrabObjectInFront(InputAction.CallbackContext pCallback)
     {
-        if(_gameObjectsInTrigger.Count == 0 && !gameObject.activeSelf) return;
+        if(_gameObjectsInTrigger.Count == 0 || !gameObject.activeSelf) return;
         float shortestDistanceGameObject = float.PositiveInfinity;
         foreach (var currentGameObject in _gameObjectsInTrigger)
         {
-            if ((currentGameObject.transform.position - transform.parent.transform.position).magnitude <
-                shortestDistanceGameObject)
+            if ((currentGameObject.transform.position - transform.parent.transform.position).magnitude < shortestDistanceGameObject)
             {
                 _grabbedObject = currentGameObject;
             }
@@ -67,7 +70,7 @@ public class Hands : Interactable
     {
         if (!_gameObjectsInTrigger.Contains(other.gameObject))
         {
-            if((_interactableLayers.value & (1 << other.gameObject.layer)) > 0)
+            if((interactableLayers.value & (1 << other.gameObject.layer)) > 0)
                 _gameObjectsInTrigger.Add(other.gameObject);
         }
     }    
