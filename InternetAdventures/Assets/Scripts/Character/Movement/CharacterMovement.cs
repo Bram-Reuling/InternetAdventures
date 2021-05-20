@@ -21,8 +21,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 _inputMovement;
     private Vector3 _externalMovement = Vector3.zero;
     private Quaternion _newRotation;
-    private GameObject _lastCollidedGameObject;
-    private PhysicsPlatformHandler _currentPhysicsPlatformHandler;
+    private GameObject _currentlyCollidingGameObject;
 
     public static bool weaponInUse;
     
@@ -54,7 +53,11 @@ public class CharacterMovement : MonoBehaviour
         _velocity += _inputMovement;
         Vector3 XZMovement = ConstrainXZMovement();
         //Apply jump force only when character is grounded.
-        if (!_characterController.isGrounded) _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+        if (!_characterController.isGrounded)
+        {
+            _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+            ResetCollisionFlags();
+        }
         //Move character controller
         if(UserInputAllowed) _characterController.Move((_velocity + _externalMovement) * Time.deltaTime);
         //Add rotation to the character controller based on the current movement speed, so the character
@@ -123,38 +126,35 @@ public class CharacterMovement : MonoBehaviour
     
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        switch (hit.transform.tag)
+        if (_currentlyCollidingGameObject == hit.gameObject) return;
+        ResetCollisionFlags();
+        _currentlyCollidingGameObject = hit.gameObject;
+        switch (_currentlyCollidingGameObject.transform.tag)
         {
             case "Platform":
-                if (_lastCollidedGameObject == null || _lastCollidedGameObject != hit.gameObject)
+                if (_currentlyCollidingGameObject == null)
                 {
-                    _lastCollidedGameObject = hit.gameObject;
                     //Todo: calculate the movement speed from the platform and apply it to the character.
                     //_externalMovement = _lastCollidedGameObject.GetComponent<MovingPlatform>().Movement;
                 }
                 break;
             case "PhysicsPlatform":
-                if (_currentPhysicsPlatformHandler == null)
-                {
-                    _currentPhysicsPlatformHandler = hit.transform.parent.GetComponent<PhysicsPlatformHandler>();
-                    _currentPhysicsPlatformHandler.OnActuation(hit.gameObject, gameObject);
-                    _lastCollidedGameObject = hit.gameObject;   
-                }
+                _currentlyCollidingGameObject.transform.parent
+                    .GetComponent<PhysicsPlatformHandler>().OnActuation(_currentlyCollidingGameObject, gameObject);
                 break;
             default:
-                ResetCollisionFlags();
                 break;
         }
     }
 
     private void ResetCollisionFlags()
     {
-        transform.parent = null;
-        _lastCollidedGameObject = null;
-        if (_currentPhysicsPlatformHandler != null)
+        if (_currentlyCollidingGameObject == null) return;
+        switch (_currentlyCollidingGameObject.transform.tag)
         {
-            _currentPhysicsPlatformHandler.StopActuation();
-            _currentPhysicsPlatformHandler = null;
+            case "PhysicsPlatform":
+                _currentlyCollidingGameObject.transform.parent.GetComponent<PhysicsPlatformHandler>().StopActuation();
+            break;
         }
     }
 }
