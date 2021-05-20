@@ -7,11 +7,10 @@ using UnityEngine.InputSystem;
 public class Hands : Interactable
 {
     private PlayerInput _playerInput;
-    [SerializeField] private float grabDistance;
     private GameObject _grabbedObject;
     [SerializeField] private HandMode handMode;
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
-    [SerializeField] private LayerMask _grabableLayers;
+    [SerializeField] private LayerMask _interactableLayers;
     private CharacterMovement _characterMovement;
     private Transform _initialParent;
     
@@ -68,7 +67,7 @@ public class Hands : Interactable
     {
         if (!_gameObjectsInTrigger.Contains(other.gameObject))
         {
-            if((_grabableLayers.value & (1 << other.gameObject.layer)) > 0)
+            if((_interactableLayers.value & (1 << other.gameObject.layer)) > 0)
                 _gameObjectsInTrigger.Add(other.gameObject);
         }
     }    
