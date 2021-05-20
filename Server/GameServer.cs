@@ -54,9 +54,12 @@ namespace Server
 
                 Log.LogInfo("Accepted new client with ID: " + playerInfo.ID, this, ConsoleColor.White);
                 
+                SendConnectionInfo(channel, playerInfo);
+                
                 foreach (KeyValuePair<TcpClient, PlayerInfo> pair in connectedPlayers)
                 {
-                    SendPlayerListUpdateEvent(pair.Key, PlayerListUpdateType.PlayerAdded);
+                    if (pair.Value.ID == playerInfo.ID) continue;
+                    SendPlayerJoinEvent(pair.Key, playerInfo);
                 }
             }
         }
@@ -110,48 +113,55 @@ namespace Server
             }
         }
 
-        private void SendPlayerListUpdateEvent(TcpClient client, PlayerListUpdateType pType)
+        private void SendConnectionInfo(TcpClient receiver, PlayerInfo info)
         {
-            PlayerListUpdateEvent playerListUpdateEvent = new PlayerListUpdateEvent();
-
-            playerListUpdateEvent.updateType = pType;
+            ConnectionInfo connectionInfo = new ConnectionInfo {ID = info.ID};
             
-            List<PlayerInfo> allPlayers = new List<PlayerInfo>();
-
-             foreach (KeyValuePair<TcpClient,PlayerInfo> players in connectedPlayers)
-             {
-                 allPlayers.Add(players.Value);
-             }
-
-            playerListUpdateEvent.updatedPlayerList = allPlayers;
-
-            Log.LogInfo("Sending PlayerListUpdateEvent!", this, ConsoleColor.White);
-            SendObject(client, playerListUpdateEvent);
+            Log.LogInfo("Sending ConnectionInfo!", this, ConsoleColor.Cyan);
+            
+            SendObject(receiver, connectionInfo);
+        }
+        
+        private void SendPlayerJoinEvent(TcpClient receiver, PlayerInfo newPlayer)
+        {
+            PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent {playerToAdd = newPlayer};
+            
+            Log.LogInfo("Sending PlayerJoinEvent!", this, ConsoleColor.Cyan);
+            SendObject(receiver, playerJoinEvent);
         }
 
-        private void SendObject(TcpClient client, ASerializable pObject)
+        private void SendPlayerRemoveEvent(TcpClient receiver, PlayerInfo removePlayer)
+        {
+            PlayerRemoveEvent playerRemoveEvent = new PlayerRemoveEvent {playerToRemove = removePlayer};
+            
+            Log.LogInfo("Sending PlayerJoinEvent!", this, ConsoleColor.Cyan);
+            SendObject(receiver, playerRemoveEvent);
+        }
+
+        private void SendObject(TcpClient receiver, ASerializable pObject)
         {
             try
             {
                 Packet outPacket = new Packet();
                 outPacket.Write(pObject);
-                StreamUtil.Write(client.GetStream(), outPacket.GetBytes());
+                StreamUtil.Write(receiver.GetStream(), outPacket.GetBytes());
             }
             catch (Exception e)
             {
                 Log.LogInfo("Could not send object to client! Client is perhaps faulthy?", this, ConsoleColor.Red);
-                RemoveClient(client);
+                RemoveClient(receiver);
             }
         }
 
         private void RemoveClient(TcpClient client)
         {
             client.Close();
+            PlayerInfo playerToRemove = connectedPlayers[client];
             connectedPlayers.Remove(client);
 
             foreach (KeyValuePair<TcpClient,PlayerInfo> player in connectedPlayers)
             {
-                SendPlayerListUpdateEvent(player.Key, PlayerListUpdateType.PlayerRemoved);
+                SendPlayerRemoveEvent(player.Key, playerToRemove);
             }
         }
     }

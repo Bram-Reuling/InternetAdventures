@@ -17,8 +17,6 @@ namespace Networking
         
         private TcpClient client;
 
-        private List<PlayerInfo> players;
-
         public NetworkedPlayerManager networkedPlayerManager;
         
         private void Awake()
@@ -29,8 +27,6 @@ namespace Networking
         // Start is called before the first frame update
         void Start()
         {
-            players = new List<PlayerInfo>();
-
             ConnectToServer();
         }
 
@@ -54,18 +50,26 @@ namespace Networking
                 // Create an object of type ASerializable.
                 ASerializable inObject = inPacket.ReadObject();
 
-                // Process PlayerListUpdateEvents
-                if (inObject is PlayerListUpdateEvent pEvent)
+                switch (inObject)
                 {
-                    ProcessPlayerListUpdateEvents(pEvent);
-                }
-                // NOTE: LEAVE THIS EMPTY & DONT DELETE THIS.
-                // This is for the ping system from the server to check if the client is still connected.
-                else if (inObject is Ping)
-                {
-                }
-                else if (inObject is PlayerMoveResponse pMoveResponse)
-                {
+                    case ConnectionInfo info:
+                        HandleConnectionInfo(info);
+                        break;
+                    case PlayerJoinEvent playerJoinEvent:
+                        HandlePlayerJoinEvent(playerJoinEvent);
+                        break;
+                    case PlayerRemoveEvent playerRemoveEvent:
+                        HandlePlayerRemoveEvent(playerRemoveEvent);
+                        break;
+                    case PlayerListResponse playerListResponse:
+                        HandlePlayerListResponse(playerListResponse);
+                        break;
+                    case Ping _:
+                        break;
+                    case PlayerMoveResponse pMoveResponse:
+                        break;
+                    default:
+                        break;
                 }
             }
             catch (Exception e)
@@ -74,53 +78,29 @@ namespace Networking
             }
         }
 
-        private void ProcessPlayerListUpdateEvents(PlayerListUpdateEvent pEvent)
+        private void HandleConnectionInfo(ConnectionInfo info)
         {
-            try
+            Debug.Log("ConnectionInfo Received");
+            networkedPlayerManager.SetConnectionId(info.ID);
+        }
+
+        private void HandlePlayerJoinEvent(PlayerJoinEvent playerJoinEvent)
+        {
+            Debug.Log("PlayerJoinEvent Received");
+            networkedPlayerManager.SpawnPlayer(playerJoinEvent.playerToAdd);
+        }
+
+        private void HandlePlayerRemoveEvent(PlayerRemoveEvent playerRemoveEvent)
+        {
+            Debug.Log("PlayerRemoveEvent Received");
+            networkedPlayerManager.RemovePlayer(playerRemoveEvent.playerToRemove);
+        }
+
+        private void HandlePlayerListResponse(PlayerListResponse playerListResponse)
+        {
+            foreach (PlayerInfo playerInfo in playerListResponse.playerList)
             {
-                Debug.Log("PlayerListUpdateEvent Received");
-
-                PlayerListUpdateType typeOfUpdate = pEvent.updateType;
-            
-                Debug.Log("Update Type: " + typeOfUpdate);
-
-                List<PlayerInfo> newPlayerList = pEvent.updatedPlayerList;
-
-                Debug.Log("Length of the list: " + newPlayerList.Count);
-            
-                switch (typeOfUpdate)
-                {
-                    case PlayerListUpdateType.PlayerRemoved:
-                        // Destroy the removed player.
-                        Debug.Log("Player Removed Case");
-                        IEnumerable<PlayerInfo> differenceListRemove = players.Except(newPlayerList);
-                        foreach (PlayerInfo player in differenceListRemove)
-                        {
-                            networkedPlayerManager.RemovePlayer(player);
-                        }
-
-                        players = newPlayerList;
-                        break;
-                    case PlayerListUpdateType.PlayerAdded:
-                        Debug.Log("Player Added Case");
-                        // Spawn the added player.
-                        IEnumerable<PlayerInfo> differenceListAdd = newPlayerList.Except(players);
-
-                        foreach (PlayerInfo player in differenceListAdd)
-                        {
-                            Debug.Log("Player thingy ID: " + player.ID);
-                            networkedPlayerManager.SpawnPlayer(player);
-                        }
-
-                        players = newPlayerList;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
+                networkedPlayerManager.SpawnPlayer(playerInfo);
             }
         }
 

@@ -9,6 +9,8 @@ namespace Networking
 {
     public class NetworkedPlayerManager : MonoBehaviour
     {
+        private int ConnectionId;
+        
         [SerializeField, Description("Character that the player can control.")] 
         private GameObject localCharacterPrefab;
         [SerializeField, Description("Character that the player cannot control (Other players).")] 
@@ -27,8 +29,14 @@ namespace Networking
             players = new Dictionary<PlayerInfo, GameObject>();
         }
 
+        public void SetConnectionId(int ID)
+        {
+            ConnectionId = ID;
+        }
+        
         public void SpawnPlayer(PlayerInfo player)
         {
+            // TODO: Check if the player is this client, if it is give that player control.
             // Spawn a player
             Debug.Log("Spawning player with ID: " + player.ID);
             
