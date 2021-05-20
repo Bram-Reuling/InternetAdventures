@@ -9,6 +9,7 @@ using Ping = Shared.Ping;
 
 namespace Networking
 {
+    [RequireComponent(typeof(NetworkedPlayerManager))]
     public class NetworkManager : MonoBehaviour
     {
         [SerializeField] private string server = "localhost";
@@ -18,7 +19,7 @@ namespace Networking
 
         private List<PlayerInfo> players;
 
-        private PlayerManager playerManager;
+        public NetworkedPlayerManager networkedPlayerManager;
         
         private void Awake()
         {
@@ -28,6 +29,8 @@ namespace Networking
         // Start is called before the first frame update
         void Start()
         {
+            players = new List<PlayerInfo>();
+
             ConnectToServer();
         }
 
@@ -43,9 +46,7 @@ namespace Networking
             {
                 // Check if there is a message to read
                 if (client.Available <= 0) return;
-
-                Debug.Log("Message is available");
-
+                
                 // Read the bytes from the stream
                 byte[] inBytes = StreamUtil.Read(client.GetStream());
                 // Create a packet based on the bytes
@@ -75,36 +76,51 @@ namespace Networking
 
         private void ProcessPlayerListUpdateEvents(PlayerListUpdateEvent pEvent)
         {
-            Debug.Log("PlayerListUpdateEvent Received");
-
-            PlayerListUpdateType typeOfUpdate = pEvent.updateType;
-
-            List<PlayerInfo> newPlayerList = pEvent.updatedPlayerList;
-
-            switch (typeOfUpdate)
+            try
             {
-                case PlayerListUpdateType.PlayerRemoved:
-                    // Destroy the removed player.
-                    IEnumerable<PlayerInfo> differenceListRemove = players.Except(newPlayerList);
-                    foreach (PlayerInfo player in differenceListRemove)
-                    {
-                        playerManager.RemovePlayer(player);
-                    }
+                Debug.Log("PlayerListUpdateEvent Received");
 
-                    players = newPlayerList;
-                    break;
-                case PlayerListUpdateType.PlayerAdded:
-                    // Spawn the added player.
-                    IEnumerable<PlayerInfo> differenceListAdd = newPlayerList.Except(players);
-                    foreach (PlayerInfo player in differenceListAdd)
-                    {
-                        playerManager.SpawnPlayer(player);
-                    }
+                PlayerListUpdateType typeOfUpdate = pEvent.updateType;
+            
+                Debug.Log("Update Type: " + typeOfUpdate);
 
-                    players = newPlayerList;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                List<PlayerInfo> newPlayerList = pEvent.updatedPlayerList;
+
+                Debug.Log("Length of the list: " + newPlayerList.Count);
+            
+                switch (typeOfUpdate)
+                {
+                    case PlayerListUpdateType.PlayerRemoved:
+                        // Destroy the removed player.
+                        Debug.Log("Player Removed Case");
+                        IEnumerable<PlayerInfo> differenceListRemove = players.Except(newPlayerList);
+                        foreach (PlayerInfo player in differenceListRemove)
+                        {
+                            networkedPlayerManager.RemovePlayer(player);
+                        }
+
+                        players = newPlayerList;
+                        break;
+                    case PlayerListUpdateType.PlayerAdded:
+                        Debug.Log("Player Added Case");
+                        // Spawn the added player.
+                        IEnumerable<PlayerInfo> differenceListAdd = newPlayerList.Except(players);
+
+                        foreach (PlayerInfo player in differenceListAdd)
+                        {
+                            Debug.Log("Player thingy ID: " + player.ID);
+                            networkedPlayerManager.SpawnPlayer(player);
+                        }
+
+                        players = newPlayerList;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
             }
         }
 

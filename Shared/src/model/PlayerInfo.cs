@@ -1,12 +1,11 @@
 ﻿using System.Numerics;
-using System.Reflection;
 
 namespace Shared
 {
     public class PlayerInfo : ASerializable
     {
         public int ID;
-        public Vector3 position;
+        public SVector3 position;
         public Quaternion rotation;
         
         public override void Serialize(Packet pPacket)
@@ -27,7 +26,7 @@ namespace Shared
         {
             ID = pPacket.ReadInt();
 
-            position = new Vector3 {X = pPacket.ReadFloat(), Y = pPacket.ReadFloat(), Z = pPacket.ReadFloat()};
+            position = new SVector3 {X = pPacket.ReadFloat(), Y = pPacket.ReadFloat(), Z = pPacket.ReadFloat()};
 
             rotation = new Quaternion
                 {W = pPacket.ReadFloat(), X = pPacket.ReadFloat(), Y = pPacket.ReadFloat(), Z = pPacket.ReadFloat()};

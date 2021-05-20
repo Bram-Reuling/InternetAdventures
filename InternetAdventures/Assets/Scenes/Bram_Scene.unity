@@ -534,6 +534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 4270987649124312461, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
 --- !u!1 &1033661790 stripped
@@ -693,6 +697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4270987649124312461, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
 --- !u!1 &1869392556 stripped
@@ -712,6 +720,7 @@ GameObject:
   - component: {fileID: 1896864484}
   - component: {fileID: 1896864483}
   - component: {fileID: 1896864486}
+  - component: {fileID: 1896864487}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -726,7 +735,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896864482}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0751f843ab43b741a3adb2409721c85, type: 3}
   m_Name: 
@@ -788,10 +797,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896864482}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66ec4a4e237166248ac8bd132d1d339b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   server: localhost
   port: 55555
+  networkedPlayerManager: {fileID: 1896864487}
+--- !u!114 &1896864487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896864482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe6a1cd985846e68039509721b40c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localCharacterPrefab: {fileID: 4270987649124312461, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
+  characterPrefab: {fileID: 4270987649124312461, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
+  cameraRigPrefab: {fileID: 7303374206783668692, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
+  cameraRig: {fileID: 321722014}

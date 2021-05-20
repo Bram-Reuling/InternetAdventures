@@ -46,7 +46,9 @@ namespace Server
                 
                 TcpClient channel = listener.AcceptTcpClient();
 
-                PlayerInfo playerInfo = new PlayerInfo {ID = GenerateRandomID() ,position = new Vector3()};
+                SVector3 spawnPosition = new SVector3(0, 2, 0);
+                
+                PlayerInfo playerInfo = new PlayerInfo {ID = GenerateRandomID() ,position = spawnPosition};
 
                 connectedPlayers.Add(channel, playerInfo);
 
@@ -112,6 +114,8 @@ namespace Server
         {
             PlayerListUpdateEvent playerListUpdateEvent = new PlayerListUpdateEvent();
 
+            playerListUpdateEvent.updateType = pType;
+            
             List<PlayerInfo> allPlayers = new List<PlayerInfo>();
 
              foreach (KeyValuePair<TcpClient,PlayerInfo> players in connectedPlayers)

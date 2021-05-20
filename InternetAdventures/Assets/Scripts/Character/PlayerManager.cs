@@ -72,16 +72,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer(PlayerInfo player)
-    {
-        // Spawn a player
-    }
-
-    public void RemovePlayer(PlayerInfo player)
-    {
-        // Remove a player
-    }
-    
     private void SpawnPlayers()
     {
         playerOne = PlayerInput
