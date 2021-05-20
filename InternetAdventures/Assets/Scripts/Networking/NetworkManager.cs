@@ -5,7 +5,6 @@ using System.Net.Sockets;
 using UnityEngine;
 using Shared;
 using UnityEngine.InputSystem;
-using Ping = Shared.Ping;
 
 namespace Networking
 {
@@ -64,7 +63,8 @@ namespace Networking
                     case PlayerListResponse playerListResponse:
                         HandlePlayerListResponse(playerListResponse);
                         break;
-                    case Ping _:
+                    case ClientHeartbeat heartBeatMessage:
+                        HandleHeartbeat(heartBeatMessage);
                         break;
                     case PlayerMoveResponse pMoveResponse:
                         break;
@@ -78,10 +78,28 @@ namespace Networking
             }
         }
 
+        private void HandleHeartbeat(ClientHeartbeat heartbeat)
+        {
+            Debug.Log("The number is: " + heartbeat.randomNumber);   
+        }
+        
         private void HandleConnectionInfo(ConnectionInfo info)
         {
             Debug.Log("ConnectionInfo Received");
             networkedPlayerManager.SetConnectionId(info.ID);
+            
+            try
+            {
+                Debug.Log("Sending PlayerListRequest");
+                PlayerListRequest playerListRequest = new PlayerListRequest();
+                Packet outPacket = new Packet();
+                outPacket.Write(playerListRequest);
+                StreamUtil.Write(client.GetStream(), outPacket.GetBytes());
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
         }
 
         private void HandlePlayerJoinEvent(PlayerJoinEvent playerJoinEvent)
@@ -98,6 +116,7 @@ namespace Networking
 
         private void HandlePlayerListResponse(PlayerListResponse playerListResponse)
         {
+            Debug.Log("PlayerListResponse Received");
             foreach (PlayerInfo playerInfo in playerListResponse.playerList)
             {
                 networkedPlayerManager.SpawnPlayer(playerInfo);

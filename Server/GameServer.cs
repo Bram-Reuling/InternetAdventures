@@ -90,14 +90,31 @@ namespace Server
                 
                 Log.LogInfo("Received packet:" + inObject, this, ConsoleColor.DarkBlue);
 
-                if (inObject is PlayerMoveRequest playerMoveRequest)
+                switch (inObject)
                 {
-                    HandlePlayerMoveRequest(playerMoveRequest, connectedPlayer.Value);
+                    case PlayerMoveRequest playerMoveRequest:
+                        HandlePlayerMoveRequest(playerMoveRequest, connectedPlayer);
+                        break;
+                    case PlayerListRequest playerListRequest:
+                        HandlePlayerListRequest(connectedPlayer);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
 
-        private void HandlePlayerMoveRequest(PlayerMoveRequest pMoveRequest, PlayerInfo requestingPlayer)
+        private void HandlePlayerListRequest(KeyValuePair<TcpClient,PlayerInfo> requestingPlayer)
+        {
+            Log.LogInfo("Sending PlayerListResponse!", this, ConsoleColor.Cyan);
+            PlayerListResponse playerListResponse = new PlayerListResponse();
+
+            playerListResponse.playerList = connectedPlayers.Select(player => player.Value).ToList();
+
+            SendObject(requestingPlayer.Key, playerListResponse);
+        }
+        
+        private void HandlePlayerMoveRequest(PlayerMoveRequest pMoveRequest, KeyValuePair<TcpClient,PlayerInfo> requestingPlayer)
         {
             
         }
@@ -108,8 +125,8 @@ namespace Server
 
             foreach (TcpClient client in clients)
             {
-                Ping ping = new Ping();
-                SendObject(client, ping);
+                ClientHeartbeat heartbeat = new ClientHeartbeat { randomNumber = 5122345 };
+                SendObject(client, heartbeat);
             }
         }
 

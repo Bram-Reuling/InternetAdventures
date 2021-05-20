@@ -65,7 +65,7 @@
         <Compile Include="src\protocol\Movement\PlayerMoveResponse.cs" />
         <Compile Include="src\protocol\PlayerListUpdateEvent.cs" />
         <Compile Include="src\protocol\Player\ConnectionInfo.cs" />
-        <Compile Include="src\protocol\Player\Ping.cs" />
+        <Compile Include="src\protocol\Player\ClientHeartbeat.cs" />
         <Compile Include="src\protocol\Player\PlayerJoinEvent.cs" />
         <Compile Include="src\protocol\Player\PlayerListRequest.cs" />
         <Compile Include="src\protocol\Player\PlayerListResponse.cs" />
