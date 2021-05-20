@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7802983747924842013}
   m_Layer: 0
-  m_Name: To
+  m_Name: Station
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -79,6 +79,7 @@ MonoBehaviour:
   duration: 3
   spawnRate: 3
   useRandomSpawnIntervals: 1
+  loopMovement: 0
   minSpawnTime: 1
   maxSpawnTime: 4
 --- !u!1 &7765774886467196018
@@ -91,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2320296924643472777}
   m_Layer: 0
-  m_Name: From
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

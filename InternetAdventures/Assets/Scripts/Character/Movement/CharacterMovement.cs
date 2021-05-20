@@ -22,7 +22,8 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 _externalMovement = Vector3.zero;
     private Quaternion _newRotation;
     private GameObject _lastCollidedGameObject;
-    
+    private PhysicsPlatformHandler _currentPhysicsPlatformHandler;
+
     public static bool weaponInUse;
     
     //Other components
@@ -133,12 +134,27 @@ public class CharacterMovement : MonoBehaviour
                 }
                 break;
             case "PhysicsPlatform":
-                hit.transform.parent.GetComponent<PhysicsPlatformHandler>().OnActuation(hit.gameObject, gameObject);
+                if (_currentPhysicsPlatformHandler == null)
+                {
+                    _currentPhysicsPlatformHandler = hit.transform.parent.GetComponent<PhysicsPlatformHandler>();
+                    _currentPhysicsPlatformHandler.OnActuation(hit.gameObject, gameObject);
+                    _lastCollidedGameObject = hit.gameObject;   
+                }
                 break;
             default:
-                transform.parent = null;
-                _lastCollidedGameObject = null;
+                ResetCollisionFlags();
                 break;
+        }
+    }
+
+    private void ResetCollisionFlags()
+    {
+        transform.parent = null;
+        _lastCollidedGameObject = null;
+        if (_currentPhysicsPlatformHandler != null)
+        {
+            _currentPhysicsPlatformHandler.StopActuation();
+            _currentPhysicsPlatformHandler = null;
         }
     }
 }
