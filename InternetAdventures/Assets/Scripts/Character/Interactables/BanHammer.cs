@@ -5,28 +5,25 @@ using UnityEngine.InputSystem;
 
 public class BanHammer : Interactable
 {
+    [Header("Interactable-specific attributes")]
+    
     //Public
     [SerializeField] private bool enableScaleEffectOnObjects;
     
     //Private
-    private PlayerInput _playerInput;
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
 
     private void Start()
     {
-        _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
-        _playerInput.actions.FindAction("Interactable").performed += SlamHammer;
+        //Setup input
+        playerInput.actions.FindAction("Interactable").performed += SlamHammer;
     }
 
     private void SlamHammer(InputAction.CallbackContext pCallback)
     {
         if (!gameObject.activeSelf) return;
-        if (enableCameraShake)
-        {
-            Camera.main.DOShakePosition(cameraShakeDuration, cameraShakeStrength);
-            Camera.main.DOShakeRotation(cameraShakeDuration, cameraShakeStrength);   
-        }
-
+        ApplyCameraShake();
+        
         foreach (var gameObjectInReach in _gameObjectsInTrigger)
         {
             //IMPORTANT
@@ -43,7 +40,7 @@ public class BanHammer : Interactable
                     gameObjectInReach.transform.position = raycastHit.point + new Vector3(0,gameObjectInReach.transform.lossyScale.y / 2,0);
                 }   
             }
-            else gameObjectInReach.transform.DOShakeScale(1, 2f);
+            else gameObjectInReach.transform.DOShakeScale(1, 1.0f);
             
             //Add impulse upwards if there's a rigidbody.
             Rigidbody rigidbody = gameObjectInReach.GetComponent<Rigidbody>();

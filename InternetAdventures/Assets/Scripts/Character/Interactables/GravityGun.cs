@@ -1,28 +1,31 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using DG.Tweening;
 
 public class GravityGun : Interactable
 {
-    private PlayerInput _playerInput;
+    [Header("Interactable-specific attributes")]
+
+    //Public
     [SerializeField] private float range;
     [SerializeField] private float gravityRadius;
     [SerializeField] private float attractionSpeed;
-    private float currentAttractionDistance;
-    [SerializeField] private float AttractionDistance;
+    [SerializeField] private float closestAttractionDistance;
     [SerializeField] private bool showDebugInfo;
-    private Dictionary<GameObject, Transform> _pickedUpObjects = new Dictionary<GameObject, Transform>();
-    [SerializeField] private LayerMask interactableLayers;
+    
+    //Private
+    private float _currentAttractionDistance;
+    private readonly List<ItemInformation> _pickedUpObjects = new List<ItemInformation>();
+    private readonly RaycastHit[] _overlappedColliders = new RaycastHit[50];
+    private float _furthestDistanceToObject;
 
     private void Start()
     {
         //Setup input
-        _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
-        _playerInput.actions.FindAction("Interactable").started += ShootGun;
-        _playerInput.actions.FindAction("Interactable").canceled += ReleaseObjects;
-        _playerInput.actions.FindAction("Scroll").performed += ChangeAttractionDistance;
+        playerInput.actions.FindAction("Interactable").started += ActivateGun;
+        playerInput.actions.FindAction("Interactable").canceled += DeactivateGun;
+        playerInput.actions.FindAction("Scroll").performed += ChangeAttractionDistance;
     }
 
     private void Update()
@@ -30,36 +33,38 @@ public class GravityGun : Interactable
         //Move objects towards player only if there's at least one.
         if (_pickedUpObjects.Count > 0)
         {
-            foreach (var pickedObject in _pickedUpObjects.Keys)
+            foreach (var pickedObject in _pickedUpObjects)
             {
-                Vector3 movementDirection = transform.parent.position - pickedObject.transform.position;
-                float distanceDelta = movementDirection.magnitude - currentAttractionDistance;
-                if (Mathf.Abs(distanceDelta) > 0.1f)
-                {
-                    if (distanceDelta > 0 && movementDirection.magnitude <= 4.0f) continue;
-                    pickedObject.transform.Translate( attractionSpeed * distanceDelta * Time.deltaTime * movementDirection, Space.World);
-                    pickedObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    pickedObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-                }
+                GameObject currentGameObject = pickedObject.CurrentGameObject;
+                Vector3 movementDirection = currentGameObject.transform.position - transform.parent.parent.position;
+                float goalDistance = pickedObject.InitialDistance + _currentAttractionDistance;
+                float deltaDistance = goalDistance - movementDirection.magnitude;
+                if (movementDirection.magnitude + attractionSpeed * deltaDistance * Time.deltaTime < closestAttractionDistance) continue;
+                if (Mathf.Abs(deltaDistance) > 0.1f)
+                    currentGameObject.transform.Translate(attractionSpeed * deltaDistance * Time.deltaTime * movementDirection.normalized, Space.World);
             }
         }
+        
         if(showDebugInfo) ShowDebugInformation();
     }
 
-    private void ShootGun(InputAction.CallbackContext pCallback)
+    private void ActivateGun(InputAction.CallbackContext pCallback)
     {
-        if (!gameObject.activeSelf) return;
-        currentAttractionDistance = AttractionDistance;
-        RaycastHit[] overlapColliders = Physics.SphereCastAll(transform.position, gravityRadius, transform.forward, range, interactableLayers);
-        if (overlapColliders.Length > 0)
+        if(!SelfActiveAndCameraShake()) return;
+        
+        int foundColliders = Physics.SphereCastNonAlloc(transform.position, gravityRadius, transform.forward, _overlappedColliders, range, interactableLayers);
+        if (foundColliders > 0)
         {
-            foreach (var intersectingObject in overlapColliders)
+            for (int i = 0; i < foundColliders; i++)
             {
-                GameObject intersectingGameObject = intersectingObject.collider.gameObject;
-                _pickedUpObjects.Add(intersectingGameObject, intersectingObject.collider.transform.parent);
-                intersectingGameObject.transform.SetParent(transform.parent);
-                intersectingObject.transform.GetComponent<Rigidbody>().useGravity = false;
-                intersectingObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                GameObject intersectingGameObject = _overlappedColliders[i].collider.gameObject;
+                Rigidbody currentRigidbody = intersectingGameObject.GetComponent<Rigidbody>();
+                float currentDistance = (intersectingGameObject.transform.position - transform.parent.parent.position).magnitude;
+                if (currentDistance > _furthestDistanceToObject) _furthestDistanceToObject = currentDistance;
+                _pickedUpObjects.Add(new ItemInformation(intersectingGameObject, intersectingGameObject.transform.parent, currentRigidbody.constraints, currentDistance));
+                intersectingGameObject.transform.SetParent(transform);
+                currentRigidbody.useGravity = false;
+                currentRigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 CharacterMovement.weaponInUse = true;
             }
         }
@@ -67,26 +72,46 @@ public class GravityGun : Interactable
 
     private void ChangeAttractionDistance(InputAction.CallbackContext pCallback)
     {
-        currentAttractionDistance += pCallback.ReadValue<Vector2>().y * 0.01f;
+        float yValue = pCallback.ReadValue<Vector2>().y * 0.01f;
+        if (_currentAttractionDistance <= -_furthestDistanceToObject && yValue < 0)
+            return;
+        _currentAttractionDistance += yValue;
     }
 
-    private void ReleaseObjects(InputAction.CallbackContext pCallback)
+    private void DeactivateGun(InputAction.CallbackContext pCallback)
     {
         //Sets parent to null again and clears list.
-        foreach (var pickedObject in _pickedUpObjects.Keys)
+        foreach (var pickedObject in _pickedUpObjects)
         {
-            pickedObject.transform.SetParent(null);
-            pickedObject.transform.GetComponent<Rigidbody>().useGravity = true;
-            pickedObject.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            pickedObject.transform.parent = _pickedUpObjects[pickedObject];
+            pickedObject.CurrentGameObject.transform.SetParent(pickedObject.Parent);
+            Rigidbody currentRigidbody = pickedObject.CurrentGameObject.GetComponent<Rigidbody>();
+            currentRigidbody.constraints = pickedObject.RigidbodyConstraints;
+            currentRigidbody.useGravity = true;
         }
 
         _pickedUpObjects.Clear();
         CharacterMovement.weaponInUse = false;
+        _currentAttractionDistance = 0;
     }
 
     private void ShowDebugInformation()
     {
         Debug.DrawRay(transform.position, transform.forward * range, Color.magenta);
+    }
+}
+
+public readonly struct ItemInformation
+{
+    public readonly GameObject CurrentGameObject;
+    public readonly Transform Parent;
+    public readonly RigidbodyConstraints RigidbodyConstraints;
+    public readonly float InitialDistance;
+
+    public ItemInformation(GameObject pGameObject, Transform pParent, RigidbodyConstraints pRigidbodyRigidbodyConstraints, float pInitialDistance)
+    {
+        CurrentGameObject = pGameObject;
+        Parent = pParent;
+        RigidbodyConstraints = pRigidbodyRigidbodyConstraints;
+        InitialDistance = pInitialDistance;
     }
 }
