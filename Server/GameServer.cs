@@ -107,9 +107,11 @@ namespace Server
         private void HandlePlayerListRequest(KeyValuePair<TcpClient,PlayerInfo> requestingPlayer)
         {
             Log.LogInfo("Sending PlayerListResponse!", this, ConsoleColor.Cyan);
-            PlayerListResponse playerListResponse = new PlayerListResponse();
+            PlayerListResponse playerListResponse = new PlayerListResponse
+            {
+                playerList = connectedPlayers.Select(player => player.Value).ToList()
+            };
 
-            playerListResponse.playerList = connectedPlayers.Select(player => player.Value).ToList();
 
             SendObject(requestingPlayer.Key, playerListResponse);
         }
