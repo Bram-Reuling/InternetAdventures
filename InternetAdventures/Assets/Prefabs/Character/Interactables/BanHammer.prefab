@@ -127,8 +127,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4393935, y: 2.6187415, z: 2.1467433}
-  m_Center: {x: -0.21969676, y: 0.35777044, z: 0.3233719}
+  m_Size: {x: 1.5, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0.4}
 --- !u!114 &2071267865242391889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +144,11 @@ MonoBehaviour:
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2048
+  enableCameraShake: 1
+  cameraShakeStrength: 1
+  cameraShakeDuration: 1
+  playerInput: {fileID: 0}
+  enableScaleEffectOnObjects: 1
 --- !u!1 &6024748194640639824
 GameObject:
   m_ObjectHideFlags: 0

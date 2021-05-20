@@ -240,11 +240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5021ed5ea12433e8b6552fde5af4114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 100
-  gravityRadius: 2
-  attractionSpeed: 1
-  AttractionDistance: 2
-  showDebugInfo: 1
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2048
+  enableCameraShake: 1
+  cameraShakeStrength: 0.1
+  cameraShakeDuration: 1
+  playerInput: {fileID: 0}
+  range: 15
+  gravityRadius: 2
+  attractionSpeed: 1
+  closestAttractionDistance: 3
+  showDebugInfo: 1

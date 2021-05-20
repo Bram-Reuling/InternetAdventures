@@ -4,23 +4,24 @@ using UnityEngine.InputSystem;
 
 public class ShockwaveGun : Interactable
 {
+    [Header("Interactable-specific attributes")]
+    
+    //Public
     [SerializeField] private float range;
-    [SerializeField] private float shockwaveStrength;
     [SerializeField] private float shockwaveRadius;
+    [SerializeField] private float shockwaveStrength;
     [SerializeField] private float possibleHitRadius;
-    [SerializeField] private bool drawDebugInfo;
-    [SerializeField] private LayerMask interactableLayers;
-    private PlayerInput _playerInput;
+    [SerializeField] private bool showDebugInfo;
 
     private void Start()
     {
-        _playerInput = transform.parent.parent.GetComponent<PlayerInput>();
-        _playerInput.actions.FindAction("Interactable").performed += ShootGun;
+        //Setup input
+        playerInput.actions.FindAction("Interactable").performed += ShootGun;
     }
 
     private void Update()
     {
-        if (drawDebugInfo) DrawDebug();
+        if (showDebugInfo) DrawDebug();
     }
 
     private void ShootGun(InputAction.CallbackContext pCallback)
@@ -29,20 +30,17 @@ public class ShockwaveGun : Interactable
         RaycastHit[] overlapColliders =
             Physics.SphereCastAll(transform.position, possibleHitRadius, transform.forward, range, interactableLayers);
 
-        if (overlapColliders.Length > 0)
+        if (overlapColliders.Length <= 0) return;
+        Vector3 hitPosition = overlapColliders[0].point;
+        Collider[] collidersInRange = Physics.OverlapSphere(hitPosition, shockwaveRadius);
+        foreach (var collider in collidersInRange)
         {
-            Vector3 hitPositon = overlapColliders[0].point;
-
-            Collider[] collidersInRange = Physics.OverlapSphere(hitPositon, shockwaveRadius);
-            foreach (var collider in collidersInRange)
-            {
-                if (collider.TryGetComponent(typeof(Rigidbody), out var rigidbody))
-                {
-                    ((Rigidbody) rigidbody).AddExplosionForce(shockwaveStrength, hitPositon, shockwaveRadius);
-                }
-            }
+            if (collider.TryGetComponent(typeof(Rigidbody), out var rigidbody))
+                ((Rigidbody) rigidbody).AddExplosionForce(shockwaveStrength, hitPosition, shockwaveRadius);
         }
-
+        
+        ApplyCameraShake();
+        
         //Deprecated - uses only ray
 
         // var raycastHit = new RaycastHit();

@@ -158,14 +158,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a36c54d01340ebbf75eb9c3d931241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 100
-  shockwaveStrength: 500
-  shockwaveRadius: 4
-  possibleHitRadius: 0.5
-  drawDebugInfo: 1
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2048
+  enableCameraShake: 1
+  cameraShakeStrength: 0.1
+  cameraShakeDuration: 1
+  playerInput: {fileID: 0}
+  range: 100
+  shockwaveRadius: 4
+  shockwaveStrength: 500
+  possibleHitRadius: 0.5
+  showDebugInfo: 0
 --- !u!1 &9171043584987043843
 GameObject:
   m_ObjectHideFlags: 0
