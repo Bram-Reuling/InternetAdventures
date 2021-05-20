@@ -1,6 +1,7 @@
 using System;
 using Character;
 using GameCamera;
+using Shared;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -71,6 +72,16 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void SpawnPlayer(PlayerInfo player)
+    {
+        // Spawn a player
+    }
+
+    public void RemovePlayer(PlayerInfo player)
+    {
+        // Remove a player
+    }
+    
     private void SpawnPlayers()
     {
         playerOne = PlayerInput

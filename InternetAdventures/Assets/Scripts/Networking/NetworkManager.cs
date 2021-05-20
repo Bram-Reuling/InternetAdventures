@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using UnityEngine;
 using Shared;
+using UnityEngine.InputSystem;
 using Ping = Shared.Ping;
 
 namespace Networking
@@ -71,19 +73,35 @@ namespace Networking
             }
         }
 
-        private static void ProcessPlayerListUpdateEvents(PlayerListUpdateEvent pEvent)
+        private void ProcessPlayerListUpdateEvents(PlayerListUpdateEvent pEvent)
         {
             Debug.Log("PlayerListUpdateEvent Received");
 
             PlayerListUpdateType typeOfUpdate = pEvent.updateType;
 
+            List<PlayerInfo> newPlayerList = pEvent.updatedPlayerList;
+
             switch (typeOfUpdate)
             {
                 case PlayerListUpdateType.PlayerRemoved:
                     // Destroy the removed player.
+                    IEnumerable<PlayerInfo> differenceListRemove = players.Except(newPlayerList);
+                    foreach (PlayerInfo player in differenceListRemove)
+                    {
+                        playerManager.RemovePlayer(player);
+                    }
+
+                    players = newPlayerList;
                     break;
                 case PlayerListUpdateType.PlayerAdded:
                     // Spawn the added player.
+                    IEnumerable<PlayerInfo> differenceListAdd = newPlayerList.Except(players);
+                    foreach (PlayerInfo player in differenceListAdd)
+                    {
+                        playerManager.SpawnPlayer(player);
+                    }
+
+                    players = newPlayerList;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
