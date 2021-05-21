@@ -3,8 +3,11 @@ using UnityEngine.InputSystem;
 
 public class Ziplinee : MonoBehaviour
 {
+    //Public
     [SerializeField] private float minDistanceToZipline;
     [SerializeField] private float ziplineSpeed;
+    
+    //Private
     private CharacterController _characterController;
     private CharacterMovement _characterMovement;
     private PlayerInput _playerInput;

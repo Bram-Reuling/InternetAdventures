@@ -41,4 +41,9 @@ public class MovingPlatform : MonoBehaviour
                 transform.DOMove(_stations.ElementAt(_currentPlatform).position, _duration).SetEase(Ease.Linear);
         }
     }
+
+    public Vector3 GetCurrentMovementVector()
+    {
+        return (_stations.ElementAt(_currentPlatform).position - _stations.ElementAt(_currentPlatform - 1).position) / _duration;
+    }
 }

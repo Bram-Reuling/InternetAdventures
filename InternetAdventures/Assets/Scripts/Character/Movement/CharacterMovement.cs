@@ -22,6 +22,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 _externalMovement = Vector3.zero;
     private Quaternion _newRotation;
     private GameObject _currentlyCollidingGameObject;
+    private bool _collideEveryFrame;
 
     public static bool weaponInUse;
     
@@ -56,7 +57,8 @@ public class CharacterMovement : MonoBehaviour
         if (!_characterController.isGrounded)
         {
             _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
-            ResetCollisionFlags();
+            OnCollisionLeave();
+            _currentlyCollidingGameObject = null;
         }
         //Move character controller
         if(UserInputAllowed) _characterController.Move((_velocity + _externalMovement) * Time.deltaTime);
@@ -126,32 +128,35 @@ public class CharacterMovement : MonoBehaviour
     
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (_currentlyCollidingGameObject == hit.gameObject) return;
-        ResetCollisionFlags();
+        //Note: Only recognize collision once, 'OnControllerColliderHit' is being called every frame.
+        if (_currentlyCollidingGameObject == hit.gameObject && !_collideEveryFrame) return;
+        OnCollisionLeave();
         _currentlyCollidingGameObject = hit.gameObject;
         switch (_currentlyCollidingGameObject.transform.tag)
         {
             case "Platform":
-                if (_currentlyCollidingGameObject == null)
-                {
-                    //Todo: calculate the movement speed from the platform and apply it to the character.
-                    //_externalMovement = _lastCollidedGameObject.GetComponent<MovingPlatform>().Movement;
-                }
+                //TODO: Cache this thing.
+                _externalMovement = _currentlyCollidingGameObject.GetComponent<MovingPlatform>()
+                    .GetCurrentMovementVector();
+                _collideEveryFrame = true;
                 break;
             case "PhysicsPlatform":
                 _currentlyCollidingGameObject.transform.parent
                     .GetComponent<PhysicsPlatformHandler>().OnActuation(_currentlyCollidingGameObject, gameObject);
                 break;
-            default:
-                break;
         }
     }
 
-    private void ResetCollisionFlags()
+    private void OnCollisionLeave()
     {
+        //Note: This case is only true, when the character jumps.
         if (_currentlyCollidingGameObject == null) return;
         switch (_currentlyCollidingGameObject.transform.tag)
         {
+            case "Platform":
+                _collideEveryFrame = false;
+                _externalMovement = Vector3.zero;
+                break;
             case "PhysicsPlatform":
                 _currentlyCollidingGameObject.transform.parent.GetComponent<PhysicsPlatformHandler>().StopActuation();
             break;

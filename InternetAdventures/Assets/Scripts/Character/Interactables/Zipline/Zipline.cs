@@ -3,7 +3,9 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Zipline : MonoBehaviour
 {
+    //Public
     [SerializeField] private GameObject _post1, _post2;
+    
     [Tooltip("This sets the distance when the character should be thrown off the zipline." +
              "0 throws off at the actual post, 1 throws off one unit before.")]
     [SerializeField] private float throwoffDistance;
