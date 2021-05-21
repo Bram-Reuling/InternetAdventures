@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -218,15 +218,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4270987649124312459, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.75
+      value: 4.25
       objectReference: {fileID: 0}
     - target: {fileID: 4270987649124312459, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.2500002
+      value: 1.5000002
       objectReference: {fileID: 0}
     - target: {fileID: 4270987649124312459, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26
+      value: -2.75
       objectReference: {fileID: 0}
     - target: {fileID: 4270987649124312459, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -292,7 +292,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 100000
+  m_Intensity: 14598.695
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -333,7 +333,7 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 2
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 100000
+  m_Intensity: 14598.695
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2473,8 +2473,32 @@ PrefabInstance:
       value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 7303374206920581548, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
+      propertyPath: TAAQuality
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303374206920581548, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
       propertyPath: antialiasing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303374206920581548, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
+      propertyPath: taaAntiFlicker
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303374206920581548, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
+      propertyPath: taaSharpenStrength
+      value: 0.547
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303374206920581548, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
+      propertyPath: taaHistorySharpening
+      value: 0.342
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303374206920581548, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
+      propertyPath: taaAntiHistoryRinging
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303374206920581549, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
