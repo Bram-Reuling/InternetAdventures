@@ -136,8 +136,7 @@ public class CharacterMovement : MonoBehaviour
         {
             case "Platform":
                 //TODO: Cache this thing.
-                _externalMovement = _currentlyCollidingGameObject.GetComponent<MovingPlatform>()
-                    .GetCurrentMovementVector();
+                _externalMovement = _currentlyCollidingGameObject.GetComponent<MovingPlatform>().CurrentMovementVector;
                 _collideEveryFrame = true;
                 break;
             case "PhysicsPlatform":

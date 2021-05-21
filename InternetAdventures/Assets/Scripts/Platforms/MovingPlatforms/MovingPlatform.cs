@@ -10,6 +10,7 @@ public class MovingPlatform : MonoBehaviour
     private List<Transform> _stations;
     private int _currentPlatform;
     private bool _loopMovement;
+    public Vector3 CurrentMovementVector { get; private set; }
 
     public void Initialize(in List<Transform> pStations, in float pDuration, in bool pLoopMovement)
     {
@@ -38,12 +39,11 @@ public class MovingPlatform : MonoBehaviour
                     _currentPlatform = -1;
             }
             else
+            {
                 transform.DOMove(_stations.ElementAt(_currentPlatform).position, _duration).SetEase(Ease.Linear);
+                CurrentMovementVector = (_stations.ElementAt(_currentPlatform).position - 
+                                         _stations.ElementAt(_currentPlatform - 1 < 0 ? _stations.Count - 1 : _currentPlatform -1).position) / _duration;
+            }
         }
-    }
-
-    public Vector3 GetCurrentMovementVector()
-    {
-        return (_stations.ElementAt(_currentPlatform).position - _stations.ElementAt(_currentPlatform - 1).position) / _duration;
     }
 }
