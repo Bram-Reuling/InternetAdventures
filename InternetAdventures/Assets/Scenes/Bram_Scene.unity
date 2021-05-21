@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fe6a1cd985846e68039509721b40c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localCharacterPrefab: {fileID: 4270987649124312461, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
-  characterPrefab: {fileID: 5013281787035831623, guid: 01640e2b1c0b3b04f8fc587182abe5d7, type: 3}
+  localCharacterPrefab: {fileID: 871982012266598263, guid: fe27460141a2f9e4b9df42d47b232c88, type: 3}
+  characterPrefab: {fileID: 4307439961101630752, guid: c41c75759791ab548bd6bfdee1772ba3, type: 3}
   cameraRigPrefab: {fileID: 7303374206783668692, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
   cameraRig: {fileID: 321722014}
