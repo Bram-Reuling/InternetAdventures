@@ -19,16 +19,21 @@ namespace Networking
             try
             {
                 Log.LogInfo("Starting server on port 55555!", this, ConsoleColor.DarkCyan);
+
+                Console.WriteLine("Starting server on port 55555!");
                 
                 listener = new TcpListener(IPAddress.Any, 55555);
                 listener.Start();
             
                 Log.LogInfo("Started server!", this, ConsoleColor.Green);
+                Console.WriteLine("Started server!");
             }
             catch (Exception e)
             {
                 Log.LogInfo("Failed to start server:", this, ConsoleColor.Red);
+                Console.WriteLine("Failed to start server:");
                 Log.LogInfo(e, this, ConsoleColor.Red);
+                Console.WriteLine(e);
             }
         }
 
@@ -50,6 +55,7 @@ namespace Networking
             if (!listener.Pending()) return;
             
             Log.LogInfo("Accepting new client...", this, ConsoleColor.White);
+            Console.WriteLine("Accepting new client...");
                 
             TcpClient channel = listener.AcceptTcpClient();
 
@@ -60,6 +66,7 @@ namespace Networking
             connectedPlayers.Add(channel, playerInfo);
 
             Log.LogInfo("Accepted new client with ID: " + playerInfo.ID, this, ConsoleColor.White);
+            Console.WriteLine("Accepted new client with ID: " + playerInfo.ID);
                 
             SendConnectionInfo(channel, playerInfo);
                 
@@ -102,6 +109,7 @@ namespace Networking
                 ASerializable inObject = inPacket.ReadObject();
                 
                 Log.LogInfo("Received packet:" + inObject, this, ConsoleColor.DarkBlue);
+                Console.WriteLine("Received packet:" + inObject);
 
                 switch (inObject)
                 {
@@ -120,6 +128,7 @@ namespace Networking
         private void HandlePlayerListRequest(KeyValuePair<TcpClient,PlayerInfo> requestingPlayer)
         {
             Log.LogInfo("Sending PlayerListResponse!", this, ConsoleColor.Cyan);
+            Console.WriteLine("Sending PlayerListResponse!");
             PlayerListResponse playerListResponse = new PlayerListResponse
             {
                 playerList = connectedPlayers.Select(player => player.Value).ToList()
@@ -149,6 +158,7 @@ namespace Networking
             ConnectionInfo connectionInfo = new ConnectionInfo {ID = info.ID};
             
             Log.LogInfo("Sending ConnectionInfo!", this, ConsoleColor.Cyan);
+            Console.WriteLine("Sending ConnectionInfo!");
             
             SendObject(receiver, connectionInfo);
         }
@@ -158,6 +168,7 @@ namespace Networking
             PlayerJoinEvent playerJoinEvent = new PlayerJoinEvent {playerToAdd = newPlayer};
             
             Log.LogInfo("Sending PlayerJoinEvent!", this, ConsoleColor.Cyan);
+            Console.WriteLine("Sending PlayerJoinEvent!");
             SendObject(receiver, playerJoinEvent);
         }
         
@@ -166,6 +177,7 @@ namespace Networking
             PlayerRemoveEvent playerRemoveEvent = new PlayerRemoveEvent {playerToRemove = removePlayer};
             
             Log.LogInfo("Sending PlayerJoinEvent!", this, ConsoleColor.Cyan);
+            Console.WriteLine("Sending PlayerJoinEvent!");
             SendObject(receiver, playerRemoveEvent);
         }
         
@@ -180,6 +192,7 @@ namespace Networking
             catch (Exception e)
             {
                 Log.LogInfo("Could not send object to client! Client is perhaps faulthy?", this, ConsoleColor.Red);
+                Console.WriteLine("Could not send object to client! Client is perhaps faulthy?");
                 RemoveClient(receiver);
             }
         }
