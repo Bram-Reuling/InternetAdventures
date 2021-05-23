@@ -66,8 +66,10 @@ namespace Networking
                     case ClientHeartbeat heartBeatMessage:
                         HandleHeartbeat(heartBeatMessage);
                         break;
+/*
                     case PlayerMoveResponse pMoveResponse:
                         break;
+*/
                     default:
                         break;
                 }

@@ -39,7 +39,7 @@ namespace Networking
         {
             Debug.Log("Spawning player with ID: " + player.ID);
             GameObject playerGameObject;
-            Vector3 spawnPosition = new Vector3 { x = player.position.X, y =  player.position.Y, z = player.position.Z };
+            Vector3 spawnPosition = new Vector3 { x = player.position.x, y =  player.position.y, z = player.position.z };
 
             if (player.ID == ConnectionId)
             {

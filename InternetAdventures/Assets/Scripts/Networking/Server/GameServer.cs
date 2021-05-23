@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
 
-namespace Networking.Server
+namespace Networking
 {
     public class GameServer : MonoBehaviour
     {
@@ -13,16 +13,17 @@ namespace Networking.Server
         {
             try
             {
-                Console.WriteLine("Starting server on port 55555");
-
+                Log.LogInfo("Starting server on port 55555!", this, ConsoleColor.DarkCyan);
+                
                 listener = new TcpListener(IPAddress.Any, 55555);
                 listener.Start();
             
-                Console.WriteLine("Started server!");
+                Log.LogInfo("Started server!", this, ConsoleColor.Green);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Log.LogInfo("Failed to start server:", this, ConsoleColor.Red);
+                Log.LogInfo(e, this, ConsoleColor.Red);
             }
         }
 
