@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using GameCamera;
-using Shared;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
