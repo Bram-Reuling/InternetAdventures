@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bram_Scene.unity
     guid: cf49cd511234f5e449ae1001bfb7f84a
+  - enabled: 1
+    path: Assets/Scenes/Server.unity
+    guid: fdc49c89bf6a6f449ab8f233b49d1cdb
   m_configObjects: {}
