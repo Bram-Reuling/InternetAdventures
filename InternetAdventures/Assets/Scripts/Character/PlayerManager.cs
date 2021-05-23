@@ -1,7 +1,6 @@
 using System;
 using Character;
 using GameCamera;
-using Shared;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
