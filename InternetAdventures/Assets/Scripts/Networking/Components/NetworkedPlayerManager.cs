@@ -78,5 +78,10 @@ namespace Networking
                 Debug.Log("No such player");
             }
         }
+
+        public void MovePlayer(PlayerInfo player)
+        {
+            players[player.ID].transform.SetPositionAndRotation(player.position, player.rotation);
+        }
     }
 }

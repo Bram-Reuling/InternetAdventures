@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = System.Random;
 
 namespace Networking
@@ -140,6 +141,20 @@ namespace Networking
 
         private void HandlePlayerMoveRequest(PlayerMoveRequest pMoveRequest, KeyValuePair<TcpClient,PlayerInfo> requestingPlayer)
         {
+            // TODO: Send PlayerMoveResponse to all the clients
+            PlayerInfo player = connectedPlayers.FirstOrDefault(p => p.Value.ID == requestingPlayer.Value.ID).Value;
+
+            player.position = pMoveRequest.inputPosition;
+            player.rotation = pMoveRequest.inputRotation;
+
+            foreach (KeyValuePair<TcpClient,PlayerInfo> playerInfo in connectedPlayers)
+            {
+                if (playerInfo.Value.ID == player.ID) continue;
+
+                PlayerMoveResponse playerMoveResponse = new PlayerMoveResponse { player = player, inputPosition = player.position, inputRotation = player.rotation };
+                
+                SendObject(playerInfo.Key, playerMoveResponse);
+            }
         }
 
         private void ProcessFaulthyClients()

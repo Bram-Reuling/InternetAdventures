@@ -66,6 +66,7 @@ namespace Networking
                         HandleHeartbeat(heartBeatMessage);
                         break;
                     case PlayerMoveResponse pMoveResponse:
+                        HandlePlayerMoveResponse(pMoveResponse);
                         break;
                     default:
                         break;
@@ -75,6 +76,11 @@ namespace Networking
             {
                 Debug.LogError(e);
             }
+        }
+
+        private void HandlePlayerMoveResponse(PlayerMoveResponse pMoveResponse)
+        {
+            networkedPlayerManager.MovePlayer(pMoveResponse.player);
         }
 
         private void HandleHeartbeat(ClientHeartbeat heartbeat)
@@ -87,12 +93,17 @@ namespace Networking
             Debug.Log("ConnectionInfo Received");
             networkedPlayerManager.SetConnectionId(info.ID);
             
+            PlayerListRequest playerListRequest = new PlayerListRequest();
+            SendObject(playerListRequest);
+        }
+
+        public void SendObject(ASerializable pObject)
+        {
             try
             {
-                Debug.Log("Sending PlayerListRequest");
-                PlayerListRequest playerListRequest = new PlayerListRequest();
+                Debug.Log("Sending: " + pObject);
                 Packet outPacket = new Packet();
-                outPacket.Write(playerListRequest);
+                outPacket.Write(pObject);
                 StreamUtil.Write(client.GetStream(), outPacket.GetBytes());
             }
             catch (Exception e)

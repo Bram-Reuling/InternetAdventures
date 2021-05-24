@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 871982012266598261, guid: fe27460141a2f9e4b9df42d47b232c88, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 871982012266598263, guid: fe27460141a2f9e4b9df42d47b232c88, type: 3}
       propertyPath: m_Name
       value: NetworkedCharacter
