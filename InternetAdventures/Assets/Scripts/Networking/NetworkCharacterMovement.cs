@@ -7,6 +7,8 @@ namespace Networking
 {
     public class NetworkCharacterMovement : NetworkBehaviour
     {
+        #region Variables
+
         //Public
         [HideInInspector] public bool UserInputAllowed;
 
@@ -31,37 +33,13 @@ namespace Networking
         private CharacterController _characterController;
         private PlayerInput _playerInput;
 
-        public override void OnStartLocalPlayer()
+        #endregion
+
+        #region Server
+
+        [ServerCallback]
+        private void Update()
         {
-            CameraRig cameraRig = FindObjectOfType<CameraRig>();
-
-            if (cameraRig)
-            {
-                cameraRig.Target = gameObject;
-            }
-        }
-
-        private void Start()
-        {
-            //Get components
-            _characterController = GetComponent<CharacterController>();
-            _playerInput = GetComponent<PlayerInput>();
-
-            //Setup input
-            //Movement
-            _playerInput.actions.FindAction("Movement").performed += OnMoveDown;
-            _playerInput.actions.FindAction("Movement").canceled += OnMoveUp;
-            //Jump
-            _playerInput.actions.FindAction("Jump").performed += OnJump;
-
-            //Initialize values
-            UserInputAllowed = true;
-        }
-
-        private void FixedUpdate()
-        {
-            if (!isLocalPlayer) return;
-            
             Decelerate();
             //Add current input movement to actual movement
             _velocity += _inputMovement;
@@ -83,45 +61,16 @@ namespace Networking
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, _newRotation,
                     XZMovement.magnitude * rotationOnMovementMultiplier);
         }
-
-        private void OnMoveDown(InputAction.CallbackContext pInputValue)
-        {
-            //Read in new vector
-            Vector2 movementVector = pInputValue.ReadValue<Vector2>();
-            //Create new rotation from the given input
-            _newRotation = Quaternion.LookRotation(new Vector3(movementVector.x, 0, movementVector.y), Vector3.up);
-            //Assign movement direction multiplied with the movement speed
-            _inputMovement = new Vector3(movementVector.x, 0, movementVector.y) * movementSpeed;
-        }
-
-        private void OnMoveUp(InputAction.CallbackContext pInputValue)
-        {
-            //This is just to assign a zero vector to the movement vector again,
-            //since the new input system does not continuously call 'performed' when button is held down.
-            Vector2 movementVector = pInputValue.ReadValue<Vector2>();
-            _inputMovement = new Vector3(movementVector.x, 0, movementVector.y) * movementSpeed;
-        }
-
-        private void OnJump(InputAction.CallbackContext pObj)
-        {
-            //Apply jump force
-            if (_characterController.isGrounded) _velocity.y = jumpHeight;
-        }
-
-        public void AddJumpForce()
-        {
-            _velocity.y = jumpHeight;
-        }
-
+        
+        [ServerCallback]
         private void Decelerate()
         {
-            if (_inputMovement.magnitude <= 0.1f)
-            {
-                _velocity.x *= deceleration;
-                _velocity.z *= deceleration;
-            }
+            if (!(_inputMovement.magnitude <= 0.1f)) return;
+            _velocity.x *= deceleration;
+            _velocity.z *= deceleration;
         }
 
+        [ServerCallback]
         private Vector3 ConstrainXZMovement()
         {
             Vector3 XZMovement = new Vector3(_velocity.x, 0, _velocity.z);
@@ -135,12 +84,27 @@ namespace Networking
 
             return XZMovement;
         }
-
-        public Vector3 GetVelocity()
+        
+        [ServerCallback]
+        private void OnCollisionLeave()
         {
-            return _velocity;
+            //Note: This case is only true, when the character jumps.
+            if (_currentlyCollidingGameObject == null) return;
+            switch (_currentlyCollidingGameObject.transform.tag)
+            {
+                case "Platform":
+                    _collideEveryFrame = false;
+                    _externalMovement = Vector3.zero;
+                    break;
+                case "PhysicsPlatform":
+                    _currentlyCollidingGameObject.transform.parent.GetComponent<PhysicsPlatformHandler>()
+                        .StopActuation();
+                    break;
+            }
         }
-
+        
+        
+        [ServerCallback]
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             //Note: Only recognize collision once, 'OnControllerColliderHit' is being called every frame.
@@ -161,22 +125,93 @@ namespace Networking
                     break;
             }
         }
-
-        private void OnCollisionLeave()
+        
+        [Command]
+        private void CmdOnMoveDown(Vector2 movementVector)
         {
-            //Note: This case is only true, when the character jumps.
-            if (_currentlyCollidingGameObject == null) return;
-            switch (_currentlyCollidingGameObject.transform.tag)
+            //Create new rotation from the given input
+            _newRotation = Quaternion.LookRotation(new Vector3(movementVector.x, 0, movementVector.y), Vector3.up);
+            //Assign movement direction multiplied with the movement speed
+            _inputMovement = new Vector3(movementVector.x, 0, movementVector.y) * movementSpeed;
+        }
+
+        [Command]
+        private void CmdOnMoveUp(Vector2 movementVector)
+        {
+            _inputMovement = new Vector3(movementVector.x, 0, movementVector.y) * movementSpeed;
+        }
+
+        [Command]
+        private void CmdOnJump()
+        {
+            //Apply jump force
+            if (_characterController.isGrounded) _velocity.y = jumpHeight;
+        }
+
+        #endregion
+
+        #region Client
+
+        [ClientCallback]
+        public override void OnStartLocalPlayer()
+        {
+            CameraRig cameraRig = FindObjectOfType<CameraRig>();
+
+            if (cameraRig)
             {
-                case "Platform":
-                    _collideEveryFrame = false;
-                    _externalMovement = Vector3.zero;
-                    break;
-                case "PhysicsPlatform":
-                    _currentlyCollidingGameObject.transform.parent.GetComponent<PhysicsPlatformHandler>()
-                        .StopActuation();
-                    break;
+                cameraRig.Target = gameObject;
             }
+        }
+        
+        [ClientCallback]
+        private void Start()
+        {
+            if (!hasAuthority) return;
+            
+            //Get components
+            _characterController = GetComponent<CharacterController>();
+            _playerInput = GetComponent<PlayerInput>();
+
+            //Setup input
+            //Movement
+            _playerInput.actions.FindAction("Movement").performed += OnMoveDown;
+            _playerInput.actions.FindAction("Movement").canceled += OnMoveUp;
+            //Jump
+            _playerInput.actions.FindAction("Jump").performed += OnJump;
+
+            //Initialize values
+            UserInputAllowed = true;
+            
+        }
+
+        [ClientCallback]
+        private void OnMoveDown(InputAction.CallbackContext pInputValue)
+        {
+            //Read in new vector
+            Vector2 movementVector = pInputValue.ReadValue<Vector2>();
+            CmdOnMoveDown(movementVector);
+        }
+        
+        [ClientCallback]
+        private void OnMoveUp(InputAction.CallbackContext pInputValue)
+        {
+            //This is just to assign a zero vector to the movement vector again,
+            //since the new input system does not continuously call 'performed' when button is held down.
+            Vector2 movementVector = pInputValue.ReadValue<Vector2>();
+            CmdOnMoveUp(movementVector);
+        }
+        
+        [ClientCallback]
+        private void OnJump(InputAction.CallbackContext pObj)
+        {
+            CmdOnJump();
+        }
+        
+        #endregion
+
+        public Vector3 GetVelocity()
+        {
+            return _velocity;
         }
     }
 }
