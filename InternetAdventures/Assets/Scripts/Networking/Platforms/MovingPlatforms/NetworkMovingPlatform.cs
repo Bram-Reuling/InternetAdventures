@@ -33,10 +33,7 @@ namespace Networking.Platforms.MovingPlatforms
 
         #region Server Functions
 
-        
-
-        #endregion
-
+        [ServerCallback]
         public void Initialize(in List<Transform> pStations, in float pDuration, in bool pLoopMovement)
         {
             _duration = pDuration;
@@ -44,6 +41,7 @@ namespace Networking.Platforms.MovingPlatforms
             _loopMovement = pLoopMovement;
         }
     
+        [ServerCallback]
         private void Update()
         {
             if (DOTween.IsTweening(transform)) return;
@@ -65,5 +63,7 @@ namespace Networking.Platforms.MovingPlatforms
                                          _stations.ElementAt(_currentPlatform - 1 < 0 ? _stations.Count - 1 : _currentPlatform -1).position) / _duration;
             }
         }
+
+        #endregion
     }
 }

@@ -39,10 +39,7 @@ namespace Networking.Platforms.MovingPlatforms
 
         #region Server Functions
 
-        
-
-        #endregion
-        
+        [ServerCallback]
         private void Start()
         {
             for (int i = 0; i < transform.childCount; i++)
@@ -57,6 +54,7 @@ namespace Networking.Platforms.MovingPlatforms
             SpawnPlatform();
         }
 
+        [ServerCallback]
         private void Update()
         {
             _timePassed += Time.deltaTime;
@@ -68,16 +66,20 @@ namespace Networking.Platforms.MovingPlatforms
             SpawnPlatform();
         }
 
+        [ServerCallback]
         private void SpawnPlatform()
         {
             //Todo: Create a deep copy of the list, so individual scripts cannot mess up the list.
             LeanPool.Spawn(platform, _platformStations.ElementAt(0).position, Quaternion.identity, transform)
                 .GetComponent<NetworkMovingPlatform>()
                 .Initialize(_platformStations, duration, loopMovement);
+
             _timePassed = 0;
             if (useRandomSpawnIntervals)
                 spawnRate = Random.Range(minSpawnTime, maxSpawnTime);
             _currentPlatformAmount++;
         }
+
+        #endregion
     }
 }
