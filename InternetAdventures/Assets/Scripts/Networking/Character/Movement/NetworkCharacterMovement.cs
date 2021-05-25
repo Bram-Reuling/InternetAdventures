@@ -18,6 +18,7 @@ namespace Networking
         [SerializeField] private float gravityMultiplier;
         [SerializeField] private float rotationOnMovementMultiplier;
         [SerializeField] private float deceleration;
+        public float CharacterMass = 70;
 
         //Private
         private Vector3 _velocity;
@@ -115,10 +116,11 @@ namespace Networking
                     _externalMovement = Vector3.zero;
                     break;
                 case "PhysicsPlatform":
-                    _currentlyCollidingGameObject.transform.parent.GetComponent<PhysicsPlatformHandler>()
-                        .StopActuation();
+                    _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().RemoveCharacter(gameObject);
                     break;
             }
+
+            _currentlyCollidingGameObject = null;
         }
         
         [ServerCallback]
@@ -126,19 +128,20 @@ namespace Networking
         {
             //Note: Only recognize collision once, 'OnControllerColliderHit' is being called every frame.
             if (_currentlyCollidingGameObject == hit.gameObject && !_collideEveryFrame) return;
-            OnCollisionLeave();
-            _currentlyCollidingGameObject = hit.gameObject;
-            switch (_currentlyCollidingGameObject.transform.tag)
+            switch (hit.gameObject.transform.tag)
             {
                 case "Platform":
                     //TODO: Cache this thing.
-                    _externalMovement = _currentlyCollidingGameObject.GetComponent<MovingPlatform>()
-                        .CurrentMovementVector;
+                    _currentlyCollidingGameObject = hit.gameObject;
+                    _externalMovement = _currentlyCollidingGameObject.GetComponent<MovingPlatform>().CurrentMovementVector;
                     _collideEveryFrame = true;
                     break;
                 case "PhysicsPlatform":
-                    _currentlyCollidingGameObject.transform.parent
-                        .GetComponent<PhysicsPlatformHandler>().OnActuation(_currentlyCollidingGameObject, gameObject);
+                    _currentlyCollidingGameObject = hit.gameObject;
+                    _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().AddCharacter(gameObject);
+                    break;
+                default:
+                    OnCollisionLeave();
                     break;
             }
         }
