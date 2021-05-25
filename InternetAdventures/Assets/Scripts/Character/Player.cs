@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Character
@@ -36,10 +35,6 @@ namespace Character
             SetComponentsActive(false);
             gameObject.transform.position = checkPoint;
             SetComponentsActive(true);
-
-            //gameObject.transform.localPosition = checkPoint;
-
-            //gameObject.transform.SetPositionAndRotation(checkPoint, gameObject.transform.rotation);
         }
 
         private void SetComponentsActive(bool pBool)
