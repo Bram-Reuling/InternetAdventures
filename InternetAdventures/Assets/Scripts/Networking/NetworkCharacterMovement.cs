@@ -35,7 +35,25 @@ namespace Networking
 
         #endregion
 
-        #region Server
+        #region Global Functions
+        
+        private void Start()
+        {
+            _characterController = GetComponent<CharacterController>();
+
+            UserInputAllowed = true;
+            
+            ClientStart();
+        }
+        
+        public Vector3 GetVelocity()
+        {
+            return _velocity;
+        }
+
+        #endregion
+        
+        #region Server Functions
 
         [ServerCallback]
         private void Update()
@@ -43,7 +61,7 @@ namespace Networking
             Decelerate();
             //Add current input movement to actual movement
             _velocity += _inputMovement;
-            Vector3 XZMovement = ConstrainXZMovement();
+            Vector3 xzMovement = ConstrainXZMovement();
             //Apply jump force only when character is grounded.
             if (!_characterController.isGrounded)
             {
@@ -57,9 +75,9 @@ namespace Networking
             //Add rotation to the character controller based on the current movement speed, so the character
             //does not rotate when not walking. The threshold is there to prevent false movement since movement has a magnitude even when
             //standing still.
-            if (XZMovement.magnitude > 2.0f)
+            if (xzMovement.magnitude > 2.0f)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, _newRotation,
-                    XZMovement.magnitude * rotationOnMovementMultiplier);
+                    xzMovement.magnitude * rotationOnMovementMultiplier);
         }
         
         [ServerCallback]
@@ -73,16 +91,16 @@ namespace Networking
         [ServerCallback]
         private Vector3 ConstrainXZMovement()
         {
-            Vector3 XZMovement = new Vector3(_velocity.x, 0, _velocity.z);
-            if (XZMovement.magnitude > movementSpeed)
+            Vector3 xzMovement = new Vector3(_velocity.x, 0, _velocity.z);
+            if (xzMovement.magnitude > movementSpeed)
             {
-                XZMovement.Normalize();
-                XZMovement *= movementSpeed;
-                _velocity.x = XZMovement.x;
-                _velocity.z = XZMovement.z;
+                xzMovement.Normalize();
+                xzMovement *= movementSpeed;
+                _velocity.x = xzMovement.x;
+                _velocity.z = xzMovement.z;
             }
 
-            return XZMovement;
+            return xzMovement;
         }
         
         [ServerCallback]
@@ -102,7 +120,6 @@ namespace Networking
                     break;
             }
         }
-        
         
         [ServerCallback]
         private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -129,6 +146,7 @@ namespace Networking
         [Command]
         private void CmdOnMoveDown(Vector2 movementVector)
         {
+            Debug.Log("CmdOnMoveDown");
             //Create new rotation from the given input
             _newRotation = Quaternion.LookRotation(new Vector3(movementVector.x, 0, movementVector.y), Vector3.up);
             //Assign movement direction multiplied with the movement speed
@@ -138,22 +156,23 @@ namespace Networking
         [Command]
         private void CmdOnMoveUp(Vector2 movementVector)
         {
+            Debug.Log("CmdOnMoveUp");
             _inputMovement = new Vector3(movementVector.x, 0, movementVector.y) * movementSpeed;
         }
 
         [Command]
         private void CmdOnJump()
         {
+            Debug.Log("CmdOnJump");
             //Apply jump force
             if (_characterController.isGrounded) _velocity.y = jumpHeight;
         }
 
         #endregion
 
-        #region Client
+        #region Client Functions
 
-        [ClientCallback]
-        public override void OnStartLocalPlayer()
+        public override void OnStartAuthority()
         {
             CameraRig cameraRig = FindObjectOfType<CameraRig>();
 
@@ -162,39 +181,20 @@ namespace Networking
                 cameraRig.Target = gameObject;
             }
         }
-        
-        [ClientCallback]
-        private void Start()
-        {
-            if (!hasAuthority) return;
-            
-            //Get components
-            _characterController = GetComponent<CharacterController>();
-            _playerInput = GetComponent<PlayerInput>();
-
-            //Setup input
-            //Movement
-            _playerInput.actions.FindAction("Movement").performed += OnMoveDown;
-            _playerInput.actions.FindAction("Movement").canceled += OnMoveUp;
-            //Jump
-            _playerInput.actions.FindAction("Jump").performed += OnJump;
-
-            //Initialize values
-            UserInputAllowed = true;
-            
-        }
 
         [ClientCallback]
         private void OnMoveDown(InputAction.CallbackContext pInputValue)
         {
+            Debug.Log("Requesting CmdOnMoveDown");
             //Read in new vector
             Vector2 movementVector = pInputValue.ReadValue<Vector2>();
             CmdOnMoveDown(movementVector);
         }
-        
+
         [ClientCallback]
         private void OnMoveUp(InputAction.CallbackContext pInputValue)
         {
+            Debug.Log("Requesting CmdOnMoveUp");
             //This is just to assign a zero vector to the movement vector again,
             //since the new input system does not continuously call 'performed' when button is held down.
             Vector2 movementVector = pInputValue.ReadValue<Vector2>();
@@ -204,14 +204,26 @@ namespace Networking
         [ClientCallback]
         private void OnJump(InputAction.CallbackContext pObj)
         {
+            Debug.Log("Requesting CmdOnJump");
             CmdOnJump();
         }
         
-        #endregion
-
-        public Vector3 GetVelocity()
+        [ClientCallback]
+        private void ClientStart()
         {
-            return _velocity;
+            if (!isLocalPlayer) return;
+            
+            //Get components
+            _playerInput = GetComponent<PlayerInput>();
+
+            //Setup input
+            //Movement
+            _playerInput.actions.FindAction("Movement").performed += OnMoveDown;
+            _playerInput.actions.FindAction("Movement").canceled += OnMoveUp;
+            //Jump
+            _playerInput.actions.FindAction("Jump").performed += OnJump;
         }
+        
+        #endregion
     }
 }
