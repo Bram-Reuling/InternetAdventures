@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +12,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float gravityMultiplier;
     [SerializeField] private float rotationOnMovementMultiplier;
     [SerializeField] private float deceleration;
+    public float CharacterMass;
     
     //Private
     private Vector3 _velocity;
@@ -58,7 +56,6 @@ public class CharacterMovement : MonoBehaviour
         {
             _velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
             OnCollisionLeave();
-            _currentlyCollidingGameObject = null;
         }
         //Move character controller
         if(UserInputAllowed) _characterController.Move((_velocity + _externalMovement) * Time.deltaTime);
@@ -130,18 +127,20 @@ public class CharacterMovement : MonoBehaviour
     {
         //Note: Only recognize collision once, 'OnControllerColliderHit' is being called every frame.
         if (_currentlyCollidingGameObject == hit.gameObject && !_collideEveryFrame) return;
-        OnCollisionLeave();
-        _currentlyCollidingGameObject = hit.gameObject;
-        switch (_currentlyCollidingGameObject.transform.tag)
+        switch (hit.gameObject.transform.tag)
         {
             case "Platform":
                 //TODO: Cache this thing.
+                _currentlyCollidingGameObject = hit.gameObject;
                 _externalMovement = _currentlyCollidingGameObject.GetComponent<MovingPlatform>().CurrentMovementVector;
                 _collideEveryFrame = true;
                 break;
             case "PhysicsPlatform":
-                _currentlyCollidingGameObject.transform.parent
-                    .GetComponent<PhysicsPlatformHandler>().OnActuation(_currentlyCollidingGameObject, gameObject);
+                _currentlyCollidingGameObject = hit.gameObject;
+                _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().AddCharacter(gameObject);
+                break;
+            default:
+                OnCollisionLeave();
                 break;
         }
     }
@@ -157,8 +156,10 @@ public class CharacterMovement : MonoBehaviour
                 _externalMovement = Vector3.zero;
                 break;
             case "PhysicsPlatform":
-                _currentlyCollidingGameObject.transform.parent.GetComponent<PhysicsPlatformHandler>().StopActuation();
-            break;
+                _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().RemoveCharacter(gameObject);
+                break;
         }
+
+        _currentlyCollidingGameObject = null;
     }
 }
