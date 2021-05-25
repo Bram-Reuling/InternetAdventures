@@ -13,6 +13,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float rotationOnMovementMultiplier;
     [SerializeField] private float deceleration;
     public float CharacterMass;
+
+    [SerializeField] private Animator animator;
     
     //Private
     private Vector3 _velocity;
@@ -64,6 +66,8 @@ public class CharacterMovement : MonoBehaviour
         //standing still.
         if(XZMovement.magnitude > 2.0f) transform.rotation = Quaternion.RotateTowards(transform.rotation, _newRotation, 
             XZMovement.magnitude * rotationOnMovementMultiplier);
+        
+        SetAnimationValues();
     }
     
     private void OnMoveDown(InputAction.CallbackContext pInputValue)
@@ -106,7 +110,7 @@ public class CharacterMovement : MonoBehaviour
 
     private Vector3 ConstrainXZMovement()
     {
-        Vector3 XZMovement = new Vector3(_velocity.x, 0, _velocity.z);
+        Vector3 XZMovement = GetXZMovement();
         if(XZMovement.magnitude > movementSpeed)
         {
             XZMovement.Normalize();
@@ -116,6 +120,11 @@ public class CharacterMovement : MonoBehaviour
         }
 
         return XZMovement;
+    }
+
+    private Vector3 GetXZMovement()
+    {
+        return new Vector3(_velocity.x, 0, _velocity.z);
     }
 
     public Vector3 GetVelocity()
@@ -161,5 +170,11 @@ public class CharacterMovement : MonoBehaviour
         }
 
         _currentlyCollidingGameObject = null;
+    }
+
+    private void SetAnimationValues()
+    {
+        animator.SetFloat("MovementSpeed", GetXZMovement().magnitude);
+        animator.SetBool("InAir", !_characterController.isGrounded);
     }
 }
