@@ -12,11 +12,13 @@ public class BanHammer : Interactable
     
     //Private
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
+    private Vector3 _initialScale;
 
     private void Start()
     {
         //Setup input
         playerInput.actions.FindAction("Interactable").performed += SlamHammer;
+        _initialScale = transform.localScale;
     }
 
     private void SlamHammer(InputAction.CallbackContext pCallback)
@@ -40,7 +42,12 @@ public class BanHammer : Interactable
                     gameObjectInReach.transform.position = raycastHit.point + new Vector3(0,gameObjectInReach.transform.lossyScale.y / 2,0);
                 }   
             }
-            else gameObjectInReach.transform.DOShakeScale(1, 1.0f);
+            else
+            {
+                gameObjectInReach.transform.DOKill();
+                gameObjectInReach.transform.localScale = _initialScale;
+                gameObjectInReach.transform.DOShakeScale(1, 1.0f);
+            }
             
             //Add impulse upwards if there's a rigidbody.
             Rigidbody rigidbody = gameObjectInReach.GetComponent<Rigidbody>();

@@ -12,14 +12,12 @@ public class PhysicsPlatform : MonoBehaviour
     {
         if (_platformGameObjects.ContainsKey(other.gameObject)) return;
         if ((LayerMask.GetMask("Moveable") & (1 << other.gameObject.layer)) <= 0) return;
-        Debug.Log(other.gameObject.name + " added");
         AddGameObject(other.gameObject);
     }
     
     private void OnTriggerExit(Collider other)
     {
         if ((LayerMask.GetMask("Moveable") & (1 << other.gameObject.layer)) <= 0) return;
-        Debug.Log(other.gameObject.name + " exited");
         RemoveGameObject(other.gameObject);
     }
 
