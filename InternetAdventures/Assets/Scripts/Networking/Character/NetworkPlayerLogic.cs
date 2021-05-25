@@ -12,15 +12,13 @@ namespace Networking.Character
 
         private CharacterController characterController;
         private PlayerInput playerInput;
-        private CharacterMovement characterMovement;
+        private NetworkCharacterMovement characterMovement;
         private ObjectInteraction objectInteraction;
         private Ziplinee zipline;
 
         #endregion
 
         #region Global Functions
-
-        
 
         #endregion
 
@@ -32,25 +30,24 @@ namespace Networking.Character
 
         #region Server Functions
 
-        
-
-        #endregion
-        
+        [ServerCallback]
         private void Start()
         {
             characterController = GetComponent<CharacterController>();
             playerInput = GetComponent<PlayerInput>();
-            characterMovement = GetComponent<CharacterMovement>();
+            characterMovement = GetComponent<NetworkCharacterMovement>();
             objectInteraction = GetComponent<ObjectInteraction>();
             zipline = GetComponent<Ziplinee>();
         }
-
+        
+        [ServerCallback]
         public void SetCheckPoint(Vector3 pPosition)
         {
             //Debug.Log("Set Check Point to: " + pPosition.ToString());
             checkPoint = pPosition;
         }
-
+        
+        [ServerCallback]
         public void RespawnPlayer()
         {
             //Debug.Log("Respawning to: " + checkPoint.ToString());
@@ -59,7 +56,8 @@ namespace Networking.Character
             gameObject.transform.position = checkPoint;
             SetComponentsActive(true);
         }
-
+        
+        [ServerCallback]
         private void SetComponentsActive(bool pBool)
         {
             characterController.enabled = pBool;
@@ -68,5 +66,8 @@ namespace Networking.Character
             objectInteraction.enabled = pBool;
             zipline.enabled = pBool;
         }
+        
+        #endregion
+        
     }
 }
