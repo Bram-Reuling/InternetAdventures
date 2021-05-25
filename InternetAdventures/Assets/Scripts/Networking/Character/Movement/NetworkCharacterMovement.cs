@@ -1,5 +1,7 @@
 ﻿using GameCamera;
 using Mirror;
+using Networking.Platforms.MovingPlatforms;
+using Networking.Platforms.PhysicsPlatform;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -116,7 +118,7 @@ namespace Networking
                     _externalMovement = Vector3.zero;
                     break;
                 case "PhysicsPlatform":
-                    _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().RemoveCharacter(gameObject);
+                    _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<NetworkPhysicsPlatform>().RemoveCharacter(gameObject);
                     break;
             }
 
@@ -133,12 +135,12 @@ namespace Networking
                 case "Platform":
                     //TODO: Cache this thing.
                     _currentlyCollidingGameObject = hit.gameObject;
-                    _externalMovement = _currentlyCollidingGameObject.GetComponent<MovingPlatform>().CurrentMovementVector;
+                    _externalMovement = _currentlyCollidingGameObject.GetComponent<NetworkMovingPlatform>().CurrentMovementVector;
                     _collideEveryFrame = true;
                     break;
                 case "PhysicsPlatform":
                     _currentlyCollidingGameObject = hit.gameObject;
-                    _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().AddCharacter(gameObject);
+                    _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<NetworkPhysicsPlatform>().AddCharacter(gameObject);
                     break;
                 default:
                     OnCollisionLeave();

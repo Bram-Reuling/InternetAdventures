@@ -72,6 +72,7 @@ MonoBehaviour:
   gravityMultiplier: 3
   rotationOnMovementMultiplier: 0.7
   deceleration: 0.92
+  CharacterMass: 70
 --- !u!1001 &6435495469758470785
 PrefabInstance:
   m_ObjectHideFlags: 0
