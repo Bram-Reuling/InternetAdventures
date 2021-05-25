@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platform1: {fileID: 6858715740092302320}
   platform2: {fileID: 6858715740015375955}
+  movePlatformsBack: 0
+  movementDuration: 0
 --- !u!1 &6858715740015375955
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +62,6 @@ GameObject:
   - component: {fileID: 6858715740015375958}
   - component: {fileID: 6858715740015375957}
   - component: {fileID: 6858715740015375956}
-  - component: {fileID: 6858715740015376297}
   m_Layer: 0
   m_Name: Platform2
   m_TagString: PhysicsPlatform
@@ -78,7 +79,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5, y: 1, z: 0}
   m_LocalScale: {x: 1.5, y: 0.1, z: 1.5}
-  m_Children: []
+  m_Children:
+  - {fileID: 1793431095420468146}
   m_Father: {fileID: 6858715738395456434}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -161,19 +163,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6858715740015376297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6858715740015375955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 760c3b587cf66bf4789dfcf62ac7e7cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _physicsPlatformHandler: {fileID: 6858715738395456433}
 --- !u!1 &6858715740092302320
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +176,6 @@ GameObject:
   - component: {fileID: 6858715740092302323}
   - component: {fileID: 6858715740092302322}
   - component: {fileID: 6858715740092302321}
-  - component: {fileID: 6858715740092302326}
   m_Layer: 0
   m_Name: Platform1
   m_TagString: PhysicsPlatform
@@ -205,7 +193,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 0.1, z: 1.5}
-  m_Children: []
+  m_Children:
+  - {fileID: 2975576212385270369}
   m_Father: {fileID: 6858715738395456434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -288,13 +277,134 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6858715740092302326
+--- !u!1 &8148877476257324437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1793431095420468146}
+  - component: {fileID: 1114812004973898899}
+  - component: {fileID: 5077199891022643663}
+  - component: {fileID: 2421721618137842770}
+  m_Layer: 0
+  m_Name: Trigger
+  m_TagString: PhysicsPlatform
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1793431095420468146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148877476257324437}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6858715740015376296}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1114812004973898899
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148877476257324437}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &5077199891022643663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148877476257324437}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2421721618137842770
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6858715740092302320}
+  m_GameObject: {fileID: 8148877476257324437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 760c3b587cf66bf4789dfcf62ac7e7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _physicsPlatformHandler: {fileID: 6858715738395456433}
+--- !u!1 &8288846238916718015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2975576212385270369}
+  - component: {fileID: 699673615673586350}
+  - component: {fileID: 5044738390144021050}
+  - component: {fileID: 909492907688721655}
+  m_Layer: 0
+  m_Name: Trigger
+  m_TagString: PhysicsPlatform
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2975576212385270369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288846238916718015}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6858715740092302325}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &699673615673586350
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288846238916718015}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &5044738390144021050
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288846238916718015}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &909492907688721655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288846238916718015}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 760c3b587cf66bf4789dfcf62ac7e7cd, type: 3}

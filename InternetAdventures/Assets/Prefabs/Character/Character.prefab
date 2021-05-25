@@ -226,6 +226,7 @@ MonoBehaviour:
   gravityMultiplier: 3
   rotationOnMovementMultiplier: 0.7
   deceleration: 0.92
+  CharacterMass: 70
 --- !u!114 &4997865184777629712
 MonoBehaviour:
   m_ObjectHideFlags: 0
