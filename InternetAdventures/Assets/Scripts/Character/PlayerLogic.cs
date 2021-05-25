@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Character
 {
-    public class Player : MonoBehaviour
+    public class PlayerLogic : MonoBehaviour
     {
         private Vector3 checkPoint;
 
