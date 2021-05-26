@@ -11,7 +11,7 @@ ModelImporter:
     second: Walk
   - first:
       74: -6276477889953456143
-    second: TakeOff
+    second: Take_Off
   - first:
       74: -4869480881004887079
     second: In_Air
@@ -105,7 +105,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0.96
     - serializedVersion: 16
-      name: TakeOff
+      name: Take_Off
       takeName: Take 001
       internalID: 0
       firstFrame: 190
