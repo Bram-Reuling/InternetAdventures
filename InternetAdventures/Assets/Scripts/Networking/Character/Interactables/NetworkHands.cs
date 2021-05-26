@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider))]
 
-public class NetworkHands : Interactable
+public class NetworkHands : NetworkInteractable
 {
     [Header("Interactable-specific attributes")]
     

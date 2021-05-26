@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using DG.Tweening;
 
-public class NetworkGravityGun : Interactable
+public class NetworkGravityGun : NetworkInteractable
 {
     [Header("Interactable-specific attributes")]
 

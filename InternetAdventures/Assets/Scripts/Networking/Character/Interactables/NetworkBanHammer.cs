@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NetworkBanHammer : Interactable
+public class NetworkBanHammer : NetworkInteractable
 {
     [Header("Interactable-specific attributes")]
     

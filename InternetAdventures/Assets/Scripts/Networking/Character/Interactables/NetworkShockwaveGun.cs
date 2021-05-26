@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NetworkShockwaveGun : Interactable
+public class NetworkShockwaveGun : NetworkInteractable
 {
     [Header("Interactable-specific attributes")]
     

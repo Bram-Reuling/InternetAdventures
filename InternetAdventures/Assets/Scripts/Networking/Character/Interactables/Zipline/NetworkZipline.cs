@@ -1,7 +1,8 @@
+using Mirror;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class NetworkZipline : MonoBehaviour
+public class NetworkZipline : NetworkBehaviour
 {
     //Public
     [SerializeField] private GameObject _post1, _post2;

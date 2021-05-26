@@ -1,7 +1,8 @@
+using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NetworkZiplinee : MonoBehaviour
+public class NetworkZiplinee : NetworkBehaviour
 {
     //Public
     [SerializeField] private float minDistanceToZipline;

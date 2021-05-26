@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mirror;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NetworkInteractableHandler : MonoBehaviour
+public class NetworkInteractableHandler : NetworkBehaviour
 {
     private List<GameObject> _interactables = new List<GameObject>();
     private int _currentIndexInList;
