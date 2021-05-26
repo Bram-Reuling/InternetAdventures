@@ -6,7 +6,6 @@ public class PhysicsPlatformHandler : MonoBehaviour
     [SerializeField] private GameObject platform1, platform2;
     [SerializeField] private bool movePlatformsBack;
     [SerializeField] private float movementDuration;
-    private GameObject _actuatedPlatform;
     private float _platformActuatorMass;
 
     private GameObject _higherPlatform;
@@ -36,9 +35,6 @@ public class PhysicsPlatformHandler : MonoBehaviour
     {
         float platform1Mass = platform1.transform.GetChild(0).GetComponent<PhysicsPlatform>().GetTotalMass();
         float platform2Mass = platform2.transform.GetChild(0).GetComponent<PhysicsPlatform>().GetTotalMass();
-
-        //Debug.Log("Platform 1 mass was " + platform1Mass);
-        Debug.Log("Platform 2 mass was " + platform2Mass);
         
         if (platform1Mass <= 0 && platform2Mass <= 0)
         {
@@ -57,7 +53,6 @@ public class PhysicsPlatformHandler : MonoBehaviour
         
         if (movePlatformsBack)
             MovePlatformsBack();
-        _actuatedPlatform = null;
     }
     
     private void MovePlatformsBack()
