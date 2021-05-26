@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using DG.Tweening;
 
-public class GravityGun : Interactable
+public class NetworkGravityGun : Interactable
 {
     [Header("Interactable-specific attributes")]
 
@@ -102,14 +102,14 @@ public class GravityGun : Interactable
     }
 }
 
-public readonly struct NetworkItemInformation
+public readonly struct ItemInformation
 {
     public readonly GameObject CurrentGameObject;
     public readonly Transform Parent;
     public readonly RigidbodyConstraints RigidbodyConstraints;
     public readonly float InitialDistance;
 
-    public NetworkItemInformation(GameObject pGameObject, Transform pParent, RigidbodyConstraints pRigidbodyRigidbodyConstraints, float pInitialDistance)
+    public ItemInformation(GameObject pGameObject, Transform pParent, RigidbodyConstraints pRigidbodyRigidbodyConstraints, float pInitialDistance)
     {
         CurrentGameObject = pGameObject;
         Parent = pParent;
