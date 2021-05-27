@@ -25,6 +25,15 @@ public class NetworkInteractableManager : NetworkBehaviour
 
     #region Ban Hammer
 
+    // CLIENT
+    [ClientRpc]
+    public void RpcSetCapsuleColliderProperties(GameObject gameObject)
+    {
+        gameObject.transform.GetComponent<CapsuleCollider>().height = 0.1f;
+        gameObject.transform.GetComponent<CapsuleCollider>().radius = 0.1f;
+    }
+    
+    // SERVER
     [Command]
     public void CmdSlamHammer(List<GameObject> _gameObjectsInTrigger, bool enableScaleEffectOnObjects, Vector3 _initialScale)
     {
@@ -52,6 +61,8 @@ public class NetworkInteractableManager : NetworkBehaviour
                 gameObjectInReach.transform.DOScaleY(0.1f, 1);
                 gameObjectInReach.transform.GetComponent<CapsuleCollider>().height = 0.1f;
                 gameObjectInReach.transform.GetComponent<CapsuleCollider>().radius = 0.1f;
+                
+                RpcSetCapsuleColliderProperties(gameObjectInReach);
 
             }
             
