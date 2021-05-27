@@ -14,6 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+--- !u!114 &3356148964538927640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064707090420629260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3213119461f4ecb8aad31f482ea31ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  _currentIndexInList: 0
+  initialInteractable: {fileID: 7867158993998891637}
 --- !u!114 &4572793819678585598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +89,8 @@ MonoBehaviour:
   rotationOnMovementMultiplier: 0.7
   deceleration: 0.92
   CharacterMass: 70
---- !u!114 &3356148964538927640
+  weaponInUse: 0
+--- !u!114 &4184848665204242540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,12 +99,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7064707090420629260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3213119461f4ecb8aad31f482ea31ef, type: 3}
+  m_Script: {fileID: 11500000, guid: c2f25da85ad74c18aa9dd4ef687239dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  initialInteractable: {fileID: 7867158993998891637}
+  banHammer: {fileID: 9212067105422364862}
+  hands: {fileID: 7867158993998891637}
+  gravityGun: {fileID: 1124405104559403834}
+  shockwaveGun: {fileID: 8439284559005088014}
 --- !u!114 &8181642465421495370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +127,7 @@ MonoBehaviour:
   cameraShakeStrength: 0.1
   cameraShakeDuration: 1
   playerInput: {fileID: 9046719869666208273}
+  networkInteractableManager: {fileID: 4184848665204242540}
   range: 100
   shockwaveRadius: 4
   shockwaveStrength: 500
@@ -131,6 +152,7 @@ MonoBehaviour:
   cameraShakeStrength: 0.1
   cameraShakeDuration: 1
   playerInput: {fileID: 9046719869666208273}
+  networkInteractableManager: {fileID: 4184848665204242540}
   range: 15
   gravityRadius: 2
   attractionSpeed: 1
@@ -155,6 +177,7 @@ MonoBehaviour:
   cameraShakeStrength: 0.1
   cameraShakeDuration: 1
   playerInput: {fileID: 9046719869666208273}
+  networkInteractableManager: {fileID: 4184848665204242540}
   handMode: 1
 --- !u!114 &1381700864317571633
 MonoBehaviour:
@@ -175,6 +198,7 @@ MonoBehaviour:
   cameraShakeStrength: 1
   cameraShakeDuration: 1
   playerInput: {fileID: 9046719869666208273}
+  networkInteractableManager: {fileID: 4184848665204242540}
   enableScaleEffectOnObjects: 1
 --- !u!1001 &6435495469758470785
 PrefabInstance:

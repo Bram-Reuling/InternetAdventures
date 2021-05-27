@@ -26,34 +26,7 @@ public class NetworkBanHammer : NetworkInteractable
         if (!gameObject.activeSelf) return;
         ApplyCameraShake();
         
-        foreach (var gameObjectInReach in _gameObjectsInTrigger)
-        {
-            //IMPORTANT
-            //Todo: This line is subject to change depending on what the designers want
-            
-            if (!enableScaleEffectOnObjects)
-            {
-                //Info: Scale object down.
-                gameObjectInReach.transform.localScale -= new Vector3(0, gameObjectInReach.transform.localScale.y - 0.2f, 0);
-                //Info: Send ray to ground and place object there.
-                if (Physics.Raycast(gameObjectInReach.transform.position, Vector3.down, out var raycastHit,
-                    float.PositiveInfinity))
-                {
-                    gameObjectInReach.transform.position = raycastHit.point + new Vector3(0,gameObjectInReach.transform.lossyScale.y / 2,0);
-                }   
-            }
-            else
-            {
-                gameObjectInReach.transform.DOKill();
-                gameObjectInReach.transform.localScale = _initialScale;
-                gameObjectInReach.transform.DOShakeScale(1, 1.0f);
-            }
-            
-            //Add impulse upwards if there's a rigidbody.
-            Rigidbody rigidbody = gameObjectInReach.GetComponent<Rigidbody>();
-            if (rigidbody != null)
-                rigidbody.AddForce(Vector3.up * 5.0f, ForceMode.Impulse);
-        }
+        networkInteractableManager.CmdSlamHammer(_gameObjectsInTrigger, enableScaleEffectOnObjects, _initialScale);
     }
     
     //Info: The purpose of this method is to cache all gameObjects that are currently in my trigger, so I can use
