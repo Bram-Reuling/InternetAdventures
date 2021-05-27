@@ -1499,6 +1499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkMovingPlatforms
       objectReference: {fileID: 0}
+    - target: {fileID: 1410042906371999525, guid: a442c56f24182a04a9c751e639badc65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2548180190648916484, guid: a442c56f24182a04a9c751e639badc65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.249996
