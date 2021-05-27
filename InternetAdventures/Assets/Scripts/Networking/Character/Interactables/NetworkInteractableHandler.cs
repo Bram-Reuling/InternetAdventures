@@ -9,9 +9,9 @@ public class NetworkInteractableHandler : NetworkBehaviour
 {
     #region Variables
 
-    private SyncList<GameObject> _interactables = new SyncList<GameObject>();
-    [SerializeField, SyncVar] private int _currentIndexInList;
-    private GameObject _activeGameobject;
+    private List<GameObject> _interactables = new List<GameObject>();
+    [SerializeField, SyncVar(hook = nameof(SetIndexInList))] private int _currentIndexInList;
+    private GameObject _activeGameobject = null;
     private PlayerInput _playerInput;
     private float _currentScrollValue;
     [SerializeField] private GameObject initialInteractable;
@@ -24,9 +24,31 @@ public class NetworkInteractableHandler : NetworkBehaviour
 
     private void Start()
     {
+        _activeGameobject = initialInteractable;
+        
         ClientStart();
 
         ServerStart();
+        
+        //Iterates through all children and saves all with the tag 'Interactable' in a list to scroll through
+        int currentIndex = 0;
+        for (int i = 0; i < transform.GetChild(0).childCount; i++)
+        {
+            GameObject currentGameObject = transform.GetChild(0).GetChild(i).gameObject;
+            if (currentGameObject.tag.Equals("Interactable"))
+            {
+                if (currentGameObject == initialInteractable)
+                {
+                    _activeGameobject = currentGameObject;
+                    _currentIndexInList = currentIndex;
+                    currentGameObject.SetActive(true);
+                }
+                else currentGameObject.SetActive(false);
+
+                _interactables.Add(currentGameObject);
+                currentIndex++;
+            }
+        }
     }
 
     #endregion
@@ -50,6 +72,18 @@ public class NetworkInteractableHandler : NetworkBehaviour
         CmdChangeInteractable(_currentScrollValue);
     }
     
+    [ClientCallback]
+    private void SetIndexInList(int oldIndex, int newIndex)
+    {
+        _currentIndexInList = newIndex;
+        //This is a quick check to avoid IndexOutOfRange's
+        if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
+        else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;
+        _activeGameobject.SetActive(false);
+        _activeGameobject = _interactables.ElementAt(_currentIndexInList);
+        _activeGameobject.SetActive(true);
+    }
+    
     #endregion
 
     #region Server Functions
@@ -58,26 +92,6 @@ public class NetworkInteractableHandler : NetworkBehaviour
     private void ServerStart()
     {
         networkCharacterMovement = transform.GetComponent<NetworkCharacterMovement>();
-
-        //Iterates through all children and saves all with the tag 'Interactable' in a list to scroll through
-        int currentIndex = 0;
-        for (int i = 0; i < transform.GetChild(0).childCount; i++)
-        {
-            GameObject currentGameObject = transform.GetChild(0).GetChild(i).gameObject;
-            if (currentGameObject.tag.Equals("Interactable"))
-            {
-                if (currentGameObject == initialInteractable)
-                {
-                    _activeGameobject = currentGameObject;
-                    _currentIndexInList = currentIndex;
-                    currentGameObject.SetActive(true);
-                }
-                else currentGameObject.SetActive(false);
-
-                _interactables.Add(currentGameObject);
-                currentIndex++;
-            }
-        }
     }
 
     [Command]
