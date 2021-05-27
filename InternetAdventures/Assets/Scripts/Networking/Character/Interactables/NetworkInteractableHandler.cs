@@ -9,8 +9,8 @@ public class NetworkInteractableHandler : NetworkBehaviour
 {
     #region Variables
 
-    private List<GameObject> _interactables = new List<GameObject>();
-    [SerializeField] private int _currentIndexInList;
+    private SyncList<GameObject> _interactables = new SyncList<GameObject>();
+    [SerializeField, SyncVar] private int _currentIndexInList;
     private GameObject _activeGameobject;
     private PlayerInput _playerInput;
     private float _currentScrollValue;
@@ -22,28 +22,41 @@ public class NetworkInteractableHandler : NetworkBehaviour
 
     #region Global Functions
 
-    
+    private void Start()
+    {
+        ClientStart();
+
+        ServerStart();
+    }
 
     #endregion
 
     #region Client Functions
 
-    
+    [ClientCallback]
+    private void ClientStart()
+    {
+        if (!hasAuthority) return;
+        //Setup input
+        _playerInput = transform.GetComponent<PlayerInput>();
+        _playerInput.actions.FindAction("Scroll").performed += ChangeInteractable;
+    }
 
+    [ClientCallback]
+    private void ChangeInteractable(InputAction.CallbackContext pCallback)
+    {
+        Debug.Log("Request Scroll");
+        _currentScrollValue = pCallback.ReadValue<Vector2>().y;
+        CmdChangeInteractable(_currentScrollValue);
+    }
+    
     #endregion
 
     #region Server Functions
 
-    
-
-    #endregion
-    
-    private void Start()
+    [ServerCallback]
+    private void ServerStart()
     {
-        //Setup input
-        _playerInput = transform.GetComponent<PlayerInput>();
-        _playerInput.actions.FindAction("Scroll").performed += ChangeInteractable;
-
         networkCharacterMovement = transform.GetComponent<NetworkCharacterMovement>();
 
         //Iterates through all children and saves all with the tag 'Interactable' in a list to scroll through
@@ -60,18 +73,20 @@ public class NetworkInteractableHandler : NetworkBehaviour
                     currentGameObject.SetActive(true);
                 }
                 else currentGameObject.SetActive(false);
+
                 _interactables.Add(currentGameObject);
                 currentIndex++;
             }
         }
     }
 
-    private void ChangeInteractable(InputAction.CallbackContext pCallback)
+    [Command]
+    private void CmdChangeInteractable(float scrollValue)
     {
+        Debug.Log("Scroll");
         //Info: Checks whether a weapon is currently in use and changes if not.
         if (networkCharacterMovement.weaponInUse) return;
-        _currentScrollValue = pCallback.ReadValue<Vector2>().y;
-        _currentIndexInList += _currentScrollValue < 0 ? -1 : 1;
+        _currentIndexInList += scrollValue < 0 ? -1 : 1;
         //This is a quick check to avoid IndexOutOfRange's
         if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
         else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;
@@ -79,4 +94,6 @@ public class NetworkInteractableHandler : NetworkBehaviour
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
     }
+    
+    #endregion
 }
