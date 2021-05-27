@@ -3,7 +3,7 @@ using DG.Tweening;
 using Mirror;
 using UnityEngine.InputSystem;
 
-public abstract class NetworkInteractable : NetworkBehaviour
+public abstract class NetworkInteractable : MonoBehaviour
 {
     [Header("Generic interactable attributes")]
     //Holds information all interactable objects share like relative position etc.

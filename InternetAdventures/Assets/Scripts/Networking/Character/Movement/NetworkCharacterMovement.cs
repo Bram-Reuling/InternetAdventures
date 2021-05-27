@@ -30,7 +30,7 @@ namespace Networking
         private GameObject _currentlyCollidingGameObject;
         private bool _collideEveryFrame;
 
-        public static bool weaponInUse;
+        public bool weaponInUse;
 
         //Other components
         private CharacterController _characterController;
