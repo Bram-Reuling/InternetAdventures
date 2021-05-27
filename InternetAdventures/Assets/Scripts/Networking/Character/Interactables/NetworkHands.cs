@@ -9,7 +9,7 @@ public class NetworkHands : NetworkInteractable
     [Header("Interactable-specific attributes")]
     
     //Public
-    [SerializeField] private HandMode handMode;
+    [SerializeField] private NetworkHandMode handMode;
     
     //Private
     private GameObject _grabbedObject;
@@ -32,7 +32,7 @@ public class NetworkHands : NetworkInteractable
     {
         if (_grabbedObject != null)
         {
-            if (handMode == HandMode.Drag)
+            if (handMode == NetworkHandMode.Drag)
             {
                 Vector3 directionVector = transform.parent.position - _grabbedObject.transform.position;
                 if (directionVector.magnitude > 3.0f)
@@ -58,7 +58,7 @@ public class NetworkHands : NetworkInteractable
         }
 
         if (_grabbedObject == null) return;
-        if (handMode == HandMode.Pickup)
+        if (handMode == NetworkHandMode.Pickup)
         {
             _initialParent = _grabbedObject.transform.parent;
             _grabbedObject.transform.parent = transform;
@@ -85,7 +85,7 @@ public class NetworkHands : NetworkInteractable
     {
         if (_grabbedObject == null) return;
         _grabbedObject.transform.parent = _initialParent;
-        if (handMode == HandMode.Pickup)
+        if (handMode == NetworkHandMode.Pickup)
         {
             Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
             objectRigidbody.constraints = RigidbodyConstraints.None;
