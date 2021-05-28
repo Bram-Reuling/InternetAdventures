@@ -20,7 +20,6 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 _velocity;
     private Vector3 _inputMovement;
     private Vector3 _externalMovement = Vector3.zero;
-    private Quaternion _externalRotation = Quaternion.identity;
     private Quaternion _newRotation;
     private GameObject _currentlyCollidingGameObject;
     private bool _collideEveryFrame;
@@ -61,13 +60,13 @@ public class CharacterMovement : MonoBehaviour
             OnCollisionLeave();
         }
         //Move character controller
-        if(UserInputAllowed) _characterController.Move(_velocity * Time.deltaTime + _externalMovement);
+        if(UserInputAllowed) _characterController.Move((_velocity + _externalMovement) * Time.deltaTime);
         //Add rotation to the character controller based on the current movement speed, so the character
         //does not rotate when not walking. The threshold is there to prevent false movement since movement has a magnitude even when
         //standing still.
         if(XZMovement.magnitude > 2.0f) transform.rotation = Quaternion.RotateTowards(transform.rotation, _newRotation, 
             XZMovement.magnitude * rotationOnMovementMultiplier);
-        if(_externalRotation != Quaternion.identity) transform.rotation *= _externalRotation;
+        
         SetAnimationValues();
     }
     
@@ -142,8 +141,7 @@ public class CharacterMovement : MonoBehaviour
             case "Platform":
                 //TODO: Cache this thing.
                 _currentlyCollidingGameObject = hit.gameObject;
-                _externalMovement = _currentlyCollidingGameObject.GetComponent<MovementData>().MovementVector;
-                _externalRotation = _currentlyCollidingGameObject.GetComponent<MovementData>().DeltaRotation;
+                _externalMovement = _currentlyCollidingGameObject.GetComponent<MovingPlatform>().CurrentMovementVector;
                 _collideEveryFrame = true;
                 break;
             case "PhysicsPlatform":
@@ -153,12 +151,6 @@ public class CharacterMovement : MonoBehaviour
             case "PressurePlate":
                 _currentlyCollidingGameObject = hit.gameObject;
                 _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().AddGameObject(gameObject);
-                break;
-            case "PressurePlatform":
-                _currentlyCollidingGameObject = hit.gameObject;
-                _externalMovement = _currentlyCollidingGameObject.GetComponent<MovementData>().MovementVector;
-                _externalRotation = _currentlyCollidingGameObject.GetComponent<MovementData>().DeltaRotation;
-                _collideEveryFrame = true;
                 break;
             default:
                 OnCollisionLeave();
@@ -175,18 +167,12 @@ public class CharacterMovement : MonoBehaviour
             case "Platform":
                 _collideEveryFrame = false;
                 _externalMovement = Vector3.zero;
-                _externalRotation = Quaternion.identity;
                 break;
             case "PhysicsPlatform":
                 _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().RemoveCharacter(gameObject);
                 break;
             case "PressurePlate":
                 _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().RemoveGameObject(gameObject);
-                break;
-            case "PressurePlatform":
-                _collideEveryFrame = false;
-                _externalMovement = Vector3.zero;
-                _externalRotation = Quaternion.identity;
                 break;
         }
 

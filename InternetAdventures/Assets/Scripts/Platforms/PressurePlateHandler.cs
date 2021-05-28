@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -21,41 +22,28 @@ public class PressurePlateHandler : MonoBehaviour
 
     public void AddGameObject(in GameObject pGameObject)
     {
-        if (_gameObjectsOnPressurePlate.Contains(pGameObject)) return;
-        _gameObjectsOnPressurePlate.Add(pGameObject);
-        if (_gameObjectsOnPressurePlate.Count == 1 && !loop)
-            MoveToTransform(targetTransform);
+        if (!_gameObjectsOnPressurePlate.Contains(pGameObject))
+        {
+          _gameObjectsOnPressurePlate.Add(pGameObject);
+          if (_gameObjectsOnPressurePlate.Count == 1)
+          {
+              platformToMove.transform.DOMove(targetTransform.position, movementDuration);
+              platformToMove.transform.DORotateQuaternion(targetTransform.rotation, movementDuration);
+          }
+        }
     }
 
     public void RemoveGameObject(in GameObject pGameObject)
     {
-        if (!_gameObjectsOnPressurePlate.Contains(pGameObject)) return;
-        _gameObjectsOnPressurePlate.Remove(pGameObject);
-        if (_gameObjectsOnPressurePlate.Count == 0)
-            MoveToTransform(_initialPosition, _initialRotation);
-    }
-    
-
-    private void Update()
-    {
-        if (_gameObjectsOnPressurePlate.Count <= 0 || !loop) return;
-        if (platformToMove.transform.position == _initialPosition && platformToMove.transform.rotation == _initialRotation)
-            MoveToTransform(targetTransform);
-        else if (platformToMove.transform.position == targetTransform.position && platformToMove.transform.rotation == targetTransform.rotation)
-            MoveToTransform(_initialPosition, _initialRotation);
-    }
-
-    private void MoveToTransform(Vector3 pPosition, Quaternion pRotation)
-    {
-        platformToMove.transform.DOMove(pPosition, movementDuration);
-        platformToMove.transform.DORotateQuaternion(pRotation, movementDuration);
-    }
-    
-    private void MoveToTransform(Transform pTransform)
-    {
-        DOTween.Kill(platformToMove);
-        platformToMove.transform.DOMove(pTransform.position, movementDuration);
-        platformToMove.transform.DORotateQuaternion(pTransform.rotation, movementDuration);
+        if (_gameObjectsOnPressurePlate.Contains(pGameObject))
+        {
+            _gameObjectsOnPressurePlate.Remove(pGameObject);
+            if (_gameObjectsOnPressurePlate.Count == 0)
+            {
+                DOTween.Kill(platformToMove);
+                platformToMove.transform.DOMove(_initialPosition, movementDuration);
+                platformToMove.transform.DORotateQuaternion(_initialRotation, movementDuration);
+            }
+        }
     }
 }
-
