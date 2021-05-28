@@ -176,5 +176,6 @@ public class CharacterMovement : MonoBehaviour
     {
         animator.SetFloat("MovementSpeed", GetXZMovement().magnitude);
         animator.SetBool("InAir", !_characterController.isGrounded);
+        //animator.
     }
 }

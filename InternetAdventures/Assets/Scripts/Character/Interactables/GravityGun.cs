@@ -41,7 +41,8 @@ public class GravityGun : Interactable
                 float deltaDistance = goalDistance - movementDirection.magnitude;
                 if (movementDirection.magnitude + attractionSpeed * deltaDistance * Time.deltaTime < closestAttractionDistance) continue;
                 if (Mathf.Abs(deltaDistance) > 0.1f)
-                    currentGameObject.transform.Translate(attractionSpeed * deltaDistance * Time.deltaTime * movementDirection.normalized, Space.World);
+                    currentGameObject.transform.Translate(attractionSpeed * deltaDistance * Time.deltaTime * 
+                                                          new Vector3(movementDirection.x, 0 ,movementDirection.z).normalized, Space.World);
             }
         }
         
@@ -54,7 +55,8 @@ public class GravityGun : Interactable
         
         ApplyCameraShake();
         
-        int foundColliders = Physics.SphereCastNonAlloc(transform.position, gravityRadius, transform.forward, _overlappedColliders, range, interactableLayers);
+        int foundColliders = Physics.SphereCastNonAlloc(transform.position, gravityRadius, transform.forward, 
+            _overlappedColliders, range, interactableLayers);
         if (foundColliders > 0)
         {
             for (int i = 0; i < foundColliders; i++)
@@ -63,7 +65,8 @@ public class GravityGun : Interactable
                 Rigidbody currentRigidbody = intersectingGameObject.GetComponent<Rigidbody>();
                 float currentDistance = (intersectingGameObject.transform.position - transform.parent.parent.position).magnitude;
                 if (currentDistance > _furthestDistanceToObject) _furthestDistanceToObject = currentDistance;
-                _pickedUpObjects.Add(new ItemInformation(intersectingGameObject, intersectingGameObject.transform.parent, currentRigidbody.constraints, currentDistance));
+                _pickedUpObjects.Add(new ItemInformation(intersectingGameObject, intersectingGameObject.transform.parent, 
+                    currentRigidbody.constraints, currentDistance));
                 intersectingGameObject.transform.SetParent(transform);
                 currentRigidbody.useGravity = false;
                 currentRigidbody.constraints = RigidbodyConstraints.FreezeAll;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -60,5 +61,10 @@ public class AIBlackboard : MonoBehaviour
         }
         
         _startingNode.EvaluateState();
+    }
+
+    public List<GameObject> GetAllNPCs()
+    {
+        return GameObject.FindGameObjectsWithTag("AI").ToList();
     }
 }

@@ -9,6 +9,7 @@ TagManager:
   - Interactable
   - Platform
   - PhysicsPlatform
+  - AI
   layers:
   - Default
   - TransparentFX
