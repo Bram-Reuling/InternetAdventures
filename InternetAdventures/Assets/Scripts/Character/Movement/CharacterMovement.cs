@@ -148,6 +148,10 @@ public class CharacterMovement : MonoBehaviour
                 _currentlyCollidingGameObject = hit.gameObject;
                 _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().AddCharacter(gameObject);
                 break;
+            case "PressurePlate":
+                _currentlyCollidingGameObject = hit.gameObject;
+                _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().AddGameObject(gameObject);
+                break;
             default:
                 OnCollisionLeave();
                 break;
@@ -166,6 +170,9 @@ public class CharacterMovement : MonoBehaviour
                 break;
             case "PhysicsPlatform":
                 _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().RemoveCharacter(gameObject);
+                break;
+            case "PressurePlate":
+                _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().RemoveGameObject(gameObject);
                 break;
         }
 
