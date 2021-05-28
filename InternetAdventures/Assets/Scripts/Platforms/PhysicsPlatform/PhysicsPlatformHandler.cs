@@ -48,7 +48,7 @@ public class PhysicsPlatformHandler : MonoBehaviour
         platform2.GetComponent<Rigidbody>().DOMoveY(platformToActuate == _higherPlatform ? _platform2Actuated.y : _platform2InitPosition.y, movementDuration);
     }
 
-    public void StopActuation()
+    private void StopActuation()
     { 
         
         if (movePlatformsBack)
