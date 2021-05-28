@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Networking;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,13 +10,13 @@ public class NetworkHands : NetworkInteractable
     [Header("Interactable-specific attributes")]
     
     //Public
-    [SerializeField] private NetworkHandMode handMode;
+    //[SerializeField] private NetworkHandMode handMode;
     
     //Private
-    private GameObject _grabbedObject;
+    [SerializeField] private GameObject _grabbedObject;
     private Transform _initialParent;
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
-    private CharacterMovement _characterMovement;
+    private NetworkCharacterMovement _characterMovement;
     
     private void Start()
     {
@@ -25,29 +26,24 @@ public class NetworkHands : NetworkInteractable
         playerInput.actions.FindAction("Interactable").canceled += ReleaseObject;
 
         //Get components
-        _characterMovement = transform.parent.parent.GetComponent<CharacterMovement>();
+        _characterMovement = transform.parent.parent.GetComponent<NetworkCharacterMovement>();
     }
 
-    private void FixedUpdate()
+    public void SetGrabbedObject(GameObject grabbedObject)
     {
-        if (_grabbedObject != null)
-        {
-            if (handMode == NetworkHandMode.Drag)
-            {
-                Vector3 directionVector = transform.parent.position - _grabbedObject.transform.position;
-                if (directionVector.magnitude > 3.0f)
-                {
-                    Vector3 forceToBeApplied = 30.0f * directionVector.normalized;
-                    _grabbedObject.GetComponent<Rigidbody>().AddForce(forceToBeApplied, ForceMode.Force);
-                }
-                else _grabbedObject.GetComponent<Rigidbody>().velocity *= 0.95f;
-            }
-        }
+        _grabbedObject = grabbedObject;
     }
 
+    public void SetInitialParent(Transform initialParent)
+    {
+        _initialParent = initialParent;
+    }
+    
     private void GrabObjectInFront(InputAction.CallbackContext pCallback)
     {
         if(_gameObjectsInTrigger.Count == 0 || !gameObject.activeSelf) return;
+        
+        // Code for the server
         float shortestDistanceGameObject = float.PositiveInfinity;
         foreach (var currentGameObject in _gameObjectsInTrigger)
         {
@@ -58,14 +54,26 @@ public class NetworkHands : NetworkInteractable
         }
 
         if (_grabbedObject == null) return;
-        if (handMode == NetworkHandMode.Pickup)
-        {
-            _initialParent = _grabbedObject.transform.parent;
-            _grabbedObject.transform.parent = transform;
-            _grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        }
+
+        // Server and client
+        _initialParent = _grabbedObject.transform.parent;
+        _grabbedObject.transform.parent = transform;
+        _grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
+    private void ReleaseObject(InputAction.CallbackContext pCallback)
+    {
+        if (_grabbedObject == null) return;
+        
+        // Server and client
+        _grabbedObject.transform.parent = _initialParent;
+        Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
+        objectRigidbody.constraints = RigidbodyConstraints.None;
+        objectRigidbody.AddForce(_characterMovement.GetVelocity() * 50);
+        
+        _grabbedObject = null;   
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (!_gameObjectsInTrigger.Contains(other.gameObject))
@@ -80,19 +88,7 @@ public class NetworkHands : NetworkInteractable
         if(_gameObjectsInTrigger.Contains(other.gameObject)) 
             _gameObjectsInTrigger.Remove(other.gameObject);
     }
-
-    private void ReleaseObject(InputAction.CallbackContext pCallback)
-    {
-        if (_grabbedObject == null) return;
-        _grabbedObject.transform.parent = _initialParent;
-        if (handMode == NetworkHandMode.Pickup)
-        {
-            Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
-            objectRigidbody.constraints = RigidbodyConstraints.None;
-            objectRigidbody.AddForce(_characterMovement.GetVelocity() * 50);
-        }
-        _grabbedObject = null;   
-    }
+    
 }
 
 public enum NetworkHandMode{ Drag, Pickup}

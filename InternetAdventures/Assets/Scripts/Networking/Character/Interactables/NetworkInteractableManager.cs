@@ -27,7 +27,7 @@ public class NetworkInteractableManager : NetworkBehaviour
 
     // CLIENT
     [ClientRpc]
-    public void RpcSetCapsuleColliderProperties(GameObject gameObject)
+    private void RpcSetCapsuleColliderProperties(GameObject gameObject)
     {
         gameObject.transform.GetComponent<CapsuleCollider>().height = 0.1f;
         gameObject.transform.GetComponent<CapsuleCollider>().radius = 0.1f;
