@@ -89,7 +89,21 @@ public class NetworkInteractableManager : NetworkBehaviour
 
     #region Shockwave Gun
 
-    
+    [Command]
+    public void CmdShootShockwaveGun(float range, float shockwaveRadius, float shockwaveStrength, float possibleHitRadius, int interactableLayers)
+    {
+        RaycastHit[] overlapColliders =
+            Physics.SphereCastAll(transform.position, possibleHitRadius, transform.forward, range, interactableLayers);
+
+        if (overlapColliders.Length <= 0) return;
+        Vector3 hitPosition = overlapColliders[0].point;
+        Collider[] collidersInRange = Physics.OverlapSphere(hitPosition, shockwaveRadius);
+        foreach (var collider in collidersInRange)
+        {
+            if (collider.TryGetComponent(typeof(Rigidbody), out var rigidbody))
+                ((Rigidbody) rigidbody).AddExplosionForce(shockwaveStrength, hitPosition, shockwaveRadius);
+        }
+    }
 
     #endregion
 }
