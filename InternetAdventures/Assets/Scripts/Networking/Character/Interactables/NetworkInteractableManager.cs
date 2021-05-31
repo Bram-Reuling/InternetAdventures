@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
 using Mirror;
+using Networking;
 using UnityEngine;
 
 public class NetworkInteractableManager : NetworkBehaviour
@@ -125,9 +126,16 @@ public class NetworkInteractableManager : NetworkBehaviour
     }
 
     [Command]
-    public void CmdReleaseObject()
+    public void CmdReleaseObject(Transform _initialParent)
     {
+        // Server and client
+        handsComponent.SetGrabbedObjectParent(_initialParent);
         
+        handsComponent.SetGrabbedObjectConstraints(RigidbodyConstraints.None);
+        handsComponent.AddForceToGrabbedRigidbody(50);
+        
+        handsComponent.SetGrabbedObject(null);
+        //RpcSetGrabbedObject(null);
     }
 
     #endregion

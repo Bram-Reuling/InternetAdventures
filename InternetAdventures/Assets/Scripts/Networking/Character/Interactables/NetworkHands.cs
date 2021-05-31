@@ -26,6 +26,8 @@ public class NetworkHands : NetworkInteractable
         _characterMovement = transform.parent.parent.GetComponent<NetworkCharacterMovement>();
     }
 
+    #region Getters and Setters
+
     public void SetGrabbedObject(GameObject grabbedObject)
     {
         _grabbedObject = grabbedObject;
@@ -51,6 +53,13 @@ public class NetworkHands : NetworkInteractable
     {
         _grabbedObject.GetComponent<Rigidbody>().constraints = constraints;
     }
+
+    #endregion
+
+    public void AddForceToGrabbedRigidbody(float pValue)
+    {
+        _grabbedObject.GetComponent<Rigidbody>().AddForce(_characterMovement.GetVelocity() * pValue);
+    }
     
     private void GrabObjectInFront(InputAction.CallbackContext pCallback)
     {
@@ -63,18 +72,7 @@ public class NetworkHands : NetworkInteractable
     {
         if (_grabbedObject == null) return;
         
-        networkInteractableManager.CmdReleaseObject();
-        
-        // Server and client
-        SetGrabbedObjectParent(_initialParent);
-        _grabbedObject.transform.parent = _initialParent;
-        
-        Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
-        objectRigidbody.constraints = RigidbodyConstraints.None;
-        objectRigidbody.AddForce(_characterMovement.GetVelocity() * 50);
-        
-        _grabbedObject = null;  
-        SetGrabbedObject(null);
+        networkInteractableManager.CmdReleaseObject(_initialParent);
     }
     
     private void OnTriggerEnter(Collider other)
@@ -93,5 +91,3 @@ public class NetworkHands : NetworkInteractable
     }
     
 }
-
-public enum NetworkHandMode{ Drag, Pickup}
