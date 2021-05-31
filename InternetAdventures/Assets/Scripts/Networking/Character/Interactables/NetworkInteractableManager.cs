@@ -77,7 +77,27 @@ public class NetworkInteractableManager : NetworkBehaviour
 
     #region Hands
 
-    
+    [Command]
+    public void CmdGrabObjectInFront(List<GameObject> _gameObjectsInTrigger, GameObject _grabbedObject)
+    {
+        float shortestDistanceGameObject = float.PositiveInfinity;
+        foreach (var currentGameObject in _gameObjectsInTrigger)
+        {
+            if ((currentGameObject.transform.position - transform.GetChild(0).transform.position).magnitude < shortestDistanceGameObject)
+            {
+                _grabbedObject = currentGameObject;
+                handsComponent.SetGrabbedObject(_grabbedObject);
+            }
+        }
+
+        if (_grabbedObject == null) return;
+    }
+
+    [Command]
+    public void CmdReleaseObject()
+    {
+        
+    }
 
     #endregion
 

@@ -8,12 +8,9 @@ using UnityEngine.InputSystem;
 public class NetworkHands : NetworkInteractable
 {
     [Header("Interactable-specific attributes")]
-    
-    //Public
-    //[SerializeField] private NetworkHandMode handMode;
-    
+
     //Private
-    [SerializeField] private GameObject _grabbedObject;
+    [SerializeField] private GameObject _grabbedObject = null;
     private Transform _initialParent;
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
     private NetworkCharacterMovement _characterMovement;
@@ -38,26 +35,23 @@ public class NetworkHands : NetworkInteractable
     {
         _initialParent = initialParent;
     }
+
+    public void SetGrabbedObjectParent(Transform _transform)
+    {
+        if (_grabbedObject == null) return;
+        _grabbedObject.transform.parent = _transform;
+    }
     
     private void GrabObjectInFront(InputAction.CallbackContext pCallback)
     {
         if(_gameObjectsInTrigger.Count == 0 || !gameObject.activeSelf) return;
         
-        // Code for the server
-        float shortestDistanceGameObject = float.PositiveInfinity;
-        foreach (var currentGameObject in _gameObjectsInTrigger)
-        {
-            if ((currentGameObject.transform.position - transform.parent.transform.position).magnitude < shortestDistanceGameObject)
-            {
-                _grabbedObject = currentGameObject;
-            }
-        }
-
-        if (_grabbedObject == null) return;
+        networkInteractableManager.CmdGrabObjectInFront(_gameObjectsInTrigger, _grabbedObject);
 
         // Server and client
         _initialParent = _grabbedObject.transform.parent;
-        _grabbedObject.transform.parent = transform;
+        SetInitialParent(_grabbedObject.transform.parent);
+        SetGrabbedObjectParent(transform);
         _grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
@@ -65,13 +59,18 @@ public class NetworkHands : NetworkInteractable
     {
         if (_grabbedObject == null) return;
         
+        networkInteractableManager.CmdReleaseObject();
+        
         // Server and client
+        SetGrabbedObjectParent(_initialParent);
         _grabbedObject.transform.parent = _initialParent;
+        
         Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
         objectRigidbody.constraints = RigidbodyConstraints.None;
         objectRigidbody.AddForce(_characterMovement.GetVelocity() * 50);
         
-        _grabbedObject = null;   
+        _grabbedObject = null;  
+        SetGrabbedObject(null);
     }
     
     private void OnTriggerEnter(Collider other)
