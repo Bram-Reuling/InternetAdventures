@@ -17,9 +17,9 @@ public class NetworkGravityGun : NetworkInteractable
     //Private
     private float _currentAttractionDistance;
     private readonly List<ItemInformation> _pickedUpObjects = new List<ItemInformation>();
-    private readonly RaycastHit[] _overlappedColliders = new RaycastHit[50];
     private float _furthestDistanceToObject;
 
+    // Client
     private void Start()
     {
         //Setup input
@@ -30,6 +30,8 @@ public class NetworkGravityGun : NetworkInteractable
 
     private void Update()
     {
+        // Server
+        
         //Move objects towards player only if there's at least one.
         if (_pickedUpObjects.Count > 0)
         {
@@ -45,7 +47,7 @@ public class NetworkGravityGun : NetworkInteractable
             }
         }
         
-        if(showDebugInfo) ShowDebugInformation();
+        //if(showDebugInfo) ShowDebugInformation();
     }
 
     private void ActivateGun(InputAction.CallbackContext pCallback)
@@ -53,52 +55,42 @@ public class NetworkGravityGun : NetworkInteractable
         if (!gameObject.activeSelf) return;
         
         ApplyCameraShake();
-        
-        int foundColliders = Physics.SphereCastNonAlloc(transform.position, gravityRadius, transform.forward, _overlappedColliders, range, interactableLayers);
-        if (foundColliders > 0)
-        {
-            for (int i = 0; i < foundColliders; i++)
-            {
-                GameObject intersectingGameObject = _overlappedColliders[i].collider.gameObject;
-                Rigidbody currentRigidbody = intersectingGameObject.GetComponent<Rigidbody>();
-                float currentDistance = (intersectingGameObject.transform.position - transform.parent.parent.position).magnitude;
-                if (currentDistance > _furthestDistanceToObject) _furthestDistanceToObject = currentDistance;
-                _pickedUpObjects.Add(new ItemInformation(intersectingGameObject, intersectingGameObject.transform.parent, currentRigidbody.constraints, currentDistance));
-                intersectingGameObject.transform.SetParent(transform);
-                currentRigidbody.useGravity = false;
-                currentRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-                CharacterMovement.weaponInUse = true;
-            }
-        }
+       
+        networkInteractableManager.CmdActivateGravityGun(gravityRadius, range, interactableLayers, _furthestDistanceToObject, _pickedUpObjects);
     }
 
     private void ChangeAttractionDistance(InputAction.CallbackContext pCallback)
     {
         float yValue = pCallback.ReadValue<Vector2>().y * 0.01f;
-        if (_currentAttractionDistance <= -_furthestDistanceToObject && yValue < 0)
-            return;
-        _currentAttractionDistance += yValue;
+        
+        // Server
+        networkInteractableManager.CmdChangeAttractionDistance(_currentAttractionDistance, _furthestDistanceToObject, yValue);
     }
 
     private void DeactivateGun(InputAction.CallbackContext pCallback)
     {
-        //Sets parent to null again and clears list.
-        foreach (var pickedObject in _pickedUpObjects)
-        {
-            pickedObject.CurrentGameObject.transform.SetParent(pickedObject.Parent);
-            Rigidbody currentRigidbody = pickedObject.CurrentGameObject.GetComponent<Rigidbody>();
-            currentRigidbody.constraints = pickedObject.RigidbodyConstraints;
-            currentRigidbody.useGravity = true;
-        }
+        networkInteractableManager.CmdDeactivateGravityGun(_pickedUpObjects);
+        // Server
+    }
 
-        _pickedUpObjects.Clear();
-        CharacterMovement.weaponInUse = false;
+    public void ChangeDistance(float pValue)
+    {
+        _currentAttractionDistance += pValue;
+    }
+
+    public void ResetDistance()
+    {
         _currentAttractionDistance = 0;
     }
 
-    private void ShowDebugInformation()
+    public void ClearObjectList()
     {
-        Debug.DrawRay(transform.position, transform.forward * range, Color.magenta);
+        _pickedUpObjects.Clear();
+    }
+    
+    public void AddItemToPickedUpList(ItemInformation item)
+    {
+        _pickedUpObjects.Add(item);
     }
 }
 
