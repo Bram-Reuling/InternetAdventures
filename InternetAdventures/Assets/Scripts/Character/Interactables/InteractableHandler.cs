@@ -9,15 +9,16 @@ public class InteractableHandler : MonoBehaviour
     private List<GameObject> _interactables = new List<GameObject>();
     private int _currentIndexInList;
     private GameObject _activeGameobject;
-    private PlayerInput _playerInput;
+    [SerializeField]private PlayerInput playerInput;
     private float _currentScrollValue;
     [SerializeField] private GameObject initialInteractable;
+    [SerializeField] private Animator characterAnimator;
     
     private void Start()
     {
         //Setup input
-        _playerInput = transform.parent.GetComponent<PlayerInput>();
-        _playerInput.actions.FindAction("Scroll").performed += ChangeInteractable;
+        //playerInput = transform.parent.GetComponent<PlayerInput>();
+        playerInput.actions.FindAction("Scroll").performed += ChangeInteractable;
 
         //Iterates through all children and saves all with the tag 'Interactable' in a list to scroll through
         int currentIndex = 0;
@@ -51,5 +52,14 @@ public class InteractableHandler : MonoBehaviour
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
+        SetAnimatorLayer(_activeGameobject.name);
+    }
+
+    private void SetAnimatorLayer(in string pLayerToSet)
+    {
+        for (int i = 0; i < characterAnimator.layerCount; i++)
+        {
+            characterAnimator.SetLayerWeight(i, characterAnimator.GetLayerName(i) == pLayerToSet ? 1.0f : 0.0f);
+        }
     }
 }
