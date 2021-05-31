@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 public class BanHammer : Interactable
@@ -9,21 +10,32 @@ public class BanHammer : Interactable
     
     //Public
     [SerializeField] private bool enableScaleEffectOnObjects;
+    [SerializeField] private float animationTimer;
     
     //Private
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
     private Vector3 _initialScale;
+    private bool coroutineRunning;
 
     private void Start()
     {
         //Setup input
-        playerInput.actions.FindAction("Interactable").performed += SlamHammer;
+        playerInput.actions.FindAction("Interactable").performed += StartHammerCoroutine;
         _initialScale = transform.localScale;
     }
 
-    private void SlamHammer(InputAction.CallbackContext pCallback)
+    private void StartHammerCoroutine(InputAction.CallbackContext pCallback)
     {
-        if (!gameObject.activeSelf) return;
+        if (!gameObject.activeSelf || coroutineRunning) return;
+        StartCoroutine(SlamHammer());
+    }
+
+    private IEnumerator SlamHammer()
+    {
+        characterAnimator.SetTrigger("UseInteractable");
+        coroutineRunning = true;
+        yield return new WaitForSeconds(animationTimer);
+        
         ApplyCameraShake();
         
         foreach (var gameObjectInReach in _gameObjectsInTrigger)
@@ -54,6 +66,11 @@ public class BanHammer : Interactable
             if (rigidbody != null)
                 rigidbody.AddForce(Vector3.up * 5.0f, ForceMode.Impulse);
         }
+        yield return null;
+        yield return new WaitWhile(() => characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
+        Debug.Log("Reset!");
+        Debug.Log(characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
+        coroutineRunning = false;
     }
     
     //Info: The purpose of this method is to cache all gameObjects that are currently in my trigger, so I can use
