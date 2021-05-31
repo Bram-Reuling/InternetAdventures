@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5155732482347536873}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6936962886927348469}
   m_Father: {fileID: 0}
@@ -66,7 +66,6 @@ MonoBehaviour:
   cameraShakeDuration: 1
   playerInput: {fileID: 0}
   enableScaleEffectOnObjects: 1
-  particleSystem: {fileID: 0}
 --- !u!1 &7714343255003834447
 GameObject:
   m_ObjectHideFlags: 0
