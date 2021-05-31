@@ -87,10 +87,41 @@ public class NetworkInteractableManager : NetworkBehaviour
             {
                 _grabbedObject = currentGameObject;
                 handsComponent.SetGrabbedObject(_grabbedObject);
+                RpcSetGrabbedObject(_grabbedObject);
             }
         }
 
         if (_grabbedObject == null) return;
+
+        var parent = _grabbedObject.transform.parent;
+        handsComponent.SetInitialParent(parent);
+        RpcSetInitialParent(parent);
+        
+        handsComponent.SetGrabbedObjectParent(transform);
+
+        handsComponent.SetGrabbedObjectConstraints(RigidbodyConstraints.FreezeAll);
+        
+        // Set the grabbed object parent on the client
+        RpcSetGrabbedObjectParamsClient(transform, RigidbodyConstraints.FreezeAll);
+    }
+
+    [ClientRpc]
+    private void RpcSetGrabbedObject(GameObject pObject)
+    {
+        handsComponent.SetGrabbedObject(pObject);
+    }
+
+    [ClientRpc]
+    private void RpcSetInitialParent(Transform pParent)
+    {
+        handsComponent.SetInitialParent(pParent);
+    }
+
+    [ClientRpc]
+    private void RpcSetGrabbedObjectParamsClient(Transform pTransform, RigidbodyConstraints pConstraints)
+    {
+        handsComponent.SetGrabbedObjectParent(pTransform);
+        handsComponent.SetGrabbedObjectConstraints(pConstraints);
     }
 
     [Command]

@@ -36,10 +36,20 @@ public class NetworkHands : NetworkInteractable
         _initialParent = initialParent;
     }
 
-    public void SetGrabbedObjectParent(Transform _transform)
+    public Transform GetInitialParent()
+    {
+        return _initialParent;
+    }
+
+    public void SetGrabbedObjectParent(Transform pTransform)
     {
         if (_grabbedObject == null) return;
-        _grabbedObject.transform.parent = _transform;
+        _grabbedObject.transform.parent = pTransform;
+    }
+
+    public void SetGrabbedObjectConstraints(RigidbodyConstraints constraints)
+    {
+        _grabbedObject.GetComponent<Rigidbody>().constraints = constraints;
     }
     
     private void GrabObjectInFront(InputAction.CallbackContext pCallback)
@@ -47,12 +57,6 @@ public class NetworkHands : NetworkInteractable
         if(_gameObjectsInTrigger.Count == 0 || !gameObject.activeSelf) return;
         
         networkInteractableManager.CmdGrabObjectInFront(_gameObjectsInTrigger, _grabbedObject);
-
-        // Server and client
-        _initialParent = _grabbedObject.transform.parent;
-        SetInitialParent(_grabbedObject.transform.parent);
-        SetGrabbedObjectParent(transform);
-        _grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
 
     private void ReleaseObject(InputAction.CallbackContext pCallback)
