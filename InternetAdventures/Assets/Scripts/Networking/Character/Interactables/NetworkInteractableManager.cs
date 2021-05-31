@@ -184,21 +184,21 @@ public class NetworkInteractableManager : NetworkBehaviour
                     intersectingGameObject.transform.parent, currentRigidbody.constraints, currentDistance);
 
                 gravityGunComponent.AddItemToPickedUpList(item);
-                CmdAddItemToClientPickedUpList(item);
+                RpcAddItemToClientPickedUpList(item);
                 characterMovement.weaponInUse = true;
-                CmdSetWeaponInUse(true);
+                RpcSetWeaponInUse(true);
             }
         }
     }
 
     [ClientRpc]
-    private void CmdAddItemToClientPickedUpList(ItemInformation item)
+    private void RpcAddItemToClientPickedUpList(ItemInformation item)
     {
         gravityGunComponent.AddItemToPickedUpList(item);
     }
 
     [ClientRpc]
-    private void CmdSetWeaponInUse(bool pValue)
+    private void RpcSetWeaponInUse(bool pValue)
     {
         characterMovement.weaponInUse = pValue;
     }
@@ -210,6 +210,13 @@ public class NetworkInteractableManager : NetworkBehaviour
         if (_currentAttractionDistance <= -_furthestDistanceToObject && yValue < 0)
             return;
         gravityGunComponent.ChangeDistance(yValue);
+        RpcChangeDistance(yValue);
+    }
+
+    [ClientRpc]
+    private void RpcChangeDistance(float pValue)
+    {
+        gravityGunComponent.ChangeDistance(pValue);
     }
 
     [Command]
@@ -225,8 +232,44 @@ public class NetworkInteractableManager : NetworkBehaviour
         }
         
         gravityGunComponent.ClearObjectList();
+        RpcClearObjectList();
         characterMovement.weaponInUse = false;
+        RpcSetWeaponInUse(false);
         gravityGunComponent.ResetDistance();
+        RpcResetDistance();
+    }
+
+    [ClientRpc]
+    private void RpcClearObjectList()
+    {
+        gravityGunComponent.ClearObjectList();
+    }
+
+    [ClientRpc]
+    private void RpcResetDistance()
+    {
+        gravityGunComponent.ResetDistance();
+    }
+
+    [ServerCallback]
+    private void Update()
+    {
+        //Move objects towards player only if there's at least one.
+        List<ItemInformation> items = gravityGunComponent.GetItems();
+        
+        if (items.Count > 0)
+        {
+            foreach (var pickedObject in items)
+            {
+                GameObject currentGameObject = pickedObject.CurrentGameObject;
+                Vector3 movementDirection = currentGameObject.transform.position - gravityGun.transform.position;
+                float goalDistance = pickedObject.InitialDistance + gravityGunComponent.GetCurrentDistance();
+                float deltaDistance = goalDistance - movementDirection.magnitude;
+                if (movementDirection.magnitude + gravityGunComponent.GetAttractionSpeed() * deltaDistance * Time.deltaTime < gravityGunComponent.GetClosestDistance()) continue;
+                if (Mathf.Abs(deltaDistance) > 0.1f)
+                    currentGameObject.transform.Translate(gravityGunComponent.GetAttractionSpeed() * deltaDistance * Time.deltaTime * movementDirection.normalized, Space.World);
+            }
+        }
     }
 
     #endregion

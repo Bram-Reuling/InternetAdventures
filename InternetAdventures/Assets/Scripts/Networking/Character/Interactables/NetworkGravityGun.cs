@@ -28,28 +28,11 @@ public class NetworkGravityGun : NetworkInteractable
         playerInput.actions.FindAction("Scroll").performed += ChangeAttractionDistance;
     }
 
-    private void Update()
+    public List<ItemInformation> GetItems()
     {
-        // Server
-        
-        //Move objects towards player only if there's at least one.
-        if (_pickedUpObjects.Count > 0)
-        {
-            foreach (var pickedObject in _pickedUpObjects)
-            {
-                GameObject currentGameObject = pickedObject.CurrentGameObject;
-                Vector3 movementDirection = currentGameObject.transform.position - transform.parent.parent.position;
-                float goalDistance = pickedObject.InitialDistance + _currentAttractionDistance;
-                float deltaDistance = goalDistance - movementDirection.magnitude;
-                if (movementDirection.magnitude + attractionSpeed * deltaDistance * Time.deltaTime < closestAttractionDistance) continue;
-                if (Mathf.Abs(deltaDistance) > 0.1f)
-                    currentGameObject.transform.Translate(attractionSpeed * deltaDistance * Time.deltaTime * movementDirection.normalized, Space.World);
-            }
-        }
-        
-        //if(showDebugInfo) ShowDebugInformation();
+        return _pickedUpObjects;
     }
-
+    
     private void ActivateGun(InputAction.CallbackContext pCallback)
     {
         if (!gameObject.activeSelf) return;
@@ -91,6 +74,21 @@ public class NetworkGravityGun : NetworkInteractable
     public void AddItemToPickedUpList(ItemInformation item)
     {
         _pickedUpObjects.Add(item);
+    }
+
+    public float GetCurrentDistance()
+    {
+        return _currentAttractionDistance;
+    }
+
+    public float GetAttractionSpeed()
+    {
+        return attractionSpeed;
+    }
+
+    public float GetClosestDistance()
+    {
+        return closestAttractionDistance;
     }
 }
 

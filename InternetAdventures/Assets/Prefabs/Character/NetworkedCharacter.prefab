@@ -1,5 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2006668782050827234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124405104559403834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd94487f4ea84a76842abbefa2b3faa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  enableCameraShake: 1
+  cameraShakeStrength: 0.1
+  cameraShakeDuration: 1
+  playerInput: {fileID: 9046719869666208273}
+  networkInteractableManager: {fileID: 4184848665204242540}
+  range: 15
+  gravityRadius: 2
+  attractionSpeed: 1
+  closestAttractionDistance: 3
+  showDebugInfo: 1
 --- !u!114 &-4245551333009793547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,6 +55,24 @@ MonoBehaviour:
   syncInterval: 0.1
   _currentIndexInList: 0
   initialInteractable: {fileID: 7867158993998891637}
+--- !u!114 &4184848665204242540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064707090420629260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f25da85ad74c18aa9dd4ef687239dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  banHammer: {fileID: 9212067105422364862}
+  hands: {fileID: 7867158993998891637}
+  gravityGun: {fileID: 1124405104559403834}
+  shockwaveGun: {fileID: 8439284559005088014}
 --- !u!114 &4572793819678585598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +111,22 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &8218216998468558112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7064707090420629260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6672f551d1b241db9ab01d473b0eacd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  minDistanceToZipline: 1.5
+  ziplineSpeed: 5
 --- !u!114 &8373152185270208760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,24 +149,27 @@ MonoBehaviour:
   deceleration: 0.92
   CharacterMass: 70
   weaponInUse: 0
---- !u!114 &4184848665204242540
+--- !u!114 &7644672626126018691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064707090420629260}
+  m_GameObject: {fileID: 7867158993998891637}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2f25da85ad74c18aa9dd4ef687239dd, type: 3}
+  m_Script: {fileID: 11500000, guid: c4ba5fb2cb6d4b26b9232f1d442c9007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  banHammer: {fileID: 9212067105422364862}
-  hands: {fileID: 7867158993998891637}
-  gravityGun: {fileID: 1124405104559403834}
-  shockwaveGun: {fileID: 8439284559005088014}
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  enableCameraShake: 0
+  cameraShakeStrength: 0.1
+  cameraShakeDuration: 1
+  playerInput: {fileID: 9046719869666208273}
+  networkInteractableManager: {fileID: 4184848665204242540}
+  _grabbedObject: {fileID: 0}
 --- !u!114 &8181642465421495370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,52 +195,6 @@ MonoBehaviour:
   shockwaveStrength: 500
   possibleHitRadius: 0.5
   showDebugInfo: 0
---- !u!114 &2006668782050827234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124405104559403834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd94487f4ea84a76842abbefa2b3faa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableLayers:
-    serializedVersion: 2
-    m_Bits: 2048
-  enableCameraShake: 1
-  cameraShakeStrength: 0.1
-  cameraShakeDuration: 1
-  playerInput: {fileID: 9046719869666208273}
-  networkInteractableManager: {fileID: 4184848665204242540}
-  range: 15
-  gravityRadius: 2
-  attractionSpeed: 1
-  closestAttractionDistance: 3
-  showDebugInfo: 1
---- !u!114 &7644672626126018691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7867158993998891637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ba5fb2cb6d4b26b9232f1d442c9007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactableLayers:
-    serializedVersion: 2
-    m_Bits: 2048
-  enableCameraShake: 0
-  cameraShakeStrength: 0.1
-  cameraShakeDuration: 1
-  playerInput: {fileID: 9046719869666208273}
-  networkInteractableManager: {fileID: 4184848665204242540}
-  handMode: 1
 --- !u!114 &1381700864317571633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +283,7 @@ PrefabInstance:
     - {fileID: 8028667545530846121, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
     - {fileID: 2971539001687543839, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
     - {fileID: 9055304501692780167, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
+    - {fileID: 13570335880824447, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 99dfd3ed6163ceb49889ff9cb014d0f9, type: 3}
 --- !u!1 &7064707090420629260 stripped
 GameObject:

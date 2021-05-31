@@ -170,9 +170,15 @@ namespace Networking
         {
             Debug.Log("CmdOnJump");
             //Apply jump force
-            if (_characterController.isGrounded) _velocity.y = jumpHeight;
+            if (_characterController.isGrounded) AddJumpForce();
         }
 
+        [ServerCallback]
+        public void AddJumpForce()
+        {
+            _velocity.y = jumpHeight;
+        }
+        
         #endregion
 
         #region Client Functions
