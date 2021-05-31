@@ -128,16 +128,23 @@ public class NetworkInteractableManager : NetworkBehaviour
     [Command]
     public void CmdReleaseObject(Transform _initialParent)
     {
-        // Server and client
         handsComponent.SetGrabbedObjectParent(_initialParent);
-        
         handsComponent.SetGrabbedObjectConstraints(RigidbodyConstraints.None);
+        RpcSetGrabbedObjectParamsClient(_initialParent, RigidbodyConstraints.None);
+        
         handsComponent.AddForceToGrabbedRigidbody(50);
+        RpcAddForceToGrabbedRigidbody(50);
         
         handsComponent.SetGrabbedObject(null);
-        //RpcSetGrabbedObject(null);
+        RpcSetGrabbedObject(null);
     }
 
+    [ClientRpc]
+    private void RpcAddForceToGrabbedRigidbody(float pValue)
+    {
+        handsComponent.AddForceToGrabbedRigidbody(pValue);
+    }
+    
     #endregion
 
     #region Gravity Gun
