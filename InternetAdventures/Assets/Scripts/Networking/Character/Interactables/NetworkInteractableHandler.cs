@@ -15,7 +15,10 @@ public class NetworkInteractableHandler : NetworkBehaviour
     private PlayerInput _playerInput;
     private float _currentScrollValue;
     [SerializeField] private GameObject initialInteractable;
-
+    [SerializeField] private Animator characterAnimator;
+    [SerializeField] private AnimatorOverrideController handsAnimatorOverrideController;
+    [SerializeField] private AnimatorOverrideController gunAnimatorOverrideController;
+    [SerializeField] private AnimatorOverrideController banHammerAnimatorOverrideController;
     private NetworkCharacterMovement networkCharacterMovement;
 
     #endregion
@@ -51,6 +54,22 @@ public class NetworkInteractableHandler : NetworkBehaviour
         }
     }
 
+    private void SetAnimatorLayer(in string pInteractableName)
+    {
+        switch (pInteractableName)
+        {
+            case "Hands":
+                characterAnimator.runtimeAnimatorController = handsAnimatorOverrideController;
+                break;
+            case "BanHammer":
+                characterAnimator.runtimeAnimatorController = banHammerAnimatorOverrideController;
+                break;
+            default:
+                characterAnimator.runtimeAnimatorController = gunAnimatorOverrideController;
+                break;
+        }
+    }
+    
     #endregion
 
     #region Client Functions
@@ -82,6 +101,7 @@ public class NetworkInteractableHandler : NetworkBehaviour
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
+        SetAnimatorLayer(_activeGameobject.name);
     }
     
     #endregion
@@ -97,7 +117,7 @@ public class NetworkInteractableHandler : NetworkBehaviour
     [Command]
     private void CmdChangeInteractable(float scrollValue)
     {
-        Debug.Log("Scroll");
+        //Debug.Log("Scroll");
         //Info: Checks whether a weapon is currently in use and changes if not.
         if (networkCharacterMovement.weaponInUse) return;
         _currentIndexInList += scrollValue < 0 ? -1 : 1;
@@ -107,6 +127,7 @@ public class NetworkInteractableHandler : NetworkBehaviour
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
+        SetAnimatorLayer(_activeGameobject.name);
     }
     
     #endregion
