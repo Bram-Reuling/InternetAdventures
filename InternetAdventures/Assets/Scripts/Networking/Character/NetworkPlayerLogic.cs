@@ -14,7 +14,7 @@ namespace Networking.Character
         private PlayerInput playerInput;
         private NetworkCharacterMovement characterMovement;
         private ObjectInteraction objectInteraction;
-        private Ziplinee zipline;
+        private NetworkZiplinee zipline;
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace Networking.Character
             playerInput = GetComponent<PlayerInput>();
             characterMovement = GetComponent<NetworkCharacterMovement>();
             objectInteraction = GetComponent<ObjectInteraction>();
-            zipline = GetComponent<Ziplinee>();
+            zipline = GetComponent<NetworkZiplinee>();
         }
         
         [ServerCallback]
