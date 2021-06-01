@@ -30,6 +30,9 @@ public class Level1Logic : MonoBehaviour
             x = x + 0.5f * Time.deltaTime;
         }
 
+        if (x >= 5f)
+            ok = false;
+
 
     }
 
