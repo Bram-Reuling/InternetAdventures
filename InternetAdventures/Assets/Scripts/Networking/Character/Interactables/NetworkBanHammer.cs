@@ -9,10 +9,12 @@ public class NetworkBanHammer : NetworkInteractable
     
     //Public
     [SerializeField] private bool enableScaleEffectOnObjects;
+    [SerializeField] private float animationTimer;
     
     //Private
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
     private Vector3 _initialScale;
+    private bool coroutineRunning;
 
     private void Start()
     {
@@ -21,12 +23,19 @@ public class NetworkBanHammer : NetworkInteractable
         _initialScale = transform.localScale;
     }
 
+    public void SetCoroutineRunning(bool pBool)
+    {
+        coroutineRunning = pBool;
+    }
+    
     private void SlamHammer(InputAction.CallbackContext pCallback)
     {
-        if (!gameObject.activeSelf) return;
-        ApplyCameraShake();
+        if (!gameObject.activeSelf || coroutineRunning) return;
+        //ApplyCameraShake();
+
+        characterAnimator.SetTrigger("UseInteractable");
         
-        networkInteractableManager.CmdSlamHammer(_gameObjectsInTrigger, enableScaleEffectOnObjects, _initialScale);
+        networkInteractableManager.CmdSlamHammer(_gameObjectsInTrigger, enableScaleEffectOnObjects, _initialScale,animationTimer);
     }
     
     //Info: The purpose of this method is to cache all gameObjects that are currently in my trigger, so I can use
@@ -46,5 +55,15 @@ public class NetworkBanHammer : NetworkInteractable
     {
         if(_gameObjectsInTrigger.Contains(other.gameObject)) 
             _gameObjectsInTrigger.Remove(other.gameObject);
+    }
+
+    public void CameraShake()
+    {
+        ApplyCameraShake();
+    }
+
+    public bool AnimatorStateIsInteractable()
+    {
+        return characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Interactable");
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Mirror;
@@ -42,8 +43,22 @@ public class NetworkInteractableManager : NetworkBehaviour
     // SERVER
     [Command]
     public void CmdSlamHammer(List<GameObject> _gameObjectsInTrigger, bool enableScaleEffectOnObjects,
-        Vector3 _initialScale)
+        Vector3 _initialScale, float animationTimer)
     {
+        StartCoroutine(SlamHammer(_gameObjectsInTrigger, enableScaleEffectOnObjects, _initialScale, animationTimer));
+    }
+
+    [ServerCallback]
+    private IEnumerator SlamHammer(List<GameObject> _gameObjectsInTrigger, bool enableScaleEffectOnObjects,
+        Vector3 _initialScale, float animationTimer)
+    {
+        banHammerComponent.SetCoroutineRunning(true);
+        yield return new WaitForSeconds(animationTimer);
+
+        RpcShakeCameraBanHammer();
+        
+        Debug.Log("Slam Hammer");
+
         foreach (var gameObjectInReach in _gameObjectsInTrigger)
         {
             //IMPORTANT
@@ -80,6 +95,16 @@ public class NetworkInteractableManager : NetworkBehaviour
             if (rigidbody != null)
                 rigidbody.AddForce(Vector3.up * 5.0f, ForceMode.Impulse);
         }
+
+        yield return null;
+        yield return new WaitWhile(() => banHammerComponent.AnimatorStateIsInteractable());
+        banHammerComponent.SetCoroutineRunning(false);
+    }
+
+    [TargetRpc]
+    private void RpcShakeCameraBanHammer()
+    {
+        banHammerComponent.CameraShake();
     }
 
     #endregion
@@ -172,19 +197,20 @@ public class NetworkInteractableManager : NetworkBehaviour
             {
                 GameObject intersectingGameObject = _overlappedColliders[i].collider.gameObject;
                 Rigidbody currentRigidbody = intersectingGameObject.GetComponent<Rigidbody>();
-                float currentDistance = (intersectingGameObject.transform.position - transform.GetChild(0).transform.position)
+                float currentDistance =
+                    (intersectingGameObject.transform.position - transform.GetChild(0).transform.position)
                     .magnitude;
-                
+
                 Debug.LogWarning($"Current Distance: {currentDistance}");
-                
+
                 if (currentDistance > _furthestDistanceToObject) _furthestDistanceToObject = currentDistance;
-                
+
                 gravityGunComponent.SetFurthestDistanceToObject(_furthestDistanceToObject);
                 RpcSetFurthestDistanceToObject(_furthestDistanceToObject);
 
                 ItemInformation item = new ItemInformation(intersectingGameObject,
                     intersectingGameObject.transform.parent, currentRigidbody.constraints, currentDistance);
-                    
+
                 //intersectingGameObject.transform.SetParent(transform);
                 currentRigidbody.useGravity = false;
                 currentRigidbody.constraints = RigidbodyConstraints.FreezeAll;
@@ -202,7 +228,7 @@ public class NetworkInteractableManager : NetworkBehaviour
     {
         gravityGunComponent.SetFurthestDistanceToObject(pValue);
     }
-    
+
     [ClientRpc]
     private void RpcAddItemToClientPickedUpList(ItemInformation item)
     {
@@ -238,14 +264,15 @@ public class NetworkInteractableManager : NetworkBehaviour
         foreach (var pickedObject in _pickedUpObjects)
         {
             //pickedObject.CurrentGameObject.transform.SetParent(pickedObject.Parent);
-            
+
             gravityGunComponent.ResetObjectParent(pickedObject);
             RpcResetObjectParent(pickedObject);
-            
+
             Rigidbody currentRigidbody = pickedObject.CurrentGameObject.GetComponent<Rigidbody>();
             currentRigidbody.constraints = pickedObject.RigidbodyConstraints;
             currentRigidbody.useGravity = true;
         }
+
         gravityGunComponent.ClearObjectList();
         RpcClearObjectList();
         characterMovement.weaponInUse = false;
@@ -277,19 +304,24 @@ public class NetworkInteractableManager : NetworkBehaviour
     {
         //Move objects towards player only if there's at least one.
         List<ItemInformation> items = gravityGunComponent.GetItems();
-        
+
         if (items.Count > 0)
         {
             foreach (var pickedObject in items)
             {
                 GameObject currentGameObject = pickedObject.CurrentGameObject;
-                Vector3 movementDirection = currentGameObject.transform.position - transform.GetChild(0).transform.position;
+                Vector3 movementDirection =
+                    currentGameObject.transform.position - transform.GetChild(0).transform.position;
                 Debug.LogWarning($"Current Distance: {movementDirection}");
                 float goalDistance = pickedObject.InitialDistance + gravityGunComponent.GetCurrentDistance();
                 float deltaDistance = goalDistance - movementDirection.magnitude;
-                if (movementDirection.magnitude + gravityGunComponent.GetAttractionSpeed() * deltaDistance * Time.deltaTime < gravityGunComponent.GetClosestDistance()) continue;
+                if (movementDirection.magnitude +
+                    gravityGunComponent.GetAttractionSpeed() * deltaDistance * Time.deltaTime <
+                    gravityGunComponent.GetClosestDistance()) continue;
                 if (Mathf.Abs(deltaDistance) > 0.1f)
-                    currentGameObject.transform.Translate(gravityGunComponent.GetAttractionSpeed() * deltaDistance * Time.deltaTime * movementDirection.normalized, Space.World);
+                    currentGameObject.transform.Translate(
+                        gravityGunComponent.GetAttractionSpeed() * deltaDistance * Time.deltaTime *
+                        movementDirection.normalized, Space.World);
             }
         }
     }
