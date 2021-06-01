@@ -13,6 +13,9 @@ public class InteractableHandler : MonoBehaviour
     private float _currentScrollValue;
     [SerializeField] private GameObject initialInteractable;
     [SerializeField] private Animator characterAnimator;
+    [SerializeField] private AnimatorOverrideController handsAnimatorOverrideController;
+    [SerializeField] private AnimatorOverrideController gunAnimatorOverrideController;
+    [SerializeField] private AnimatorOverrideController banHammerAnimatorOverrideController;
     
     private void Start()
     {
@@ -55,11 +58,19 @@ public class InteractableHandler : MonoBehaviour
         SetAnimatorLayer(_activeGameobject.name);
     }
 
-    private void SetAnimatorLayer(in string pLayerToSet)
+    private void SetAnimatorLayer(in string pInteractableName)
     {
-        for (int i = 0; i < characterAnimator.layerCount; i++)
+        switch (pInteractableName)
         {
-            characterAnimator.SetLayerWeight(i, characterAnimator.GetLayerName(i) == pLayerToSet ? 1.0f : 0.0f);
+            case "Hands":
+                characterAnimator.runtimeAnimatorController = handsAnimatorOverrideController;
+                break;
+            case "BanHammer":
+                characterAnimator.runtimeAnimatorController = banHammerAnimatorOverrideController;
+                break;
+            default:
+                characterAnimator.runtimeAnimatorController = gunAnimatorOverrideController;
+                break;
         }
     }
 }

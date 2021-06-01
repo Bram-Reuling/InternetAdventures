@@ -1018,7 +1018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5474631957821710355}
   m_LocalRotation: {x: -0.022996044, y: -0.024259511, z: -0.68757063, w: 0.7253477}
-  m_LocalPosition: {x: 0.35512698, y: -0.4360441, z: -0.04218957}
+  m_LocalPosition: {x: 0.35512698, y: -0.4360441, z: -0.042189598}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4816108716541027755}
@@ -1043,6 +1043,9 @@ MonoBehaviour:
   playerInput: {fileID: 6088667288562305892}
   initialInteractable: {fileID: 564827373244285522}
   characterAnimator: {fileID: 8123460606793852159}
+  handsAnimatorOverrideController: {fileID: 22100000, guid: 24f4093de6bfe1d44a16defe46c53f2d, type: 2}
+  gunAnimatorOverrideController: {fileID: 22100000, guid: 6e5f677e18db2ae4ea96478225a44ae6, type: 2}
+  banHammerAnimatorOverrideController: {fileID: 22100000, guid: 525a8b0234e7f994b9a48c4c4b03e0d1, type: 2}
 --- !u!114 &5474631957821710352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1815,48 +1818,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1336
+      value: 0.093
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0142
+      value: -0.116
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.1329
+      value: 0.083
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.46437365
+      value: 0.7564291
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.69488156
+      value: -0.38189325
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.43196929
+      value: 0.5291991
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.33896807
+      value: 0.043828573
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -110.246
+      value: -141.381
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 11.653
+      value: -100.935
       objectReference: {fileID: 0}
     - target: {fileID: 183589566303122960, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 55.597
+      value: 154.376
       objectReference: {fileID: 0}
     - target: {fileID: 2071267865242391889, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 6088667288562305892}
+    - target: {fileID: 2071267865242391889, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
+      propertyPath: animationTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071267865242391889, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
+      propertyPath: characterAnimator
+      value: 
+      objectReference: {fileID: 8123460606793852159}
     - target: {fileID: 5155732482347536873, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_Name
       value: BanHammer
@@ -1931,6 +1942,10 @@ PrefabInstance:
       propertyPath: shockwaveRadius
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3233229994015860528, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: characterAnimator
+      value: 
+      objectReference: {fileID: 8123460606793852159}
     - target: {fileID: 3233229994015860528, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
       propertyPath: possibleHitRadius
       value: 0.5
@@ -2013,6 +2028,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 6088667288562305892}
+    - target: {fileID: 6544693422178865410, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
+      propertyPath: characterAnimator
+      value: 
+      objectReference: {fileID: 8123460606793852159}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
 --- !u!4 &4816108716541027755 stripped
@@ -2080,6 +2099,10 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 6088667288562305892}
+    - target: {fileID: 5610307697550241047, guid: ae78a59f8cea0b942b38381f2ca6588f, type: 3}
+      propertyPath: characterAnimator
+      value: 
+      objectReference: {fileID: 8123460606793852159}
     - target: {fileID: 8387275685348839173, guid: ae78a59f8cea0b942b38381f2ca6588f, type: 3}
       propertyPath: m_Name
       value: GravityGun

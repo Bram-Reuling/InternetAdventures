@@ -12,8 +12,7 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField] protected float cameraShakeDuration;
     [SerializeField] protected PlayerInput playerInput;
     [SerializeField] protected Animator characterAnimator;
-    [SerializeField] protected Animation interactableAnimator;
-    
+
     protected void ApplyCameraShake()
     {
         if (enableCameraShake)

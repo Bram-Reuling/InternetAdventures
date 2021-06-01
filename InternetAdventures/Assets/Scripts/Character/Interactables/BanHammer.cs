@@ -67,9 +67,7 @@ public class BanHammer : Interactable
                 rigidbody.AddForce(Vector3.up * 5.0f, ForceMode.Impulse);
         }
         yield return null;
-        yield return new WaitWhile(() => characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
-        Debug.Log("Reset!");
-        Debug.Log(characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
+        yield return new WaitWhile(() => characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Interactable"));
         coroutineRunning = false;
     }
     
