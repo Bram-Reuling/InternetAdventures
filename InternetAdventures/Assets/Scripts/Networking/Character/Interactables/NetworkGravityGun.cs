@@ -28,6 +28,11 @@ public class NetworkGravityGun : NetworkInteractable
         playerInput.actions.FindAction("Scroll").performed += ChangeAttractionDistance;
     }
 
+    public void SetFurthestDistanceToObject(float pValue)
+    {
+        _furthestDistanceToObject = pValue;
+    }
+    
     public List<ItemInformation> GetItems()
     {
         return _pickedUpObjects;
@@ -39,7 +44,7 @@ public class NetworkGravityGun : NetworkInteractable
         
         ApplyCameraShake();
        
-        networkInteractableManager.CmdActivateGravityGun(gravityRadius, range, interactableLayers, _furthestDistanceToObject, _pickedUpObjects);
+        networkInteractableManager.CmdActivateGravityGun(gravityRadius, range, interactableLayers, _furthestDistanceToObject);
     }
 
     private void ChangeAttractionDistance(InputAction.CallbackContext pCallback)
@@ -70,9 +75,15 @@ public class NetworkGravityGun : NetworkInteractable
     {
         _pickedUpObjects.Clear();
     }
-    
-    public void AddItemToPickedUpList(ItemInformation item)
+
+    public void ResetObjectParent(ItemInformation pickedUpObject)
     {
+        pickedUpObject.CurrentGameObject.transform.SetParent(pickedUpObject.Parent);
+    }
+    
+    public void AddItemToPickedUpList(ItemInformation item, Transform parentTransform)
+    {
+        item.CurrentGameObject.transform.SetParent(parentTransform); 
         _pickedUpObjects.Add(item);
     }
 

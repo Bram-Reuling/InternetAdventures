@@ -160,7 +160,7 @@ public class NetworkInteractableManager : NetworkBehaviour
 
     [Command]
     public void CmdActivateGravityGun(float gravityRadius, float range, int interactableLayers,
-        float _furthestDistanceToObject, List<ItemInformation> _pickedUpObjects)
+        float _furthestDistanceToObject)
     {
         RaycastHit[] _overlappedColliders = new RaycastHit[50];
 
@@ -172,18 +172,24 @@ public class NetworkInteractableManager : NetworkBehaviour
             {
                 GameObject intersectingGameObject = _overlappedColliders[i].collider.gameObject;
                 Rigidbody currentRigidbody = intersectingGameObject.GetComponent<Rigidbody>();
-                float currentDistance = (intersectingGameObject.transform.position - transform.position)
+                float currentDistance = (intersectingGameObject.transform.position - transform.GetChild(0).transform.position)
                     .magnitude;
+                
+                Debug.LogWarning($"Current Distance: {currentDistance}");
+                
                 if (currentDistance > _furthestDistanceToObject) _furthestDistanceToObject = currentDistance;
-
-                intersectingGameObject.transform.SetParent(transform);
-                currentRigidbody.useGravity = false;
-                currentRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                
+                gravityGunComponent.SetFurthestDistanceToObject(_furthestDistanceToObject);
+                RpcSetFurthestDistanceToObject(_furthestDistanceToObject);
 
                 ItemInformation item = new ItemInformation(intersectingGameObject,
                     intersectingGameObject.transform.parent, currentRigidbody.constraints, currentDistance);
+                    
+                //intersectingGameObject.transform.SetParent(transform);
+                currentRigidbody.useGravity = false;
+                currentRigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
-                gravityGunComponent.AddItemToPickedUpList(item);
+                gravityGunComponent.AddItemToPickedUpList(item, transform);
                 RpcAddItemToClientPickedUpList(item);
                 characterMovement.weaponInUse = true;
                 RpcSetWeaponInUse(true);
@@ -192,9 +198,15 @@ public class NetworkInteractableManager : NetworkBehaviour
     }
 
     [ClientRpc]
+    private void RpcSetFurthestDistanceToObject(float pValue)
+    {
+        gravityGunComponent.SetFurthestDistanceToObject(pValue);
+    }
+    
+    [ClientRpc]
     private void RpcAddItemToClientPickedUpList(ItemInformation item)
     {
-        gravityGunComponent.AddItemToPickedUpList(item);
+        gravityGunComponent.AddItemToPickedUpList(item, transform);
     }
 
     [ClientRpc]
@@ -225,12 +237,15 @@ public class NetworkInteractableManager : NetworkBehaviour
         //Sets parent to null again and clears list.
         foreach (var pickedObject in _pickedUpObjects)
         {
-            pickedObject.CurrentGameObject.transform.SetParent(null);
+            //pickedObject.CurrentGameObject.transform.SetParent(pickedObject.Parent);
+            
+            gravityGunComponent.ResetObjectParent(pickedObject);
+            RpcResetObjectParent(pickedObject);
+            
             Rigidbody currentRigidbody = pickedObject.CurrentGameObject.GetComponent<Rigidbody>();
             currentRigidbody.constraints = pickedObject.RigidbodyConstraints;
             currentRigidbody.useGravity = true;
         }
-        
         gravityGunComponent.ClearObjectList();
         RpcClearObjectList();
         characterMovement.weaponInUse = false;
@@ -243,6 +258,12 @@ public class NetworkInteractableManager : NetworkBehaviour
     private void RpcClearObjectList()
     {
         gravityGunComponent.ClearObjectList();
+    }
+
+    [ClientRpc]
+    private void RpcResetObjectParent(ItemInformation pickedUpObject)
+    {
+        gravityGunComponent.ResetObjectParent(pickedUpObject);
     }
 
     [ClientRpc]
@@ -262,7 +283,8 @@ public class NetworkInteractableManager : NetworkBehaviour
             foreach (var pickedObject in items)
             {
                 GameObject currentGameObject = pickedObject.CurrentGameObject;
-                Vector3 movementDirection = currentGameObject.transform.position - gravityGun.transform.position;
+                Vector3 movementDirection = currentGameObject.transform.position - transform.GetChild(0).transform.position;
+                Debug.LogWarning($"Current Distance: {movementDirection}");
                 float goalDistance = pickedObject.InitialDistance + gravityGunComponent.GetCurrentDistance();
                 float deltaDistance = goalDistance - movementDirection.magnitude;
                 if (movementDirection.magnitude + gravityGunComponent.GetAttractionSpeed() * deltaDistance * Time.deltaTime < gravityGunComponent.GetClosestDistance()) continue;
