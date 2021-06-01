@@ -61,6 +61,32 @@ Transform:
   m_Father: {fileID: 340163903808223597}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1370827931921147726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672585471348064985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86d764c4a8f4513970b54e051954b82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  enableCameraShake: 1
+  cameraShakeStrength: 0.1
+  cameraShakeDuration: 1
+  playerInput: {fileID: 1209930381765980499}
+  characterAnimator: {fileID: 3749694773464833736}
+  networkInteractableManager: {fileID: 4498515088040701259}
+  range: 100
+  shockwaveRadius: 5
+  shockwaveStrength: 750
+  possibleHitRadius: 0.5
+  showDebugInfo: 0
 --- !u!1 &772797444966635223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,6 +2268,10 @@ PrefabInstance:
       value: 92.985
       objectReference: {fileID: 0}
     - target: {fileID: 3233229994015860528, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3233229994015860528, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 1209930381765980499}
@@ -2261,7 +2291,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShockwaveGun
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3233229994015860528, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
 --- !u!1 &672585471348064985 stripped
 GameObject:
