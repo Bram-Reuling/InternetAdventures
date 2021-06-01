@@ -22,10 +22,13 @@ namespace Networking
         [SerializeField] private float deceleration;
         public float CharacterMass = 70;
 
+        [SerializeField] private Animator animator;
+
         //Private
         private Vector3 _velocity;
         private Vector3 _inputMovement;
         private Vector3 _externalMovement = Vector3.zero;
+        private Quaternion _externalRotation = Quaternion.identity;
         private Quaternion _newRotation;
         private GameObject _currentlyCollidingGameObject;
         private bool _collideEveryFrame;
@@ -54,6 +57,11 @@ namespace Networking
             return _velocity;
         }
 
+        private Vector3 GetXZMovement()
+        {
+            return new Vector3(_velocity.x, 0, _velocity.z);
+        }
+        
         #endregion
         
         #region Server Functions
@@ -81,8 +89,18 @@ namespace Networking
             if (xzMovement.magnitude > 2.0f)
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, _newRotation,
                     xzMovement.magnitude * rotationOnMovementMultiplier);
+            if(_externalRotation != Quaternion.identity) transform.rotation *= _externalRotation;
+            SetAnimationValues();
+            RpcSetAnimationValues();
         }
-        
+
+        [ServerCallback]
+        private void SetAnimationValues()
+        {
+            animator.SetFloat("MovementSpeed", GetXZMovement().magnitude);
+            animator.SetBool("InAir", !_characterController.isGrounded);
+        }
+
         [ServerCallback]
         private void Decelerate()
         {
@@ -120,6 +138,14 @@ namespace Networking
                 case "PhysicsPlatform":
                     _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<NetworkPhysicsPlatform>().RemoveCharacter(gameObject);
                     break;
+                case "PressurePlate":
+                    _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().RemoveGameObject(gameObject);
+                    break;
+                case "PressurePlatform":
+                    _collideEveryFrame = false;
+                    _externalMovement = Vector3.zero;
+                    _externalRotation = Quaternion.identity;
+                    break;
             }
 
             _currentlyCollidingGameObject = null;
@@ -141,6 +167,16 @@ namespace Networking
                 case "PhysicsPlatform":
                     _currentlyCollidingGameObject = hit.gameObject;
                     _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<NetworkPhysicsPlatform>().AddCharacter(gameObject);
+                    break;
+                case "PressurePlate":
+                    _currentlyCollidingGameObject = hit.gameObject;
+                    _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().AddGameObject(gameObject);
+                    break;
+                case "PressurePlatform":
+                    _currentlyCollidingGameObject = hit.gameObject;
+                    _externalMovement = _currentlyCollidingGameObject.GetComponent<MovementData>().MovementVector;
+                    _externalRotation = _currentlyCollidingGameObject.GetComponent<MovementData>().DeltaRotation;
+                    _collideEveryFrame = true;
                     break;
                 default:
                     OnCollisionLeave();
@@ -233,6 +269,13 @@ namespace Networking
             _playerInput.actions.FindAction("Movement").canceled += OnMoveUp;
             //Jump
             _playerInput.actions.FindAction("Jump").performed += OnJump;
+        }
+        
+        [ClientRpc]
+        private void RpcSetAnimationValues()
+        {
+            animator.SetFloat("MovementSpeed", GetXZMovement().magnitude);
+            animator.SetBool("InAir", !_characterController.isGrounded);
         }
         
         #endregion
