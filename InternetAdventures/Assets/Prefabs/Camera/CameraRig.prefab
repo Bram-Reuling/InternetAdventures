@@ -50,7 +50,8 @@ MonoBehaviour:
   canMoveOnYAxis: 1
   canMoveOnZAxis: 1
   useLookAt: 0
-  moveWeight: 0.01
+  moveWeight: 0.05
+  setTargetExternally: 1
 --- !u!1 &7303374206920581538
 GameObject:
   m_ObjectHideFlags: 0

@@ -105,14 +105,14 @@ public class GravityGun : Interactable
     }
 }
 
-public readonly struct ItemInformation
+public readonly struct NetworkItemInformation
 {
     public readonly GameObject CurrentGameObject;
     public readonly Transform Parent;
     public readonly RigidbodyConstraints RigidbodyConstraints;
     public readonly float InitialDistance;
 
-    public ItemInformation(GameObject pGameObject, Transform pParent, RigidbodyConstraints pRigidbodyRigidbodyConstraints, float pInitialDistance)
+    public NetworkItemInformation(GameObject pGameObject, Transform pParent, RigidbodyConstraints pRigidbodyRigidbodyConstraints, float pInitialDistance)
     {
         CurrentGameObject = pGameObject;
         Parent = pParent;

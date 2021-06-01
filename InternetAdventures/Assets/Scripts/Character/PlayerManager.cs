@@ -16,8 +16,8 @@ public class PlayerManager : MonoBehaviour
     private CharacterMovement playerOneMovement;
     private CharacterMovement playerTwoMovement;
 
-    private Player playerOneComponent;
-    private Player playerTwoComponent;
+    private PlayerLogic playerLogicOneComponent;
+    private PlayerLogic playerLogicTwoComponent;
 
     public GameObject cameraRig;
     private CameraRig cameraRigComponent;
@@ -47,12 +47,12 @@ public class PlayerManager : MonoBehaviour
         if (pCharacterName == playerOne.name)
         {
             //Debug.Log("Respawn Event P1");
-            playerOneComponent.RespawnPlayer();
+            playerLogicOneComponent.RespawnPlayer();
         }
         else if (pCharacterName == playerTwo.name)
         {
             //Debug.Log("Respawn Event P2");
-            playerTwoComponent.RespawnPlayer();
+            playerLogicTwoComponent.RespawnPlayer();
         }
     }
 
@@ -61,13 +61,13 @@ public class PlayerManager : MonoBehaviour
         //Debug.Log("Checkpoint Event");
         if (pCharacterName == playerOne.name)
         {
-            playerOneComponent.SetCheckPoint(pPosition);
+            playerLogicOneComponent.SetCheckPoint(pPosition);
             //Debug.Log("Checkpoint Event P1");
         }
         else if (pCharacterName == playerTwo.name)
         {
             //Debug.Log("Checkpoint Event P2");
-            playerTwoComponent.SetCheckPoint(pPosition);
+            playerLogicTwoComponent.SetCheckPoint(pPosition);
         }
     }
 
@@ -89,8 +89,8 @@ public class PlayerManager : MonoBehaviour
         playerOneMovement = playerOne.GetComponent<CharacterMovement>();
         playerTwoMovement = playerTwo.GetComponent<CharacterMovement>();
 
-        playerOneComponent = playerOne.GetComponent<Player>();
-        playerTwoComponent = playerTwo.GetComponent<Player>();
+        playerLogicOneComponent = playerOne.GetComponent<PlayerLogic>();
+        playerLogicTwoComponent = playerTwo.GetComponent<PlayerLogic>();
 
         cameraRigComponent = cameraRig.GetComponent<CameraRig>();
         
