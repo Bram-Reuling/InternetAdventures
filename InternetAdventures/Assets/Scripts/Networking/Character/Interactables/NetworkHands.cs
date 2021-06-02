@@ -51,6 +51,7 @@ public class NetworkHands : NetworkInteractable
 
     public void SetGrabbedObjectConstraints(RigidbodyConstraints constraints)
     {
+        if (_grabbedObject == null) return;
         _grabbedObject.GetComponent<Rigidbody>().constraints = constraints;
     }
 
@@ -58,6 +59,7 @@ public class NetworkHands : NetworkInteractable
 
     public void AddForceToGrabbedRigidbody(float pValue)
     {
+        if (_grabbedObject == null) return;
         _grabbedObject.GetComponent<Rigidbody>().AddForce(_characterMovement.GetVelocity() * pValue);
     }
     
