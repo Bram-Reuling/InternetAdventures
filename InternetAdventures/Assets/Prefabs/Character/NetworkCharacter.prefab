@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 6625110882650105036}
   - component: {fileID: 4761002072964296606}
   - component: {fileID: 6861740392027051690}
+  - component: {fileID: 8448709137098924226}
   m_Layer: 12
   m_Name: NetworkCharacter
   m_TagString: Character
@@ -345,7 +346,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102272659099837518}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
   m_Name: 
@@ -498,6 +499,20 @@ MonoBehaviour:
   syncInterval: 0.01
   clientAuthority: 0
   animator: {fileID: 3749694773464833736}
+--- !u!114 &8448709137098924226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102272659099837518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64fe0f8a57cb4dccabcd80f4b05b978c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &1102272659777378852
 GameObject:
   m_ObjectHideFlags: 0
