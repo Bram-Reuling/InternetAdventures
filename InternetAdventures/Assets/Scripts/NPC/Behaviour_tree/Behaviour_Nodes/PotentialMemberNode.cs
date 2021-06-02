@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PotentialMemberNode : Node
 {
-    private float _groupProximity = 1.5f;
+    private float _groupProximity = 2.5f;
     
     public PotentialMemberNode(AIBlackboard pAIBlackboard)
     {
@@ -12,21 +12,22 @@ public class PotentialMemberNode : Node
     public override State EvaluateState()
     {
         nodeState = State.Success;
+        aiBlackboard.hasMember = false;
         foreach (var npc in aiBlackboard.GetAllNPCs())
         {
-            if(npc == aiBlackboard.gameObject) continue;
             if ((npc.GetComponent<AIBlackboard>().NavAgent.destination - aiBlackboard.transform.position).magnitude <= _groupProximity)
             {
-                if (npc.GetComponent<AIBlackboard>().NavAgent.hasPath)
+                aiBlackboard.hasMember = true;
+                if (npc.GetComponent<AIBlackboard>().NavAgent.velocity.magnitude > 0.15f)
                 {
                     nodeState = State.Failure;
-                    Debug.Log("Halted movement. NPC " + npc.name + " was on its way");
+                    break;
                 }
                 //Consider moving on
-                else nodeState = Random.Range(0.0f, 1.0f) < 0.25f ? State.Success : State.Failure;
+               nodeState = Random.Range(0.0f, 1.0f) < 0.4f ? State.Success : State.Failure;
             }
         }
-
+        
         return nodeState;
     }
 }
