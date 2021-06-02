@@ -1906,7 +1906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Port: 7777
   NoDelay: 1
-  Interval: 10
+  Interval: 2
   FastResend: 2
   CongestionWindow: 0
   SendWindowSize: 4096
