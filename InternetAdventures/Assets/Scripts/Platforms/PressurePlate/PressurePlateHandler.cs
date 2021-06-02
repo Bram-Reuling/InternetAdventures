@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class NetworkPressurePlateHandler : MonoBehaviour
+public class PressurePlateHandler : MonoBehaviour
 {
     [SerializeField] private Transform targetTransform;
     [SerializeField] private GameObject platformToMove;

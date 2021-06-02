@@ -139,7 +139,7 @@ namespace Networking
                     _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<NetworkPhysicsPlatform>().RemoveCharacter(gameObject);
                     break;
                 case "PressurePlate":
-                    _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().RemoveGameObject(gameObject);
+                    _currentlyCollidingGameObject.transform.parent.GetComponent<NetworkPressurePlateHandler>().RemoveGameObject(gameObject);
                     break;
                 case "PressurePlatform":
                     _collideEveryFrame = false;
@@ -170,7 +170,7 @@ namespace Networking
                     break;
                 case "PressurePlate":
                     _currentlyCollidingGameObject = hit.gameObject;
-                    _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().AddGameObject(gameObject);
+                    _currentlyCollidingGameObject.transform.parent.GetComponent<NetworkPressurePlateHandler>().AddGameObject(gameObject);
                     break;
                 case "PressurePlatform":
                     _currentlyCollidingGameObject = hit.gameObject;
