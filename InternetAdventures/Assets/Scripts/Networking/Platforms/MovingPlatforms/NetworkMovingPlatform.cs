@@ -51,6 +51,7 @@ namespace Networking.Platforms.MovingPlatforms
                 if (!_loopMovement)
                 {
                     LeanPool.Despawn(gameObject);
+                    NetworkServer.UnSpawn(gameObject);
                     _currentPlatform = 0;
                 }
                 else

@@ -107,6 +107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 2919294032861913312, guid: 575f43fe6cadfbf4da4d0a1cac13c144, type: 3}
+      propertyPath: m_TagString
+      value: PressurePlatform
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7514086893342895932, guid: 575f43fe6cadfbf4da4d0a1cac13c144, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 575f43fe6cadfbf4da4d0a1cac13c144, type: 3}

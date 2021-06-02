@@ -70,10 +70,15 @@ namespace Networking.Platforms.MovingPlatforms
         private void SpawnPlatform()
         {
             //Todo: Create a deep copy of the list, so individual scripts cannot mess up the list.
-            LeanPool.Spawn(platform, _platformStations.ElementAt(0).position, Quaternion.identity, transform)
-                .GetComponent<NetworkMovingPlatform>()
-                .Initialize(_platformStations, duration, loopMovement);
+            //LeanPool.Spawn(platform, _platformStations.ElementAt(0).position, Quaternion.identity, transform)
+                //.GetComponent<NetworkMovingPlatform>()
+                //.Initialize(_platformStations, duration, loopMovement);
 
+            GameObject platformGameObject = LeanPool.Spawn(platform, _platformStations.ElementAt(0).position, Quaternion.identity, transform);
+            platformGameObject.GetComponent<NetworkMovingPlatform>().Initialize(_platformStations, duration, loopMovement);
+            
+            NetworkServer.Spawn(platformGameObject);
+            
             _timePassed = 0;
             if (useRandomSpawnIntervals)
                 spawnRate = Random.Range(minSpawnTime, maxSpawnTime);
