@@ -32,12 +32,14 @@ public class AIBlackboard : MonoBehaviour
         CheckHealthNode checkHealthNode = new CheckHealthNode(this, criticalHealthThreshold);
         SequenceNode healthSequence = new SequenceNode(new List<Node>() {new InverterNode(checkHealthNode)});
         
-        //Patrol=====================================================================================================================================
+        //Grouping===================================================================================================================================
+        RandomTimerNode randomTimerNode = new RandomTimerNode(this, 1.0f, 3.0f);
+        PotentialMemberNode potentialMemberNode = new PotentialMemberNode(this);
         PatrolNode patrolNode = new PatrolNode(this);
-        SequenceNode patrolSequence = new SequenceNode(new List<Node>() {patrolNode});
+        SequenceNode groupingSelector = new SequenceNode(new List<Node>(){randomTimerNode, potentialMemberNode, patrolNode});
         
         //Starting Node==============================================================================================================================
-        _startingNode = new SelectorNode(new List<Node>() {healthSequence, patrolSequence});
+        _startingNode = new SelectorNode(new List<Node>() {healthSequence, groupingSelector});
     }
 
     private void Start()
