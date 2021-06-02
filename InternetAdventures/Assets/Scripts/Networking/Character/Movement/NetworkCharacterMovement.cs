@@ -90,8 +90,8 @@ namespace Networking
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, _newRotation,
                     xzMovement.magnitude * rotationOnMovementMultiplier);
             if(_externalRotation != Quaternion.identity) transform.rotation *= _externalRotation;
+            //RpcSyncRotation(transform.rotation);
             SetAnimationValues();
-            RpcSetAnimationValues();
         }
 
         [ServerCallback]
@@ -270,14 +270,13 @@ namespace Networking
             //Jump
             _playerInput.actions.FindAction("Jump").performed += OnJump;
         }
-        
+
         [ClientRpc]
-        private void RpcSetAnimationValues()
+        private void RpcSyncRotation(Quaternion currentRotation)
         {
-            animator.SetFloat("MovementSpeed", GetXZMovement().magnitude);
-            animator.SetBool("InAir", !_characterController.isGrounded);
+            transform.localRotation = currentRotation;
         }
-        
+
         #endregion
     }
 }
