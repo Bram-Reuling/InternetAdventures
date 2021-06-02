@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -794,6 +794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CommunityMember
       objectReference: {fileID: 0}
+    - target: {fileID: 8395200038346799519, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
+      propertyPath: m_TagString
+      value: AI
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
 --- !u!1001 &302940819
@@ -860,14 +864,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5474631957821710354, guid: 2ec14ae3f0b77114f9eaa76315e1a816, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.35512698
-      objectReference: {fileID: 0}
-    - target: {fileID: 5474631957821710354, guid: 2ec14ae3f0b77114f9eaa76315e1a816, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.042189598
-      objectReference: {fileID: 0}
     - target: {fileID: 5474631959551696505, guid: 2ec14ae3f0b77114f9eaa76315e1a816, type: 3}
       propertyPath: m_Name
       value: Character
@@ -916,18 +912,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6651101152624914511, guid: 2ec14ae3f0b77114f9eaa76315e1a816, type: 3}
-      propertyPath: test
-      value: 
-      objectReference: {fileID: 22100000, guid: 6e5f677e18db2ae4ea96478225a44ae6, type: 2}
-    - target: {fileID: 6651101152624914511, guid: 2ec14ae3f0b77114f9eaa76315e1a816, type: 3}
-      propertyPath: gunAnimatorOverrideController
-      value: 
-      objectReference: {fileID: 22100000, guid: 6e5f677e18db2ae4ea96478225a44ae6, type: 2}
-    - target: {fileID: 6651101152624914511, guid: 2ec14ae3f0b77114f9eaa76315e1a816, type: 3}
-      propertyPath: banHammerAnimatorOverrideController
-      value: 
-      objectReference: {fileID: 22100000, guid: 525a8b0234e7f994b9a48c4c4b03e0d1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ec14ae3f0b77114f9eaa76315e1a816, type: 3}
 --- !u!1 &347624701
@@ -1304,7 +1288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &827551002
 Transform:
   m_ObjectHideFlags: 0
@@ -1388,6 +1372,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &964261345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5474631959551696505, guid: 2ec14ae3f0b77114f9eaa76315e1a816, type: 3}
+  m_PrefabInstance: {fileID: 344780065}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &984928796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1664,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8395200038346799519, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395200038346799519, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
+      propertyPath: m_TagString
+      value: AI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
@@ -1958,7 +1951,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8395200038346799519, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395200038346799519, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
+      propertyPath: m_TagString
+      value: AI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
@@ -2007,7 +2004,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 13008359fab4e8c46aeead7ead2fb756, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 2c934eb329b6a6846bfc8d79b4654fa4, type: 2}
 --- !u!4 &1297629992
 Transform:
   m_ObjectHideFlags: 0
@@ -2402,7 +2399,7 @@ PrefabInstance:
     - target: {fileID: 7303374206783668695, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 964261345}
     - target: {fileID: 7303374206783668695, guid: 2c81819486c4f744c9ced7a30196531f, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2746,6 +2743,10 @@ PrefabInstance:
     - target: {fileID: 8395200038346799519, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8395200038346799519, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
+      propertyPath: m_TagString
+      value: AI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
