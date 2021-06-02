@@ -4,6 +4,8 @@ using DG.Tweening;
 
 public class PressurePlateHandler : MonoBehaviour
 {
+    #region Variables
+
     [SerializeField] private Transform targetTransform;
     [SerializeField] private GameObject platformToMove;
     [SerializeField] private float movementDuration;
@@ -13,6 +15,26 @@ public class PressurePlateHandler : MonoBehaviour
     private Vector3 _initialPosition;
     private Quaternion _initialRotation;
 
+    #endregion
+
+    #region Global Functions
+
+    
+
+    #endregion
+
+    #region Server Functions
+
+    
+
+    #endregion
+
+    #region Client Functions
+
+    
+
+    #endregion
+    
     private void Start()
     {
         _initialPosition = platformToMove.transform.position;
