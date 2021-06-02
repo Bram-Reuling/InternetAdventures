@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 8923795586029830953}
   - component: {fileID: 2581476289942204489}
   - component: {fileID: 7822369943151290935}
+  - component: {fileID: 7018847361126768659}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Platform
@@ -283,7 +284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7144447315465148653}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.787, y: 0.574, z: 0}
+  m_LocalPosition: {x: 2.37, y: 0.574, z: 0}
   m_LocalScale: {x: 4.5, y: 0.0050000004, z: 4.5}
   m_Children: []
   m_Father: {fileID: 5274555613013735432}
@@ -352,6 +353,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7018847361126768659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7144447315465148653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07089bf9482aefc42813d49121c12d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8766457325261183609
 GameObject:
   m_ObjectHideFlags: 0

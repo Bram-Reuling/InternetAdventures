@@ -785,6 +785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkPressurePlate (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3158484259728261369, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.99
+      objectReference: {fileID: 0}
     - target: {fileID: 5274555613013735432, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -829,9 +833,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5321360641263186192, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5652101734287021421, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: sceneId
       value: 596277523
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_TagString
+      value: PressurePlatform
       objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.y
