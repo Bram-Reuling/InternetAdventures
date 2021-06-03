@@ -65,7 +65,9 @@ MonoBehaviour:
   cameraShakeStrength: 1
   cameraShakeDuration: 1
   playerInput: {fileID: 0}
+  characterAnimator: {fileID: 0}
   enableScaleEffectOnObjects: 1
+  animationTimer: 1
 --- !u!1 &7714343255003834447
 GameObject:
   m_ObjectHideFlags: 0
