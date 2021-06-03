@@ -22,7 +22,7 @@ public class AIBlackboard : MonoBehaviour
     //NavMeshAgent
     public NavMeshAgent NavAgent => _navMesh;
     [SerializeField] private NavMeshAgent _navMesh;
-    
+
     //NavMeshObstacle
     public NavMeshObstacle NavObstacle => navMeshObstacle;
     [SerializeField] private NavMeshObstacle navMeshObstacle;

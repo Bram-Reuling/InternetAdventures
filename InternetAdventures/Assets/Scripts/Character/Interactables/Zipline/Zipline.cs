@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class Zipline : MonoBehaviour
 {
     //Public
@@ -13,12 +12,7 @@ public class Zipline : MonoBehaviour
     //Info: 'yOffset' is the offset on the y-axis from the center of a zipline post. This way the 'actual'
     //zipline can be moved up/down the post.
     [SerializeField] private Vector3 yOffset;
-    [SerializeField] private bool drawDebugInfo;
-    
-    private void Update()
-    {
-        if(drawDebugInfo) DrawDebugInfo();
-    }
+    [SerializeField] private bool drawDebug;
     
     private Vector3 GetDirectionVector()
     {
@@ -39,7 +33,7 @@ public class Zipline : MonoBehaviour
         Vector3 vecOnLine = transform.TransformDirection(_post1.transform.position + yOffset) + GetNormalizedDirectionVector() * scalarProjection;
         //Calculates the vector from that point to the player
         Vector3 vecToPlayer = pPlayerPosition - vecOnLine;
-        if(drawDebugInfo) Debug.DrawRay(vecOnLine, vecToPlayer, Color.blue);
+        Debug.DrawRay(vecOnLine, vecToPlayer, Color.blue);
         return vecToPlayer;
     }
 
@@ -63,10 +57,12 @@ public class Zipline : MonoBehaviour
         float scalarProjection = GetScalarProjection(pPlayerPosition);
         return scalarProjection > throwoffDistance && scalarProjection < GetDirectionVector().magnitude - throwoffDistance;
     }
-
-    private void DrawDebugInfo()
+    
+    private void OnDrawGizmos()
     {
-        Debug.DrawLine(_post2.transform.position + yOffset, _post1.transform.position + yOffset, Color.magenta);
+        if(!drawDebug) return;
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(_post2.transform.position + yOffset, _post1.transform.position + yOffset);
         GetShortestVectorToLine(GameObject.FindWithTag("Character").transform.position);
     }
 }

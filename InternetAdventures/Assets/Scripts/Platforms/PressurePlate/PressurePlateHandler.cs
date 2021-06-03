@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -8,6 +9,7 @@ public class PressurePlateHandler : MonoBehaviour
     [SerializeField] private GameObject platformToMove;
     [SerializeField] private float movementDuration;
     [SerializeField] private bool loop;
+    [SerializeField] private bool drawDebug;
     
     private readonly List<GameObject> _gameObjectsOnPressurePlate = new List<GameObject>();
     private Vector3 _initialPosition;
@@ -56,6 +58,14 @@ public class PressurePlateHandler : MonoBehaviour
         DOTween.Kill(platformToMove);
         platformToMove.transform.DOMove(pTransform.position, movementDuration);
         platformToMove.transform.DORotateQuaternion(pTransform.rotation, movementDuration);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(!drawDebug) return;
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawCube(targetTransform.position, platformToMove.transform.localScale);
+        Gizmos.DrawLine(platformToMove.transform.position, targetTransform.position);
     }
 }
 

@@ -36,6 +36,7 @@ public class TraverseToMember : Node
             {
                 GameObject memberToGoTo = potentialMembers.ElementAt(Random.Range(0, potentialMembers.Count - 1));
                 memberToGoTo.GetComponent<AIBlackboard>().hasMember = true;
+                aiBlackboard.hasMember = true;
                 memberPosition = memberToGoTo.transform.position;
             }
             else goRandom = true;
