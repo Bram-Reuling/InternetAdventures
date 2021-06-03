@@ -460,7 +460,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   UserInputAllowed: 0
-  jumpHeight: 10
+  jumpHeight: 9
   movementSpeed: 5
   gravityMultiplier: 3
   rotationOnMovementMultiplier: 0.7
