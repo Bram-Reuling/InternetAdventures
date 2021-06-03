@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 10240
   enableCameraShake: 1
   cameraShakeStrength: 1
   cameraShakeDuration: 1
