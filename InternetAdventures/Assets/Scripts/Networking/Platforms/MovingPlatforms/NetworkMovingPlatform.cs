@@ -15,6 +15,7 @@ namespace Networking.Platforms.MovingPlatforms
         private List<Transform> _stations;
         private int _currentPlatform;
         private bool _loopMovement;
+        private NetworkMovingPlatformHandler handler;
         public Vector3 CurrentMovementVector { get; private set; }
 
         #endregion
@@ -34,11 +35,12 @@ namespace Networking.Platforms.MovingPlatforms
         #region Server Functions
 
         [ServerCallback]
-        public void Initialize(in List<Transform> pStations, in float pDuration, in bool pLoopMovement)
+        public void Initialize(in List<Transform> pStations, in float pDuration, in bool pLoopMovement, NetworkMovingPlatformHandler handler)
         {
             _duration = pDuration;
             _stations = pStations;
             _loopMovement = pLoopMovement;
+            this.handler = handler;
         }
     
         [ServerCallback]
@@ -51,6 +53,7 @@ namespace Networking.Platforms.MovingPlatforms
                 if (!_loopMovement)
                 {
                     LeanPool.Despawn(gameObject);
+                    handler.platforms.Remove(gameObject);
                     NetworkServer.UnSpawn(gameObject);
                     _currentPlatform = 0;
                 }

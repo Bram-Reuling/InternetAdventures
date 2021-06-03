@@ -22,6 +22,7 @@ namespace Networking.Platforms.MovingPlatforms
         private int _maxPlatformAmount;
         private int _currentPlatformAmount;
         private readonly List<Transform> _platformStations = new List<Transform>();
+        public SyncList<GameObject> platforms = new SyncList<GameObject>();
 
         #endregion
 
@@ -75,9 +76,11 @@ namespace Networking.Platforms.MovingPlatforms
                 //.Initialize(_platformStations, duration, loopMovement);
 
             GameObject platformGameObject = LeanPool.Spawn(platform, _platformStations.ElementAt(0).position, Quaternion.identity, transform);
-            platformGameObject.GetComponent<NetworkMovingPlatform>().Initialize(_platformStations, duration, loopMovement);
+            platformGameObject.GetComponent<NetworkMovingPlatform>().Initialize(_platformStations, duration, loopMovement, this);
             
             NetworkServer.Spawn(platformGameObject);
+            
+            platforms.Add(platformGameObject);
             
             _timePassed = 0;
             if (useRandomSpawnIntervals)
