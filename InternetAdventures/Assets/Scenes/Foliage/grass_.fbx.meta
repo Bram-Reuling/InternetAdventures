@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2f5d7d96efe7ba6428e313af1fe7ff31
+guid: 417eef61f55b1f44ab0a8e80d318ba86
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: d0bb512d62ffb5b42a397d08039152ea, type: 2}
+      name: grass
+    second: {fileID: 2100000, guid: a80daf0e1eff82b4b93ecc3fb76fe960, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -39,7 +39,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 200
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 2
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

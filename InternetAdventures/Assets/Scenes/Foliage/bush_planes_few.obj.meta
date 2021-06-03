@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 70c12de3f79c4314ab8e1906b217a5ac
+guid: 757efec46bb3be748996c14655b9e0c0
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: grass_clumpMat
-    second: {fileID: 2100000, guid: f83fc3dbf1ce45b49ae7b1ca6ab6f057, type: 2}
+      name: bush_planes_fewMat
+    second: {fileID: 2100000, guid: 2685d868e930d0e47bd8eda7caf8de36, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -39,7 +39,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 2
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +90,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 10
+    globalScale: 2
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
