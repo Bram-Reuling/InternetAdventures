@@ -197,7 +197,7 @@ MonoBehaviour:
   serverBatching: 1
   serverBatchInterval: 0
   offlineScene: 
-  onlineScene: Assets/Scenes/Networked/Lobby.unity
+  onlineScene: 
   transport: {fileID: 441448197}
   networkAddress: localhost
   maxConnections: 2
@@ -209,9 +209,21 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 6839684718418311442, guid: b828225b1ca9e0b47abb339c93b786f8, type: 3}
+  - {fileID: 1102272659099837518, guid: eba69840eb33af046ac33a3b05e7b4e1, type: 3}
+  - {fileID: 8533688138613019795, guid: db621e21d7f7c3e40aae98f770d9826d, type: 3}
+  - {fileID: 73135309124414007, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+  - {fileID: 1410042906371999525, guid: a442c56f24182a04a9c751e639badc65, type: 3}
+  - {fileID: 1622714220629318450, guid: d3d7583325caa80469a84a85ac5c8202, type: 3}
+  - {fileID: 5820195611337655409, guid: a7622406ed54ffe49bfb025fa59605c2, type: 3}
+  - {fileID: 3237861838682142909, guid: 35b20cd0fbd20894a990211762e05dbf, type: 3}
+  - {fileID: 2166735362425664342, guid: a4f6e62e72c4c42439241952052f5c99, type: 3}
+  - {fileID: 2596931389606945906, guid: 852ca4f99be639b45a84125bdf5cea02, type: 3}
   minPlayers: 2
   menuScene: Assets/Scenes/Networked/Lobby.unity
+  gameScene: Assets/Scenes/Networked/SceneBramNetworked.unity
   roomPlayerPrefab: {fileID: 6839684718418311440, guid: b828225b1ca9e0b47abb339c93b786f8, type: 3}
+  gamePlayerPrefab: {fileID: 2157042507151468279, guid: eba69840eb33af046ac33a3b05e7b4e1, type: 3}
+  playerSpawnSystem: {fileID: 2596931389606945906, guid: 852ca4f99be639b45a84125bdf5cea02, type: 3}
 --- !u!1 &748930308
 GameObject:
   m_ObjectHideFlags: 0

@@ -155,7 +155,7 @@ namespace Networking.Lobby
         public void CmdStartGame()
         {
             if (Room.RoomPlayers[0].connectionToClient != connectionToClient) {return;}
-            
+            Room.StartGame();
         }
     }
 }   

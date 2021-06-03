@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Networked/SceneBramNetworked.unity
-    guid: 1861a1ee62abb5c4398bbfafeb199de0
   - enabled: 1
     path: Assets/Scenes/Networked/Lobby.unity
     guid: 05d01148ff79f324fbf05ec9f593241a
+  - enabled: 1
+    path: Assets/Scenes/Networked/SceneBramNetworked.unity
+    guid: 1861a1ee62abb5c4398bbfafeb199de0
   m_configObjects: {}
