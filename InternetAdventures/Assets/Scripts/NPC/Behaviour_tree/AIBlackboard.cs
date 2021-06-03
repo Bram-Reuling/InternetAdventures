@@ -1,15 +1,17 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Collider))]
 
 public class AIBlackboard : MonoBehaviour
 {
+    //Public
+    public bool hasMember;
+    [SerializeField] private float minTimer;
+    [SerializeField] private float maxTimer;
+    
     //Starting node
     private SelectorNode _startingNode;
     
@@ -20,6 +22,10 @@ public class AIBlackboard : MonoBehaviour
     //NavMeshAgent
     public NavMeshAgent NavAgent => _navMesh;
     [SerializeField] private NavMeshAgent _navMesh;
+    
+    //NavMeshObstacle
+    public NavMeshObstacle NavObstacle => navMeshObstacle;
+    [SerializeField] private NavMeshObstacle navMeshObstacle;
 
     //Health
     public float CurrentHealth { get; private set; }
@@ -33,10 +39,10 @@ public class AIBlackboard : MonoBehaviour
         SequenceNode healthSequence = new SequenceNode(new List<Node>() {new InverterNode(checkHealthNode)});
         
         //Grouping===================================================================================================================================
-        RandomTimerNode randomTimerNode = new RandomTimerNode(this, 1.0f, 3.0f);
+        RandomTimerAtPositionNode randomTimerAtPositionNode = new RandomTimerAtPositionNode(this, minTimer, maxTimer);
         PotentialMemberNode potentialMemberNode = new PotentialMemberNode(this);
-        PatrolNode patrolNode = new PatrolNode(this);
-        SequenceNode groupingSelector = new SequenceNode(new List<Node>(){randomTimerNode, potentialMemberNode, patrolNode});
+        TraverseToMember traverseToMember = new TraverseToMember(this);
+        SequenceNode groupingSelector = new SequenceNode(new List<Node>(){randomTimerAtPositionNode, potentialMemberNode, traverseToMember});
         
         //Starting Node==============================================================================================================================
         _startingNode = new SelectorNode(new List<Node>() {healthSequence, groupingSelector});
@@ -67,6 +73,8 @@ public class AIBlackboard : MonoBehaviour
 
     public List<GameObject> GetAllNPCs()
     {
-        return GameObject.FindGameObjectsWithTag("AI").ToList();
+        List<GameObject> allNPCS = GameObject.FindGameObjectsWithTag("AI").ToList();
+        allNPCS.Remove(gameObject);
+        return allNPCS;
     }
 }
