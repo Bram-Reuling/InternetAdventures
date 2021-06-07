@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Character
-{
     public class PlayerLogic : MonoBehaviour
     {
         private Vector3 checkPoint;
@@ -46,4 +44,3 @@ namespace Character
             ziplinee.enabled = pBool;
         }
     }
-}
