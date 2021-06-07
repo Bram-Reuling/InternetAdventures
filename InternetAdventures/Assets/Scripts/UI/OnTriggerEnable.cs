@@ -7,6 +7,7 @@ public class OnTriggerEnable : MonoBehaviour
     [SerializeField] private GameObject gameObjectToEnable;
     [SerializeField] private LayerMask collidingLayers;
     [SerializeField] private float enableTimer;
+    [SerializeField] private bool turnOffAfterTimer;
 
     private void Start()
     {
@@ -16,7 +17,10 @@ public class OnTriggerEnable : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!gameObjectToEnable.activeSelf && (collidingLayers & (1 << other.gameObject.layer)) > 0)
-            StartCoroutine(WaitAndDisable());
+        {
+            gameObjectToEnable.SetActive(true);
+            if(turnOffAfterTimer) StartCoroutine(WaitAndDisable());
+        }
     }
 
     private IEnumerator WaitAndDisable()
