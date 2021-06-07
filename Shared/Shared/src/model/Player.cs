@@ -5,6 +5,7 @@ namespace Shared.model
         public int Id { get; set; } = 0;
         public string Name { get; set; } = "Name";
         public PlayerState PlayerState { get; set; } = PlayerState.SearchingForLobby;
+        public ReadyState ReadyState { get; set; } = ReadyState.NotReady;
 
         public Player()
         {
@@ -16,6 +17,7 @@ namespace Shared.model
             pPacket.Write(Id);
             pPacket.Write(Name);
             pPacket.Write((int)PlayerState);
+            pPacket.Write((int)ReadyState);
         }
 
         public void Deserialize(Packet pPacket)
@@ -23,6 +25,7 @@ namespace Shared.model
             Id = pPacket.ReadInt();
             Name = pPacket.ReadString();
             PlayerState = (PlayerState)pPacket.ReadInt();
+            ReadyState = (ReadyState)pPacket.ReadInt();
         }
     }
 }

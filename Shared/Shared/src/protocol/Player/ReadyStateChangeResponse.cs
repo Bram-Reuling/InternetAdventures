@@ -1,6 +1,6 @@
 namespace Shared.protocol
 {
-    public class PlayerStateChangeRequest : ISerializable
+    public class ReadyStateChangeResponse : ISerializable
     {
         public void Serialize(Packet pPacket)
         {
@@ -9,6 +9,7 @@ namespace Shared.protocol
 
         public void Deserialize(Packet pPacket)
         {
+            
         }
     }
 }
