@@ -1,33 +1,36 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class PotentialMemberNode : Node
 {
-    private float _groupProximity = 2.5f;
+    private float _memberProximity;
     
-    public PotentialMemberNode(AIBlackboard pAIBlackboard)
+    public PotentialMemberNode(AIBlackboard pAIBlackboard, float pMemberProximity)
     {
         aiBlackboard = pAIBlackboard;
+        _memberProximity = pMemberProximity;
     }
     
     public override State EvaluateState()
     {
-        nodeState = State.Success;
-        aiBlackboard.hasMember = false;
-        foreach (var npc in aiBlackboard.GetAllNPCs())
+        List<GameObject> allNPCs = aiBlackboard.GetAllNPCs();
+        foreach (var currentNPC in allNPCs)
         {
-            if ((npc.GetComponent<AIBlackboard>().NavAgent.destination - aiBlackboard.transform.position).magnitude <= _groupProximity)
+            NavMeshAgent currentNavAgent = currentNPC.GetComponent<NavMeshAgent>();
+            if ((currentNavAgent.destination - aiBlackboard.transform.position).magnitude <=
+                _memberProximity)
             {
-                aiBlackboard.hasMember = true;
-                if (npc.GetComponent<AIBlackboard>().NavAgent.velocity.magnitude > 0.15f)
-                {
+                if (currentNavAgent.velocity.magnitude > 0.1f)
                     nodeState = State.Failure;
-                    break;
-                }
-                //Consider moving on
-               nodeState = Random.Range(0.0f, 1.0f) < 0.4f ? State.Success : State.Failure;
+                else if (Random.Range(0.0f, 1.0f) < 0.2f)
+                    nodeState = State.Success;
+                else nodeState = State.Failure;
+                return nodeState;
             }
         }
-        
+
+        nodeState = State.Success;
         return nodeState;
     }
 }
