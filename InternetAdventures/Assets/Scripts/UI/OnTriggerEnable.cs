@@ -13,7 +13,7 @@ public class OnTriggerEnable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if((collidingLayers & (1 << other.gameObject.layer)) > 0)
+        if(!gameObjectToEnable.activeSelf && (collidingLayers & (1 << other.gameObject.layer)) > 0)
             gameObjectToEnable.SetActive(true);
     }
 }
