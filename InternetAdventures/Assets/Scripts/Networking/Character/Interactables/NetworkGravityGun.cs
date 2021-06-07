@@ -16,7 +16,7 @@ public class NetworkGravityGun : NetworkInteractable
     
     //Private
     private float _currentAttractionDistance;
-    private readonly List<ItemInformation> _pickedUpObjects = new List<ItemInformation>();
+    private readonly List<NetworkItemInformation> _pickedUpObjects = new List<NetworkItemInformation>();
     private float _furthestDistanceToObject;
 
     // Client
@@ -33,7 +33,7 @@ public class NetworkGravityGun : NetworkInteractable
         _furthestDistanceToObject = pValue;
     }
     
-    public List<ItemInformation> GetItems()
+    public List<NetworkItemInformation> GetItems()
     {
         return _pickedUpObjects;
     }
@@ -76,12 +76,12 @@ public class NetworkGravityGun : NetworkInteractable
         _pickedUpObjects.Clear();
     }
 
-    public void ResetObjectParent(ItemInformation pickedUpObject)
+    public void ResetObjectParent(NetworkItemInformation pickedUpObject)
     {
         pickedUpObject.CurrentGameObject.transform.SetParent(pickedUpObject.Parent);
     }
     
-    public void AddItemToPickedUpList(ItemInformation item, Transform parentTransform)
+    public void AddItemToPickedUpList(NetworkItemInformation item, Transform parentTransform)
     {
         item.CurrentGameObject.transform.SetParent(parentTransform); 
         _pickedUpObjects.Add(item);
@@ -103,14 +103,14 @@ public class NetworkGravityGun : NetworkInteractable
     }
 }
 
-public readonly struct ItemInformation
+public readonly struct NetworkItemInformation
 {
     public readonly GameObject CurrentGameObject;
     public readonly Transform Parent;
     public readonly RigidbodyConstraints RigidbodyConstraints;
     public readonly float InitialDistance;
 
-    public ItemInformation(GameObject pGameObject, Transform pParent, RigidbodyConstraints pRigidbodyRigidbodyConstraints, float pInitialDistance)
+    public NetworkItemInformation(GameObject pGameObject, Transform pParent, RigidbodyConstraints pRigidbodyRigidbodyConstraints, float pInitialDistance)
     {
         CurrentGameObject = pGameObject;
         Parent = pParent;

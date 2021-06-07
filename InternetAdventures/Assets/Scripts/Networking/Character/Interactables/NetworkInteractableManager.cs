@@ -208,7 +208,7 @@ public class NetworkInteractableManager : NetworkBehaviour
                 gravityGunComponent.SetFurthestDistanceToObject(_furthestDistanceToObject);
                 RpcSetFurthestDistanceToObject(_furthestDistanceToObject);
 
-                ItemInformation item = new ItemInformation(intersectingGameObject,
+                NetworkItemInformation item = new NetworkItemInformation(intersectingGameObject,
                     intersectingGameObject.transform.parent, currentRigidbody.constraints, currentDistance);
 
                 //intersectingGameObject.transform.SetParent(transform);
@@ -230,7 +230,7 @@ public class NetworkInteractableManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void RpcAddItemToClientPickedUpList(ItemInformation item)
+    private void RpcAddItemToClientPickedUpList(NetworkItemInformation item)
     {
         gravityGunComponent.AddItemToPickedUpList(item, transform);
     }
@@ -258,7 +258,7 @@ public class NetworkInteractableManager : NetworkBehaviour
     }
 
     [Command]
-    public void CmdDeactivateGravityGun(List<ItemInformation> _pickedUpObjects)
+    public void CmdDeactivateGravityGun(List<NetworkItemInformation> _pickedUpObjects)
     {
         //Sets parent to null again and clears list.
         foreach (var pickedObject in _pickedUpObjects)
@@ -288,7 +288,7 @@ public class NetworkInteractableManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void RpcResetObjectParent(ItemInformation pickedUpObject)
+    private void RpcResetObjectParent(NetworkItemInformation pickedUpObject)
     {
         gravityGunComponent.ResetObjectParent(pickedUpObject);
     }
@@ -303,7 +303,7 @@ public class NetworkInteractableManager : NetworkBehaviour
     private void Update()
     {
         //Move objects towards player only if there's at least one.
-        List<ItemInformation> items = gravityGunComponent.GetItems();
+        List<NetworkItemInformation> items = gravityGunComponent.GetItems();
 
         if (items.Count > 0)
         {
