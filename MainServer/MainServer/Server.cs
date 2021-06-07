@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using Shared;
 using Shared.model;
+using Shared.protocol;
 
 namespace MainServer
 {
@@ -54,8 +55,15 @@ namespace MainServer
                 {
                     Player newPlayer = new Player();
                     GeneratePlayerId(ref newPlayer);
-                
-                    _connectedPlayers.Add(newPlayer, _listener.AcceptTcpClient());
+
+                    TcpClient client = _listener.AcceptTcpClient();
+                    
+                    _connectedPlayers.Add(newPlayer, client);
+
+                    PlayerDataRequest playerDataRequest = new PlayerDataRequest();
+                    playerDataRequest.Player = newPlayer;
+                    
+                    SendObject(new KeyValuePair<Player, TcpClient>(newPlayer, client), playerDataRequest);
                 }
             }
             catch (Exception e)
@@ -78,12 +86,30 @@ namespace MainServer
 
                 switch (inObject)
                 {
+                    case PlayerDataResponse response:
+                        HandlePlayerDataResponse(response);
+                        break;
+                    case PlayerStateChangeRequest request:
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandlePlayerDataResponse(PlayerDataResponse response)
+        {
+            Player player = _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Player.Id).Key;
+            player.Name = response.Player.Name;
+        }
+
+        private void HandlePlayerStateChangeRequest(PlayerStateChangeRequest request)
+        {
+            // Do some authoritative shit        
+            
+            // Send some shit to the client
+        }
+        
         private void ProcessFaultyClients()
         {
         }
