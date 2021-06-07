@@ -60,12 +60,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 10240
   enableCameraShake: 1
   cameraShakeStrength: 1
   cameraShakeDuration: 1
   playerInput: {fileID: 0}
+  characterAnimator: {fileID: 0}
   enableScaleEffectOnObjects: 1
+  animationTimer: 1
 --- !u!1 &7714343255003834447
 GameObject:
   m_ObjectHideFlags: 0

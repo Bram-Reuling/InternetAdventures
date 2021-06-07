@@ -1,38 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class RandomTimerAtPositionNode : Node
 {
-    private float _timePassed;
-    private float _currentTimer;
     private readonly float _minTime;
     private readonly float _maxTime;
-    
+    private float _timePassed;
+    private float _currentTimer;
+    private bool _pathComplete;
+
     public RandomTimerAtPositionNode(AIBlackboard pAIBlackboard, float pMinTime, float pMaxTime)
     {
         aiBlackboard = pAIBlackboard;
         _minTime = pMinTime;
         _maxTime = pMaxTime;
+        _currentTimer = Random.Range(_minTime, _maxTime);
     }
     
     public override State EvaluateState()
     {
         nodeState = State.Failure;
-        //aiBlackboard.NavAgent.enabled = false;
-        //aiBlackboard.NavObstacle.enabled = true;
+        if (!aiBlackboard.NavAgent.hasPath && aiBlackboard.NavAgent.pathStatus == NavMeshPathStatus.PathComplete)
+        {
+            _pathComplete = true;
+            aiBlackboard.NavAgent.enabled = false;
+            aiBlackboard.NavObstacle.enabled = true;
+        }
+        
+        if (_pathComplete)
+            _timePassed += Time.deltaTime;
+        
         
         if (_timePassed >= _currentTimer)
         {
             nodeState = State.Success;
             _timePassed = 0;
             _currentTimer = Random.Range(_minTime, _maxTime);
-            //aiBlackboard.NavObstacle.enabled = false;
-            //aiBlackboard.NavAgent.enabled = true;
+            aiBlackboard.NavAgent.enabled = true;
+            _pathComplete = false;
         }
 
-        //This will be incorrect if behaviour tree is not evaluated every frame.
-        if (aiBlackboard.NavAgent.pathStatus == NavMeshPathStatus.PathComplete)
-            _timePassed += Time.deltaTime;
+        if (_timePassed >= _currentTimer * 0.97f)
+            aiBlackboard.NavObstacle.enabled = false;
 
         return nodeState;
     }

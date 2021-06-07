@@ -10,6 +10,7 @@ public class Hands : Interactable
     
     //Public
     [SerializeField] private HandMode handMode;
+    [SerializeField] private float forceOnLeave;
     
     //Private
     private GameObject _grabbedObject;
@@ -61,7 +62,7 @@ public class Hands : Interactable
         if (handMode == HandMode.Pickup)
         {
             _initialParent = _grabbedObject.transform.parent;
-            _grabbedObject.transform.parent = transform;
+            _grabbedObject.transform.parent = transform.parent.parent;
             _grabbedObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
     }
@@ -89,7 +90,7 @@ public class Hands : Interactable
         {
             Rigidbody objectRigidbody = _grabbedObject.GetComponent<Rigidbody>();
             objectRigidbody.constraints = RigidbodyConstraints.None;
-            objectRigidbody.AddForce(_characterMovement.GetVelocity() * 50);
+            objectRigidbody.AddForce(_characterMovement.GetVelocity() * forceOnLeave);
         }
         _grabbedObject = null;   
     }

@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Lean.Pool;
+using Random = UnityEngine.Random;
 
 public class MovingPlatformsHandler : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class MovingPlatformsHandler : MonoBehaviour
     [SerializeField] private bool loopMovement;
     [SerializeField] private float minSpawnTime;
     [SerializeField] private float maxSpawnTime;
+    [SerializeField] private bool drawDebug;
     
     private float _timePassed;
     private int _maxPlatformAmount;
@@ -51,5 +54,15 @@ public class MovingPlatformsHandler : MonoBehaviour
         if(useRandomSpawnIntervals) 
             spawnRate = Random.Range(minSpawnTime, maxSpawnTime);
         _currentPlatformAmount++;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if(!drawDebug) return;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Gizmos.DrawLine(transform.GetChild(i).transform.position, transform.GetChild(i + 1 == transform.childCount ? 0 : i + 1).transform.position);
+        }
+        
     }
 }

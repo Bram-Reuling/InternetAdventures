@@ -65,7 +65,9 @@ MonoBehaviour:
   cameraShakeStrength: 0.1
   cameraShakeDuration: 1
   playerInput: {fileID: 0}
+  characterAnimator: {fileID: 0}
   handMode: 1
+  forceOnLeave: 10000
 --- !u!1 &6024748194640639824
 GameObject:
   m_ObjectHideFlags: 0

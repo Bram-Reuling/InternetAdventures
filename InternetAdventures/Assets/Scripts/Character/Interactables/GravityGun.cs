@@ -67,7 +67,7 @@ public class GravityGun : Interactable
                 if (currentDistance > _furthestDistanceToObject) _furthestDistanceToObject = currentDistance;
                 _pickedUpObjects.Add(new ItemInformation(intersectingGameObject, intersectingGameObject.transform.parent, 
                     currentRigidbody.constraints, currentDistance));
-                intersectingGameObject.transform.SetParent(transform);
+                intersectingGameObject.transform.SetParent(transform.parent.parent);
                 currentRigidbody.useGravity = false;
                 currentRigidbody.constraints = RigidbodyConstraints.FreezeAll;
                 CharacterMovement.weaponInUse = true;

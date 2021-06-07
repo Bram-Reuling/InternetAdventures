@@ -145,7 +145,7 @@ MonoBehaviour:
   _post2: {fileID: 7543503767127363423}
   throwoffDistance: 1
   yOffset: {x: 0, y: 1, z: 0}
-  drawDebugInfo: 1
+  drawDebug: 1
 --- !u!1 &7543503768969856933
 GameObject:
   m_ObjectHideFlags: 0
