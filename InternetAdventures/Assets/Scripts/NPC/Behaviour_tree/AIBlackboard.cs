@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class AIBlackboard : MonoBehaviour
 {
     //Public
-    public bool hasMember;
+    public GameObject MemberPair;
     [SerializeField] private float minTimer;
     [SerializeField] private float maxTimer;
     
@@ -40,7 +40,7 @@ public class AIBlackboard : MonoBehaviour
         
         //Grouping===================================================================================================================================
         RandomTimerAtPositionNode randomTimerAtPositionNode = new RandomTimerAtPositionNode(this, minTimer, maxTimer);
-        PotentialMemberNode potentialMemberNode = new PotentialMemberNode(this);
+        PotentialMemberNode potentialMemberNode = new PotentialMemberNode(this, 3.0f);
         TraverseToMember traverseToMember = new TraverseToMember(this);
         SequenceNode groupingSelector = new SequenceNode(new List<Node>(){randomTimerAtPositionNode, potentialMemberNode, traverseToMember});
         
