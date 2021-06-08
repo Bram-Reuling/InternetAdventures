@@ -2,14 +2,16 @@ namespace Shared.protocol.Match
 {
     public class MatchEndRequest : ISerializable
     {
+        public string RoomCode { get; set; } = "00000";
+
         public void Serialize(Packet pPacket)
         {
-            throw new System.NotImplementedException();
+            pPacket.Write(RoomCode);
         }
 
         public void Deserialize(Packet pPacket)
         {
-            throw new System.NotImplementedException();
+            RoomCode = pPacket.ReadString();
         }
     }
 }
