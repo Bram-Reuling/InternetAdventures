@@ -2,14 +2,19 @@ namespace Shared.protocol.Lobby
 {
     public class LobbyCreateRequest : ISerializable
     {
+        public int RequestingPlayerId { get; set; } = 0;
+        public string LobbyDescription { get; set; } = "";
+        
         public void Serialize(Packet pPacket)
         {
-            throw new System.NotImplementedException();
+            pPacket.Write(RequestingPlayerId);
+            pPacket.Write(LobbyDescription);
         }
 
         public void Deserialize(Packet pPacket)
         {
-            throw new System.NotImplementedException();
+            RequestingPlayerId = pPacket.ReadInt();
+            LobbyDescription = pPacket.ReadString();
         }
     }
 }
