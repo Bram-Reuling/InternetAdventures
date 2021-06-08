@@ -55,9 +55,11 @@ namespace MainServer
             {
                 while (_listener.Pending())
                 {
+                    Log.LogInfo("New client pending!", this, ConsoleColor.Green);
                     Client newClient = new Client();
                     GeneratePlayerId(ref newClient);
 
+                    Log.LogInfo("Accepted new client.", this, ConsoleColor.Green);
                     TcpClient tcpClient = _listener.AcceptTcpClient();
                     
                     _connectedPlayers.Add(newClient, tcpClient);
