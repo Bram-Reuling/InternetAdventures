@@ -3032,7 +3032,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1880415691}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2047644820}
+        m_TargetAssemblyTypeName: MainServerClient, Assembly-CSharp
+        m_MethodName: JoinLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1880415691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3250,6 +3262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nameInput: {fileID: 988599968}
   _descriptionInput: {fileID: 747754232}
+  _roomCodeInput: {fileID: 481119683}
   _server: localhost
   _port: 55555
   _menuScene: Assets/Scenes/Networked/MainMenu.unity

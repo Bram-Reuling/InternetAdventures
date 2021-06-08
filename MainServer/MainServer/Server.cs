@@ -103,12 +103,45 @@ namespace MainServer
                     case LobbyDataRequest request:
                         HandleLobbyDataRequest(request);
                         break;
+                    case LobbyJoinRequest request:
+                        HandleLobbyJoinRequest(request);
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandleLobbyJoinRequest(LobbyJoinRequest request)
+        {
+            // Check if room with room code exists
+            Room room = _rooms.Find(r => r.RoomCode == request.RoomCode);
+
+            KeyValuePair<Client, TcpClient> clientPair =
+                _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.RequestingPlayerId);
+            
+            if (room == null)
+            {
+                Log.LogInfo($"Lobby not found with code: {request.RoomCode}!", this, ConsoleColor.Red);
+                LobbyJoinResponse lobbyJoinResponse = new LobbyJoinResponse
+                    {ResponseCode = ResponseCode.Error, ResponseMessage = "No room found with room code!"};
+                
+                SendObject(clientPair, lobbyJoinResponse);
+            }
+            else
+            {
+                Log.LogInfo("Lobby found!", this, ConsoleColor.DarkGreen);
+                LobbyJoinResponse lobbyJoinResponse = new LobbyJoinResponse
+                    {ResponseCode = ResponseCode.Ok, RoomCode = request.RoomCode};
+                
+                SendObject(clientPair, lobbyJoinResponse);
+                
+                // Tell the client to switch to the lobby panel
+                PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanel"};
+                SendObject(clientPair, panelChange);
+            }
+        }
+        
         private void HandleLobbyDataRequest(LobbyDataRequest request)
         {
             Room room = _rooms.Find(p => p.RoomCode == request.RoomCode);

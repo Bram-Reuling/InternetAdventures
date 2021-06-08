@@ -16,6 +16,7 @@ public class MainServerClient : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _nameInput;
     [SerializeField] private TMP_InputField _descriptionInput;
+    [SerializeField] private TMP_InputField _roomCodeInput;
     [SerializeField] private string _server = "localhost";
     [SerializeField] private int _port = 55555;
 
@@ -94,6 +95,9 @@ public class MainServerClient : MonoBehaviour
                     case LobbyDataResponse response:
                         HandleLobbyDataResponse(response);
                         break;
+                    case LobbyJoinResponse response:
+                        HandleLobbyJoinResponse(response);
+                        break;
                     default:
                         break;
                 }
@@ -107,6 +111,21 @@ public class MainServerClient : MonoBehaviour
         }
     }
 
+    private void HandleLobbyJoinResponse(LobbyJoinResponse response)
+    {
+        _joinedRoomCode = response.RoomCode;
+
+        if (response.ResponseCode == ResponseCode.Error)
+        {
+            Debug.LogWarning(response.ResponseMessage);
+        }
+        
+        PlayerStateChangeRequest playerStateChangeRequest = new PlayerStateChangeRequest
+            {PlayerId = _clientId, RequestedPlayerState = PlayerState.InLobby};
+        
+        SendObject(playerStateChangeRequest);
+    }
+    
     private void HandleLobbyDataResponse(LobbyDataResponse response)
     {
         // Update the lobby panel with the correct information
@@ -177,5 +196,15 @@ public class MainServerClient : MonoBehaviour
         };
         
         SendObject(lobbyCreateRequest);
+    }
+
+    public void JoinLobby()
+    {
+        if (string.IsNullOrEmpty(_roomCodeInput.text)) return;
+
+        LobbyJoinRequest lobbyJoinRequest = new LobbyJoinRequest
+            {RequestingPlayerId = _clientId, RoomCode = _roomCodeInput.text};
+        
+        SendObject(lobbyJoinRequest);
     }
 }
