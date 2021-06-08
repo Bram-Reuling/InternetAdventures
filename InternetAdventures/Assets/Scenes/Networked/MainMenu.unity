@@ -583,3 +583,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _server: localhost
   _port: 55555
+  _menuScene: Assets/Scenes/Networked/MainMenu.unity
+  _clientName: Bram

@@ -103,11 +103,19 @@ namespace MainServer
 
         private void HandleClientDataResponse(ClientDataResponse response)
         {
-            Client client = _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Client.Id).Key;
+            KeyValuePair<Client, TcpClient> clientPair =
+                _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Client.Id);
+            Client client = clientPair.Key;
             Log.LogInfo($"Client Name: {response.Client.Name}", this, ConsoleColor.Blue);
             client.Name = response.Client.Name;
             Log.LogInfo($"Client Type: {response.Client.ClientType}", this, ConsoleColor.Blue);
             client.ClientType = response.Client.ClientType;
+            
+            // Since this method is only called when a client is connected
+            // Send a PanelChange packet
+
+            PanelChange panelChange = new PanelChange { PanelToChangeTo = "MainPanel" };
+            SendObject(clientPair, panelChange);
         }
 
         private void HandleClientStateChangeRequest(PlayerStateChangeRequest request)

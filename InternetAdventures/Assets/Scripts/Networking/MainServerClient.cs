@@ -2,15 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using Mirror;
 using Shared;
 using Shared.model;
 using Shared.protocol;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainServerClient : MonoBehaviour
 {
     [SerializeField] private string _server = "localhost";
     [SerializeField] private int _port = 55555;
+
+    [Scene, SerializeField] private string _menuScene;
 
     private TcpClient _client;
 
@@ -52,11 +56,15 @@ public class MainServerClient : MonoBehaviour
                 Packet inPacket = new Packet(inBytes);
                 ISerializable inObject = inPacket.ReadObject();
 
+                Debug.Log("Received: " + inObject);
+                
                 switch (inObject)
                 {
                     case ClientDataRequest request:
-                        Debug.Log("Received: " + inObject);
                         HandleClientDataRequest(request);
+                        break;
+                    case PanelChange panelChange:
+                        HandlePanelChange(panelChange);
                         break;
                     default:
                         break;
@@ -69,6 +77,16 @@ public class MainServerClient : MonoBehaviour
             _client.Close();
             ConnectToServer();
         }
+    }
+
+    private void HandlePanelChange(PanelChange panelChange)
+    {
+        // Change to a specific panel if the scene is MainMenu
+        if (SceneManager.GetActiveScene().path != _menuScene) return;
+        
+        Debug.Log("Menu Scene is active");
+
+        EventBroker.CallChangePanelEvent(panelChange.PanelToChangeTo);
     }
 
     private void HandleClientDataRequest(ClientDataRequest request)
