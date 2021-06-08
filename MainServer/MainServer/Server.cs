@@ -95,9 +95,13 @@ namespace MainServer
                         HandleClientDataResponse(response);
                         break;
                     case PlayerStateChangeRequest request:
+                        HandlePlayerStateChangeRequest(request);
                         break;
                     case LobbyCreateRequest request:
                         HandleLobbyCreateRequest(request);
+                        break;
+                    case LobbyDataRequest request:
+                        HandleLobbyDataRequest(request);
                         break;
                     default:
                         break;
@@ -105,14 +109,47 @@ namespace MainServer
             }
         }
 
+        private void HandleLobbyDataRequest(LobbyDataRequest request)
+        {
+            Room room = _rooms.Find(p => p.RoomCode == request.RoomCode);
+
+            if (room == null) return;
+            
+            LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
+                {Lobby = room, ResponseCode = ResponseCode.Ok};
+                
+            KeyValuePair<Client, TcpClient> clientPair =
+                _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.RequestingPlayerId);
+                
+            SendObject(clientPair, lobbyDataResponse);
+        }
+        
         private void HandleLobbyCreateRequest(LobbyCreateRequest request)
         {
             // Generate room code
             string roomCode = GenerateRoomCode();
+            Log.LogInfo($"Generated RoomCode: {roomCode}", this, ConsoleColor.Magenta);
             // Create room
+            Room room = new Room { Id = _rooms.Count + 1, RoomCode = roomCode };
+            Log.LogInfo("Created a new room!", this, ConsoleColor.Green);
             // Add user to room
+            KeyValuePair<Client, TcpClient> clientPair =
+                _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.RequestingPlayerId);
+            room.Players.Add(clientPair.Key);
+            Log.LogInfo("Added the requesting player to the players list", this, ConsoleColor.Green);
             // Add room to the room list
+            _rooms.Add(room);
+            Log.LogInfo("Added the room to the rooms list with ID: " + room.Id, this, ConsoleColor.Green);
             // Send LobbyCreateResponse
+            LobbyCreateResponse lobbyCreateResponse = new LobbyCreateResponse
+                {ResponseCode = ResponseCode.Ok, RoomCode = roomCode};
+            
+            SendObject(clientPair, lobbyCreateResponse);
+            
+            // Tell the client to switch to the lobby panel
+            PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanel"};
+            SendObject(clientPair, panelChange);
+
         }
 
         private string GenerateRoomCode()
@@ -149,11 +186,16 @@ namespace MainServer
             SendObject(clientPair, panelChange);
         }
 
-        private void HandleClientStateChangeRequest(PlayerStateChangeRequest request)
+        private void HandlePlayerStateChangeRequest(PlayerStateChangeRequest request)
         {
-            // Do some authoritative shit        
+            // Secure this
+            KeyValuePair<Client, TcpClient> clientPair =
+                _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.PlayerId);
             
-            // Send some shit to the client
+            PlayerStateChangeResponse playerStateChangeResponse = new PlayerStateChangeResponse
+                {NewPlayerState = request.RequestedPlayerState, PlayerId = request.PlayerId};
+            
+            SendObject(clientPair, playerStateChangeResponse);
         }
         
         private void ProcessFaultyClients()
@@ -207,6 +249,7 @@ namespace MainServer
         {
             try
             {
+                Log.LogInfo($"Sending {outObject} to player with ID: {player.Key.Id}", this, ConsoleColor.Cyan);
                 Packet outPacket = new Packet();
                 outPacket.Write(outObject);
                 

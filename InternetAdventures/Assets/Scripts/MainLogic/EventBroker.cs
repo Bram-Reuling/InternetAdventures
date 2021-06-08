@@ -1,4 +1,5 @@
 using System;
+using Shared.protocol.Lobby;
 using UnityEngine;
 
 public static class EventBroker
@@ -12,6 +13,8 @@ public static class EventBroker
 
     public delegate void PanelDelegate(string pPanel);
 
+    public delegate void LobbyDataDelegate(LobbyDataResponse pLobby);
+
     // Events
     public static event ExampleDelegate ExampleEvent;
 
@@ -20,6 +23,10 @@ public static class EventBroker
     public static event CharacterDelegate RespawnCharacterEvent;
 
     public static event PanelDelegate ChangePanelEvent;
+
+    public static event Action LoadedLobbyPanelEvent;
+
+    public static event LobbyDataDelegate UpdateLobbyDataEvent;
 
     // Functions
     public static void CallExampleEvent(int pValue)
@@ -40,5 +47,15 @@ public static class EventBroker
     public static void CallChangePanelEvent(string pPanel)
     {
         ChangePanelEvent?.Invoke(pPanel);
+    }
+
+    public static void CallLoadedLobbyPanelEvent()
+    {
+        LoadedLobbyPanelEvent?.Invoke();
+    }
+
+    public static void CallUpdateLobbyDataEvent(LobbyDataResponse response)
+    {
+        UpdateLobbyDataEvent?.Invoke(response);
     }
 }

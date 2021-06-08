@@ -27,6 +27,8 @@ public class MainServerClient : MonoBehaviour
     [SerializeField] private string _clientName = "Bram";
     private int _clientId = 0;
 
+    private string _joinedRoomCode = "";
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -35,6 +37,13 @@ public class MainServerClient : MonoBehaviour
     private void Start()
     {
         //ConnectToServer();
+        EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanel;
+    }
+
+    private void LoadedLobbyPanel()
+    {
+        LobbyDataRequest lobbyDataRequest = new LobbyDataRequest {RequestingPlayerId = _clientId, RoomCode = _joinedRoomCode};
+        SendObject(lobbyDataRequest);
     }
 
     public void ConnectToServer()
@@ -79,6 +88,12 @@ public class MainServerClient : MonoBehaviour
                     case PanelChange panelChange:
                         HandlePanelChange(panelChange);
                         break;
+                    case LobbyCreateResponse response:
+                        HandleLobbyCreateResponse(response);
+                        break;
+                    case LobbyDataResponse response:
+                        HandleLobbyDataResponse(response);
+                        break;
                     default:
                         break;
                 }
@@ -92,6 +107,23 @@ public class MainServerClient : MonoBehaviour
         }
     }
 
+    private void HandleLobbyDataResponse(LobbyDataResponse response)
+    {
+        // Update the lobby panel with the correct information
+        EventBroker.CallUpdateLobbyDataEvent(response);
+    }
+    
+    private void HandleLobbyCreateResponse(LobbyCreateResponse response)
+    {
+        // TODO: better error handling
+        _joinedRoomCode = response.RoomCode;
+
+        PlayerStateChangeRequest playerStateChangeRequest = new PlayerStateChangeRequest
+            {PlayerId = _clientId, RequestedPlayerState = PlayerState.InLobby};
+        
+        SendObject(playerStateChangeRequest);
+    }
+    
     private void HandlePanelChange(PanelChange panelChange)
     {
         // Change to a specific panel if the scene is MainMenu

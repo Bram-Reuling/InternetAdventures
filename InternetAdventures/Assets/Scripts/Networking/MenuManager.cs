@@ -8,6 +8,7 @@ namespace Networking
         [SerializeField] private GameObject _loginPanel;
         [SerializeField] private GameObject _mainPanel;
         [SerializeField] private GameObject _joinHostPanel;
+        [SerializeField] private GameObject _lobbyPanel;
 
         private void Start()
         {
@@ -22,6 +23,10 @@ namespace Networking
                     Debug.Log("Enabling Main Panel!");
                     EnableMainPanel();
                     break;
+                case "LobbyPanel":
+                    Debug.Log("Enabling Lobby Panel");
+                    EnableLobbyPanel();
+                    break;
                 default:
                     break;
             }
@@ -31,6 +36,14 @@ namespace Networking
         {
             _loginPanel.SetActive(false);
             _mainPanel.SetActive(true);
+        }
+
+        private void EnableLobbyPanel()
+        {
+            _joinHostPanel.SetActive(false);
+            _lobbyPanel.SetActive(true);
+            
+            EventBroker.CallLoadedLobbyPanelEvent();
         }
     }
 }
