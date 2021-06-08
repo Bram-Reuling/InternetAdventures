@@ -6,9 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Reference Include="Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\Shared\Shared\bin\Release\net5.0\ref\Shared.dll</HintPath>
-      </Reference>
+      <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
 </Project>

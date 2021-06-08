@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Shared;
+using Shared.log;
 using Shared.model;
 using Shared.protocol;
 
@@ -26,7 +27,8 @@ namespace MainServer
         {
             try
             {
-                Console.WriteLine("Server started on port 55555");
+                Log.LogInfo("Server starting on port 55555", this, ConsoleColor.White);
+                //Console.WriteLine("Server started on port 55555");
 
                 _listener = new TcpListener(IPAddress.Any, 55555);
                 _listener.Start();
