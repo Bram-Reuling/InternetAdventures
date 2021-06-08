@@ -7,6 +7,7 @@ namespace Networking
     {
         [SerializeField] private GameObject _loginPanel;
         [SerializeField] private GameObject _mainPanel;
+        [SerializeField] private GameObject _joinHostPanel;
 
         private void Start()
         {

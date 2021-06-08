@@ -2,23 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Mirror;
 using Shared;
 using Shared.model;
 using Shared.protocol;
+using Shared.protocol.Lobby;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainServerClient : MonoBehaviour
 {
+    [SerializeField] private TMP_InputField _nameInput;
+    [SerializeField] private TMP_InputField _descriptionInput;
     [SerializeField] private string _server = "localhost";
     [SerializeField] private int _port = 55555;
 
     [Scene, SerializeField] private string _menuScene;
 
     private TcpClient _client;
+    private bool _connectedToServer = false;
 
     [SerializeField] private string _clientName = "Bram";
+    private int _clientId = 0;
 
     private void Awake()
     {
@@ -27,15 +34,19 @@ public class MainServerClient : MonoBehaviour
 
     private void Start()
     {
-        ConnectToServer();
+        //ConnectToServer();
     }
 
-    private void ConnectToServer()
+    public void ConnectToServer()
     {
+        if (string.IsNullOrEmpty(_nameInput.text)) return;
         try
         {
+            _clientName = _nameInput.text;
+            
             _client = new TcpClient();
             _client.Connect(_server, _port);
+            _connectedToServer = true;
             Debug.Log("Connected to server.");
         }
         catch (Exception e)
@@ -47,6 +58,8 @@ public class MainServerClient : MonoBehaviour
 
     private void Update()
     {
+        if (!_connectedToServer) return;
+        
         try
         {
             if (_client.Available > 0)
@@ -94,6 +107,8 @@ public class MainServerClient : MonoBehaviour
         Client mainServerClient = request.Client;
         mainServerClient.Name = _clientName;
         mainServerClient.ClientType = ClientType.Client;
+
+        _clientId = mainServerClient.Id;
         
         // Send
 
@@ -118,5 +133,17 @@ public class MainServerClient : MonoBehaviour
             _client.Close();
             ConnectToServer();
         }
+    }
+
+    public void CreateLobby()
+    {
+        if (string.IsNullOrEmpty(_descriptionInput.text)) return;
+
+        LobbyCreateRequest lobbyCreateRequest = new LobbyCreateRequest
+        {
+            LobbyDescription = _descriptionInput.text, RequestingPlayerId = _clientId
+        };
+        
+        SendObject(lobbyCreateRequest);
     }
 }

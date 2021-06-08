@@ -8,6 +8,7 @@ using Shared;
 using Shared.log;
 using Shared.model;
 using Shared.protocol;
+using Shared.protocol.Lobby;
 
 namespace MainServer
 {
@@ -95,12 +96,41 @@ namespace MainServer
                         break;
                     case PlayerStateChangeRequest request:
                         break;
+                    case LobbyCreateRequest request:
+                        HandleLobbyCreateRequest(request);
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandleLobbyCreateRequest(LobbyCreateRequest request)
+        {
+            // Generate room code
+            string roomCode = GenerateRoomCode();
+            // Create room
+            // Add user to room
+            // Add room to the room list
+            // Send LobbyCreateResponse
+        }
+
+        private string GenerateRoomCode()
+        {
+            Random rnd = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string code = "";
+            bool result = true;
+
+            while (result)
+            {
+                code = new string(Enumerable.Repeat(chars, 5).Select(s => s[rnd.Next(s.Length)]).ToArray());
+                result = _rooms.Any(c => c.RoomCode == code);
+            }
+
+            return code;
+        }
+        
         private void HandleClientDataResponse(ClientDataResponse response)
         {
             KeyValuePair<Client, TcpClient> clientPair =
