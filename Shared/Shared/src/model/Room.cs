@@ -7,7 +7,8 @@ namespace Shared.model
         public int Id { get; set; } = 0;
         public string RoomCode { get; set; } = "00000";
         public RoomState RoomState { get; set; } = RoomState.Lobby;
-        public List<Player> Players { get; set; } = new List<Player>();
+        public List<Client> Players { get; set; } = new List<Client>();
+        public Client Server { get; set; } = new Client();
 
         public Room()
         {
@@ -22,10 +23,12 @@ namespace Shared.model
 
             pPacket.Write(Players.Count);
 
-            foreach (Player player in Players)
+            foreach (Client player in Players)
             {
                 pPacket.Write(player);
             }
+            
+            pPacket.Write(Server);
         }
 
         public void Deserialize(Packet pPacket)
@@ -38,8 +41,10 @@ namespace Shared.model
 
             for (int i = 0; i < playerCount; i++)
             {
-                Players.Add(pPacket.Read<Player>());
+                Players.Add(pPacket.Read<Client>());
             }
+
+            Server = pPacket.Read<Client>();
         }
     }
 }

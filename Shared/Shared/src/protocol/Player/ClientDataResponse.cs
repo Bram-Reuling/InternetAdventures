@@ -2,18 +2,18 @@ using Shared.model;
 
 namespace Shared.protocol
 {
-    public class PlayerDataRequest : ISerializable
+    public class ClientDataResponse : ISerializable
     {
-        public Player Player { get; set; } = new Player();
+        public Client Client { get; set; } = new Client();
         
         public void Serialize(Packet pPacket)
         {
-            pPacket.Write(Player);
+            pPacket.Write(Client);
         }
 
         public void Deserialize(Packet pPacket)
         {
-            Player = pPacket.Read<Player>();
+            Client = pPacket.Read<Client>();
         }
     }
 }

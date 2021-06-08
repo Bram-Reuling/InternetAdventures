@@ -1,13 +1,14 @@
 namespace Shared.model
 {
-    public class Player : ISerializable
+    public class Client : ISerializable
     {
         public int Id { get; set; } = 0;
         public string Name { get; set; } = "Name";
         public PlayerState PlayerState { get; set; } = PlayerState.SearchingForLobby;
         public ReadyState ReadyState { get; set; } = ReadyState.NotReady;
+        public ClientType ClientType { get; set; } = ClientType.Client;
 
-        public Player()
+        public Client()
         {
             
         }
@@ -18,6 +19,7 @@ namespace Shared.model
             pPacket.Write(Name);
             pPacket.Write((int)PlayerState);
             pPacket.Write((int)ReadyState);
+            pPacket.Write((int)ClientType);
         }
 
         public void Deserialize(Packet pPacket)
@@ -26,6 +28,7 @@ namespace Shared.model
             Name = pPacket.ReadString();
             PlayerState = (PlayerState)pPacket.ReadInt();
             ReadyState = (ReadyState)pPacket.ReadInt();
+            ClientType = (ClientType)pPacket.ReadInt();
         }
     }
 }
