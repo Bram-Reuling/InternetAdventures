@@ -87,7 +87,7 @@ namespace MainServer
                 switch (inObject)
                 {
                     case ClientDataResponse response:
-                        HandlePlayerDataResponse(response);
+                        HandleClientDataResponse(response);
                         break;
                     case PlayerStateChangeRequest request:
                         break;
@@ -97,13 +97,13 @@ namespace MainServer
             }
         }
 
-        private void HandlePlayerDataResponse(ClientDataResponse response)
+        private void HandleClientDataResponse(ClientDataResponse response)
         {
             Client player = _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Client.Id).Key;
             player.Name = response.Client.Name;
         }
 
-        private void HandlePlayerStateChangeRequest(PlayerStateChangeRequest request)
+        private void HandleClientStateChangeRequest(PlayerStateChangeRequest request)
         {
             // Do some authoritative shit        
             
