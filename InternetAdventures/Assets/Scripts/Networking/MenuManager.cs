@@ -19,10 +19,17 @@ namespace Networking
             {
                 case "MainPanel":
                     Debug.Log("Enabling Main Panel!");
+                    EnableMainPanel();
                     break;
                 default:
                     break;
             }
+        }
+
+        private void EnableMainPanel()
+        {
+            _loginPanel.SetActive(false);
+            _mainPanel.SetActive(true);
         }
     }
 }

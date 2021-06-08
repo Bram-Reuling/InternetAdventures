@@ -113,8 +113,9 @@ namespace MainServer
             
             // Since this method is only called when a client is connected
             // Send a PanelChange packet
-
+            
             PanelChange panelChange = new PanelChange { PanelToChangeTo = "MainPanel" };
+            Log.LogInfo($"Sending: {panelChange}", this, ConsoleColor.DarkBlue);
             SendObject(clientPair, panelChange);
         }
 
