@@ -134,8 +134,18 @@ namespace MainServer
                 LobbyJoinResponse lobbyJoinResponse = new LobbyJoinResponse
                     {ResponseCode = ResponseCode.Ok, RoomCode = request.RoomCode};
                 
+                _rooms.Find(r => r.RoomCode == request.RoomCode)?.Players.Add(clientPair.Key);
+
                 SendObject(clientPair, lobbyJoinResponse);
+
+                LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
+                    {Lobby = _rooms.Find(r => r.RoomCode == request.RoomCode), ResponseCode = ResponseCode.Ok};
+
+                KeyValuePair<Client, TcpClient> otherClientPair =
+                    _connectedPlayers.FirstOrDefault(c => c.Key.Id == room.Players[0].Id);
                 
+                SendObject(otherClientPair, lobbyDataResponse);
+
                 // Tell the client to switch to the lobby panel
                 PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanel"};
                 SendObject(clientPair, panelChange);
