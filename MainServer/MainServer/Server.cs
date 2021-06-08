@@ -86,7 +86,7 @@ namespace MainServer
                 Packet inPacket = new Packet(inBytes);
                 ISerializable inObject = inPacket.ReadObject();
 
-                Console.WriteLine("Received: " + inObject);
+                Log.LogInfo($"Received: {inObject}", this, ConsoleColor.Blue);
 
                 switch (inObject)
                 {
@@ -103,8 +103,11 @@ namespace MainServer
 
         private void HandleClientDataResponse(ClientDataResponse response)
         {
-            Client player = _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Client.Id).Key;
-            player.Name = response.Client.Name;
+            Client client = _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Client.Id).Key;
+            Log.LogInfo($"Client Name: {response.Client.Name}", this, ConsoleColor.Blue);
+            client.Name = response.Client.Name;
+            Log.LogInfo($"Client Type: {response.Client.ClientType}", this, ConsoleColor.Blue);
+            client.ClientType = response.Client.ClientType;
         }
 
         private void HandleClientStateChangeRequest(PlayerStateChangeRequest request)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using Shared;
+using Shared.model;
 using Shared.protocol;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class MainServerClient : MonoBehaviour
     [SerializeField] private int _port = 55555;
 
     private TcpClient _client;
+
+    [SerializeField] private string _clientName = "Bram";
 
     private void Awake()
     {
@@ -53,6 +56,7 @@ public class MainServerClient : MonoBehaviour
                 {
                     case ClientDataRequest request:
                         Debug.Log("Received: " + inObject);
+                        HandleClientDataRequest(request);
                         break;
                     default:
                         break;
@@ -62,6 +66,37 @@ public class MainServerClient : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log(e.Message);
+            _client.Close();
+            ConnectToServer();
+        }
+    }
+
+    private void HandleClientDataRequest(ClientDataRequest request)
+    {
+        Client mainServerClient = request.Client;
+        mainServerClient.Name = _clientName;
+        mainServerClient.ClientType = ClientType.Client;
+        
+        // Send
+
+        ClientDataResponse response = new ClientDataResponse {Client = mainServerClient};
+        SendObject(response);
+    }
+
+    private void SendObject(ISerializable pObject)
+    {
+        try
+        {
+            Debug.Log("Sending: " + pObject);
+            Packet outPacket = new Packet();
+            outPacket.Write(pObject);
+            StreamUtil.Write(_client.GetStream(), outPacket.GetBytes());
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Cannot send message!");
+            Debug.Log(e.Message);
+            
             _client.Close();
             ConnectToServer();
         }
