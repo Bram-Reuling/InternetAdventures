@@ -11,6 +11,7 @@ public class AIBlackboard : MonoBehaviour
     public GameObject MemberPair;
     [SerializeField] private float minTimer;
     [SerializeField] private float maxTimer;
+    [SerializeField] private float memberProximity;
     
     //Starting node
     private SelectorNode _startingNode;
@@ -36,13 +37,13 @@ public class AIBlackboard : MonoBehaviour
     {
         //Health=====================================================================================================================================
         CheckHealthNode checkHealthNode = new CheckHealthNode(this, criticalHealthThreshold);
-        SequenceNode healthSequence = new SequenceNode(new List<Node>() {new InverterNode(checkHealthNode)});
+        SequenceNode healthSequence = new SequenceNode(new List<Node>{new InverterNode(checkHealthNode)});
         
         //Grouping===================================================================================================================================
         RandomTimerAtPositionNode randomTimerAtPositionNode = new RandomTimerAtPositionNode(this, minTimer, maxTimer);
-        PotentialMemberNode potentialMemberNode = new PotentialMemberNode(this, 3.0f);
-        TraverseToMember traverseToMember = new TraverseToMember(this);
-        SequenceNode groupingSelector = new SequenceNode(new List<Node>(){randomTimerAtPositionNode, potentialMemberNode, traverseToMember});
+        PotentialMemberNode potentialMemberNode = new PotentialMemberNode(this, memberProximity);
+        TraverseToMember traverseToMember = new TraverseToMember(this, memberProximity);
+        SequenceNode groupingSelector = new SequenceNode(new List<Node>{randomTimerAtPositionNode, potentialMemberNode, traverseToMember});
         
         //Starting Node==============================================================================================================================
         _startingNode = new SelectorNode(new List<Node>() {healthSequence, groupingSelector});

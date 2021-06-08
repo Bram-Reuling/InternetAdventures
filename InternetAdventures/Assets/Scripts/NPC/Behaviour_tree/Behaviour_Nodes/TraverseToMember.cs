@@ -6,11 +6,13 @@ using UnityEngine.AI;
 public class TraverseToMember : Node
 {
     //Positional
-    private float _minimalOffset = 4.0f;
+    private float _minimalOffset = 2.0f;
+    private float _memberProximity;
 
-    public TraverseToMember(AIBlackboard pAIBlackboard)
+    public TraverseToMember(AIBlackboard pAIBlackboard, float pMemberProximity)
     {
         aiBlackboard = pAIBlackboard;
+        _memberProximity = pMemberProximity;
     }
     
     public override State EvaluateState()
@@ -24,9 +26,10 @@ public class TraverseToMember : Node
         bool goRandom = Random.Range(0.0f, 1.0f) < 0.5f;
         Vector3 memberPosition = Vector3.zero; 
         List<GameObject> potentialMembers = new List<GameObject>();
+        List<GameObject> allCurrentNPC = aiBlackboard.GetAllNPCs();
         if (!goRandom)
         {
-            foreach (var npc in aiBlackboard.GetAllNPCs())
+            foreach (var npc in allCurrentNPC)
             {
                 AIBlackboard memberBlackboard = npc.GetComponent<AIBlackboard>();
                 if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
@@ -55,15 +58,24 @@ public class TraverseToMember : Node
         NavMeshPath navMeshPath = new NavMeshPath();
         Vector3 newPosition = Vector3.zero;
         int i = 0;
+        bool randomPointInMemberProximity;
         do
         {
-            Debug.Log("Go to member " + !goRandom);
-            Vector2 randomXZDirection = Random.insideUnitCircle * (goRandom ? Random.Range(_minimalOffset, 12.5f) : Random.Range(2.5f, 2.75f));
-            newPosition = new Vector3(randomXZDirection.x, aiBlackboard.transform.position.y, randomXZDirection.y);
-            aiBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath);
+            randomPointInMemberProximity = false;
+            Vector2 randomXZDirection = Random.insideUnitCircle.normalized * (goRandom ? Random.Range(_minimalOffset, 20 - i) : Random.Range(2.5f, 2.75f));
+            newPosition = new Vector3(randomXZDirection.x , aiBlackboard.transform.position.y, randomXZDirection.y);
+            // if (goRandom)
+            // {
+            //     foreach (var npc in allCurrentNPC)
+            //     {
+            //         if (((memberPosition + newPosition) - npc.GetComponent<AIBlackboard>().NavAgent.destination).magnitude < _memberProximity)
+            //             randomPointInMemberProximity = true;
+            //     }
+            // }
             i++;
-        } while (navMeshPath.status == NavMeshPathStatus.PathPartial && i < 10);
+        } while ((!aiBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) || randomPointInMemberProximity) && i < 20);
 
-        aiBlackboard.NavAgent.SetDestination(memberPosition + newPosition);
+        if(i == 20) Debug.Log("Couldn't find path");
+        aiBlackboard.NavAgent.SetPath(navMeshPath);
     }
 }

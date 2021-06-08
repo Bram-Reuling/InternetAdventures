@@ -148,6 +148,7 @@ MonoBehaviour:
   MemberPair: {fileID: 0}
   minTimer: 4
   maxTimer: 12.5
+  memberProximity: 3
   tickTimer: 0
   _navMesh: {fileID: 7134617730179551935}
   navMeshObstacle: {fileID: 7586038150961620183}
