@@ -13,7 +13,7 @@ namespace MainServer
     class Server
     {
         private TcpListener _listener;
-        private Dictionary<Player, TcpClient> _connectedPlayers = new Dictionary<Player, TcpClient>();
+        private Dictionary<Client, TcpClient> _connectedPlayers = new Dictionary<Client, TcpClient>();
         private List<Room> _rooms = new List<Room>();
 
         public static void Main(string[] args)
@@ -53,17 +53,17 @@ namespace MainServer
             {
                 while (_listener.Pending())
                 {
-                    Player newPlayer = new Player();
-                    GeneratePlayerId(ref newPlayer);
+                    Client newClient = new Client();
+                    GeneratePlayerId(ref newClient);
 
-                    TcpClient client = _listener.AcceptTcpClient();
+                    TcpClient tcpClient = _listener.AcceptTcpClient();
                     
-                    _connectedPlayers.Add(newPlayer, client);
+                    _connectedPlayers.Add(newClient, tcpClient);
 
-                    PlayerDataRequest playerDataRequest = new PlayerDataRequest();
-                    playerDataRequest.Player = newPlayer;
+                    ClientDataRequest playerDataRequest = new ClientDataRequest();
+                    playerDataRequest.Client = newClient;
                     
-                    SendObject(new KeyValuePair<Player, TcpClient>(newPlayer, client), playerDataRequest);
+                    SendObject(new KeyValuePair<Client, TcpClient>(newClient, tcpClient), playerDataRequest);
                 }
             }
             catch (Exception e)
@@ -74,7 +74,7 @@ namespace MainServer
 
         private void ProcessExistingClients()
         {
-            foreach (KeyValuePair<Player,TcpClient> player in _connectedPlayers)
+            foreach (KeyValuePair<Client,TcpClient> player in _connectedPlayers)
             {
                 if (player.Value.Available == 0) continue;
 
@@ -86,7 +86,7 @@ namespace MainServer
 
                 switch (inObject)
                 {
-                    case PlayerDataResponse response:
+                    case ClientDataResponse response:
                         HandlePlayerDataResponse(response);
                         break;
                     case PlayerStateChangeRequest request:
@@ -97,10 +97,10 @@ namespace MainServer
             }
         }
 
-        private void HandlePlayerDataResponse(PlayerDataResponse response)
+        private void HandlePlayerDataResponse(ClientDataResponse response)
         {
-            Player player = _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Player.Id).Key;
-            player.Name = response.Player.Name;
+            Client player = _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Client.Id).Key;
+            player.Name = response.Client.Name;
         }
 
         private void HandlePlayerStateChangeRequest(PlayerStateChangeRequest request)
@@ -114,7 +114,7 @@ namespace MainServer
         {
         }
 
-        private void GeneratePlayerId(ref Player playerObject)
+        private void GeneratePlayerId(ref Client playerObject)
         {
             var rnd = new Random();
             int id = 0;
@@ -129,7 +129,7 @@ namespace MainServer
             playerObject.Id = id;
         }
 
-        private void RemovePlayer(KeyValuePair<Player, TcpClient> player)
+        private void RemovePlayer(KeyValuePair<Client, TcpClient> player)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace MainServer
             }
         }
 
-        private void SendObject(KeyValuePair<Player, TcpClient> player, ISerializable outObject)
+        private void SendObject(KeyValuePair<Client, TcpClient> player, ISerializable outObject)
         {
             try
             {
