@@ -9,6 +9,7 @@ namespace Shared.model
         public RoomState RoomState { get; set; } = RoomState.Lobby;
         public List<Client> Players { get; set; } = new List<Client>();
         public Client Server { get; set; } = new Client();
+        public bool IsMatchmakingAllowed = false;
 
         public Room()
         {
@@ -29,6 +30,7 @@ namespace Shared.model
             }
             
             pPacket.Write(Server);
+            pPacket.Write(IsMatchmakingAllowed);
         }
 
         public void Deserialize(Packet pPacket)
@@ -45,6 +47,7 @@ namespace Shared.model
             }
 
             Server = pPacket.Read<Client>();
+            IsMatchmakingAllowed = pPacket.ReadBool();
         }
     }
 }

@@ -106,12 +106,62 @@ namespace MainServer
                     case LobbyJoinRequest request:
                         HandleLobbyJoinRequest(request);
                         break;
+                    case ReadyStateChangeRequest request:
+                        HandleReadyStateChangeRequest(request);
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandleReadyStateChangeRequest(ReadyStateChangeRequest request)
+        {
+            KeyValuePair<Client, TcpClient> clientPair =
+                _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.RequestingPlayerId);
+
+            switch (clientPair.Key.ReadyState)
+            {
+                case ReadyState.Ready:
+                    clientPair.Key.ReadyState = ReadyState.NotReady;
+                    break;
+                case ReadyState.NotReady:
+                    clientPair.Key.ReadyState = ReadyState.Ready;
+                    break;
+                default:
+                    break;
+            }
+            
+            // Get the room the player is in.
+            Room room = _rooms.Find(r => r.RoomCode == clientPair.Key.JoinedRoomCode);
+
+            if (room == null) return;
+
+            int playersReady = 0;
+            
+            foreach (Client player in room.Players)
+            {
+                if (player.ReadyState == ReadyState.Ready)
+                {
+                    playersReady += 1;
+                }
+            }
+
+            room.IsMatchmakingAllowed = playersReady == 2;
+
+            // Send lobby data to both clients that are connected to the lobby
+            LobbyDataResponse lobbyDataResponse = new LobbyDataResponse {Lobby = room, ResponseCode = ResponseCode.Ok};
+
+            foreach (Client player in room.Players)
+            {
+                // Get the KeyValuePair
+                KeyValuePair<Client, TcpClient> pair =
+                    _connectedPlayers.FirstOrDefault(c => c.Key.Id == player.Id);
+                // Send lobby data
+                SendObject(pair, lobbyDataResponse);
+            }
+        }
+        
         private void HandleLobbyJoinRequest(LobbyJoinRequest request)
         {
             // Check if room with room code exists
@@ -133,6 +183,8 @@ namespace MainServer
                 Log.LogInfo("Lobby found!", this, ConsoleColor.DarkGreen);
                 LobbyJoinResponse lobbyJoinResponse = new LobbyJoinResponse
                     {ResponseCode = ResponseCode.Ok, RoomCode = request.RoomCode};
+
+                clientPair.Key.JoinedRoomCode = request.RoomCode;
                 
                 _rooms.Find(r => r.RoomCode == request.RoomCode)?.Players.Add(clientPair.Key);
 
@@ -178,6 +230,7 @@ namespace MainServer
             // Add user to room
             KeyValuePair<Client, TcpClient> clientPair =
                 _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.RequestingPlayerId);
+            clientPair.Key.JoinedRoomCode = roomCode;
             room.Players.Add(clientPair.Key);
             Log.LogInfo("Added the requesting player to the players list", this, ConsoleColor.Green);
             // Add room to the room list

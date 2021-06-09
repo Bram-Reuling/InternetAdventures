@@ -207,4 +207,10 @@ public class MainServerClient : MonoBehaviour
         
         SendObject(lobbyJoinRequest);
     }
+
+    public void ChangeReadyState()
+    {
+        ReadyStateChangeRequest readyStateChangeRequest = new ReadyStateChangeRequest {RequestingPlayerId = _clientId};
+        SendObject(readyStateChangeRequest);
+    }
 }

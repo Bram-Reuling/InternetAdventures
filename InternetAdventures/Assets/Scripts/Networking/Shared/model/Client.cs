@@ -7,6 +7,7 @@ namespace Shared.model
         public PlayerState PlayerState { get; set; } = PlayerState.SearchingForLobby;
         public ReadyState ReadyState { get; set; } = ReadyState.NotReady;
         public ClientType ClientType { get; set; } = ClientType.Client;
+        public string JoinedRoomCode { get; set; } = "00000";
 
         public Client()
         {
@@ -20,6 +21,7 @@ namespace Shared.model
             pPacket.Write((int)PlayerState);
             pPacket.Write((int)ReadyState);
             pPacket.Write((int)ClientType);
+            pPacket.Write(JoinedRoomCode);
         }
 
         public void Deserialize(Packet pPacket)
@@ -29,6 +31,7 @@ namespace Shared.model
             PlayerState = (PlayerState)pPacket.ReadInt();
             ReadyState = (ReadyState)pPacket.ReadInt();
             ClientType = (ClientType)pPacket.ReadInt();
+            JoinedRoomCode = pPacket.ReadString();
         }
     }
 }
