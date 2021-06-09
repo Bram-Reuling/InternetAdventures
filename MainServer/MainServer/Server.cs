@@ -9,6 +9,7 @@ using Shared.log;
 using Shared.model;
 using Shared.protocol;
 using Shared.protocol.Lobby;
+using Shared.protocol.Match;
 
 namespace MainServer
 {
@@ -112,12 +113,22 @@ namespace MainServer
                     case LobbyLeaveRequest request:
                         HandleLobbyLeaveRequest(request);
                         break;
+                    case MatchCreateRequest request:
+                        HandleMatchCreateRequest(request);
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandleMatchCreateRequest(MatchCreateRequest request)
+        {
+            // Grab an available port from the ports list.
+            
+            // Start a new game process.
+        }
+        
         private void HandleLobbyLeaveRequest(LobbyLeaveRequest request)
         {
             KeyValuePair<Client, TcpClient> clientPair =

@@ -8,6 +8,7 @@ using Shared;
 using Shared.model;
 using Shared.protocol;
 using Shared.protocol.Lobby;
+using Shared.protocol.Match;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -98,6 +99,9 @@ public class MainServerClient : MonoBehaviour
                     case LobbyJoinResponse response:
                         HandleLobbyJoinResponse(response);
                         break;
+                    case LobbyLeaveResponse response:
+                        HandleLobbyLeaveResponse(response);
+                        break;
                     default:
                         break;
                 }
@@ -111,6 +115,11 @@ public class MainServerClient : MonoBehaviour
         }
     }
 
+    private void HandleLobbyLeaveResponse(LobbyLeaveResponse response)
+    {
+        _joinedRoomCode = "";
+    }
+    
     private void HandleLobbyJoinResponse(LobbyJoinResponse response)
     {
         _joinedRoomCode = response.RoomCode;
@@ -218,5 +227,13 @@ public class MainServerClient : MonoBehaviour
     {
         LobbyLeaveRequest lobbyLeaveRequest = new LobbyLeaveRequest {RequestedPlayerId = _clientId};
         SendObject(lobbyLeaveRequest);
+    }
+
+    public void StartMatch()
+    {
+        MatchCreateRequest matchCreateRequest = new MatchCreateRequest
+            {RequestingPlayerId = _clientId, RoomCode = _joinedRoomCode};
+        
+        SendObject(matchCreateRequest);
     }
 }
