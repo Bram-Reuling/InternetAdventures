@@ -8,6 +8,7 @@ namespace Shared.model
         public ReadyState ReadyState { get; set; } = ReadyState.NotReady;
         public ClientType ClientType { get; set; } = ClientType.Client;
         public string JoinedRoomCode { get; set; } = "00000";
+        public bool IsLobbyLeader { get; set; } = false;
 
         public Client()
         {
@@ -22,6 +23,7 @@ namespace Shared.model
             pPacket.Write((int)ReadyState);
             pPacket.Write((int)ClientType);
             pPacket.Write(JoinedRoomCode);
+            pPacket.Write(IsLobbyLeader);
         }
 
         public void Deserialize(Packet pPacket)
@@ -32,6 +34,7 @@ namespace Shared.model
             ReadyState = (ReadyState)pPacket.ReadInt();
             ClientType = (ClientType)pPacket.ReadInt();
             JoinedRoomCode = pPacket.ReadString();
+            IsLobbyLeader = pPacket.ReadBool();
         }
     }
 }

@@ -231,6 +231,7 @@ namespace MainServer
             KeyValuePair<Client, TcpClient> clientPair =
                 _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.RequestingPlayerId);
             clientPair.Key.JoinedRoomCode = roomCode;
+            clientPair.Key.IsLobbyLeader = true;
             room.Players.Add(clientPair.Key);
             Log.LogInfo("Added the requesting player to the players list", this, ConsoleColor.Green);
             // Add room to the room list

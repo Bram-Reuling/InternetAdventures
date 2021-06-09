@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Shared.model;
 using Shared.protocol.Lobby;
 using TMPro;
@@ -20,7 +21,7 @@ namespace Networking
             EventBroker.UpdateLobbyDataEvent += UpdateLobbyData;
         }
 
-        private void UpdateLobbyData(LobbyDataResponse pLobbyDataResponse)
+        private void UpdateLobbyData(LobbyDataResponse pLobbyDataResponse, int pClientId)
         {
             _roomCodeText.text = $"Code: {pLobbyDataResponse.Lobby.RoomCode}";
             _roomCodeText.enabled = true;
@@ -34,8 +35,13 @@ namespace Networking
             {
                 _playerOneText.text = CheckReadyStateOfPlayer(pLobbyDataResponse.Lobby.Players[0]);
             }
-            
-            _matchMakingButton.SetActive(pLobbyDataResponse.Lobby.IsMatchmakingAllowed);
+
+            Client thisClient = pLobbyDataResponse.Lobby.Players.FirstOrDefault(c => c.Id == pClientId);
+
+            if (thisClient.IsLobbyLeader)
+            {
+                _matchMakingButton.SetActive(pLobbyDataResponse.Lobby.IsMatchmakingAllowed);   
+            }
         }
 
         private string CheckReadyStateOfPlayer(Client player)

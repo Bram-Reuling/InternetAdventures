@@ -129,7 +129,7 @@ public class MainServerClient : MonoBehaviour
     private void HandleLobbyDataResponse(LobbyDataResponse response)
     {
         // Update the lobby panel with the correct information
-        EventBroker.CallUpdateLobbyDataEvent(response);
+        EventBroker.CallUpdateLobbyDataEvent(response, _clientId);
     }
     
     private void HandleLobbyCreateResponse(LobbyCreateResponse response)

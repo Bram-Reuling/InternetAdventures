@@ -13,7 +13,7 @@ public static class EventBroker
 
     public delegate void PanelDelegate(string pPanel);
 
-    public delegate void LobbyDataDelegate(LobbyDataResponse pLobby);
+    public delegate void LobbyDataDelegate(LobbyDataResponse pLobby, int thisClientId);
 
     // Events
     public static event ExampleDelegate ExampleEvent;
@@ -54,8 +54,8 @@ public static class EventBroker
         LoadedLobbyPanelEvent?.Invoke();
     }
 
-    public static void CallUpdateLobbyDataEvent(LobbyDataResponse response)
+    public static void CallUpdateLobbyDataEvent(LobbyDataResponse response, int thisClientId)
     {
-        UpdateLobbyDataEvent?.Invoke(response);
+        UpdateLobbyDataEvent?.Invoke(response, thisClientId);
     }
 }
