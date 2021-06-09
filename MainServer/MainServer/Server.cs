@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -18,6 +19,7 @@ namespace MainServer
         private TcpListener _listener;
         private Dictionary<Client, TcpClient> _connectedPlayers = new Dictionary<Client, TcpClient>();
         private List<Room> _rooms = new List<Room>();
+        private List<int> _ports = new List<int> {55556, 55557, 55558, 55559};
 
         public static void Main(string[] args)
         {
@@ -116,17 +118,63 @@ namespace MainServer
                     case MatchCreateRequest request:
                         HandleMatchCreateRequest(request);
                         break;
+                    case ServerStarted serverStarted:
+                        HandleServerStarted(serverStarted);
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandleServerStarted(ServerStarted serverStarted)
+        {
+            Room room = _rooms.FirstOrDefault(r => r.RoomCode == serverStarted.GameInstanceRoomCode);
+
+            if (room == null) return;
+
+            MatchCreateResponse matchCreateResponse = new MatchCreateResponse
+                {MatchPortNumber = serverStarted.GameInstancePort, ResponseCode = ResponseCode.Ok};
+
+            PlayerStateChangeResponse playerStateChangeResponse = new PlayerStateChangeResponse
+                {NewPlayerState = PlayerState.InGame};
+            
+            foreach (Client player in room.Players)
+            {
+                KeyValuePair<Client, TcpClient> clientPair =
+                    _connectedPlayers.FirstOrDefault(c => c.Key.Id == player.Id);
+
+                clientPair.Key.PlayerState = PlayerState.InGame;
+                
+                SendObject(clientPair, matchCreateResponse);
+                SendObject(clientPair, playerStateChangeResponse);
+            }
+        }
+
         private void HandleMatchCreateRequest(MatchCreateRequest request)
         {
             // Grab an available port from the ports list.
-            
+            int port = _ports[0];
+            _ports.Remove(port);
             // Start a new game process.
+            Room room = _rooms.FirstOrDefault(r => r.RoomCode == request.RoomCode);
+
+            Process gameInstance = new Process
+            {
+                StartInfo =
+                {
+                    FileName =
+                        "C:\\Repositories\\InternetAdventures\\InternetAdventures\\Builds\\Networked\\V1.0.5S\\InternetAdventures.exe",
+                    Arguments = $"-server {port}",
+                    CreateNoWindow = false,
+                    WindowStyle = ProcessWindowStyle.Normal,
+                    UseShellExecute = true
+                }
+            };
+
+            if (room != null) room.gameInstance = gameInstance;
+
+            gameInstance.Start();
         }
         
         private void HandleLobbyLeaveRequest(LobbyLeaveRequest request)
@@ -341,13 +389,26 @@ namespace MainServer
             client.Name = response.Client.Name;
             Log.LogInfo($"Client Type: {response.Client.ClientType}", this, ConsoleColor.Blue);
             client.ClientType = response.Client.ClientType;
-            
-            // Since this method is only called when a client is connected
-            // Send a PanelChange packet
-            
-            PanelChange panelChange = new PanelChange { PanelToChangeTo = "MainPanel" };
-            Log.LogInfo($"Sending: {panelChange}", this, ConsoleColor.DarkBlue);
-            SendObject(clientPair, panelChange);
+
+            switch (client.ClientType)
+            {
+                // Since this method is only called when a client is connected
+                // Send a PanelChange packet
+                case ClientType.Client:
+                {
+                    PanelChange panelChange = new PanelChange { PanelToChangeTo = "MainPanel" };
+                    Log.LogInfo($"Sending: {panelChange}", this, ConsoleColor.DarkBlue);
+                    SendObject(clientPair, panelChange);
+                    break;
+                }
+                case ClientType.GameInstance:
+                {
+                    StartServerInstance serverInstance = new StartServerInstance();
+                    Log.LogInfo($"Sending: {serverInstance}", this, ConsoleColor.DarkBlue);
+                    SendObject(clientPair, serverInstance);
+                    break;   
+                }
+            }
         }
 
         private void HandlePlayerStateChangeRequest(PlayerStateChangeRequest request)

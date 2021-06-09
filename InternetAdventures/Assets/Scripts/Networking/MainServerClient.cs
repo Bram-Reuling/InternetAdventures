@@ -102,6 +102,9 @@ public class MainServerClient : MonoBehaviour
                     case LobbyLeaveResponse response:
                         HandleLobbyLeaveResponse(response);
                         break;
+                    case MatchCreateResponse response:
+                        HandleMatchCreateResponse(response);
+                        break;
                     default:
                         break;
                 }
@@ -115,6 +118,11 @@ public class MainServerClient : MonoBehaviour
         }
     }
 
+    private void HandleMatchCreateResponse(MatchCreateResponse response)
+    {
+        
+    }
+    
     private void HandleLobbyLeaveResponse(LobbyLeaveResponse response)
     {
         _joinedRoomCode = "";

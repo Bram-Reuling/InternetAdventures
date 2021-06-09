@@ -2,7 +2,7 @@ namespace Shared.model
 {
     public enum ClientType
     {
-        Player,
+        GameInstance,
         Client
     }
 }

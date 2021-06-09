@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Shared.model
 {
@@ -9,6 +10,7 @@ namespace Shared.model
         public RoomState RoomState { get; set; } = RoomState.Lobby;
         public List<Client> Players { get; set; } = new List<Client>();
         public Client Server { get; set; } = new Client();
+        public Process gameInstance { get; set; } = new Process();
         public bool IsMatchmakingAllowed = false;
 
         public Room()
