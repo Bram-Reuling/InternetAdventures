@@ -34,6 +34,7 @@ namespace Networking
             else if (pLobbyDataResponse.Lobby.Players.Count == 1)
             {
                 _playerOneText.text = CheckReadyStateOfPlayer(pLobbyDataResponse.Lobby.Players[0]);
+                _playerTwoText.text = "Waiting for player..";
             }
 
             Client thisClient = pLobbyDataResponse.Lobby.Players.FirstOrDefault(c => c.Id == pClientId);

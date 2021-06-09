@@ -213,4 +213,10 @@ public class MainServerClient : MonoBehaviour
         ReadyStateChangeRequest readyStateChangeRequest = new ReadyStateChangeRequest {RequestingPlayerId = _clientId};
         SendObject(readyStateChangeRequest);
     }
+
+    public void LeaveLobby()
+    {
+        LobbyLeaveRequest lobbyLeaveRequest = new LobbyLeaveRequest {RequestedPlayerId = _clientId};
+        SendObject(lobbyLeaveRequest);
+    }
 }

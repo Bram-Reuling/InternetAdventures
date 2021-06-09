@@ -109,12 +109,68 @@ namespace MainServer
                     case ReadyStateChangeRequest request:
                         HandleReadyStateChangeRequest(request);
                         break;
+                    case LobbyLeaveRequest request:
+                        HandleLobbyLeaveRequest(request);
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandleLobbyLeaveRequest(LobbyLeaveRequest request)
+        {
+            KeyValuePair<Client, TcpClient> clientPair =
+                _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.RequestedPlayerId);
+
+            Room room = _rooms.FirstOrDefault(r => r.RoomCode == clientPair.Key.JoinedRoomCode);
+
+            if (room == null) return;
+
+            if (room.Players.Count == 2)
+            {
+                room.Players.Remove(clientPair.Key);
+                
+                if (clientPair.Key.IsLobbyLeader)
+                {
+                    KeyValuePair<Client, TcpClient> secondClient =
+                        _connectedPlayers.FirstOrDefault(c => c.Key.Id == room.Players[0].Id);
+                    Log.LogInfo($"Giving Player with ID {secondClient.Key.Id} lobby leader status", this, ConsoleColor.Magenta);
+                    secondClient.Key.IsLobbyLeader = true;
+                    clientPair.Key.IsLobbyLeader = false;
+                    room.IsMatchmakingAllowed = false;
+
+                    LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
+                        {Lobby = room, ResponseCode = ResponseCode.Ok};
+                    SendObject(secondClient, lobbyDataResponse);
+                }
+            }
+            else if (room.Players.Count == 1)
+            {
+                // Remove player from room
+                room.Players.Remove(clientPair.Key);
+                // Delete room from list
+                Log.LogInfo($"Removing room with code: {room.RoomCode}", this, ConsoleColor.Magenta);
+                _rooms.Remove(room);
+
+                clientPair.Key.IsLobbyLeader = false;
+            }
+            
+            // Send player back to Host/Join panel
+            clientPair.Key.ReadyState = ReadyState.NotReady;
+            clientPair.Key.PlayerState = PlayerState.SearchingForLobby;
+
+            PlayerStateChangeResponse playerStateChangeResponse = new PlayerStateChangeResponse
+                {NewPlayerState = PlayerState.SearchingForLobby, PlayerId = clientPair.Key.Id};
+            SendObject(clientPair, playerStateChangeResponse);
+
+            PanelChange panelChange = new PanelChange {PanelToChangeTo = "JoinHostPanel"};
+            SendObject(clientPair, panelChange);
+
+            LobbyLeaveResponse lobbyLeaveResponse = new LobbyLeaveResponse {ResponseCode = ResponseCode.Ok};
+            SendObject(clientPair, lobbyLeaveResponse);
+        }
+        
         private void HandleReadyStateChangeRequest(ReadyStateChangeRequest request)
         {
             KeyValuePair<Client, TcpClient> clientPair =
