@@ -35,7 +35,7 @@ namespace Networking
             if (kcpTransport == null) return;
 
             // Server
-            if (arguments[1] == "-server")
+            if (arguments.Length > 1 && arguments[1] == "-server")
             {
                 Debug.Log(kcpTransport.Port);
 
@@ -54,6 +54,7 @@ namespace Networking
             }
             else
             {
+                Debug.Log("Giving client port:" + DataHandler.Port);
                 _localPort = DataHandler.Port;
                 kcpTransport.Port = DataHandler.Port;
             }
@@ -78,6 +79,7 @@ namespace Networking
             }
             else
             {
+                Debug.Log("Starting Client!");
                 StartClient();
             }
         }
@@ -86,24 +88,25 @@ namespace Networking
         {
             try
             {
-                if (_client.Available > 0 && IsServer)
+                if (!IsServer) return;
+
+                if (_client.Available <= 0) return;
+                
+                Debug.Log("Bytes available! Reading...");
+                byte[] inBytes = StreamUtil.Read(_client.GetStream());
+                Packet inPacket = new Packet(inBytes);
+                ISerializable inObject = inPacket.ReadObject();
+
+                Debug.Log("Received: " + inObject);
+
+                switch (inObject)
                 {
-                    Debug.Log("Bytes available! Reading...");
-                    byte[] inBytes = StreamUtil.Read(_client.GetStream());
-                    Packet inPacket = new Packet(inBytes);
-                    ISerializable inObject = inPacket.ReadObject();
-
-                    Debug.Log("Received: " + inObject);
-
-                    switch (inObject)
-                    {
-                        case ClientDataRequest request:
-                            HandleClientDataRequest(request);
-                            break;
-                        case StartServerInstance startServerInstance:
-                            StartGameInstanceServer();
-                            break;
-                    }
+                    case ClientDataRequest request:
+                        HandleClientDataRequest(request);
+                        break;
+                    case StartServerInstance startServerInstance:
+                        StartGameInstanceServer();
+                        break;
                 }
             }
             catch (Exception e)
