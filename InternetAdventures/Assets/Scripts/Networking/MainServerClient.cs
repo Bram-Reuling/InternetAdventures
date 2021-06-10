@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Mirror;
+using Networking;
 using Shared;
 using Shared.model;
 using Shared.protocol;
 using Shared.protocol.Lobby;
 using Shared.protocol.Match;
+using Shared.protocol.protocol;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,7 +24,8 @@ public class MainServerClient : MonoBehaviour
     [SerializeField] private int _port = 55555;
 
     [Scene, SerializeField] private string _menuScene;
-
+    [Scene, SerializeField] private string _gameScene;
+    
     private TcpClient _client;
     private bool _connectedToServer = false;
 
@@ -105,6 +108,9 @@ public class MainServerClient : MonoBehaviour
                     case MatchCreateResponse response:
                         HandleMatchCreateResponse(response);
                         break;
+                    case SceneChange sceneChange:
+                        HandleSceneChange(sceneChange);
+                        break;
                     default:
                         break;
                 }
@@ -118,9 +124,20 @@ public class MainServerClient : MonoBehaviour
         }
     }
 
+    private void HandleSceneChange(SceneChange sceneChange)
+    {
+        switch (sceneChange.SceneToSwitchTo)
+        {
+            case "GameScene":
+                Debug.Log("Load Game Scene");
+                SceneManager.LoadScene(_gameScene);
+                break;
+        }
+    }
+    
     private void HandleMatchCreateResponse(MatchCreateResponse response)
     {
-        
+        DataHandler.Port = (ushort)response.MatchPortNumber;
     }
     
     private void HandleLobbyLeaveResponse(LobbyLeaveResponse response)

@@ -11,6 +11,7 @@ using Shared.model;
 using Shared.protocol;
 using Shared.protocol.Lobby;
 using Shared.protocol.Match;
+using Shared.protocol.protocol;
 
 namespace MainServer
 {
@@ -138,6 +139,8 @@ namespace MainServer
 
             PlayerStateChangeResponse playerStateChangeResponse = new PlayerStateChangeResponse
                 {NewPlayerState = PlayerState.InGame};
+
+            SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "GameScene"};
             
             foreach (Client player in room.Players)
             {
@@ -148,6 +151,7 @@ namespace MainServer
                 
                 SendObject(clientPair, matchCreateResponse);
                 SendObject(clientPair, playerStateChangeResponse);
+                SendObject(clientPair, sceneChange);
             }
         }
 
@@ -165,7 +169,7 @@ namespace MainServer
                 {
                     FileName =
                         "C:\\Repositories\\InternetAdventures\\InternetAdventures\\Builds\\Networked\\V1.0.5S\\InternetAdventures.exe",
-                    Arguments = $"-server {port}",
+                    Arguments = $"-server {port} {request.RoomCode}",
                     CreateNoWindow = false,
                     WindowStyle = ProcessWindowStyle.Normal,
                     UseShellExecute = true

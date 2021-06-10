@@ -20,9 +20,9 @@ namespace Networking
         [SerializeField] private int _mainServerPort = 55555;
 
         private TcpClient _client;
-        private string _serverRoomCode;
-        private int _localPort;
-        private int _clientId;
+        private string _serverRoomCode = "";
+        private int _localPort = 0;
+        private int _clientId = 0;
 
         public override void Awake()
         {
@@ -39,15 +39,23 @@ namespace Networking
             {
                 Debug.Log(kcpTransport.Port);
 
-                ushort port;
-                ushort.TryParse(arguments[2], out port);
+                int.TryParse(arguments[2], out var port);
+                
+                Debug.Log("Starting server with port:" + port);
 
                 _localPort = port;
-                kcpTransport.Port = port;
+                kcpTransport.Port = (ushort)port;
+
+                _serverRoomCode = arguments[3];
             
                 Debug.Log(kcpTransport.Port);
 
                 IsServer = true;
+            }
+            else
+            {
+                _localPort = DataHandler.Port;
+                kcpTransport.Port = DataHandler.Port;
             }
         }
 
@@ -67,6 +75,10 @@ namespace Networking
                     Debug.LogError("Could not connect to server:");
                     Debug.LogError(e.Message);
                 }
+            }
+            else
+            {
+                StartClient();
             }
         }
 
@@ -119,17 +131,13 @@ namespace Networking
             
             Debug.Log("Starting server!");
             StartServer();
-        }
-
-        public override void OnStartServer()
-        {
-            base.OnStartServer();
             StartCoroutine(SendStartSuccess());
         }
 
         IEnumerator SendStartSuccess()
         {
             yield return new WaitForSeconds(2f);
+            
             Debug.Log("ServerStarted!");
 
             ServerStarted serverStarted = new ServerStarted
@@ -138,8 +146,6 @@ namespace Networking
             };
             
             SendObject(serverStarted);
-            
-            yield return null;
         }
 
         private void SendObject(ISerializable pObject)
@@ -148,15 +154,23 @@ namespace Networking
             {
                 Debug.Log("Sending: " + pObject);
                 Packet outPacket = new Packet();
+                Debug.Log("Created packet " + pObject);
+
+                if (pObject == null)
+                {
+                    Debug.Log("Object is null");
+                }
+                
+                Debug.Log("Writing object data into packet");
                 outPacket.Write(pObject);
+                Debug.Log("Ended writing object data into packet");
+                
                 StreamUtil.Write(_client.GetStream(), outPacket.GetBytes());
             }
             catch (Exception e)
             {
                 Debug.Log("Cannot send message!");
                 Debug.Log(e.Message);
-            
-                _client.Close();
             }
         }
     }

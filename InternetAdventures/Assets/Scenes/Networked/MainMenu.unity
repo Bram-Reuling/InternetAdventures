@@ -4508,6 +4508,7 @@ MonoBehaviour:
   _server: localhost
   _port: 55555
   _menuScene: Assets/Scenes/Networked/MainMenu.unity
+  _gameScene: Assets/Scenes/Networked/SceneBramNetworked.unity
   _clientName: Bram
 --- !u!1 &2056029201
 GameObject:

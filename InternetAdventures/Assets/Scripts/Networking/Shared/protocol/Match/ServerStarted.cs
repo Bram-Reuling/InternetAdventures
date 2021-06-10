@@ -1,4 +1,6 @@
-﻿namespace Shared.protocol.Match
+﻿using UnityEngine;
+
+namespace Shared.protocol.Match
 {
     public class ServerStarted : ISerializable
     {
@@ -8,6 +10,20 @@
         
         public void Serialize(Packet pPacket)
         {
+            if (GameInstancePort == null)
+            {
+                Debug.Log("--------------------GameInstancePort IsNull--------------------");
+            }
+            
+            if (GameInstanceRoomCode == null)
+            {
+                Debug.Log("--------------------GameInstanceRoomCode IsNull--------------------");
+            }
+            
+            if (GameInstanceClientId == null)
+            {
+                Debug.Log("--------------------GameInstanceClientId IsNull--------------------");
+            }
             pPacket.Write(GameInstanceClientId);
             pPacket.Write(GameInstanceRoomCode);
             pPacket.Write(GameInstancePort);
