@@ -28,6 +28,9 @@ public static class EventBroker
 
     public static event LobbyDataDelegate UpdateLobbyDataEvent;
 
+    public static event Action PlayerEnterMatchEndZoneEvent;
+    public static event Action PlayerExitMatchEndZoneEvent;
+
     // Functions
     public static void CallExampleEvent(int pValue)
     {
@@ -57,5 +60,15 @@ public static class EventBroker
     public static void CallUpdateLobbyDataEvent(LobbyDataResponse response, int thisClientId)
     {
         UpdateLobbyDataEvent?.Invoke(response, thisClientId);
+    }
+
+    public static void CallPlayerEnterMatchEndZoneEvent()
+    {
+        PlayerEnterMatchEndZoneEvent?.Invoke();
+    }
+
+    public static void CallPlayerExitMatchEndZoneEvent()
+    {
+        PlayerExitMatchEndZoneEvent?.Invoke();
     }
 }

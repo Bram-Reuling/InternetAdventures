@@ -111,6 +111,9 @@ public class MainServerClient : MonoBehaviour
                     case SceneChange sceneChange:
                         HandleSceneChange(sceneChange);
                         break;
+                    case MatchEndResponse response:
+                        HandleMatchEndResponse(response);
+                        break;
                     default:
                         break;
                 }
@@ -124,6 +127,11 @@ public class MainServerClient : MonoBehaviour
         }
     }
 
+    private void HandleMatchEndResponse(MatchEndResponse response)
+    {
+        NetworkClient.Disconnect();
+    }
+    
     private void HandleSceneChange(SceneChange sceneChange)
     {
         switch (sceneChange.SceneToSwitchTo)
@@ -131,6 +139,10 @@ public class MainServerClient : MonoBehaviour
             case "GameScene":
                 Debug.Log("Load Game Scene");
                 SceneManager.LoadScene(_gameScene);
+                break;
+            case "MainMenu":
+                Debug.Log("Load Main Menu Scene");
+                SceneManager.LoadScene(_menuScene);
                 break;
         }
     }

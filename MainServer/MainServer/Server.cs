@@ -122,12 +122,47 @@ namespace MainServer
                     case ServerStarted serverStarted:
                         HandleServerStarted(serverStarted);
                         break;
+                    case MatchEndRequest request:
+                        HandleMatchEndRequest(request);
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandleMatchEndRequest(MatchEndRequest request)
+        {
+            // Find the lobby
+            Room room = _rooms.FirstOrDefault(r => r.RoomCode == request.RoomCode);
+            // MatchEndResponse to players in lobby
+            MatchEndResponse matchEndResponse = new MatchEndResponse {ResponseCode = ResponseCode.Ok};
+            // Scene Change to the players in the lobby
+            SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "MainMenu"};
+            // Panel Change to the players in the lobby
+            PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanelFromGame"};
+            
+            foreach (Client player in room.Players)
+            {
+                // Get the KeyValuePair
+                KeyValuePair<Client, TcpClient> pair =
+                    _connectedPlayers.FirstOrDefault(c => c.Key.Id == player.Id);
+                // Send lobby data
+                SendObject(pair, matchEndResponse);
+                SendObject(pair, sceneChange);
+                SendObject(pair, panelChange);
+            }
+            
+            // Stop the process
+            room.gameInstance.Kill();
+            // Remove the process from the room
+            room.gameInstance = new Process();
+            // Remove game instance client from the connected clients list
+            Client serverClient = _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.ServerId).Key;
+            room.Server = new Client();
+            _connectedPlayers.Remove(serverClient);
+        }
+        
         private void HandleServerStarted(ServerStarted serverStarted)
         {
             Room room = _rooms.FirstOrDefault(r => r.RoomCode == serverStarted.GameInstanceRoomCode);

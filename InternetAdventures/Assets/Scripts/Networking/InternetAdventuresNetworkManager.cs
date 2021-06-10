@@ -23,6 +23,8 @@ namespace Networking
         private string _serverRoomCode = "";
         private int _localPort = 0;
         private int _clientId = 0;
+        private int _playersInEndZone = 0;
+        private bool _endMatchPacketSend = false;
 
         public override void Awake()
         {
@@ -65,6 +67,9 @@ namespace Networking
             base.Start();
             if (IsServer)
             {
+                EventBroker.PlayerEnterMatchEndZoneEvent += PlayerEnterMatchEndZoneEvent;
+                EventBroker.PlayerExitMatchEndZoneEvent += PlayerExitMatchEndZoneEvent;
+                
                 try
                 {
                     _client = new TcpClient();
@@ -84,12 +89,30 @@ namespace Networking
             }
         }
 
+        private void PlayerEnterMatchEndZoneEvent()
+        {
+            _playersInEndZone++;
+        }
+
+        private void PlayerExitMatchEndZoneEvent()
+        {
+            _playersInEndZone--;
+        }
+        
         private void Update()
         {
             try
             {
                 if (!IsServer) return;
 
+                if (_playersInEndZone == 2 && !_endMatchPacketSend)
+                {
+                    MatchEndRequest matchEndRequest = new MatchEndRequest {RoomCode = _serverRoomCode, ServerId = _clientId};
+                    SendObject(matchEndRequest);
+
+                    _endMatchPacketSend = true;
+                }
+                
                 if (_client.Available <= 0) return;
                 
                 Debug.Log("Bytes available! Reading...");

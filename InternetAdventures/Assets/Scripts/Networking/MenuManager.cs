@@ -31,6 +31,10 @@ namespace Networking
                     Debug.Log("Enabling Host Join Panel");
                     EnableHostJoinPanel();
                     break;
+                case "LobbyPanelFromGame":
+                    Debug.Log("Enabling Lobby Panel");
+                    EnableLobbyPanelFromGame();
+                    break;
                 default:
                     break;
             }
@@ -54,6 +58,15 @@ namespace Networking
         {
             _lobbyPanel.SetActive(false);
             _joinHostPanel.SetActive(true);
+        }
+
+        private void EnableLobbyPanelFromGame()
+        {
+            _loginPanel.SetActive(false);
+            _mainPanel.SetActive(true);
+            _joinHostPanel.SetActive(false);
+            _lobbyPanel.SetActive(true);
+            EventBroker.CallLoadedLobbyPanelEvent();
         }
     }
 }
