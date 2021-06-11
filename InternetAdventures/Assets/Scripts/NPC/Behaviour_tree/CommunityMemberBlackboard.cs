@@ -4,7 +4,7 @@ using System.Linq;
 
 public class CommunityMemberBlackboard : AIBlackboard
 {
-    public GameObject MemberPair;
+    [HideInInspector] public GameObject MemberPair;
     [SerializeField] private float minTimer;
     [SerializeField] private float maxTimer;
     [SerializeField] private float memberProximity;
