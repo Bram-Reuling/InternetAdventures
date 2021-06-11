@@ -148,6 +148,15 @@ namespace Networking
             }
         }
 
+        public override void OnServerDisconnect(NetworkConnection conn)
+        {
+            base.OnServerDisconnect(conn);
+            MatchEndRequest matchEndRequest = new MatchEndRequest {RoomCode = _serverRoomCode, ServerId = _clientId};
+            SendObject(matchEndRequest);
+
+            _endMatchPacketSend = true;
+        }
+
         private void HandleClientDataRequest(ClientDataRequest request)
         {
             Client gameInstanceClient = request.Client;

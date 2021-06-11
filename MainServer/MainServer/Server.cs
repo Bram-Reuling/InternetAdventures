@@ -470,6 +470,11 @@ namespace MainServer
         
         private void ProcessFaultyClients()
         {
+            foreach (KeyValuePair<Client,TcpClient> player in _connectedPlayers)
+            {
+                PingMessage pingMessage = new PingMessage();
+                SendObject(player, pingMessage);
+            }
         }
 
         private void GeneratePlayerId(ref Client playerObject)
@@ -528,7 +533,8 @@ namespace MainServer
             catch (Exception e)
             {
                 // Remove the faulty client
-                Console.WriteLine(e);
+                //Console.WriteLine(e);
+                Log.LogInfo("Removing faulty client!", this, ConsoleColor.Red);
                 if (!player.Value.Connected)
                 {
                     RemovePlayer(player);
