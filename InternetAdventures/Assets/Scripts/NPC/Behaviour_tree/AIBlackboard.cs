@@ -43,10 +43,11 @@ public class AIBlackboard : MonoBehaviour
         SequenceNode healthSequence = new SequenceNode(new List<Node>{new InverterNode(checkHealthNode)});
         
         //Grouping===================================================================================================================================
+        RotateToMember rotateToMemberNode = new RotateToMember(this);
         RandomTimerAtPositionNode randomTimerAtPositionNode = new RandomTimerAtPositionNode(this, minTimer, maxTimer);
         PotentialMemberNode potentialMemberNode = new PotentialMemberNode(this, memberProximity);
         TraverseToMember traverseToMember = new TraverseToMember(this, memberProximity);
-        SequenceNode groupingSelector = new SequenceNode(new List<Node>{randomTimerAtPositionNode, potentialMemberNode, traverseToMember});
+        SequenceNode groupingSelector = new SequenceNode(new List<Node>{rotateToMemberNode, randomTimerAtPositionNode, potentialMemberNode, traverseToMember});
         
         //Starting Node==============================================================================================================================
         _startingNode = new SelectorNode(new List<Node>() {healthSequence, groupingSelector});
@@ -74,7 +75,6 @@ public class AIBlackboard : MonoBehaviour
         
         _startingNode.EvaluateState();
         animator.SetFloat("MovementSpeed", NavAgent.velocity.magnitude);
-        Debug.Log("NavAgent velocity was " + NavAgent.velocity.magnitude);
     }
 
     public List<GameObject> GetAllNPCs()
