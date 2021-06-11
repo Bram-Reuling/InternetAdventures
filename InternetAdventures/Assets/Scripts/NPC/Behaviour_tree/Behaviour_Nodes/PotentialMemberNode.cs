@@ -5,21 +5,22 @@ using UnityEngine.AI;
 public class PotentialMemberNode : Node
 {
     private float _memberProximity;
+    private CommunityMemberBlackboard _communityMemberBlackboard;
 
-    public PotentialMemberNode(AIBlackboard pAIBlackboard, float pMemberProximity)
+    public PotentialMemberNode(CommunityMemberBlackboard pAIBlackboard, float pMemberProximity)
     {
-        aiBlackboard = pAIBlackboard;
+        _communityMemberBlackboard = pAIBlackboard;
         _memberProximity = pMemberProximity;
     }
 
     public override State EvaluateState()
     {
-        List<GameObject> allNPCs = aiBlackboard.GetAllNPCs();
+        List<GameObject> allNPCs = _communityMemberBlackboard.GetAllNPCs();
         foreach (var currentNPC in allNPCs)
         {
             NavMeshAgent currentNavAgent = currentNPC.GetComponent<NavMeshAgent>();
             //Checks if there are AI destinations within my range.
-            if ((currentNavAgent.destination - aiBlackboard.transform.position).magnitude <=
+            if ((currentNavAgent.destination - _communityMemberBlackboard.transform.position).magnitude <=
                 _memberProximity)
             {
                 //Checks if the AI is still traversing, meaning it walkings towards me.

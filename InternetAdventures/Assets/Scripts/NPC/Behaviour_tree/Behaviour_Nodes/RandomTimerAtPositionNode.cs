@@ -10,10 +10,11 @@ public class RandomTimerAtPositionNode : Node
     private float _timePassed;
     private float _currentTimer;
     private bool _pathComplete;
+    private CommunityMemberBlackboard _communityMemberBlackboard;
 
-    public RandomTimerAtPositionNode(AIBlackboard pAIBlackboard, float pMinTime, float pMaxTime)
+    public RandomTimerAtPositionNode(CommunityMemberBlackboard pAIBlackboard, float pMinTime, float pMaxTime)
     {
-        aiBlackboard = pAIBlackboard;
+        _communityMemberBlackboard = pAIBlackboard;
         _minTime = pMinTime;
         _maxTime = pMaxTime;
         _currentTimer = Random.Range(_minTime, _maxTime);
@@ -22,11 +23,11 @@ public class RandomTimerAtPositionNode : Node
     public override State EvaluateState()
     {
         nodeState = State.Failure;
-        if (!aiBlackboard.NavAgent.hasPath && aiBlackboard.NavAgent.pathStatus == NavMeshPathStatus.PathComplete)
+        if (!_communityMemberBlackboard.NavAgent.hasPath && _communityMemberBlackboard.NavAgent.pathStatus == NavMeshPathStatus.PathComplete)
         {
             _pathComplete = true;
-            aiBlackboard.NavAgent.enabled = false;
-            aiBlackboard.NavObstacle.enabled = true;
+            _communityMemberBlackboard.NavAgent.enabled = false;
+            _communityMemberBlackboard.NavObstacle.enabled = true;
         }
         
         if (_pathComplete)
@@ -38,12 +39,12 @@ public class RandomTimerAtPositionNode : Node
             nodeState = State.Success;
             _timePassed = 0;
             _currentTimer = Random.Range(_minTime, _maxTime);
-            aiBlackboard.NavAgent.enabled = true;
+            _communityMemberBlackboard.NavAgent.enabled = true;
             _pathComplete = false;
         }
 
         if (_timePassed >= _currentTimer * 0.97f)
-            aiBlackboard.NavObstacle.enabled = false;
+            _communityMemberBlackboard.NavObstacle.enabled = false;
 
         return nodeState;
     }

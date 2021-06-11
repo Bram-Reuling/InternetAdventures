@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class RotateToMember : Node
 {
-    public RotateToMember(in AIBlackboard pAIBlackboard)
+    private CommunityMemberBlackboard _communityMemberBlackboard;
+    
+    public RotateToMember(in CommunityMemberBlackboard pAIBlackboard)
     {
-        aiBlackboard = pAIBlackboard;
+        _communityMemberBlackboard = pAIBlackboard;
     }
 
 
     public override State EvaluateState()
     {
         nodeState = State.Success;
-        if(aiBlackboard.MemberPair != null && aiBlackboard.NavAgent.velocity.magnitude < 0.1f && aiBlackboard.NavAgent.enabled == false){
-            Vector3 vecToMember = aiBlackboard.MemberPair.transform.position - aiBlackboard.transform.position;
-            if(Vector3.Angle(aiBlackboard.transform.forward, vecToMember.normalized) > 5){
-                aiBlackboard.transform.rotation = Quaternion.Slerp(aiBlackboard.transform.rotation, Quaternion.LookRotation(vecToMember, aiBlackboard.transform.up), 0.02f);
+        if(_communityMemberBlackboard.MemberPair != null && _communityMemberBlackboard.NavAgent.velocity.magnitude < 0.1f && _communityMemberBlackboard.NavAgent.enabled == false){
+            Vector3 vecToMember = _communityMemberBlackboard.MemberPair.transform.position - _communityMemberBlackboard.transform.position;
+            if(Vector3.Angle(_communityMemberBlackboard.transform.forward, vecToMember.normalized) > 5){
+                _communityMemberBlackboard.transform.rotation = Quaternion.Slerp(_communityMemberBlackboard.transform.rotation, Quaternion.LookRotation(vecToMember, _communityMemberBlackboard.transform.up), 0.02f);
             }
         }
         return nodeState;

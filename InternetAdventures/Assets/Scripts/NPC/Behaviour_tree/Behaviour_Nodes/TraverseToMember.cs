@@ -8,10 +8,11 @@ public class TraverseToMember : Node
     //Positional
     private float _minimalOffset = 2.0f;
     private float _memberProximity;
+    private CommunityMemberBlackboard _communityMemberBlackboard;
 
-    public TraverseToMember(AIBlackboard pAIBlackboard, float pMemberProximity)
+    public TraverseToMember(CommunityMemberBlackboard pAIBlackboard, float pMemberProximity)
     {
-        aiBlackboard = pAIBlackboard;
+        _communityMemberBlackboard = pAIBlackboard;
         _memberProximity = pMemberProximity;
     }
     
@@ -27,35 +28,35 @@ public class TraverseToMember : Node
         bool goRandom = Random.Range(0.0f, 1.0f) < 0.35f;
         Vector3 memberPosition = Vector3.zero; 
         List<GameObject> potentialMembers = new List<GameObject>();
-        List<GameObject> allCurrentNPC = aiBlackboard.GetAllNPCs();
+        List<GameObject> allCurrentNPC = _communityMemberBlackboard.GetAllNPCs();
         if (!goRandom)
         {
             foreach (var npc in allCurrentNPC)
             {
-                AIBlackboard memberBlackboard = npc.GetComponent<AIBlackboard>();
+                CommunityMemberBlackboard memberBlackboard = npc.GetComponent<CommunityMemberBlackboard>();
                 //Don't consider moving to an AI if it has a member or is currently walking somewhere.
-                if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
+                if (_communityMemberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
                 potentialMembers.Add(npc);
             }
 
             if (potentialMembers.Count > 0)
             {
                 GameObject memberToGoTo = potentialMembers.ElementAt(Random.Range(0, potentialMembers.Count - 1));
-                aiBlackboard.MemberPair = memberToGoTo;
-                memberToGoTo.GetComponent<AIBlackboard>().MemberPair = aiBlackboard.gameObject;
+                _communityMemberBlackboard.MemberPair = memberToGoTo;
+                memberToGoTo.GetComponent<CommunityMemberBlackboard>().MemberPair = _communityMemberBlackboard.gameObject;
                 memberPosition = memberToGoTo.transform.position;
             }
             else
             {
                 goRandom = true;
-                memberPosition = aiBlackboard.transform.position;
+                memberPosition = _communityMemberBlackboard.transform.position;
             }
         }
         
         if(goRandom){
-            if(aiBlackboard.MemberPair != null)
-                aiBlackboard.MemberPair.GetComponent<AIBlackboard>().MemberPair = null;
-            aiBlackboard.MemberPair = null;
+            if(_communityMemberBlackboard.MemberPair != null)
+                _communityMemberBlackboard.MemberPair.GetComponent<CommunityMemberBlackboard>().MemberPair = null;
+            _communityMemberBlackboard.MemberPair = null;
         }
         
         NavMeshPath navMeshPath = new NavMeshPath();
@@ -68,7 +69,7 @@ public class TraverseToMember : Node
             Vector2 randomXZDirection = Random.insideUnitCircle.normalized * 
             (goRandom ? Random.Range(_minimalOffset, 20 - i) : Random.Range(1.25f, 1.75f));
 
-            newPosition = new Vector3(randomXZDirection.x , aiBlackboard.transform.position.y, randomXZDirection.y);
+            newPosition = new Vector3(randomXZDirection.x , _communityMemberBlackboard.transform.position.y, randomXZDirection.y);
             // if (goRandom)
             // {
             //     foreach (var npc in allCurrentNPC)
@@ -78,9 +79,9 @@ public class TraverseToMember : Node
             //     }
             // }
             i++;
-        } while ((!aiBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) || randomPointInMemberProximity) && i < 20);
+        } while ((!_communityMemberBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) || randomPointInMemberProximity) && i < 20);
 
         if(i == 20) Debug.Log("Couldn't find path");
-        aiBlackboard.NavAgent.SetPath(navMeshPath);
+        _communityMemberBlackboard.NavAgent.SetPath(navMeshPath);
     }
 }
