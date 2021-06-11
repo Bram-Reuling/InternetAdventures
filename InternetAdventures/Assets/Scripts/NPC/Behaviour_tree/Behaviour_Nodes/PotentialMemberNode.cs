@@ -24,8 +24,8 @@ public class PotentialMemberNode : Node
             {
                 //Checks if the AI is still traversing, meaning it walkings towards me.
                 if (currentNavAgent.velocity.magnitude > 0.1f) nodeState = State.Failure;
-                //If close-by but standing still, I consider moving on by 20%.
-                else if (Random.Range(0.0f, 1.0f) < 0.2f) nodeState = State.Success;
+                //If close-by but standing still, I consider moving on by 10%.
+                else if (Random.Range(0.0f, 1.0f) < 0.1f) nodeState = State.Success;
                 else nodeState = State.Failure;
                 return nodeState;
             }

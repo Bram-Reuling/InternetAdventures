@@ -81,7 +81,6 @@ public class TraverseToMember : Node
         } while ((!aiBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) || randomPointInMemberProximity) && i < 20);
 
         if(i == 20) Debug.Log("Couldn't find path");
-        if(goRandom)Debug.Log("Went random");
         aiBlackboard.NavAgent.SetPath(navMeshPath);
     }
 }
