@@ -13,14 +13,42 @@ namespace Networking
         [SerializeField] private TMP_Text _roomCodeText;
         [SerializeField] private TMP_Text _playerOneText;
         [SerializeField] private TMP_Text _playerTwoText;
-        [SerializeField] private GameObject _matchMakingButton;
-        
+        [SerializeField] private GameObject _matchMakingButtonGameObject;
+        [SerializeField] private Button _matchMakingButton;
+        [SerializeField] private Button _readyButton;
+        [SerializeField] private Button _leaveButton;
+
+        [SerializeField] private MainServerClient MainServerClient;
+
         private void Start()
         {
             _roomCodeText.enabled = false;
             EventBroker.UpdateLobbyDataEvent += UpdateLobbyData;
+            
+            EventBroker.CallLoadedLobbyPanelEvent();
+
+            MainServerClient = FindObjectOfType<MainServerClient>();
+
+            _matchMakingButton.onClick.AddListener(OnMatchButtonClick);
+            _readyButton.onClick.AddListener(OnReadyButton);
+            _leaveButton.onClick.AddListener(OnLeaveButton);
         }
 
+        private void OnMatchButtonClick()
+        {
+            MainServerClient.StartMatch();
+        }
+
+        private void OnReadyButton()
+        {
+            MainServerClient.ChangeReadyState();
+        }
+
+        private void OnLeaveButton()
+        {
+            MainServerClient.LeaveLobby();
+        }
+        
         private void UpdateLobbyData(LobbyDataResponse pLobbyDataResponse, int pClientId)
         {
             _roomCodeText.text = $"Code: {pLobbyDataResponse.Lobby.RoomCode}";
@@ -41,7 +69,7 @@ namespace Networking
 
             if (thisClient.IsLobbyLeader)
             {
-                _matchMakingButton.SetActive(pLobbyDataResponse.Lobby.IsMatchmakingAllowed);   
+                _matchMakingButtonGameObject.SetActive(pLobbyDataResponse.Lobby.IsMatchmakingAllowed);   
             }
         }
 

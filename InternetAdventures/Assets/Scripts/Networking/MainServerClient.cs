@@ -26,7 +26,8 @@ public class MainServerClient : MonoBehaviour
 
     [Scene, SerializeField] private string _menuScene;
     [Scene, SerializeField] private string _gameScene;
-    
+    [Scene, SerializeField] private string _lobbyScene;
+
     private TcpClient _client;
     private bool _connectedToServer = false;
 
@@ -162,6 +163,10 @@ public class MainServerClient : MonoBehaviour
             case "MainMenu":
                 Debug.Log("Load Main Menu Scene");
                 SceneManager.LoadScene(_menuScene);
+                break;
+            case "LobbyMenu":
+                Debug.Log("Load Lobby Menu Scene");
+                SceneManager.LoadScene(_lobbyScene);
                 break;
         }
     }

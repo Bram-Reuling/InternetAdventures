@@ -138,7 +138,7 @@ namespace MainServer
             // MatchEndResponse to players in lobby
             MatchEndResponse matchEndResponse = new MatchEndResponse {ResponseCode = ResponseCode.Ok};
             // Scene Change to the players in the lobby
-            SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "MainMenu"};
+            SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "LobbyMenu"};
             // Panel Change to the players in the lobby
             PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanelFromGame"};
             
