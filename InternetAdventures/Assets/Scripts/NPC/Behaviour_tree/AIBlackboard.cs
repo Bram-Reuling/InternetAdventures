@@ -32,6 +32,9 @@ public class AIBlackboard : MonoBehaviour
     public float CurrentHealth { get; private set; }
     [SerializeField] private float initialHealth;
     [SerializeField] private float criticalHealthThreshold;
+
+    //Animation
+    [SerializeField] private Animator animator;
     
     private void AssembleBehaviourTree()
     {
@@ -70,6 +73,8 @@ public class AIBlackboard : MonoBehaviour
         }
         
         _startingNode.EvaluateState();
+        animator.SetFloat("MovementSpeed", NavAgent.velocity.magnitude);
+        Debug.Log("NavAgent velocity was " + NavAgent.velocity.magnitude);
     }
 
     public List<GameObject> GetAllNPCs()
