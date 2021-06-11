@@ -63,6 +63,9 @@ public class MainServerClient : MonoBehaviour
     {
         //ConnectToServer();
         EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanel;
+        EventBroker.ConnectToServerEvent += ConnectToServer;
+        EventBroker.JoinLobbyEvent += JoinLobby;
+        EventBroker.HostLobbyEvent += CreateLobby;
     }
 
     private void LoadedLobbyPanel()
@@ -142,7 +145,7 @@ public class MainServerClient : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            _client.Close();
+            //_client.Close();
             //ConnectToServer();
         }
     }
@@ -220,9 +223,15 @@ public class MainServerClient : MonoBehaviour
         
         Debug.Log("Menu Scene is active");
 
-        EventBroker.CallChangePanelEvent(panelChange.PanelToChangeTo);
+        StartCoroutine(CallChangePanelEvent(panelChange.PanelToChangeTo));
     }
 
+    IEnumerator CallChangePanelEvent(string panelToChangeTo)
+    {
+        yield return new WaitForSeconds(0.2f);
+        EventBroker.CallChangePanelEvent(panelToChangeTo);
+    }
+    
     private void HandleClientDataRequest(ClientDataRequest request)
     {
         Client mainServerClient = request.Client;
@@ -296,5 +305,13 @@ public class MainServerClient : MonoBehaviour
             {RequestingPlayerId = _clientId, RoomCode = _joinedRoomCode};
         
         SendObject(matchCreateRequest);
+    }
+
+    private void OnDestroy()
+    {
+        EventBroker.LoadedLobbyPanelEvent -= LoadedLobbyPanel;
+        EventBroker.ConnectToServerEvent -= ConnectToServer;
+        EventBroker.JoinLobbyEvent -= JoinLobby;
+        EventBroker.HostLobbyEvent -= CreateLobby;
     }
 }

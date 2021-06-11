@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using Shared.model;
 using Shared.protocol.Lobby;
@@ -24,16 +25,22 @@ namespace Networking
         {
             _roomCodeText.enabled = false;
             EventBroker.UpdateLobbyDataEvent += UpdateLobbyData;
-            
-            EventBroker.CallLoadedLobbyPanelEvent();
 
             MainServerClient = FindObjectOfType<MainServerClient>();
 
             _matchMakingButton.onClick.AddListener(OnMatchButtonClick);
             _readyButton.onClick.AddListener(OnReadyButton);
             _leaveButton.onClick.AddListener(OnLeaveButton);
+
+            StartCoroutine(LobbyLoaded());
         }
 
+        IEnumerator LobbyLoaded()
+        {
+            yield return new WaitForSeconds(0.1f);
+            EventBroker.CallLoadedLobbyPanelEvent();
+        }
+        
         private void OnMatchButtonClick()
         {
             MainServerClient.StartMatch();
@@ -51,6 +58,24 @@ namespace Networking
         
         private void UpdateLobbyData(LobbyDataResponse pLobbyDataResponse, int pClientId)
         {
+            if (_roomCodeText == null)
+            {
+                Debug.Log("code text is null");
+                return;
+            }
+            
+            if (_playerOneText == null)
+            {
+                Debug.Log("p1 text is null");
+                return;
+            }
+            
+            if (_playerTwoText == null)
+            {
+                Debug.Log("p2 text is null");
+                return;
+            }
+            
             _roomCodeText.text = $"Code: {pLobbyDataResponse.Lobby.RoomCode}";
             _roomCodeText.enabled = true;
 
@@ -81,6 +106,11 @@ namespace Networking
                 ReadyState.NotReady => $"<color=red>{player.Name}</color>",
                 _ => $"{player.Name}"
             };
-        }   
+        }
+
+        private void OnDestroy()
+        {
+            EventBroker.UpdateLobbyDataEvent -= UpdateLobbyData;
+        }
     }
 }

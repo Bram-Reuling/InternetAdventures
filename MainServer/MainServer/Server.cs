@@ -229,19 +229,20 @@ namespace MainServer
             {
                 room.Players.Remove(clientPair.Key);
                 
+                KeyValuePair<Client, TcpClient> secondClient =
+                    _connectedPlayers.FirstOrDefault(c => c.Key.Id == room.Players[0].Id);
+                
                 if (clientPair.Key.IsLobbyLeader)
                 {
-                    KeyValuePair<Client, TcpClient> secondClient =
-                        _connectedPlayers.FirstOrDefault(c => c.Key.Id == room.Players[0].Id);
                     Log.LogInfo($"Giving Player with ID {secondClient.Key.Id} lobby leader status", this, ConsoleColor.Magenta);
                     secondClient.Key.IsLobbyLeader = true;
                     clientPair.Key.IsLobbyLeader = false;
                     room.IsMatchmakingAllowed = false;
-
-                    LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
-                        {Lobby = room, ResponseCode = ResponseCode.Ok};
-                    SendObject(secondClient, lobbyDataResponse);
                 }
+                
+                LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
+                    {Lobby = room, ResponseCode = ResponseCode.Ok};
+                SendObject(secondClient, lobbyDataResponse);
             }
             else if (room.Players.Count == 1)
             {
@@ -262,6 +263,9 @@ namespace MainServer
                 {NewPlayerState = PlayerState.SearchingForLobby, PlayerId = clientPair.Key.Id};
             SendObject(clientPair, playerStateChangeResponse);
 
+            SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "MainMenu"};
+            SendObject(clientPair, sceneChange);
+            
             PanelChange panelChange = new PanelChange {PanelToChangeTo = "JoinHostPanel"};
             SendObject(clientPair, panelChange);
 
@@ -354,7 +358,8 @@ namespace MainServer
 
                 // Tell the client to switch to the lobby panel
                 PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanel"};
-                SendObject(clientPair, panelChange);
+                SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "LobbyMenu"};
+                SendObject(clientPair, sceneChange);
             }
         }
         
@@ -399,7 +404,8 @@ namespace MainServer
             
             // Tell the client to switch to the lobby panel
             PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanel"};
-            SendObject(clientPair, panelChange);
+            SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "LobbyMenu"};
+            SendObject(clientPair, sceneChange);
 
         }
 

@@ -31,6 +31,13 @@ public static class EventBroker
     public static event Action PlayerEnterMatchEndZoneEvent;
     public static event Action PlayerExitMatchEndZoneEvent;
 
+    public static event Action ConnectToServerEvent;
+    public static event Action JoinLobbyEvent;
+    public static event Action HostLobbyEvent;
+    public static event Action ReadyEvent;
+    public static event Action LeaveEvent;
+    public static event Action StartMatchEvent;
+
     // Functions
     public static void CallExampleEvent(int pValue)
     {
@@ -70,5 +77,35 @@ public static class EventBroker
     public static void CallPlayerExitMatchEndZoneEvent()
     {
         PlayerExitMatchEndZoneEvent?.Invoke();
+    }
+
+    public static void CallConnectToServerEvent()
+    {
+        ConnectToServerEvent?.Invoke();
+    }
+
+    public static void CallJoinLobbyEvent()
+    {
+        JoinLobbyEvent?.Invoke();
+    }
+
+    public static void CallHostLobbyEvent()
+    {
+        HostLobbyEvent?.Invoke();
+    }
+
+    public static void CallReadyEvent()
+    {
+        ReadyEvent?.Invoke();
+    }
+
+    public static void CallLeaveEvent()
+    {
+        LeaveEvent?.Invoke();
+    }
+
+    public static void CallStartMatchEvent()
+    {
+        StartMatchEvent?.Invoke();
     }
 }

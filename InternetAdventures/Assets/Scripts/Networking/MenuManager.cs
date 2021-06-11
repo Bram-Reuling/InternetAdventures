@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Networking
 {
@@ -13,6 +11,18 @@ namespace Networking
         private void Start()
         {
             EventBroker.ChangePanelEvent += ChangePanelEvent;
+
+            switch (DataHandler.MenuState)
+            {
+                case "LoginPanel":
+                    break;
+                case "MainPanel":
+                    EnableMainPanel();
+                    break;
+                case "JoinHostPanel":
+                    EnableHostJoinPanel();
+                    break;
+            }
         }
 
         private void ChangePanelEvent(string pPanel)    
@@ -36,11 +46,23 @@ namespace Networking
         {
             _loginPanel.SetActive(false);
             _mainPanel.SetActive(true);
+
+            DataHandler.MenuState = "MainPanel";
         }
 
         private void EnableHostJoinPanel()
         {
+            //yield return new WaitForSeconds(0.05f);
+            
+            EnableMainPanel();
             _joinHostPanel.SetActive(true);
+
+            DataHandler.MenuState = "JoinHostPanel";
+        }
+
+        private void OnDestroy()
+        {
+            EventBroker.ChangePanelEvent -= ChangePanelEvent;
         }
     }
 }

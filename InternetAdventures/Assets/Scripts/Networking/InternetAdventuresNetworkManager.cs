@@ -8,6 +8,7 @@ using Shared.model;
 using Shared.protocol;
 using Shared.protocol.Match;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Networking
 {
@@ -18,6 +19,8 @@ namespace Networking
 
         [SerializeField] private string _mainServerAddress = "localhost";
         [SerializeField] private int _mainServerPort = 55555;
+
+        [Scene, SerializeField] private string _lobbyScene;
 
         private TcpClient _client;
         private string _serverRoomCode = "";
@@ -85,8 +88,14 @@ namespace Networking
             else
             {
                 Debug.Log("Starting Client!");
+                EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanelEvent;
                 StartClient();
             }
+        }
+
+        private void LoadedLobbyPanelEvent()
+        {
+            DestroyImmediate(this.gameObject);
         }
 
         private void PlayerEnterMatchEndZoneEvent()
@@ -197,6 +206,21 @@ namespace Networking
             {
                 Debug.Log("Cannot send message!");
                 Debug.Log(e.Message);
+            }
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            if (IsServer)
+            {
+                EventBroker.PlayerEnterMatchEndZoneEvent -= PlayerEnterMatchEndZoneEvent;
+                EventBroker.PlayerExitMatchEndZoneEvent -= PlayerExitMatchEndZoneEvent;
+            }
+            else
+            {
+                EventBroker.LoadedLobbyPanelEvent -= LoadedLobbyPanelEvent;
             }
         }
     }
