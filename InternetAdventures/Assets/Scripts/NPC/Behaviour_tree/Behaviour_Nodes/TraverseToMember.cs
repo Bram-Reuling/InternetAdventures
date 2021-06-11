@@ -67,7 +67,7 @@ public class TraverseToMember : Node
         {
             randomPointInMemberProximity = false;
             Vector2 randomXZDirection = Random.insideUnitCircle.normalized * 
-            (goRandom ? Random.Range(_minimalOffset, 20 - i) : Random.Range(1.25f, 1.75f));
+            (goRandom ? Random.Range(_minimalOffset, 20 - i) : Random.Range(1.25f, 2.5f));
 
             newPosition = new Vector3(randomXZDirection.x , _communityMemberBlackboard.transform.position.y, randomXZDirection.y);
             // if (goRandom)

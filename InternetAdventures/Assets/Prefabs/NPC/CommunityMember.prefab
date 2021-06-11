@@ -1305,7 +1305,7 @@ GameObject:
   - component: {fileID: 8395200038346799518}
   - component: {fileID: 8395200038346799509}
   - component: {fileID: 8395200038346799514}
-  - component: {fileID: -4569730652455116139}
+  - component: {fileID: 3828683399807458662}
   - component: {fileID: 7134617730179551935}
   - component: {fileID: 7586038150961620183}
   m_Layer: 0
@@ -1375,7 +1375,7 @@ MonoBehaviour:
   minimalTimeForImageChange: 5
   maximalTimeForImageChange: 10
   imageSlot: {fileID: 8395200039411600640}
---- !u!114 &-4569730652455116139
+--- !u!114 &3828683399807458662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1384,19 +1384,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8395200038346799519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 225ce98f03fb3354d9658a14160bdae2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c4d16ba5faa0b04d8c4e7eb5fa4f99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MemberPair: {fileID: 0}
-  minTimer: 4
-  maxTimer: 12.5
-  memberProximity: 3
   tickTimer: 0
   _navMesh: {fileID: 7134617730179551935}
   navMeshObstacle: {fileID: 7586038150961620183}
   initialHealth: 100
   criticalHealthThreshold: 20
   animator: {fileID: 1334179642309416667}
+  MemberPair: {fileID: 0}
+  minTimer: 4
+  maxTimer: 14
+  memberProximity: 2.5
 --- !u!195 &7134617730179551935
 NavMeshAgent:
   m_ObjectHideFlags: 0
