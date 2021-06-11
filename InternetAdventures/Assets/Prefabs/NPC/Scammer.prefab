@@ -678,12 +678,12 @@ GameObject:
   - component: {fileID: 2344323985209881132}
   - component: {fileID: 2344323985209881127}
   - component: {fileID: 2344323985209881128}
-  - component: {fileID: 1485068454975220007}
+  - component: {fileID: 9185872087111730233}
   - component: {fileID: 3966064664962603277}
   - component: {fileID: 4417484002340745061}
   m_Layer: 0
   m_Name: Scammer
-  m_TagString: AI
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -748,7 +748,7 @@ MonoBehaviour:
   minimalTimeForImageChange: 5
   maximalTimeForImageChange: 10
   imageSlot: {fileID: 2344323984115631794}
---- !u!114 &1485068454975220007
+--- !u!114 &9185872087111730233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -757,19 +757,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2344323985209881133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 225ce98f03fb3354d9658a14160bdae2, type: 3}
+  m_Script: {fileID: 11500000, guid: e0eb01274c0d1b343a88b8b58c072c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MemberPair: {fileID: 0}
-  minTimer: 4
-  maxTimer: 12.5
-  memberProximity: 3
   tickTimer: 0
-  _navMesh: {fileID: 3966064664962603277}
+  _navMeshAgent: {fileID: 3966064664962603277}
   navMeshObstacle: {fileID: 4417484002340745061}
-  initialHealth: 100
+  _navMesh: {fileID: 3966064664962603277}
+  initialHealth: 0
   criticalHealthThreshold: 20
   animator: {fileID: 5083155067871452521}
+  objectToFollow: {fileID: 0}
+  distanceToObject: 1.5
 --- !u!195 &3966064664962603277
 NavMeshAgent:
   m_ObjectHideFlags: 0

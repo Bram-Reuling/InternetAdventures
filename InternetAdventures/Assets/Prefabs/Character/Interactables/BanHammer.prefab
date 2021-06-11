@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 183589566303122960}
   - component: {fileID: 4783327313570943141}
   - component: {fileID: 2071267865242391889}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BanHammer
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 6936962886927348469}
   - component: {fileID: 6335106073431670096}
   - component: {fileID: 8074433106628610458}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: hammer_smaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}

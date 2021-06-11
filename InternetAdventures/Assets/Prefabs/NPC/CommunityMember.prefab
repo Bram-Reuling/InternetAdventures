@@ -1388,8 +1388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickTimer: 0
-  _navMesh: {fileID: 7134617730179551935}
+  _navMeshAgent: {fileID: 7134617730179551935}
   navMeshObstacle: {fileID: 7586038150961620183}
+  _navMesh: {fileID: 7134617730179551935}
   initialHealth: 100
   criticalHealthThreshold: 20
   animator: {fileID: 1334179642309416667}

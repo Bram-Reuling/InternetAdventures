@@ -15,12 +15,15 @@ public abstract class AIBlackboard : MonoBehaviour
     private float _timePassed;
 
     //NavMeshAgent
-    public NavMeshAgent NavAgent => _navMesh;
-    [SerializeField] private NavMeshAgent _navMesh;
+    public NavMeshAgent NavAgent => _navMeshAgent;
+    [SerializeField] private NavMeshAgent _navMeshAgent;
 
     //NavMeshObstacle
     public NavMeshObstacle NavObstacle => navMeshObstacle;
     [SerializeField] private NavMeshObstacle navMeshObstacle;
+
+    public NavMeshData NavMesh => _navMesh;
+    [SerializeField] private NavMeshData _navMesh;
 
     //Health
     public float CurrentHealth { get; private set; }
