@@ -12,6 +12,7 @@ using Shared.protocol.Lobby;
 using Shared.protocol.Match;
 using Shared.protocol.protocol;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,9 +37,27 @@ public class MainServerClient : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (DataHandler.IsMainServerClientAlreadySpawned == false)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            DataHandler.IsMainServerClientAlreadySpawned = true;
+            DataHandler.MainServerClientInstance = this;
+        }
+        else
+        {
+            // Give data to already existing one
+            DataHandler.MainServerClientInstance.SetInputFields(_nameInput, _descriptionInput, _roomCodeInput);
+            DestroyImmediate(this.gameObject);
+        }
     }
 
+    public void SetInputFields(TMP_InputField name, TMP_InputField desc, TMP_InputField code)
+    {
+        _nameInput = name;
+        _descriptionInput = desc;
+        _roomCodeInput = code;
+    }
+    
     private void Start()
     {
         //ConnectToServer();
@@ -123,7 +142,7 @@ public class MainServerClient : MonoBehaviour
         {
             Debug.Log(e.Message);
             _client.Close();
-            ConnectToServer();
+            //ConnectToServer();
         }
     }
 

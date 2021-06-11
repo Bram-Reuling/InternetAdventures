@@ -150,7 +150,7 @@ namespace MainServer
                 // Send lobby data
                 SendObject(pair, matchEndResponse);
                 SendObject(pair, sceneChange);
-                SendObject(pair, panelChange);
+                //SendObject(pair, panelChange);
             }
             
             // Stop the process

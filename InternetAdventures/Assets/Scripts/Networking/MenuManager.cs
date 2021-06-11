@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Networking
@@ -62,6 +63,25 @@ namespace Networking
 
         private void EnableLobbyPanelFromGame()
         {
+            if (_loginPanel == null)
+            {
+                Debug.Log("Login panel is null");
+            }
+            
+            if (_mainPanel == null)
+            {
+                Debug.Log("Main panel is null");
+            }
+            
+            if (_joinHostPanel == null)
+            {
+                Debug.Log("Join Host panel is null");
+            }
+            
+            if (_lobbyPanel == null)
+            {
+                Debug.Log("Lobby panel is null");
+            }
             _loginPanel.SetActive(false);
             _mainPanel.SetActive(true);
             _joinHostPanel.SetActive(false);
