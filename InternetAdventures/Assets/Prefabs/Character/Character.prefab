@@ -1123,7 +1123,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 60
+  m_SlopeLimit: 45
   m_StepOffset: 0.2
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
@@ -1878,20 +1878,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6088667288562305892}
     - target: {fileID: 2071267865242391889, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
-      propertyPath: animationTimer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2071267865242391889, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: characterAnimator
       value: 
       objectReference: {fileID: 8123460606793852159}
     - target: {fileID: 5155732482347536873, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_Name
       value: BanHammer
-      objectReference: {fileID: 0}
-    - target: {fileID: 5155732482347536873, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}

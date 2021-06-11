@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine.InputSystem;
 
 public class BanHammer : Interactable
@@ -60,6 +61,12 @@ public class BanHammer : Interactable
                 gameObjectInReach.transform.localScale = _initialScale;
                 gameObjectInReach.transform.DOShakeScale(1, 1.0f);
             }
+
+            if (gameObjectInReach.CompareTag("AI"))
+            {
+                Destroy(gameObjectInReach.GetComponent<CommunityMemberBlackboard>());
+                gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().StopPlayback();
+            }
             
             //Add impulse upwards if there's a rigidbody.
             Rigidbody rigidbody = gameObjectInReach.GetComponent<Rigidbody>();
@@ -78,8 +85,11 @@ public class BanHammer : Interactable
         if (!_gameObjectsInTrigger.Contains(other.gameObject))
         {
             //Only add game object when its in the interactable layers.
-            if((interactableLayers.value & (1 << other.gameObject.layer)) > 0)
+            if ((interactableLayers.value & (1 << other.gameObject.layer)) > 0)
+            {
                 _gameObjectsInTrigger.Add(other.gameObject);
+                Debug.Log("added " + other.name);
+            }
         }
     }    
     

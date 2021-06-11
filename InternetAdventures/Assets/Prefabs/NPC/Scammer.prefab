@@ -768,7 +768,7 @@ MonoBehaviour:
   criticalHealthThreshold: 20
   animator: {fileID: 5083155067871452521}
   objectToFollow: {fileID: 0}
-  distanceToObject: 1.5
+  distanceToObject: 2.5
 --- !u!195 &3966064664962603277
 NavMeshAgent:
   m_ObjectHideFlags: 0
