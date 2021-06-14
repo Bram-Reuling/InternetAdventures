@@ -12,7 +12,6 @@ public class HasMemberNode : Node
     public override State EvaluateState()
     {
         nodeState = _communityMemberBlackboard.MemberPair != null ? State.Success : State.Failure;
-        Debug.Log("Has member ");
         return nodeState;
     }
 }

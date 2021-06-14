@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshObstacle))]
 
 public abstract class AIBlackboard : MonoBehaviour
 {
@@ -43,6 +45,11 @@ public abstract class AIBlackboard : MonoBehaviour
     protected virtual void InitializeData()
     {
         CurrentHealth = initialHealth;
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshObstacle = GetComponent<NavMeshObstacle>();
+        animator = transform.GetChild(1).GetComponent<Animator>();
+        navMeshObstacle.enabled = false;
+        _navMeshAgent.enabled = true;
     }
 
     protected virtual void Update()

@@ -34,7 +34,6 @@ public class TraverseToMember : Node
             foreach (var npc in allCurrentNPC)
             {
                 CommunityMemberBlackboard memberBlackboard = npc.GetComponent<CommunityMemberBlackboard>();
-                //Don't consider moving to an AI if it has a member or is currently walking somewhere.
                 if (_communityMemberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
                 potentialMembers.Add(npc);
             }

@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class BadMemberBlackboard : CommunityMemberBlackboard
 {
-    [SerializeField] private float minConvinceInterval, maxConvinceInterval;
-    
     protected override void AssembleBehaviourTree()
     {
         //Health=====================================================================================================================================
@@ -21,7 +19,8 @@ public class BadMemberBlackboard : CommunityMemberBlackboard
 
         HasMemberNode hasMemberNode = new HasMemberNode(this);
         RotateToMember rotateToMember = new RotateToMember(this);
-        SequenceNode atMember = new SequenceNode(new List<Node>() {atDestinationNode, hasMemberNode, rotateToMember});
+        ConvertToBadNode convertToBadNode = new ConvertToBadNode(this);
+        SequenceNode atMember = new SequenceNode(new List<Node>() {atDestinationNode, hasMemberNode, rotateToMember, convertToBadNode});
 
         SelectorNode pairing = new SelectorNode(new List<Node>() {findNewMember, atMember});
         
