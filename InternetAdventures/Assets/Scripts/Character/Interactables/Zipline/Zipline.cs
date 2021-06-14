@@ -63,6 +63,6 @@ public class Zipline : MonoBehaviour
         if(!drawDebug) return;
         Gizmos.color = Color.green;
         Gizmos.DrawLine(_post2.transform.position + yOffset, _post1.transform.position + yOffset);
-        GetShortestVectorToLine(GameObject.FindWithTag("Character").transform.position);
+        //GetShortestVectorToLine(GameObject.FindWithTag("Character").transform.position);
     }
 }
