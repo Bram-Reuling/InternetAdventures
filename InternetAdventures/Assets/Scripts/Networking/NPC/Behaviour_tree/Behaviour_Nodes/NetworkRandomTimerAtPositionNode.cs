@@ -29,7 +29,7 @@ public class NetworkRandomTimerAtPositionNode : Node
             _communityMemberBlackboard.NavAgent.enabled = true;
         }
 
-        if (_timePassed >= _currentTimer * 0.97f)
+        if (_timePassed >= _currentTimer * 0.95f)
             _communityMemberBlackboard.NavObstacle.enabled = false;
 
         return nodeState;

@@ -26,9 +26,6 @@ public class NetworkConvertToBadNode : Node
                     NetworkGoodMemberBlackboard goodMemberBlackboard = _communityMemberBlackboard.MemberPair.GetComponent<NetworkGoodMemberBlackboard>();
                     goodMemberBlackboard.TurnBad();
                     _oldMember = _communityMemberBlackboard.MemberPair;
-                    //_communityMemberBlackboard.MemberPair.GetComponent<NavMeshObstacle>().enabled = false;
-                    //_communityMemberBlackboard.MemberPair.GetComponent<NavMeshAgent>().enabled = true;
-                    _communityMemberBlackboard.MemberPair = null;
                     nodeState = State.Success;
                 }
                 catch

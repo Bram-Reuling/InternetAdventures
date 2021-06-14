@@ -31,6 +31,7 @@ public class NetworkGoodMemberBlackboard : NetworkCommunityMemberBlackboard
     {
         //Turn bad called
         Debug.Log(gameObject.name + " turned bad!");
+        gameObject.AddComponent<NetworkBadMemberBlackboard>().InitializeData(minTimer, maxTimer, MemberPair);
         Destroy(this);
         gameObject.AddComponent<NetworkBadMemberBlackboard>();
     }

@@ -34,13 +34,16 @@ public class NetworkTraverseToMember : Node
             foreach (var npc in allCurrentNPC)
             {
                 NetworkCommunityMemberBlackboard memberBlackboard = npc.GetComponent<NetworkCommunityMemberBlackboard>();
-                if (_communityMemberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
+                if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
                 potentialMembers.Add(npc);
             }
 
             if (potentialMembers.Count > 0)
             {
                 GameObject memberToGoTo = potentialMembers.ElementAt(Random.Range(0, potentialMembers.Count - 1));
+                if (_communityMemberBlackboard.MemberPair != null)
+                    _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair =
+                        null;
                 _communityMemberBlackboard.MemberPair = memberToGoTo;
                 memberToGoTo.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = _communityMemberBlackboard.gameObject;
                 memberPosition = memberToGoTo.transform.position;
@@ -52,7 +55,8 @@ public class NetworkTraverseToMember : Node
             }
         }
         
-        if(goRandom){
+        if(goRandom)
+        {
             if(_communityMemberBlackboard.MemberPair != null)
                 _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = null;
             _communityMemberBlackboard.MemberPair = null;
