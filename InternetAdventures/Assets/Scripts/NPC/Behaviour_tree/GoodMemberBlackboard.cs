@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GoodMemberBlackboard : CommunityMemberBlackboard
 {
@@ -24,5 +25,13 @@ public class GoodMemberBlackboard : CommunityMemberBlackboard
         
         //Starting Node==============================================================================================================================
         _startingNode = new SelectorNode(new List<Node>() {healthSequence, pairing});
+    }
+
+    public void TurnBad()
+    {
+        //Turn bad called
+        Debug.Log(gameObject.name + " turned bad!");
+        Destroy(this);
+        gameObject.AddComponent<BadMemberBlackboard>();
     }
 }

@@ -1,42 +1,48 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ConvertToBadNode : Node
 {
     private readonly CommunityMemberBlackboard _communityMemberBlackboard;
-    private readonly float minConvinceInterval, maxConvinceInterval;
+    private GameObject _oldMember;
     private float _timePassed;
     private float _currentTimer;
 
-    public ConvertToBadNode(in CommunityMemberBlackboard pCommunityMemberBlackboard, in float pMinConvinceInterval, in float pMaxConvinceInterval)
+    public ConvertToBadNode(in CommunityMemberBlackboard pCommunityMemberBlackboard)
     {
         _communityMemberBlackboard = pCommunityMemberBlackboard;
-        minConvinceInterval = pMinConvinceInterval;
-        maxConvinceInterval = pMaxConvinceInterval;
     }
     
     public override State EvaluateState()
     {
-        // if (_timePassed >= _currentTimer)
-        // {
-        //     _timePassed = 0;
-        //     _currentTimer = Random.Range(minConvinceInterval, maxConvinceInterval);
-        //     
-        //     //Try to convince
-        //     if (_communityMemberBlackboard.MemberPair != null &&
-        //         _communityMemberBlackboard.NavAgent.velocity.magnitude < 0.1f &&
-        //         _communityMemberBlackboard.NavAgent.enabled == false)
-        //     {
-        //         if (Random.Range(1.0f, 2.0f) > 0.9f)
-        //         {
-        //             _communityMemberBlackboard.MemberPair.GetComponent<GoodMemberBlackboard>().TurnBad();
-        //             _communityMemberBlackboard.MemberPair = null;
-        //         }
-        //     }
-        // }
-        // else 
-            nodeState = State.Success;
-        
-        _timePassed += Time.deltaTime;
+        if (_oldMember != _communityMemberBlackboard.MemberPair)
+        {
+            _oldMember = _communityMemberBlackboard.MemberPair;
+            if (Random.Range(0.0f, 1.0f) <= 1.15f)
+            {
+                //Convinced to turn bad
+                try
+                {
+                    GoodMemberBlackboard goodMemberBlackboard = _communityMemberBlackboard.MemberPair.GetComponent<GoodMemberBlackboard>();
+                    goodMemberBlackboard.TurnBad();
+                    _oldMember = _communityMemberBlackboard.MemberPair;
+                    //_communityMemberBlackboard.MemberPair.GetComponent<NavMeshObstacle>().enabled = false;
+                    //_communityMemberBlackboard.MemberPair.GetComponent<NavMeshAgent>().enabled = true;
+                    _communityMemberBlackboard.MemberPair = null;
+                    nodeState = State.Success;
+                }
+                catch
+                {
+                    Debug.Log("Member was already bad");
+                }
+            }
+            else
+            {
+                //Not successfully convinced
+                nodeState = State.Failure;
+            }   
+        }
+
         return nodeState;
     }
 }
