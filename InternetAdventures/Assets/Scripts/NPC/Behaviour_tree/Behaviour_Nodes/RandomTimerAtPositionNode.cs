@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class RandomTimerAtPositionNode : Node
 {
@@ -9,7 +6,6 @@ public class RandomTimerAtPositionNode : Node
     private readonly float _maxTime;
     private float _timePassed;
     private float _currentTimer;
-    private bool _pathComplete;
     private CommunityMemberBlackboard _communityMemberBlackboard;
 
     public RandomTimerAtPositionNode(CommunityMemberBlackboard pAIBlackboard, float pMinTime, float pMaxTime)
@@ -23,24 +19,14 @@ public class RandomTimerAtPositionNode : Node
     public override State EvaluateState()
     {
         nodeState = State.Failure;
-        if (!_communityMemberBlackboard.NavAgent.hasPath && _communityMemberBlackboard.NavAgent.pathStatus == NavMeshPathStatus.PathComplete)
-        {
-            _pathComplete = true;
-            _communityMemberBlackboard.NavAgent.enabled = false;
-            _communityMemberBlackboard.NavObstacle.enabled = true;
-        }
-        
-        if (_pathComplete)
-            _timePassed += Time.deltaTime;
-        
-        
+        _timePassed += Time.deltaTime;
+
         if (_timePassed >= _currentTimer)
         {
             nodeState = State.Success;
             _timePassed = 0;
             _currentTimer = Random.Range(_minTime, _maxTime);
             _communityMemberBlackboard.NavAgent.enabled = true;
-            _pathComplete = false;
         }
 
         if (_timePassed >= _currentTimer * 0.97f)

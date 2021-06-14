@@ -1305,12 +1305,12 @@ GameObject:
   - component: {fileID: 8395200038346799518}
   - component: {fileID: 7327484259800117017}
   - component: {fileID: 8395200038346799509}
+  - component: {fileID: 14062027309115334}
   - component: {fileID: 8395200038346799514}
-  - component: {fileID: 3828683399807458662}
   - component: {fileID: 7134617730179551935}
   - component: {fileID: 7586038150961620183}
   m_Layer: 14
-  m_Name: CommunityMember
+  m_Name: GoodCommunityMember
   m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1376,6 +1376,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumTriggerSpan: 10
   cameraRig: {fileID: 0}
+--- !u!114 &14062027309115334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395200038346799519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501d2fcbda49c2c43b88453b5ffbc9bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tickTimer: 0
+  _navMeshAgent: {fileID: 7134617730179551935}
+  navMeshObstacle: {fileID: 7586038150961620183}
+  _navMesh: {fileID: 23800000, guid: 2c934eb329b6a6846bfc8d79b4654fa4, type: 2}
+  initialHealth: 100
+  criticalHealthThreshold: 20
+  animator: {fileID: 1334179642309416667}
+  MemberPair: {fileID: 0}
+  minTimer: 5
+  maxTimer: 8
+  memberProximity: 2.5
 --- !u!114 &8395200038346799514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,29 +1415,6 @@ MonoBehaviour:
   minimalTimeForImageChange: 5
   maximalTimeForImageChange: 10
   imageSlot: {fileID: 8395200039411600640}
---- !u!114 &3828683399807458662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8395200038346799519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c4d16ba5faa0b04d8c4e7eb5fa4f99f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tickTimer: 0
-  _navMeshAgent: {fileID: 7134617730179551935}
-  navMeshObstacle: {fileID: 7586038150961620183}
-  _navMesh: {fileID: 23800000, guid: 2c934eb329b6a6846bfc8d79b4654fa4, type: 2}
-  initialHealth: 100
-  criticalHealthThreshold: 20
-  animator: {fileID: 1334179642309416667}
-  MemberPair: {fileID: 0}
-  minTimer: 4
-  maxTimer: 14
-  memberProximity: 2.5
 --- !u!195 &7134617730179551935
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,6 +30,7 @@ public abstract class AIBlackboard : MonoBehaviour
 
     //Animation
     [SerializeField] private Animator animator;
+    private static readonly int MovementSpeed = Animator.StringToHash("MovementSpeed");
 
     protected abstract void AssembleBehaviourTree();
 
@@ -56,6 +55,6 @@ public abstract class AIBlackboard : MonoBehaviour
         }
         
         _startingNode.EvaluateState();
-        animator.SetFloat("MovementSpeed", NavAgent.velocity.magnitude);
+        animator.SetFloat(MovementSpeed, NavAgent.velocity.magnitude);
     }
 }
