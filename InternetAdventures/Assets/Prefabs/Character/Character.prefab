@@ -1018,7 +1018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5474631957821710355}
   m_LocalRotation: {x: -0.022996044, y: -0.024259511, z: -0.68757063, w: 0.7253477}
-  m_LocalPosition: {x: 0.35512698, y: -0.4360441, z: -0.042189598}
+  m_LocalPosition: {x: 0.35512698, y: -0.4360441, z: -0.04218956}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4816108716541027755}
@@ -1123,7 +1123,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 60
+  m_SlopeLimit: 45
   m_StepOffset: 0.2
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
@@ -1727,7 +1727,7 @@ NavMeshObstacle:
   m_Extents: {x: 0.5, y: 1, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
-  m_CarveOnlyStationary: 1
+  m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
 --- !u!1 &8311810253159430210
@@ -1878,20 +1878,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6088667288562305892}
     - target: {fileID: 2071267865242391889, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
-      propertyPath: animationTimer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2071267865242391889, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: characterAnimator
       value: 
       objectReference: {fileID: 8123460606793852159}
     - target: {fileID: 5155732482347536873, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
       propertyPath: m_Name
       value: BanHammer
-      objectReference: {fileID: 0}
-    - target: {fileID: 5155732482347536873, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d9c3a6f924299649b134189b68b8e6f, type: 3}

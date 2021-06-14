@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5590937895244017420}
   - component: {fileID: 8807030901625397417}
   - component: {fileID: 6763329910990034019}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: pushgun11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 214708549029508458}
   - component: {fileID: 3233229994015860528}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ShockwaveGun
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -133,6 +133,7 @@ MonoBehaviour:
   cameraShakeStrength: 0.1
   cameraShakeDuration: 1
   playerInput: {fileID: 0}
+  characterAnimator: {fileID: 0}
   range: 100
   shockwaveRadius: 4
   shockwaveStrength: 500
