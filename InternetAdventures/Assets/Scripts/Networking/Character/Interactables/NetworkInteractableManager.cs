@@ -90,6 +90,12 @@ public class NetworkInteractableManager : NetworkBehaviour
                 RpcSetCapsuleColliderProperties(gameObjectInReach);
             }
 
+            if (gameObjectInReach.CompareTag("AI"))
+            {
+                Destroy(gameObjectInReach.GetComponent<NetworkCommunityMemberBlackboard>());
+                gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().StopPlayback();
+            }
+            
             //Add impulse upwards if there's a rigidbody.
             Rigidbody rigidbody = gameObjectInReach.GetComponent<Rigidbody>();
             if (rigidbody != null)
