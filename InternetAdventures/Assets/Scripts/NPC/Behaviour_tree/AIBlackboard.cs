@@ -48,8 +48,6 @@ public abstract class AIBlackboard : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshObstacle = GetComponent<NavMeshObstacle>();
         animator = transform.GetChild(1).GetComponent<Animator>();
-        navMeshObstacle.enabled = false;
-        _navMeshAgent.enabled = true;
     }
 
     protected virtual void Update()

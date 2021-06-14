@@ -15,4 +15,12 @@ public abstract class CommunityMemberBlackboard : AIBlackboard
         allNPCS.Remove(gameObject);
         return allNPCS;
     }
+
+    public void InitializeData(float pMinTimer, float pMaxTimer, GameObject pMemberPair)
+    {
+        base.InitializeData();
+        minTimer = pMinTimer;
+        maxTimer = pMaxTimer;
+        MemberPair = pMemberPair;
+    }
 }
