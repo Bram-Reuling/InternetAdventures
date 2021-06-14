@@ -31,7 +31,9 @@ public class GoodMemberBlackboard : CommunityMemberBlackboard
     {
         //Turn bad called
         Debug.Log(gameObject.name + " turned bad!");
+        gameObject.AddComponent<BadMemberBlackboard>().InitializeData(minTimer, maxTimer, MemberPair);
         Destroy(this);
-        gameObject.AddComponent<BadMemberBlackboard>();
+        //NavAgent.enabled = false;
+        //NavObstacle.enabled = false;
     }
 }
