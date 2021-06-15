@@ -68,6 +68,8 @@ public class BanHammer : Interactable
                 catch{Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());}
                 gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().StopPlayback();
                 LoseWinHandler.RemoveFromList(gameObjectInReach);
+                gameObjectInReach.tag = "Untagged";
+                gameObjectInReach.layer = new int();
             }
             
             //Add impulse upwards if there's a rigidbody.
