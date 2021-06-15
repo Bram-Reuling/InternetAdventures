@@ -12,6 +12,7 @@ public class Zipline : MonoBehaviour
     //Info: 'yOffset' is the offset on the y-axis from the center of a zipline post. This way the 'actual'
     //zipline can be moved up/down the post.
     [SerializeField] private Vector3 yOffset;
+    public Vector3 YOffset => yOffset;
     [SerializeField] private bool drawDebug;
     
     private Vector3 GetDirectionVector()
