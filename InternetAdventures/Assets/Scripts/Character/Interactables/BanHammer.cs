@@ -68,6 +68,10 @@ public class BanHammer : Interactable
                 catch{Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());}
                 gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().StopPlayback();
                 LoseWinHandler.RemoveFromList(gameObjectInReach);
+                
+                //Reset tag and layer so this 'smashed' AI will not be further considered by other AIs.
+                //This is especially important since the blackboard component is getting removed and will result in an 
+                //exception otherwise.
                 gameObjectInReach.tag = "Untagged";
                 gameObjectInReach.layer = new int();
             }
