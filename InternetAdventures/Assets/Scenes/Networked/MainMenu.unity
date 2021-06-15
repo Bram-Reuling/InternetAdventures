@@ -3093,10 +3093,10 @@ MonoBehaviour:
   _nameInput: {fileID: 988599968}
   _descriptionInput: {fileID: 747754232}
   _roomCodeInput: {fileID: 481119683}
-  _server: localhost
+  _server: 34.141.143.31
   _port: 55555
   _menuScene: Assets/Scenes/Networked/MainMenu.unity
-  _gameScene: Assets/Scenes/Networked/SceneBramNetworked.unity
+  _gameScene: Assets/Scenes/Networked/Level1.unity
   _lobbyScene: Assets/Scenes/Networked/LobbyScene.unity
   _clientName: Bram
 --- !u!1 &2056029201
