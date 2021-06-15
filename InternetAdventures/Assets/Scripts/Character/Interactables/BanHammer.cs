@@ -64,8 +64,10 @@ public class BanHammer : Interactable
 
             if (gameObjectInReach.CompareTag("AI"))
             {
-                Destroy(gameObjectInReach.GetComponent<CommunityMemberBlackboard>());
+                try{Destroy(gameObjectInReach.GetComponent<GoodMemberBlackboard>());}
+                catch{Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());}
                 gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().StopPlayback();
+                LoseWinHandler.RemoveFromList(gameObjectInReach);
             }
             
             //Add impulse upwards if there's a rigidbody.
@@ -88,7 +90,6 @@ public class BanHammer : Interactable
             if ((interactableLayers.value & (1 << other.gameObject.layer)) > 0)
             {
                 _gameObjectsInTrigger.Add(other.gameObject);
-                Debug.Log("added " + other.name);
             }
         }
     }    
