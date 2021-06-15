@@ -207,7 +207,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 60
+  m_SlopeLimit: 45
   m_StepOffset: 0.2
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1b3525d7d315a47ba223574283f713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushForce: 20
+  pushForce: 5000
   interactableLayers:
     serializedVersion: 2
     m_Bits: 2048
@@ -460,7 +460,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   UserInputAllowed: 0
-  jumpHeight: 9
+  jumpHeight: 10
   movementSpeed: 5
   gravityMultiplier: 3
   rotationOnMovementMultiplier: 0.7
@@ -2318,6 +2318,30 @@ PrefabInstance:
     - target: {fileID: 3233229994015860528, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
       propertyPath: shockwaveStrength
       value: 75000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8387275685348839173, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
       propertyPath: m_Name
