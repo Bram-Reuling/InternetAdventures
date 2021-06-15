@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class ShockwaveGun : Interactable
 {
@@ -12,11 +13,14 @@ public class ShockwaveGun : Interactable
     [SerializeField] private float shockwaveStrength;
     [SerializeField] private float possibleHitRadius;
     [SerializeField] private bool showDebugInfo;
+    [SerializeField] private VisualEffect effect;
+
 
     private void Start()
     {
         //Setup input
         playerInput.actions.FindAction("Interactable").performed += ShootGun;
+        effect.playRate = 3;
     }
 
     private void Update()
@@ -27,6 +31,8 @@ public class ShockwaveGun : Interactable
     private void ShootGun(InputAction.CallbackContext pCallback)
     {
         if (!gameObject.activeSelf) return;
+        effect.Play();
+
         RaycastHit[] overlapColliders =
             Physics.SphereCastAll(transform.position, possibleHitRadius, transform.forward, range, interactableLayers);
 
