@@ -27,6 +27,7 @@ public class ConvertToBadNode : Node
                 {
                     GoodMemberBlackboard goodMemberBlackboard = _communityMemberBlackboard.MemberPair.GetComponent<GoodMemberBlackboard>();
                     goodMemberBlackboard.TurnBad();
+                    LoseWinHandler.AddToBadList(_communityMemberBlackboard.MemberPair);
                     _oldMember = _communityMemberBlackboard.MemberPair;
                     nodeState = State.Success;
                 }
