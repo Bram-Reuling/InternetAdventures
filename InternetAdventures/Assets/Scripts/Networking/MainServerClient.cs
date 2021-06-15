@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Mirror;
@@ -21,7 +22,7 @@ public class MainServerClient : MonoBehaviour
     [SerializeField] private TMP_InputField _nameInput;
     [SerializeField] private TMP_InputField _descriptionInput;
     [SerializeField] private TMP_InputField _roomCodeInput;
-    [SerializeField] private string _server = "localhost";
+    [SerializeField] private string _server = "";
     [SerializeField] private int _port = 55555;
 
     [Scene, SerializeField] private string _menuScene;
@@ -30,6 +31,10 @@ public class MainServerClient : MonoBehaviour
 
     private TcpClient _client;
     private bool _connectedToServer = false;
+
+    private IPAddress ipAddress;
+
+    private bool IsUsingIPAddress = false;
 
     [SerializeField] private string _clientName = "Bram";
     private int _clientId = 0;
@@ -61,6 +66,7 @@ public class MainServerClient : MonoBehaviour
     
     private void Start()
     {
+        ipAddress = IPAddress.Parse(_server);
         //ConnectToServer();
         EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanel;
         EventBroker.ConnectToServerEvent += ConnectToServer;
@@ -79,12 +85,14 @@ public class MainServerClient : MonoBehaviour
         if (string.IsNullOrEmpty(_nameInput.text)) return;
         try
         {
+            Debug.Log("Setting the client name.");
             _clientName = _nameInput.text;
-            
+            Debug.Log("Creating a new TCP Client");
             _client = new TcpClient();
-            _client.Connect(_server, _port);
-            _connectedToServer = true;
+            Debug.Log("Trying to connect to the server.");
+            _client.Connect(ipAddress, _port);
             Debug.Log("Connected to server.");
+            _connectedToServer = true;
         }
         catch (Exception e)
         {

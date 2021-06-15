@@ -5,8 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using shared;
 using Shared;
-using Shared.log;
 using Shared.model;
 using Shared.protocol;
 using Shared.protocol.Lobby;
@@ -33,10 +33,16 @@ namespace MainServer
             try
             {
                 Log.LogInfo("Server starting on port 55555", this, ConsoleColor.White);
-                //Console.WriteLine("Server started on port 55555");
+                Console.WriteLine("Server started on port 55555");
 
                 _listener = new TcpListener(IPAddress.Any, 55555);
                 _listener.Start();
+                
+                IPEndPoint localEndPoint = _listener.Server.LocalEndPoint as IPEndPoint;
+                IPEndPoint remoteEndPoint = _listener.Server.RemoteEndPoint as IPEndPoint;
+
+                if (localEndPoint != null) Console.WriteLine($"Started on Local IP: {localEndPoint.Address}");
+                if (remoteEndPoint != null) Console.WriteLine($"Started on Remote IP: {remoteEndPoint.Address}");
 
                 while (true)
                 {
@@ -61,10 +67,12 @@ namespace MainServer
                 while (_listener.Pending())
                 {
                     Log.LogInfo("New client pending!", this, ConsoleColor.Green);
+                    Console.WriteLine("New client pending!");
                     Client newClient = new Client();
                     GeneratePlayerId(ref newClient);
 
                     Log.LogInfo("Accepted new client.", this, ConsoleColor.Green);
+                    Console.WriteLine("Accepted new client.");
                     TcpClient tcpClient = _listener.AcceptTcpClient();
                     
                     _connectedPlayers.Add(newClient, tcpClient);
@@ -92,6 +100,7 @@ namespace MainServer
                 ISerializable inObject = inPacket.ReadObject();
 
                 Log.LogInfo($"Received: {inObject}", this, ConsoleColor.Blue);
+                Console.WriteLine($"Received: {inObject}");
 
                 switch (inObject)
                 {
@@ -198,12 +207,13 @@ namespace MainServer
             // Start a new game process.
             Room room = _rooms.FirstOrDefault(r => r.RoomCode == request.RoomCode);
 
+            //TODO: make it debian compatible
             Process gameInstance = new Process
             {
                 StartInfo =
                 {
                     FileName =
-                        "C:\\Repositories\\InternetAdventures\\InternetAdventures\\Builds\\Networked\\V1.0.5S\\InternetAdventures.exe",
+                        "../LinuxServer/InternetAdventuresServer.x86_64",
                     Arguments = $"-server {port} {request.RoomCode}",
                     CreateNoWindow = false,
                     WindowStyle = ProcessWindowStyle.Normal,
@@ -235,6 +245,7 @@ namespace MainServer
                 if (clientPair.Key.IsLobbyLeader)
                 {
                     Log.LogInfo($"Giving Player with ID {secondClient.Key.Id} lobby leader status", this, ConsoleColor.Magenta);
+                    Console.WriteLine($"Giving Player with ID {secondClient.Key.Id} lobby leader status");
                     secondClient.Key.IsLobbyLeader = true;
                     clientPair.Key.IsLobbyLeader = false;
                     room.IsMatchmakingAllowed = false;
@@ -250,6 +261,7 @@ namespace MainServer
                 room.Players.Remove(clientPair.Key);
                 // Delete room from list
                 Log.LogInfo($"Removing room with code: {room.RoomCode}", this, ConsoleColor.Magenta);
+                Console.WriteLine($"Removing room with code: {room.RoomCode}");
                 _rooms.Remove(room);
 
                 clientPair.Key.IsLobbyLeader = false;
@@ -331,6 +343,7 @@ namespace MainServer
             if (room == null)
             {
                 Log.LogInfo($"Lobby not found with code: {request.RoomCode}!", this, ConsoleColor.Red);
+                Console.WriteLine($"Lobby not found with code: {request.RoomCode}!");
                 LobbyJoinResponse lobbyJoinResponse = new LobbyJoinResponse
                     {ResponseCode = ResponseCode.Error, ResponseMessage = "No room found with room code!"};
                 
@@ -383,9 +396,11 @@ namespace MainServer
             // Generate room code
             string roomCode = GenerateRoomCode();
             Log.LogInfo($"Generated RoomCode: {roomCode}", this, ConsoleColor.Magenta);
+            Console.WriteLine($"Generated RoomCode: {roomCode}");
             // Create room
             Room room = new Room { Id = _rooms.Count + 1, RoomCode = roomCode };
             Log.LogInfo("Created a new room!", this, ConsoleColor.Green);
+            Console.WriteLine("Created a new room!");
             // Add user to room
             KeyValuePair<Client, TcpClient> clientPair =
                 _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.RequestingPlayerId);
@@ -393,9 +408,11 @@ namespace MainServer
             clientPair.Key.IsLobbyLeader = true;
             room.Players.Add(clientPair.Key);
             Log.LogInfo("Added the requesting player to the players list", this, ConsoleColor.Green);
+            Console.WriteLine("Added the requesting player to the players list");
             // Add room to the room list
             _rooms.Add(room);
             Log.LogInfo("Added the room to the rooms list with ID: " + room.Id, this, ConsoleColor.Green);
+            Console.WriteLine("Added the room to the rooms list with ID: " + room.Id);
             // Send LobbyCreateResponse
             LobbyCreateResponse lobbyCreateResponse = new LobbyCreateResponse
                 {ResponseCode = ResponseCode.Ok, RoomCode = roomCode};
@@ -431,8 +448,10 @@ namespace MainServer
                 _connectedPlayers.FirstOrDefault(p => p.Key.Id == response.Client.Id);
             Client client = clientPair.Key;
             Log.LogInfo($"Client Name: {response.Client.Name}", this, ConsoleColor.Blue);
+            Console.WriteLine($"Client Name: {response.Client.Name}");
             client.Name = response.Client.Name;
             Log.LogInfo($"Client Type: {response.Client.ClientType}", this, ConsoleColor.Blue);
+            Console.WriteLine($"Client Type: {response.Client.ClientType}");
             client.ClientType = response.Client.ClientType;
 
             switch (client.ClientType)
@@ -443,6 +462,7 @@ namespace MainServer
                 {
                     PanelChange panelChange = new PanelChange { PanelToChangeTo = "MainPanel" };
                     Log.LogInfo($"Sending: {panelChange}", this, ConsoleColor.DarkBlue);
+                    Console.WriteLine($"Sending: {panelChange}");
                     SendObject(clientPair, panelChange);
                     break;
                 }
@@ -450,6 +470,7 @@ namespace MainServer
                 {
                     StartServerInstance serverInstance = new StartServerInstance();
                     Log.LogInfo($"Sending: {serverInstance}", this, ConsoleColor.DarkBlue);
+                    Console.WriteLine($"Sending: {serverInstance}");
                     SendObject(clientPair, serverInstance);
                     break;   
                 }
@@ -525,6 +546,7 @@ namespace MainServer
             try
             {
                 Log.LogInfo($"Sending {outObject} to player with ID: {player.Key.Id}", this, ConsoleColor.Cyan);
+                Console.WriteLine($"Sending {outObject} to player with ID: {player.Key.Id}");
                 Packet outPacket = new Packet();
                 outPacket.Write(outObject);
                 
@@ -535,6 +557,7 @@ namespace MainServer
                 // Remove the faulty client
                 //Console.WriteLine(e);
                 Log.LogInfo("Removing faulty client!", this, ConsoleColor.Red);
+                Console.WriteLine("Removing faulty client!");
                 if (!player.Value.Connected)
                 {
                     RemovePlayer(player);
