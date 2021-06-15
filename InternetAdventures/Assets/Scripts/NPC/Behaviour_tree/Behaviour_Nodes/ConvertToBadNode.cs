@@ -18,7 +18,9 @@ public class ConvertToBadNode : Node
         if (_oldMember != _communityMemberBlackboard.MemberPair)
         {
             _oldMember = _communityMemberBlackboard.MemberPair;
-            if (Random.Range(0.0f, 1.0f) <= 1.15f)
+            
+            //Note: The probability that a good community member is convinced to turn bad is currently 15%.
+            if (Random.Range(0.0f, 1.0f) <= 0.15f)
             {
                 //Convinced to turn bad
                 try
