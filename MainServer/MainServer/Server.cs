@@ -518,19 +518,27 @@ namespace MainServer
             {
                 TimeSpan difference = DateTime.Now.Subtract(player.LastIsAliveTime);
 
+                Log.LogInfo($"Difference for client with ID {player.Client.Id} is: {difference.Seconds}", this, ConsoleColor.DarkBlue);
+                
                 if (difference.Seconds <= 7) continue;
+                Log.LogInfo("Number is bigger than 7 seconds", this, ConsoleColor.DarkBlue);
                 if (!faultyClients.Contains(player))
-                    faultyClients.Add(player);
+                {
+                    Log.LogInfo("Adding player to faulty clients", this, ConsoleColor.DarkBlue);
+                    faultyClients.Add(player);   
+                }
             }
             
             // Process the faulty clients list
             foreach (ClientServerInfo faultyClient in faultyClients)
             {
+                Log.LogInfo("Removing player!", this, ConsoleColor.DarkBlue);
                 faultyClient.TcpClient.Close();
                 _connectedPlayers.Remove(faultyClient);
             }
             
-            faultyClients.Clear();
+            if (faultyClients.Count > 0)
+                faultyClients.Clear();
         }
 
         private void GeneratePlayerId(ref Client playerObject)

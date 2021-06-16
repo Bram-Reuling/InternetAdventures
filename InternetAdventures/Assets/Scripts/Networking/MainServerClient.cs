@@ -29,6 +29,8 @@ public class MainServerClient : MonoBehaviour
     [Scene, SerializeField] private string _gameScene;
     [Scene, SerializeField] private string _lobbyScene;
 
+    [SerializeField] private bool UseLocalhost = false;
+
     private TcpClient _client;
     private bool _connectedToServer = false;
 
@@ -72,8 +74,6 @@ public class MainServerClient : MonoBehaviour
         EventBroker.ConnectToServerEvent += ConnectToServer;
         EventBroker.JoinLobbyEvent += JoinLobby;
         EventBroker.HostLobbyEvent += CreateLobby;
-
-        StartCoroutine(SendIsAlive());
     }
 
     IEnumerator SendIsAlive()
@@ -82,8 +82,10 @@ public class MainServerClient : MonoBehaviour
         {
             try
             {
+                Debug.Log("Trying to send IsAlive");
                 IsAlive isAlive = new IsAlive();
                 SendObject(isAlive);
+                Debug.Log("Send IsAlive");
             }
             catch (Exception e)
             {
@@ -110,9 +112,17 @@ public class MainServerClient : MonoBehaviour
             Debug.Log("Creating a new TCP Client");
             _client = new TcpClient();
             Debug.Log("Trying to connect to the server.");
-            _client.Connect(ipAddress, _port);
+            if (UseLocalhost)
+            {
+                _client.Connect("localhost", _port);
+            }
+            else
+            {
+                _client.Connect(ipAddress, _port);   
+            }
             Debug.Log("Connected to server.");
             _connectedToServer = true;
+            StartCoroutine(SendIsAlive());
         }
         catch (Exception e)
         {
