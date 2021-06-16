@@ -12,6 +12,7 @@ namespace Shared.model
         public Client Server { get; set; } = new Client();
         public Process gameInstance { get; set; } = new Process();
         public bool IsMatchmakingAllowed = false;
+        public int Port { get; set; } = 0;
 
         public Room()
         {
@@ -33,6 +34,8 @@ namespace Shared.model
             
             pPacket.Write(Server);
             pPacket.Write(IsMatchmakingAllowed);
+            
+            pPacket.Write(Port);
         }
 
         public void Deserialize(Packet pPacket)
@@ -50,6 +53,8 @@ namespace Shared.model
 
             Server = pPacket.Read<Client>();
             IsMatchmakingAllowed = pPacket.ReadBool();
+
+            Port = pPacket.ReadInt();
         }
     }
 }
