@@ -22,6 +22,7 @@ namespace MainServer
         private List<ClientServerInfo> _connectedPlayers = new List<ClientServerInfo>();
         private List<Room> _rooms = new List<Room>();
         private List<int> _ports = new List<int> {55556, 55557, 55558, 55559};
+        private List<ClientServerInfo> faultyClients = new List<ClientServerInfo>();
 
         public static void Main(string[] args)
         {
@@ -139,12 +140,20 @@ namespace MainServer
                     case MatchEndRequest request:
                         HandleMatchEndRequest(request);
                         break;
+                    case IsAlive isAlive:
+                        HandleIsAlivePacket(player);
+                        break;
                     default:
                         break;
                 }
             }
         }
 
+        private void HandleIsAlivePacket(ClientServerInfo clientServerInfo)
+        {
+            clientServerInfo.SetLastIsAliveTime(DateTime.Now);
+        }
+        
         private void HandleMatchEndRequest(MatchEndRequest request)
         {
             // Find the lobby
@@ -503,14 +512,25 @@ namespace MainServer
             SendObject(clientServerInfo, playerStateChangeResponse);
         }
         
-        // TODO: REDO THIS
         private void ProcessFaultyClients()
         {
             foreach (ClientServerInfo player in _connectedPlayers)
             {
-                PingMessage pingMessage = new PingMessage();
-                SendObject(player, pingMessage);
+                TimeSpan difference = DateTime.Now.Subtract(player.LastIsAliveTime);
+
+                if (difference.Seconds <= 7) continue;
+                if (!faultyClients.Contains(player))
+                    faultyClients.Add(player);
             }
+            
+            // Process the faulty clients list
+            foreach (ClientServerInfo faultyClient in faultyClients)
+            {
+                faultyClient.TcpClient.Close();
+                _connectedPlayers.Remove(faultyClient);
+            }
+            
+            faultyClients.Clear();
         }
 
         private void GeneratePlayerId(ref Client playerObject)
@@ -532,23 +552,7 @@ namespace MainServer
         {
             try
             {
-                player.TcpClient.Close();
-                _connectedPlayers.Remove(player);
-
-                switch (player.Client.PlayerState)
-                {
-                    case PlayerState.SearchingForLobby:
-                        // Do not notify every client
-                        break;
-                    case PlayerState.InLobby:
-                        // Notify every client in the lobby
-                        break;
-                    case PlayerState.InGame:
-                        // Notify every client in the game
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                faultyClients.Add(player);
             }
             catch (Exception e)
             {

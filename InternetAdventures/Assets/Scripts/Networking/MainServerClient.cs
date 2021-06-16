@@ -72,8 +72,28 @@ public class MainServerClient : MonoBehaviour
         EventBroker.ConnectToServerEvent += ConnectToServer;
         EventBroker.JoinLobbyEvent += JoinLobby;
         EventBroker.HostLobbyEvent += CreateLobby;
+
+        StartCoroutine(SendIsAlive());
     }
 
+    IEnumerator SendIsAlive()
+    {
+        while (_client.Connected)
+        {
+            try
+            {
+                IsAlive isAlive = new IsAlive();
+                SendObject(isAlive);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+
+            yield return new WaitForSeconds(5f);
+        }
+    }
+    
     private void LoadedLobbyPanel()
     {
         LobbyDataRequest lobbyDataRequest = new LobbyDataRequest {RequestingPlayerId = _clientId, RoomCode = _joinedRoomCode};
