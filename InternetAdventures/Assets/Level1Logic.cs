@@ -6,16 +6,16 @@ public class Level1Logic : MonoBehaviour
 {
 
     public GameObject CamTrigger, Camera;
-    Vector3 ogposition;
-    Quaternion ogrotation;
-    bool ok = false;
+    Vector3 ogPosition;
+    Quaternion ogRotation;
+    bool isOk = false;
     float x=0;
 
     // Start is called before the first frame update
     void Start()
     {
-        ogposition = Camera.transform.localPosition;
-        ogrotation = Camera.transform.localRotation;
+        ogPosition = Camera.transform.localPosition;
+        ogRotation = Camera.transform.localRotation;
 
     }
 
@@ -23,21 +23,21 @@ public class Level1Logic : MonoBehaviour
     void Update()
     {
         
-        if(ok)
+        if(isOk)
         {
-            Camera.transform.localPosition = Vector3.Lerp(ogposition, new Vector3(0, 7, -7), x);
-            Camera.transform.localRotation = Quaternion.Lerp(ogrotation, Quaternion.Euler(40, 0, 0), x);
-            x = x + 0.5f * Time.deltaTime;
+            Camera.transform.localPosition = Vector3.Lerp(ogPosition, new Vector3(0, 7, -7), x);
+            Camera.transform.localRotation = Quaternion.Lerp(ogRotation, Quaternion.Euler(40, 0, 0), x);
+            x += 0.5f * Time.deltaTime;
         }
 
         if (x >= 5f)
-            ok = false;
+            isOk = false;
 
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        ok = true;
+        isOk = true;
     }
 }

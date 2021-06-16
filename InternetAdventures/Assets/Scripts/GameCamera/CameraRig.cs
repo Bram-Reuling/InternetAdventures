@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace GameCamera
 {
@@ -20,6 +22,15 @@ namespace GameCamera
 
         public bool setTargetExternally = false;
 
+        private Vector3 cameraStartPosition;
+        private Vector3 cameraDestinationPosition;
+
+        private Quaternion cameraStartRotation;
+        private Vector3 cameraDestinationRotation;
+
+        private float speed = 0;
+        private float fraction = 0;
+
         private void Start()
         {
             if (camera == null)
@@ -35,6 +46,15 @@ namespace GameCamera
             {
                 Target = target;    
             }
+
+            var transform1 = RigCamera.transform;
+            var position = transform1.localPosition;
+            var rotation = transform1.localRotation;
+            cameraStartPosition = position;
+            cameraStartRotation = rotation;
+
+            cameraDestinationPosition = position;
+            cameraDestinationRotation = rotation.eulerAngles;
             
             transform.position = DetermineTargetPosition(new Vector3());
         }
@@ -46,6 +66,14 @@ namespace GameCamera
             targetPosition = DetermineTargetPosition(targetPosition);
 
             FollowTarget(targetPosition);
+
+            if (fraction < 1)
+            {
+                fraction += Time.deltaTime * speed;
+                RigCamera.transform.localPosition =
+                    Vector3.Lerp(cameraStartPosition, cameraDestinationPosition, fraction);
+                RigCamera.transform.localRotation = Quaternion.Lerp(cameraStartRotation, Quaternion.Euler(cameraDestinationRotation), fraction);
+            }
         }
 
         private Vector3 DetermineTargetPosition(Vector3 targetPosition)
@@ -81,6 +109,20 @@ namespace GameCamera
             {
                 camera.transform.LookAt(pTargetPosition);   
             }
+        }
+
+        public void ChangePerspective(Vector3 pOffset, Vector3 pRotOffset, float pTime)
+        {
+            speed = pTime;
+            fraction = 0;
+            
+            var rigCameraTransform = RigCamera.transform;
+            var position = rigCameraTransform.localPosition;
+            cameraStartPosition = position;
+            cameraStartRotation = rigCameraTransform.localRotation;
+
+            cameraDestinationPosition = position + pOffset;
+            cameraDestinationRotation = cameraStartRotation.eulerAngles + pRotOffset;
         }
     }
 }
