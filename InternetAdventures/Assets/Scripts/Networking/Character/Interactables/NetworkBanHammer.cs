@@ -33,11 +33,14 @@ public class NetworkBanHammer : NetworkInteractable
         if (!gameObject.activeSelf || coroutineRunning) return;
         //ApplyCameraShake();
 
-        characterAnimator.SetTrigger("UseInteractable");
-        
         networkInteractableManager.CmdSlamHammer(_gameObjectsInTrigger, enableScaleEffectOnObjects, _initialScale,animationTimer);
     }
-    
+
+    public void PlayAnimation()
+    {
+        characterAnimator.SetTrigger("UseInteractable");
+    }
+
     //Info: The purpose of this method is to cache all gameObjects that are currently in my trigger, so I can use
     //that list when the hammer is being slammed.
     private void OnTriggerEnter(Collider other)
