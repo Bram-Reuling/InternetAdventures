@@ -148,9 +148,7 @@ namespace MainServer
             MatchEndResponse matchEndResponse = new MatchEndResponse {ResponseCode = ResponseCode.Ok};
             // Scene Change to the players in the lobby
             SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "LobbyMenu"};
-            // Panel Change to the players in the lobby
-            PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanelFromGame"};
-            
+
             foreach (Client player in room.Players)
             {
                 // Get the KeyValuePair
@@ -159,8 +157,10 @@ namespace MainServer
                 // Send lobby data
                 SendObject(pair, matchEndResponse);
                 SendObject(pair, sceneChange);
-                //SendObject(pair, panelChange);
             }
+            
+            _ports.Add(room.Port);
+            room.Port = 0;
             
             // Stop the process
             room.gameInstance.Kill();
@@ -170,6 +170,7 @@ namespace MainServer
             Client serverClient = _connectedPlayers.FirstOrDefault(c => c.Key.Id == request.ServerId).Key;
             room.Server = new Client();
             _connectedPlayers.Remove(serverClient);
+            
         }
         
         private void HandleServerStarted(ServerStarted serverStarted)
@@ -221,7 +222,11 @@ namespace MainServer
                 }
             };
 
-            if (room != null) room.gameInstance = gameInstance;
+            if (room != null)
+            {
+                room.gameInstance = gameInstance;
+                room.Port = port;
+            }
 
             gameInstance.Start();
         }
