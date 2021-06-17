@@ -64,9 +64,8 @@ public class BanHammer : Interactable
 
             if (gameObjectInReach.CompareTag("AI"))
             {
-                try{Destroy(gameObjectInReach.GetComponent<GoodMemberBlackboard>());}
-                catch{Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());}
-
+                Destroy(gameObjectInReach.GetComponent<GoodMemberBlackboard>());
+                Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());
                 gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().enabled = false;
                 LoseWinHandler.RemoveFromList(gameObjectInReach);
                 
