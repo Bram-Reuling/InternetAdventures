@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5575,8 +5575,6 @@ MonoBehaviour:
   localScaleSensitivity: 0.01
   compressRotation: 0
   interpolateScale: 1
-  interpolateRotation: 1
-  interpolatePosition: 1
   syncScale: 1
 --- !u!114 &45853941
 MonoBehaviour:
@@ -8109,8 +8107,6 @@ MonoBehaviour:
   localScaleSensitivity: 0.01
   compressRotation: 0
   interpolateScale: 1
-  interpolateRotation: 1
-  interpolatePosition: 1
   syncScale: 1
 --- !u!114 &275430977
 MonoBehaviour:
@@ -8873,8 +8869,6 @@ MonoBehaviour:
   localScaleSensitivity: 0.01
   compressRotation: 0
   interpolateScale: 1
-  interpolateRotation: 1
-  interpolatePosition: 1
   syncScale: 1
 --- !u!114 &372274408
 MonoBehaviour:
@@ -18503,8 +18497,6 @@ MonoBehaviour:
   localScaleSensitivity: 0.01
   compressRotation: 0
   interpolateScale: 1
-  interpolateRotation: 1
-  interpolatePosition: 1
   syncScale: 1
 --- !u!114 &1050934024
 MonoBehaviour:
@@ -24554,7 +24546,6 @@ MonoBehaviour:
   Port: 7777
   NoDelay: 1
   Interval: 2
-  Timeout: 10000
   FastResend: 2
   CongestionWindow: 0
   SendWindowSize: 4096
@@ -25308,8 +25299,6 @@ MonoBehaviour:
   localScaleSensitivity: 0.01
   compressRotation: 0
   interpolateScale: 1
-  interpolateRotation: 1
-  interpolatePosition: 1
   syncScale: 1
 --- !u!114 &1264423086
 MonoBehaviour:
@@ -36164,7 +36153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412140209}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 225.49, y: 14.22, z: 9.29}
+  m_LocalPosition: {x: 225.002, y: 14.489, z: 9.345}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1320152821}
@@ -41956,8 +41945,6 @@ MonoBehaviour:
   localScaleSensitivity: 0.01
   compressRotation: 0
   interpolateScale: 1
-  interpolateRotation: 1
-  interpolatePosition: 1
   syncScale: 1
 --- !u!114 &1512574462
 MonoBehaviour:

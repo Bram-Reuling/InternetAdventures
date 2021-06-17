@@ -38,7 +38,7 @@ public class BanHammer : Interactable
         yield return new WaitForSeconds(animationTimer);
         
         ApplyCameraShake();
-        Instantiate(particleSystem, transform.position + new Vector3(0f, 0, 1), Quaternion.identity).GetComponent<ParticleSystem>();
+        Instantiate(particleSystem, transform.position + new Vector3(0, 0, 1), Quaternion.identity).GetComponent<ParticleSystem>();
 
         foreach (var gameObjectInReach in _gameObjectsInTrigger)
         {

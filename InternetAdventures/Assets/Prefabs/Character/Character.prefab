@@ -2020,6 +2020,10 @@ PrefabInstance:
       value: 75000
       objectReference: {fileID: 0}
     - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
