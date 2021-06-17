@@ -56,6 +56,8 @@ public class NetworkInteractableManager : NetworkBehaviour
         banHammerComponent.SetCoroutineRunning(true);
         yield return new WaitForSeconds(animationTimer);
 
+        RpcPlayParticles();
+        
         RpcShakeCameraBanHammer();
         
         Debug.Log("Slam Hammer");
@@ -126,6 +128,12 @@ public class NetworkInteractableManager : NetworkBehaviour
     private void RpcShakeCameraBanHammer()
     {
         banHammerComponent.CameraShake();
+    }
+
+    [ClientRpc]
+    private void RpcPlayParticles()
+    {
+        banHammerComponent.PlayParticles();
     }
 
     #endregion

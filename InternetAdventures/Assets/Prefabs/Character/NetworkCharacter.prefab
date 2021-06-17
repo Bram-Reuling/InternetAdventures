@@ -87,6 +87,7 @@ MonoBehaviour:
   shockwaveStrength: 750
   possibleHitRadius: 0.5
   showDebugInfo: 0
+  effect: {fileID: 0}
 --- !u!1 &772797444966635223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,6 +1054,7 @@ MonoBehaviour:
   networkInteractableManager: {fileID: 4498515088040701259}
   enableScaleEffectOnObjects: 1
   animationTimer: 1
+  particleSystem: {fileID: 8538297196508490635, guid: 5e1fcc3e50f9f1948940776d6ca02e00, type: 3}
 --- !u!1 &4029798649945211509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,6 +2386,10 @@ PrefabInstance:
       value: 75000
       objectReference: {fileID: 0}
     - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200294966006880961, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -2410,6 +2416,10 @@ PrefabInstance:
     - target: {fileID: 8387275685348839173, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
       propertyPath: m_Name
       value: ShockwaveGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387275685348839173, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3233229994015860528, guid: 1b188a9ddcd485f4f8325ca8eed1e75e, type: 3}
