@@ -191,6 +191,7 @@ Transform:
   m_Children:
   - {fileID: 1102272659777378853}
   - {fileID: 3749694773464833739}
+  - {fileID: 5653926266018120851}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -735,6 +736,65 @@ Transform:
   m_Father: {fileID: 8772959379091771570}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2257998630113422679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5653926266018120851}
+  - component: {fileID: 2239976782901782948}
+  - component: {fileID: 2067239361033482463}
+  m_Layer: 12
+  m_Name: BoxTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5653926266018120851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257998630113422679}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.14991486, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1102272659099837512}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2239976782901782948
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257998630113422679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2067239361033482463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257998630113422679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cbe0c541b834055a4d07dcd8541946a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hands: {fileID: 4855839612812507237}
+  banHammer: {fileID: 3916314591965260552}
 --- !u!1 &2739973692258790836
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,6 +2118,10 @@ PrefabInstance:
     - target: {fileID: 5155732482347536873, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
       propertyPath: m_Name
       value: Hands
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155732482347536873, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5951744372551747623, guid: bade807753a76f542bc5d5bbcc1735d6, type: 3}
       propertyPath: playerInput

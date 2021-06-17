@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class NetworkShockwaveGun : NetworkInteractable
 {
@@ -12,11 +13,13 @@ public class NetworkShockwaveGun : NetworkInteractable
     [SerializeField] private float shockwaveStrength;
     [SerializeField] private float possibleHitRadius;
     [SerializeField] private bool showDebugInfo;
+    [SerializeField] private VisualEffect effect;
 
     private void Start()
     {
         //Setup input
         playerInput.actions.FindAction("Interactable").performed += ShootGun;
+        effect.playRate = 3;
     }
 
     private void Update()
@@ -33,6 +36,11 @@ public class NetworkShockwaveGun : NetworkInteractable
         ApplyCameraShake();
     }
 
+    public void PlayEffect()
+    {
+        effect.Play();
+    }
+    
     private void DrawDebug()
     {
         Debug.DrawRay(transform.position, transform.forward * range, Color.magenta);
