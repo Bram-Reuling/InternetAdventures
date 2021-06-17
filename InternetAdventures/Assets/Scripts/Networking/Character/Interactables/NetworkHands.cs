@@ -3,8 +3,6 @@ using Networking;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(BoxCollider))]
-
 public class NetworkHands : NetworkInteractable
 {
     [Header("Interactable-specific attributes")]
@@ -77,7 +75,7 @@ public class NetworkHands : NetworkInteractable
         networkInteractableManager.CmdReleaseObject(_initialParent);
     }
     
-    private void OnTriggerEnter(Collider other)
+    public void AddOnTriggerEnter(Collider other)
     {
         if (!_gameObjectsInTrigger.Contains(other.gameObject))
         {
@@ -86,7 +84,7 @@ public class NetworkHands : NetworkInteractable
         }
     }    
     
-    private void OnTriggerExit(Collider other)
+    public void RemoveOnTriggerExit(Collider other)
     {
         if(_gameObjectsInTrigger.Contains(other.gameObject)) 
             _gameObjectsInTrigger.Remove(other.gameObject);
