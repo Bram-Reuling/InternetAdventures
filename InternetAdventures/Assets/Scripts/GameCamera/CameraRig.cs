@@ -111,7 +111,7 @@ namespace GameCamera
             }
         }
 
-        public void ChangePerspective(Vector3 pOffset, Vector3 pRotOffset, float pTime)
+        public void ChangePerspective(Vector3 newPosition, Vector3 newRotation, float pTime)
         {
             speed = pTime;
             fraction = 0;
@@ -121,8 +121,8 @@ namespace GameCamera
             cameraStartPosition = position;
             cameraStartRotation = rigCameraTransform.localRotation;
 
-            cameraDestinationPosition = position + pOffset;
-            cameraDestinationRotation = cameraStartRotation.eulerAngles + pRotOffset;
+            cameraDestinationPosition = newPosition;
+            cameraDestinationRotation = newRotation;
         }
     }
 }

@@ -2008,6 +2008,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1649200429601774829, guid: 7dffb10e8ef796c4084c0eb6374fec03, type: 3}
+      propertyPath: newCameraPosition.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649200429601774829, guid: 7dffb10e8ef796c4084c0eb6374fec03, type: 3}
+      propertyPath: newCameraPosition.z
+      value: -6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dffb10e8ef796c4084c0eb6374fec03, type: 3}
 --- !u!1001 &2557804789215014517
