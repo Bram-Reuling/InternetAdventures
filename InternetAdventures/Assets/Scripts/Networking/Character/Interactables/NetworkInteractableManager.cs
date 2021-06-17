@@ -93,8 +93,16 @@ public class NetworkInteractableManager : NetworkBehaviour
 
             if (gameObjectInReach.CompareTag("AI"))
             {
-                Destroy(gameObjectInReach.GetComponent<NetworkCommunityMemberBlackboard>());
-                gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().StopPlayback();
+                Destroy(gameObjectInReach.GetComponent<GoodMemberBlackboard>());
+                Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());
+                gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().enabled = false;
+                LoseWinHandler.RemoveFromList(gameObjectInReach);
+                
+                //Reset tag and layer so this 'smashed' AI will not be further considered by other AIs.
+                //This is especially important since the blackboard component is getting removed and will result in an 
+                //exception otherwise.
+                gameObjectInReach.tag = "Untagged";
+                gameObjectInReach.layer = new int();
             }
             
             //Add impulse upwards if there's a rigidbody.
@@ -347,6 +355,8 @@ public class NetworkInteractableManager : NetworkBehaviour
     public void CmdShootShockwaveGun(float range, float shockwaveRadius, float shockwaveStrength,
         float possibleHitRadius, int interactableLayers)
     {
+        RpcPlayEffect();
+        
         RaycastHit[] overlapColliders =
             Physics.SphereCastAll(transform.position, possibleHitRadius, transform.forward, range, interactableLayers);
 
@@ -358,6 +368,12 @@ public class NetworkInteractableManager : NetworkBehaviour
             if (collider.TryGetComponent(typeof(Rigidbody), out var rigidbody))
                 ((Rigidbody) rigidbody).AddExplosionForce(shockwaveStrength, hitPosition, shockwaveRadius);
         }
+    }
+
+    [TargetRpc]
+    private void RpcPlayEffect()
+    {
+        shockwaveGunComponent.PlayEffect();
     }
 
     #endregion
