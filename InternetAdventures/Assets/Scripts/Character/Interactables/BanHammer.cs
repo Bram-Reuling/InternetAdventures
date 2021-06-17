@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine.InputSystem;
 
 public class BanHammer : Interactable
@@ -12,6 +11,7 @@ public class BanHammer : Interactable
     //Public
     [SerializeField] private bool enableScaleEffectOnObjects;
     [SerializeField] private float animationTimer;
+    [SerializeField] private GameObject particleSystem;
     
     //Private
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
@@ -38,7 +38,8 @@ public class BanHammer : Interactable
         yield return new WaitForSeconds(animationTimer);
         
         ApplyCameraShake();
-        
+        Instantiate(particleSystem, transform.position + new Vector3(0f, 0, 1), Quaternion.identity).GetComponent<ParticleSystem>();
+
         foreach (var gameObjectInReach in _gameObjectsInTrigger)
         {
             //IMPORTANT

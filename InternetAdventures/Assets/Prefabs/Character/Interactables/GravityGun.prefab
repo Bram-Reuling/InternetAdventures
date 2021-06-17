@@ -133,6 +133,7 @@ MonoBehaviour:
   cameraShakeStrength: 0.1
   cameraShakeDuration: 1
   playerInput: {fileID: 0}
+  characterAnimator: {fileID: 0}
   range: 15
   gravityRadius: 2
   attractionSpeed: 1
