@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(BoxCollider))]
 
 public class Hands : Interactable
 {
@@ -67,7 +66,7 @@ public class Hands : Interactable
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void AddOnTriggerEnter(Collider other)
     {
         if (!_gameObjectsInTrigger.Contains(other.gameObject))
         {
@@ -76,7 +75,7 @@ public class Hands : Interactable
         }
     }    
     
-    private void OnTriggerExit(Collider other)
+    public void RemoveOnTriggerExit(Collider other)
     {
         if(_gameObjectsInTrigger.Contains(other.gameObject)) 
             _gameObjectsInTrigger.Remove(other.gameObject);
