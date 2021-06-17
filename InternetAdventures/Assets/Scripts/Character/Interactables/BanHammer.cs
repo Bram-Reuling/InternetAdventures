@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine.InputSystem;
 
 public class BanHammer : Interactable
@@ -12,6 +11,7 @@ public class BanHammer : Interactable
     //Public
     [SerializeField] private bool enableScaleEffectOnObjects;
     [SerializeField] private float animationTimer;
+    [SerializeField] private GameObject particleSystem;
     
     //Private
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
@@ -38,7 +38,8 @@ public class BanHammer : Interactable
         yield return new WaitForSeconds(animationTimer);
         
         ApplyCameraShake();
-        
+        Instantiate(particleSystem, transform.position + new Vector3(0f, 0, 1), Quaternion.identity).GetComponent<ParticleSystem>();
+
         foreach (var gameObjectInReach in _gameObjectsInTrigger)
         {
             //IMPORTANT
@@ -64,9 +65,9 @@ public class BanHammer : Interactable
 
             if (gameObjectInReach.CompareTag("AI"))
             {
-                try{Destroy(gameObjectInReach.GetComponent<GoodMemberBlackboard>());}
-                catch{Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());}
-                gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().StopPlayback();
+                Destroy(gameObjectInReach.GetComponent<GoodMemberBlackboard>());
+                Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());
+                gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().enabled = false;
                 LoseWinHandler.RemoveFromList(gameObjectInReach);
                 
                 //Reset tag and layer so this 'smashed' AI will not be further considered by other AIs.
@@ -88,7 +89,7 @@ public class BanHammer : Interactable
     
     //Info: The purpose of this method is to cache all gameObjects that are currently in my trigger, so I can use
     //that list when the hammer is being slammed.
-    private void OnTriggerEnter(Collider other)
+    public void AddOnTriggerEnter(Collider other)
     {
         if (!_gameObjectsInTrigger.Contains(other.gameObject))
         {
@@ -101,7 +102,7 @@ public class BanHammer : Interactable
     }    
     
     //Info: The purpose here is to remove the previously added game objects from the list.
-    private void OnTriggerExit(Collider other)
+    public void RemoveOnTriggerExit(Collider other)
     {
         if(_gameObjectsInTrigger.Contains(other.gameObject)) 
             _gameObjectsInTrigger.Remove(other.gameObject);

@@ -43,7 +43,7 @@ public class NetworkBanHammer : NetworkInteractable
 
     //Info: The purpose of this method is to cache all gameObjects that are currently in my trigger, so I can use
     //that list when the hammer is being slammed.
-    private void OnTriggerEnter(Collider other)
+    public void AddOnTriggerEnter(Collider other)
     {
         if (!_gameObjectsInTrigger.Contains(other.gameObject))
         {
@@ -54,7 +54,7 @@ public class NetworkBanHammer : NetworkInteractable
     }    
     
     //Info: The purpose here is to remove the previously added game objects from the list.
-    private void OnTriggerExit(Collider other)
+    public void RemoveOnTriggerExit(Collider other)
     {
         if(_gameObjectsInTrigger.Contains(other.gameObject)) 
             _gameObjectsInTrigger.Remove(other.gameObject);
