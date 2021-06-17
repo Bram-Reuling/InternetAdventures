@@ -1054,6 +1054,7 @@ MonoBehaviour:
   networkInteractableManager: {fileID: 4498515088040701259}
   enableScaleEffectOnObjects: 1
   animationTimer: 1
+  particleSystem: {fileID: 8538297196508490635, guid: 5e1fcc3e50f9f1948940776d6ca02e00, type: 3}
 --- !u!1 &4029798649945211509
 GameObject:
   m_ObjectHideFlags: 0

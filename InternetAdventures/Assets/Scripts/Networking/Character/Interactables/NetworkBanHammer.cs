@@ -10,6 +10,7 @@ public class NetworkBanHammer : NetworkInteractable
     //Public
     [SerializeField] private bool enableScaleEffectOnObjects;
     [SerializeField] private float animationTimer;
+    [SerializeField] private GameObject particleSystem;
     
     //Private
     private readonly List<GameObject> _gameObjectsInTrigger = new List<GameObject>();
@@ -36,6 +37,11 @@ public class NetworkBanHammer : NetworkInteractable
         networkInteractableManager.CmdSlamHammer(_gameObjectsInTrigger, enableScaleEffectOnObjects, _initialScale,animationTimer);
     }
 
+    public void PlayParticles()
+    {
+        Instantiate(particleSystem, transform.position + new Vector3(0f, 0, 1), Quaternion.identity).GetComponent<ParticleSystem>();
+    }
+    
     public void PlayAnimation()
     {
         characterAnimator.SetTrigger("UseInteractable");
