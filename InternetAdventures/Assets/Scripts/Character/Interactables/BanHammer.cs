@@ -43,7 +43,7 @@ public class BanHammer : Interactable
         foreach (var gameObjectInReach in _gameObjectsInTrigger)
         {
             //IMPORTANT
-            //Todo: This line is subject to change depending on what the designers want
+            //Todo: This part is subject to change depending on what the designers want
             
             if (!enableScaleEffectOnObjects)
             {

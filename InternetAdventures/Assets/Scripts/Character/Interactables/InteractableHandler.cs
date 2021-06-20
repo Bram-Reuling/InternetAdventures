@@ -55,10 +55,10 @@ public class InteractableHandler : MonoBehaviour
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
-        SetAnimatorLayer(_activeGameobject.name);
+        SetAnimatorOverride(_activeGameobject.name);
     }
 
-    private void SetAnimatorLayer(in string pInteractableName)
+    private void SetAnimatorOverride(in string pInteractableName)
     {
         switch (pInteractableName)
         {
