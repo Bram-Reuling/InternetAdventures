@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ScammerDialogManager : MonoBehaviour
+public class ScammerDialogueManager : MonoBehaviour
 {
-    private Queue<string> dialogToShow = new Queue<string>();
+    private Queue<string> dialogueToShow = new Queue<string>();
     [SerializeField] private TMP_Text name, sentence;
     private CharacterMovement _characterMovement;
     private bool coroutineRunning;
@@ -15,21 +15,21 @@ public class ScammerDialogManager : MonoBehaviour
         _characterMovement = FindObjectOfType<CharacterMovement>();
     }
     
-    public void AddDialog(ScammerDialog pScammerDialog)
+    public void AddDialog(ScammerDialogue pScammerDialogue)
     {
-        foreach (var sentence in pScammerDialog.dialog)
+        foreach (var sentence in pScammerDialogue.dialog)
         {
-            dialogToShow.Enqueue(sentence);
+            dialogueToShow.Enqueue(sentence);
         }
 
-        if (pScammerDialog.lockCharacterMovement)
+        if (pScammerDialogue.lockCharacterMovement)
         {
-            _characterMovement.lockMovement = true;
+            _characterMovement.UserInputAllowed = false;
         }
 
         if (!coroutineRunning)
         {
-            name.text = pScammerDialog.talkerName;
+            name.text = pScammerDialogue.talkerName;
             StartCoroutine(ShowDialogue());
         }
     }
@@ -38,15 +38,16 @@ public class ScammerDialogManager : MonoBehaviour
     private IEnumerator ShowDialogue()
     {
         coroutineRunning = true;
-        sentence.text = dialogToShow.Peek();
-        dialogToShow.Dequeue();
+        sentence.text = dialogueToShow.Peek();
+        dialogueToShow.Dequeue();
         yield return new WaitForSeconds(5);
-        if(dialogToShow.Count > 0)
+        if(dialogueToShow.Count > 0)
             StartCoroutine(ShowDialogue());
         else
         {
-            _characterMovement.lockMovement = false;
+            _characterMovement.UserInputAllowed = true;
             coroutineRunning = false;
+            sentence.text = "";
         }
     }
 }
