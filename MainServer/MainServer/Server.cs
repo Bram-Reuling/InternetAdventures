@@ -18,11 +18,11 @@ namespace MainServer
 {
     public class Server
     {
-        public TcpListener Listener { get; private set; }
+        private TcpListener listener;
         public List<ClientServerInfo> ConnectedPlayers { get; } = new List<ClientServerInfo>();
         public List<Room> Rooms { get; } = new List<Room>();
         public List<int> Ports { get; } = new List<int> {55556, 55557, 55558, 55559};
-        public List<ClientServerInfo> FaultyClients { get; } = new List<ClientServerInfo>();
+        private List<ClientServerInfo> faultyClients = new List<ClientServerInfo>();
 
         // Handlers
         private AlivePacketsHandler alivePacketsHandler;
@@ -54,11 +54,11 @@ namespace MainServer
                 Log.LogInfo("Server starting on port 55555", this, ConsoleColor.White);
                 Console.WriteLine("Server started on port 55555");
 
-                Listener = new TcpListener(IPAddress.Any, 55555);
-                Listener.Start();
+                listener = new TcpListener(IPAddress.Any, 55555);
+                listener.Start();
 
-                IPEndPoint localEndPoint = Listener.Server.LocalEndPoint as IPEndPoint;
-                IPEndPoint remoteEndPoint = Listener.Server.RemoteEndPoint as IPEndPoint;
+                IPEndPoint localEndPoint = listener.Server.LocalEndPoint as IPEndPoint;
+                IPEndPoint remoteEndPoint = listener.Server.RemoteEndPoint as IPEndPoint;
 
                 if (localEndPoint != null) Console.WriteLine($"Started on Local IP: {localEndPoint.Address}");
                 if (remoteEndPoint != null) Console.WriteLine($"Started on Remote IP: {remoteEndPoint.Address}");
@@ -85,7 +85,7 @@ namespace MainServer
         {
             try
             {
-                while (Listener.Pending())
+                while (listener.Pending())
                 {
                     Log.LogInfo("New client pending!", this, ConsoleColor.Green);
                     Console.WriteLine("New client pending!");
@@ -94,7 +94,7 @@ namespace MainServer
 
                     Log.LogInfo("Accepted new client.", this, ConsoleColor.Green);
                     Console.WriteLine("Accepted new client.");
-                    TcpClient tcpClient = Listener.AcceptTcpClient();
+                    TcpClient tcpClient = listener.AcceptTcpClient();
 
                     ClientServerInfo clientServerInfo = new ClientServerInfo();
                     clientServerInfo.SetClient(newClient);
@@ -142,23 +142,23 @@ namespace MainServer
 
                 if (difference.Seconds <= 7) continue;
 
-                if (!FaultyClients.Contains(player))
+                if (!faultyClients.Contains(player))
                 {
-                    Log.LogInfo("Adding player to faulty clients", this, ConsoleColor.DarkBlue);
-                    FaultyClients.Add(player);
+                    Console.WriteLine("Adding player to faulty clients!");
+                    faultyClients.Add(player);
                 }
             }
 
             // Process the faulty clients list
-            foreach (ClientServerInfo faultyClient in FaultyClients)
+            foreach (ClientServerInfo faultyClient in faultyClients)
             {
-                Log.LogInfo("Removing player!", this, ConsoleColor.DarkBlue);
+                Console.WriteLine("Removing player!");
                 faultyClient.TcpClient.Close();
                 ConnectedPlayers.Remove(faultyClient);
             }
 
-            if (FaultyClients.Count > 0)
-                FaultyClients.Clear();
+            if (faultyClients.Count > 0)
+                faultyClients.Clear();
         }
 
         #endregion
@@ -246,7 +246,7 @@ namespace MainServer
         {
             try
             {
-                FaultyClients.Add(player);
+                faultyClients.Add(player);
             }
             catch (Exception e)
             {
@@ -258,7 +258,6 @@ namespace MainServer
         {
             try
             {
-                Log.LogInfo($"Sending {outObject} to player with ID: {player.Client.Id}", this, ConsoleColor.Cyan);
                 Console.WriteLine($"Sending {outObject} to player with ID: {player.Client.Id}");
                 Packet outPacket = new Packet();
                 outPacket.Write(outObject);
@@ -267,9 +266,7 @@ namespace MainServer
             }
             catch (Exception e)
             {
-                // Remove the faulty client
-                //Console.WriteLine(e);
-                Log.LogInfo("Removing faulty client!", this, ConsoleColor.Red);
+                // Remove the faulty clients
                 Console.WriteLine("Removing faulty client!");
                 if (!player.TcpClient.Connected)
                 {
