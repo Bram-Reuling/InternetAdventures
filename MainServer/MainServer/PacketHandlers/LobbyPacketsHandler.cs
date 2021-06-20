@@ -46,7 +46,7 @@ namespace MainServer.PacketHandlers
 
                 LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
                     {Lobby = room, ResponseCode = ResponseCode.Ok};
-                serverInstance.SendObjectToPlayer(secondClient, lobbyDataResponse);
+                serverInstance.SendPacketToClient(secondClient, lobbyDataResponse);
             }
             else if (room.Players.Count == 1)
             {
@@ -66,16 +66,16 @@ namespace MainServer.PacketHandlers
 
             PlayerStateChangeResponse playerStateChangeResponse = new PlayerStateChangeResponse
                 {NewPlayerState = PlayerState.SearchingForLobby, PlayerId = clientServerInfo.Client.Id};
-            serverInstance.SendObjectToPlayer(clientServerInfo, playerStateChangeResponse);
+            serverInstance.SendPacketToClient(clientServerInfo, playerStateChangeResponse);
 
             SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "MainMenu"};
-            serverInstance.SendObjectToPlayer(clientServerInfo, sceneChange);
+            serverInstance.SendPacketToClient(clientServerInfo, sceneChange);
 
             PanelChange panelChange = new PanelChange {PanelToChangeTo = "JoinHostPanel"};
-            serverInstance.SendObjectToPlayer(clientServerInfo, panelChange);
+            serverInstance.SendPacketToClient(clientServerInfo, panelChange);
 
             LobbyLeaveResponse lobbyLeaveResponse = new LobbyLeaveResponse {ResponseCode = ResponseCode.Ok};
-            serverInstance.SendObjectToPlayer(clientServerInfo, lobbyLeaveResponse);
+            serverInstance.SendPacketToClient(clientServerInfo, lobbyLeaveResponse);
         }
 
         public void HandleLobbyJoinRequest(LobbyJoinRequest request)
@@ -94,7 +94,7 @@ namespace MainServer.PacketHandlers
                 LobbyJoinResponse lobbyJoinResponse = new LobbyJoinResponse
                     {ResponseCode = ResponseCode.Error, ResponseMessage = "No room found with room code!"};
 
-                serverInstance.SendObjectToPlayer(clientServerInfo, lobbyJoinResponse);
+                serverInstance.SendPacketToClient(clientServerInfo, lobbyJoinResponse);
             }
             else
             {
@@ -106,18 +106,18 @@ namespace MainServer.PacketHandlers
 
                 serverInstance.GetRoom(request.RoomCode)?.Players.Add(clientServerInfo.Client);
 
-                serverInstance.SendObjectToPlayer(clientServerInfo, lobbyJoinResponse);
+                serverInstance.SendPacketToClient(clientServerInfo, lobbyJoinResponse);
 
                 LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
                     {Lobby = serverInstance.GetRoom(request.RoomCode), ResponseCode = ResponseCode.Ok};
 
                 ClientServerInfo otherClientServerInfo = serverInstance.GetClientServerInfo(room.Players[0].Id);
 
-                serverInstance.SendObjectToPlayer(otherClientServerInfo, lobbyDataResponse);
+                serverInstance.SendPacketToClient(otherClientServerInfo, lobbyDataResponse);
 
                 // Tell the client to switch to the lobby panel
                 SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "LobbyMenu"};
-                serverInstance.SendObjectToPlayer(clientServerInfo, sceneChange);
+                serverInstance.SendPacketToClient(clientServerInfo, sceneChange);
             }
         }
 
@@ -134,7 +134,7 @@ namespace MainServer.PacketHandlers
 
             if (clientServerInfo == null) return;
 
-            serverInstance.SendObjectToPlayer(clientServerInfo, lobbyDataResponse);
+            serverInstance.SendPacketToClient(clientServerInfo, lobbyDataResponse);
         }
 
         public void HandleLobbyCreateRequest(LobbyCreateRequest request)
@@ -170,11 +170,11 @@ namespace MainServer.PacketHandlers
             LobbyCreateResponse lobbyCreateResponse = new LobbyCreateResponse
                 {ResponseCode = ResponseCode.Ok, RoomCode = roomCode};
 
-            serverInstance.SendObjectToPlayer(clientServerInfo, lobbyCreateResponse);
+            serverInstance.SendPacketToClient(clientServerInfo, lobbyCreateResponse);
 
             // Tell the client to switch to the lobby scene
             SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "LobbyMenu"};
-            serverInstance.SendObjectToPlayer(clientServerInfo, sceneChange);
+            serverInstance.SendPacketToClient(clientServerInfo, sceneChange);
         }
     }
 }

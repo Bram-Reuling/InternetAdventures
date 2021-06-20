@@ -36,9 +36,9 @@ namespace MainServer.PacketHandlers
 
                 if (clientServerInfo != null) clientServerInfo.Client.PlayerState = PlayerState.InGame;
 
-                serverInstance.SendObjectToPlayer(clientServerInfo, matchCreateResponse);
-                serverInstance.SendObjectToPlayer(clientServerInfo, playerStateChangeResponse);
-                serverInstance.SendObjectToPlayer(clientServerInfo, sceneChange);
+                serverInstance.SendPacketToClient(clientServerInfo, matchCreateResponse);
+                serverInstance.SendPacketToClient(clientServerInfo, playerStateChangeResponse);
+                serverInstance.SendPacketToClient(clientServerInfo, sceneChange);
             }
         }
     }

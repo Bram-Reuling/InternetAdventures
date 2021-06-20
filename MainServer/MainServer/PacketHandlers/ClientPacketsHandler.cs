@@ -41,7 +41,7 @@ namespace MainServer.PacketHandlers
                     PanelChange panelChange = new PanelChange {PanelToChangeTo = "MainPanel"};
                     Log.LogInfo($"Sending: {panelChange}", this, ConsoleColor.DarkBlue);
                     Console.WriteLine($"Sending: {panelChange}");
-                    serverInstance.SendObjectToPlayer(clientServerInfo, panelChange);
+                    serverInstance.SendPacketToClient(clientServerInfo, panelChange);
                     break;
                 }
                 case ClientType.GameInstance:
@@ -49,7 +49,7 @@ namespace MainServer.PacketHandlers
                     StartServerInstance gameServerInstance = new StartServerInstance();
                     Log.LogInfo($"Sending: {gameServerInstance}", this, ConsoleColor.DarkBlue);
                     Console.WriteLine($"Sending: {gameServerInstance}");
-                    serverInstance.SendObjectToPlayer(clientServerInfo, gameServerInstance);
+                    serverInstance.SendPacketToClient(clientServerInfo, gameServerInstance);
                     break;
                 }
             }
@@ -63,7 +63,7 @@ namespace MainServer.PacketHandlers
             PlayerStateChangeResponse playerStateChangeResponse = new PlayerStateChangeResponse
                 {NewPlayerState = request.RequestedPlayerState, PlayerId = request.PlayerId};
 
-            serverInstance.SendObjectToPlayer(clientServerInfo, playerStateChangeResponse);
+            serverInstance.SendPacketToClient(clientServerInfo, playerStateChangeResponse);
         }
 
         public void HandleClientReadyStateChangeRequest(ReadyStateChangeRequest request)
@@ -110,7 +110,7 @@ namespace MainServer.PacketHandlers
                 ClientServerInfo serverInfo = serverInstance.GetClientServerInfo(player.Id);
                 if (serverInfo == null) continue;
                 // Send lobby data
-                serverInstance.SendObjectToPlayer(serverInfo, lobbyDataResponse);
+                serverInstance.SendPacketToClient(serverInfo, lobbyDataResponse);
             }
         }
     }

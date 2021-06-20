@@ -64,8 +64,8 @@ namespace MainServer.PacketHandlers
                 ClientServerInfo clientServerInfo =
                     serverInstance.GetClientServerInfo(player.Id);
                 // Send lobby data
-                serverInstance.SendObjectToPlayer(clientServerInfo, matchEndResponse);
-                serverInstance.SendObjectToPlayer(clientServerInfo, sceneChange);
+                serverInstance.SendPacketToClient(clientServerInfo, matchEndResponse);
+                serverInstance.SendPacketToClient(clientServerInfo, sceneChange);
             }
 
             serverInstance.Ports.Add(room.Port);

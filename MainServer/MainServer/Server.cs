@@ -34,7 +34,7 @@ namespace MainServer
         public static void Main(string[] args)
         {
             Server server = new Server();
-            server.Run();
+            server.RunServer();
         }
 
         private void InitializeHandlers()
@@ -46,7 +46,7 @@ namespace MainServer
             lobbyPacketsHandler = new LobbyPacketsHandler(this);
         }
         
-        private void Run()
+        private void RunServer()
         {
             try
             {
@@ -105,7 +105,7 @@ namespace MainServer
 
                     ClientDataRequest playerDataRequest = new ClientDataRequest {Client = newClient};
 
-                    SendObjectToPlayer(clientServerInfo, playerDataRequest);
+                    SendPacketToClient(clientServerInfo, playerDataRequest);
                 }
             }
             catch (Exception e)
@@ -133,15 +133,15 @@ namespace MainServer
 
         private void ProcessFaultyClients()
         {
+            // Check the amount of time between alive packets of a client
+            // if the amount of time is bigger than 7 seconds, add the client to the
+            // faulty client list for removal
             foreach (ClientServerInfo player in ConnectedPlayers)
             {
                 TimeSpan difference = DateTime.Now.Subtract(player.LastIsAliveTime);
 
-                Log.LogInfo($"Difference for client with ID {player.Client.Id} is: {difference.Seconds}", this,
-                    ConsoleColor.DarkBlue);
-
                 if (difference.Seconds <= 7) continue;
-                Log.LogInfo("Number is bigger than 7 seconds", this, ConsoleColor.DarkBlue);
+
                 if (!FaultyClients.Contains(player))
                 {
                     Log.LogInfo("Adding player to faulty clients", this, ConsoleColor.DarkBlue);
@@ -254,7 +254,7 @@ namespace MainServer
             }
         }
 
-        public void SendObjectToPlayer(ClientServerInfo player, ISerializable outObject)
+        public void SendPacketToClient(ClientServerInfo player, ISerializable outObject)
         {
             try
             {
