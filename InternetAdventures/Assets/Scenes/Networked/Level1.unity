@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8715,25 +8715,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6845849838138778762, guid: 57468247ec269a442914d8454c2bf806, type: 3}
---- !u!1 &355984547 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5387339473597475839, guid: 279d21543fb2a8340ade78593b28c133, type: 3}
-  m_PrefabInstance: {fileID: 396449822}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &355984549
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355984547}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8850091470190975658, guid: 279d21543fb2a8340ade78593b28c133, type: 3}
 --- !u!1 &372274401
 GameObject:
   m_ObjectHideFlags: 0
@@ -9108,25 +9089,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
   m_PrefabInstance: {fileID: 378272694}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &380994175 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1869004960016252962, guid: 279d21543fb2a8340ade78593b28c133, type: 3}
-  m_PrefabInstance: {fileID: 396449822}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &380994177
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380994175}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8097860741330282927, guid: 279d21543fb2a8340ade78593b28c133, type: 3}
 --- !u!1001 &382899906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11299,7 +11261,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 77148797615473927, guid: 107c55d01890798429cfefb20b518efa, type: 3}
       propertyPath: m_Text
-      value: Build Version 1.0.7
+      value: 'Build Version 1.0.8
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 77148798418664882, guid: 107c55d01890798429cfefb20b518efa, type: 3}
       propertyPath: m_Name
@@ -24489,6 +24453,7 @@ GameObject:
   - component: {fileID: 1237487878}
   - component: {fileID: 1237487877}
   - component: {fileID: 1237487876}
+  - component: {fileID: 1237487879}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -24567,6 +24532,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1237487879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237487875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
 --- !u!1 &1240435388
 GameObject:
   m_ObjectHideFlags: 0
