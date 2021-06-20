@@ -71,7 +71,7 @@ public class MainServerClient : MonoBehaviour
         ipAddress = IPAddress.Parse(_server);
         //ConnectToServer();
         EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanel;
-        EventBroker.ConnectToServerEvent += ConnectToServer;
+        EventBroker.ConnectToServerEvent += ConnectToMainServer;
         EventBroker.JoinLobbyEvent += JoinLobby;
         EventBroker.HostLobbyEvent += CreateLobby;
     }
@@ -102,7 +102,7 @@ public class MainServerClient : MonoBehaviour
         SendObject(lobbyDataRequest);
     }
 
-    public void ConnectToServer()
+    public void ConnectToMainServer()
     {
         if (string.IsNullOrEmpty(_nameInput.text)) return;
         try
@@ -299,7 +299,7 @@ public class MainServerClient : MonoBehaviour
             Debug.Log(e.Message);
             
             _client.Close();
-            ConnectToServer();
+            ConnectToMainServer();
         }
     }
 
@@ -348,7 +348,7 @@ public class MainServerClient : MonoBehaviour
     private void OnDestroy()
     {
         EventBroker.LoadedLobbyPanelEvent -= LoadedLobbyPanel;
-        EventBroker.ConnectToServerEvent -= ConnectToServer;
+        EventBroker.ConnectToServerEvent -= ConnectToMainServer;
         EventBroker.JoinLobbyEvent -= JoinLobby;
         EventBroker.HostLobbyEvent -= CreateLobby;
     }
