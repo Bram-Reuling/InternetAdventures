@@ -86,7 +86,7 @@ namespace MainServer
 
                     ClientDataRequest playerDataRequest = new ClientDataRequest {Client = newClient};
 
-                    SendObject(clientServerInfo, playerDataRequest);
+                    SendObjectToPlayer(clientServerInfo, playerDataRequest);
                 }
             }
             catch (Exception e)
@@ -108,44 +108,49 @@ namespace MainServer
                 Log.LogInfo($"Received: {inObject}", this, ConsoleColor.Blue);
                 Console.WriteLine($"Received: {inObject}");
 
-                switch (inObject)
-                {
-                    case ClientDataResponse response:
-                        HandleClientDataResponse(response);
-                        break;
-                    case PlayerStateChangeRequest request:
-                        HandlePlayerStateChangeRequest(request);
-                        break;
-                    case LobbyCreateRequest request:
-                        HandleLobbyCreateRequest(request);
-                        break;
-                    case LobbyDataRequest request:
-                        HandleLobbyDataRequest(request);
-                        break;
-                    case LobbyJoinRequest request:
-                        HandleLobbyJoinRequest(request);
-                        break;
-                    case ReadyStateChangeRequest request:
-                        HandleReadyStateChangeRequest(request);
-                        break;
-                    case LobbyLeaveRequest request:
-                        HandleLobbyLeaveRequest(request);
-                        break;
-                    case MatchCreateRequest request:
-                        HandleMatchCreateRequest(request);
-                        break;
-                    case ServerStarted serverStarted:
-                        HandleServerStarted(serverStarted);
-                        break;
-                    case MatchEndRequest request:
-                        HandleMatchEndRequest(request);
-                        break;
-                    case IsAlive isAlive:
-                        HandleIsAlivePacket(player);
-                        break;
-                    default:
-                        break;
-                }
+                HandlePacket(inObject, player);
+            }
+        }
+
+        private void HandlePacket(ISerializable inObject, ClientServerInfo player)
+        {
+            switch (inObject)
+            {
+                case ClientDataResponse response:
+                    HandleClientDataResponse(response);
+                    break;
+                case PlayerStateChangeRequest request:
+                    HandlePlayerStateChangeRequest(request);
+                    break;
+                case LobbyCreateRequest request:
+                    HandleLobbyCreateRequest(request);
+                    break;
+                case LobbyDataRequest request:
+                    HandleLobbyDataRequest(request);
+                    break;
+                case LobbyJoinRequest request:
+                    HandleLobbyJoinRequest(request);
+                    break;
+                case ReadyStateChangeRequest request:
+                    HandleReadyStateChangeRequest(request);
+                    break;
+                case LobbyLeaveRequest request:
+                    HandleLobbyLeaveRequest(request);
+                    break;
+                case MatchCreateRequest request:
+                    HandleMatchCreateRequest(request);
+                    break;
+                case ServerStarted serverStarted:
+                    HandleServerStarted(serverStarted);
+                    break;
+                case MatchEndRequest request:
+                    HandleMatchEndRequest(request);
+                    break;
+                case IsAlive isAlive:
+                    HandleIsAlivePacket(player);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -157,7 +162,10 @@ namespace MainServer
         private void HandleMatchEndRequest(MatchEndRequest request)
         {
             // Find the lobby
-            Room room = _rooms.FirstOrDefault(r => r.RoomCode == request.RoomCode);
+            Room room = GetRoom(request.RoomCode);
+
+            if (room == null) return;
+            
             // MatchEndResponse to players in lobby
             MatchEndResponse matchEndResponse = new MatchEndResponse {ResponseCode = ResponseCode.Ok};
             // Scene Change to the players in the lobby
@@ -169,8 +177,8 @@ namespace MainServer
                 ClientServerInfo clientServerInfo =
                     _connectedPlayers.FirstOrDefault(c => c.Client.Id == player.Id);
                 // Send lobby data
-                SendObject(clientServerInfo, matchEndResponse);
-                SendObject(clientServerInfo, sceneChange);
+                SendObjectToPlayer(clientServerInfo, matchEndResponse);
+                SendObjectToPlayer(clientServerInfo, sceneChange);
             }
             
             _ports.Add(room.Port);
@@ -181,7 +189,8 @@ namespace MainServer
             // Remove the process from the room
             room.gameInstance = new Process();
             // Remove game instance client from the connected clients list
-            ClientServerInfo serverClient = _connectedPlayers.FirstOrDefault(c => c.Client.Id == request.ServerId);
+            ClientServerInfo serverClient = GetClientServerInfo(request.ServerId);
+            if (serverClient == null) return;
             room.Server = new Client();
             _connectedPlayers.Remove(serverClient);
             
@@ -189,7 +198,7 @@ namespace MainServer
         
         private void HandleServerStarted(ServerStarted serverStarted)
         {
-            Room room = _rooms.FirstOrDefault(r => r.RoomCode == serverStarted.GameInstanceRoomCode);
+            Room room = GetRoom(serverStarted.GameInstanceRoomCode);
 
             if (room == null) return;
 
@@ -204,13 +213,13 @@ namespace MainServer
             foreach (Client player in room.Players)
             {
                 ClientServerInfo clientServerInfo =
-                    _connectedPlayers.FirstOrDefault(c => c.Client.Id == player.Id);
+                    GetClientServerInfo(player.Id);
 
                 if (clientServerInfo != null) clientServerInfo.Client.PlayerState = PlayerState.InGame;
 
-                SendObject(clientServerInfo, matchCreateResponse);
-                SendObject(clientServerInfo, playerStateChangeResponse);
-                SendObject(clientServerInfo, sceneChange);
+                SendObjectToPlayer(clientServerInfo, matchCreateResponse);
+                SendObjectToPlayer(clientServerInfo, playerStateChangeResponse);
+                SendObjectToPlayer(clientServerInfo, sceneChange);
             }
         }
 
@@ -220,7 +229,7 @@ namespace MainServer
             int port = _ports[0];
             _ports.Remove(port);
             // Start a new game process.
-            Room room = _rooms.FirstOrDefault(r => r.RoomCode == request.RoomCode);
+            Room room = GetRoom(request.RoomCode);
 
             //TODO: make it debian compatible
             Process gameInstance = new Process
@@ -247,12 +256,11 @@ namespace MainServer
         
         private void HandleLobbyLeaveRequest(LobbyLeaveRequest request)
         {
-            ClientServerInfo clientServerInfo =
-                _connectedPlayers.FirstOrDefault(c => c.Client.Id == request.RequestedPlayerId);
+            ClientServerInfo clientServerInfo = GetClientServerInfo(request.RequestedPlayerId);
 
             if (clientServerInfo == null) return;
             
-            Room room = _rooms.FirstOrDefault(r => r.RoomCode == clientServerInfo.Client.JoinedRoomCode);
+            Room room = GetRoom(clientServerInfo.Client.JoinedRoomCode);
 
             if (room == null) return;
 
@@ -274,7 +282,7 @@ namespace MainServer
                 
                 LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
                     {Lobby = room, ResponseCode = ResponseCode.Ok};
-                SendObject(secondClient, lobbyDataResponse);
+                SendObjectToPlayer(secondClient, lobbyDataResponse);
             }
             else if (room.Players.Count == 1)
             {
@@ -294,22 +302,21 @@ namespace MainServer
 
             PlayerStateChangeResponse playerStateChangeResponse = new PlayerStateChangeResponse
                 {NewPlayerState = PlayerState.SearchingForLobby, PlayerId = clientServerInfo.Client.Id};
-            SendObject(clientServerInfo, playerStateChangeResponse);
+            SendObjectToPlayer(clientServerInfo, playerStateChangeResponse);
 
             SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "MainMenu"};
-            SendObject(clientServerInfo, sceneChange);
+            SendObjectToPlayer(clientServerInfo, sceneChange);
             
             PanelChange panelChange = new PanelChange {PanelToChangeTo = "JoinHostPanel"};
-            SendObject(clientServerInfo, panelChange);
+            SendObjectToPlayer(clientServerInfo, panelChange);
 
             LobbyLeaveResponse lobbyLeaveResponse = new LobbyLeaveResponse {ResponseCode = ResponseCode.Ok};
-            SendObject(clientServerInfo, lobbyLeaveResponse);
+            SendObjectToPlayer(clientServerInfo, lobbyLeaveResponse);
         }
         
         private void HandleReadyStateChangeRequest(ReadyStateChangeRequest request)
         {
-            ClientServerInfo clientServerInfo =
-                _connectedPlayers.FirstOrDefault(c => c.Client.Id == request.RequestingPlayerId);
+            ClientServerInfo clientServerInfo = GetClientServerInfo(request.RequestingPlayerId);
 
             if (clientServerInfo == null) return;
             
@@ -326,7 +333,7 @@ namespace MainServer
             }
             
             // Get the room the player is in.
-            Room room = _rooms.Find(r => r.RoomCode == clientServerInfo.Client.JoinedRoomCode);
+            Room room = GetRoom(clientServerInfo.Client.JoinedRoomCode);
 
             if (room == null) return;
 
@@ -348,21 +355,22 @@ namespace MainServer
             foreach (Client player in room.Players)
             {
                 // Get the KeyValuePair
-                ClientServerInfo serverInfo =
-                    _connectedPlayers.FirstOrDefault(c => c.Client.Id == player.Id);
+                ClientServerInfo serverInfo = GetClientServerInfo(player.Id);
+                if (serverInfo == null) continue;
                 // Send lobby data
-                SendObject(serverInfo, lobbyDataResponse);
+                SendObjectToPlayer(serverInfo, lobbyDataResponse);
             }
         }
         
         private void HandleLobbyJoinRequest(LobbyJoinRequest request)
         {
             // Check if room with room code exists
-            Room room = _rooms.Find(r => r.RoomCode == request.RoomCode);
+            Room room = GetRoom(request.RoomCode);
 
-            ClientServerInfo clientServerInfo =
-                _connectedPlayers.FirstOrDefault(c => c.Client.Id == request.RequestingPlayerId);
+            ClientServerInfo clientServerInfo = GetClientServerInfo(request.RequestingPlayerId);
 
+            if (clientServerInfo == null) return;
+            
             if (room == null)
             {
                 Log.LogInfo($"Lobby not found with code: {request.RoomCode}!", this, ConsoleColor.Red);
@@ -370,7 +378,7 @@ namespace MainServer
                 LobbyJoinResponse lobbyJoinResponse = new LobbyJoinResponse
                     {ResponseCode = ResponseCode.Error, ResponseMessage = "No room found with room code!"};
                 
-                SendObject(clientServerInfo, lobbyJoinResponse);
+                SendObjectToPlayer(clientServerInfo, lobbyJoinResponse);
             }
             else
             {
@@ -380,38 +388,37 @@ namespace MainServer
 
                 clientServerInfo.Client.JoinedRoomCode = request.RoomCode;
                 
-                _rooms.Find(r => r.RoomCode == request.RoomCode)?.Players.Add(clientServerInfo.Client);
+                GetRoom(request.RoomCode)?.Players.Add(clientServerInfo.Client);
 
-                SendObject(clientServerInfo, lobbyJoinResponse);
+                SendObjectToPlayer(clientServerInfo, lobbyJoinResponse);
 
                 LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
                     {Lobby = _rooms.Find(r => r.RoomCode == request.RoomCode), ResponseCode = ResponseCode.Ok};
 
-                ClientServerInfo otherClientServerInfo =
-                    _connectedPlayers.FirstOrDefault(c => c.Client.Id == room.Players[0].Id);
+                ClientServerInfo otherClientServerInfo = GetClientServerInfo(room.Players[0].Id);
                 
-                SendObject(otherClientServerInfo, lobbyDataResponse);
+                SendObjectToPlayer(otherClientServerInfo, lobbyDataResponse);
 
                 // Tell the client to switch to the lobby panel
-                PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanel"};
                 SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "LobbyMenu"};
-                SendObject(clientServerInfo, sceneChange);
+                SendObjectToPlayer(clientServerInfo, sceneChange);
             }
         }
         
         private void HandleLobbyDataRequest(LobbyDataRequest request)
         {
-            Room room = _rooms.Find(p => p.RoomCode == request.RoomCode);
+            Room room = GetRoom(request.RoomCode);
 
             if (room == null) return;
             
             LobbyDataResponse lobbyDataResponse = new LobbyDataResponse
                 {Lobby = room, ResponseCode = ResponseCode.Ok};
                 
-            ClientServerInfo clientServerInfo =
-                _connectedPlayers.FirstOrDefault(c => c.Client.Id == request.RequestingPlayerId);
+            ClientServerInfo clientServerInfo = GetClientServerInfo(request.RequestingPlayerId);
+
+            if (clientServerInfo == null) return;
                 
-            SendObject(clientServerInfo, lobbyDataResponse);
+            SendObjectToPlayer(clientServerInfo, lobbyDataResponse);
         }
         
         private void HandleLobbyCreateRequest(LobbyCreateRequest request)
@@ -420,32 +427,38 @@ namespace MainServer
             string roomCode = GenerateRoomCode();
             Log.LogInfo($"Generated RoomCode: {roomCode}", this, ConsoleColor.Magenta);
             Console.WriteLine($"Generated RoomCode: {roomCode}");
+            
             // Create room
             Room room = new Room { Id = _rooms.Count + 1, RoomCode = roomCode };
             Log.LogInfo("Created a new room!", this, ConsoleColor.Green);
             Console.WriteLine("Created a new room!");
+
             // Add user to room
-            ClientServerInfo clientServerInfo =
-                _connectedPlayers.FirstOrDefault(c => c.Client.Id == request.RequestingPlayerId);
+            ClientServerInfo clientServerInfo = GetClientServerInfo(request.RequestingPlayerId);
+
+            // if the user is not found, just cancel the creation process
+            if (clientServerInfo == null) return;
+
             clientServerInfo.Client.JoinedRoomCode = roomCode;
             clientServerInfo.Client.IsLobbyLeader = true;
             room.Players.Add(clientServerInfo.Client);
             Log.LogInfo("Added the requesting player to the players list", this, ConsoleColor.Green);
             Console.WriteLine("Added the requesting player to the players list");
+
             // Add room to the room list
             _rooms.Add(room);
             Log.LogInfo("Added the room to the rooms list with ID: " + room.Id, this, ConsoleColor.Green);
             Console.WriteLine("Added the room to the rooms list with ID: " + room.Id);
+            
             // Send LobbyCreateResponse
             LobbyCreateResponse lobbyCreateResponse = new LobbyCreateResponse
                 {ResponseCode = ResponseCode.Ok, RoomCode = roomCode};
             
-            SendObject(clientServerInfo, lobbyCreateResponse);
+            SendObjectToPlayer(clientServerInfo, lobbyCreateResponse);
             
-            // Tell the client to switch to the lobby panel
-            PanelChange panelChange = new PanelChange {PanelToChangeTo = "LobbyPanel"};
+            // Tell the client to switch to the lobby scene
             SceneChange sceneChange = new SceneChange {SceneToSwitchTo = "LobbyMenu"};
-            SendObject(clientServerInfo, sceneChange);
+            SendObjectToPlayer(clientServerInfo, sceneChange);
 
         }
 
@@ -467,14 +480,17 @@ namespace MainServer
         
         private void HandleClientDataResponse(ClientDataResponse response)
         {
-            ClientServerInfo clientServerInfo =
-                _connectedPlayers.FirstOrDefault(p => p.Client.Id == response.Client.Id);
+            ClientServerInfo clientServerInfo = GetClientServerInfo(response.Client.Id);
             Client client = clientServerInfo.Client;
+            
             Log.LogInfo($"Client Name: {response.Client.Name}", this, ConsoleColor.Blue);
             Console.WriteLine($"Client Name: {response.Client.Name}");
+            
             client.Name = response.Client.Name;
+            
             Log.LogInfo($"Client Type: {response.Client.ClientType}", this, ConsoleColor.Blue);
             Console.WriteLine($"Client Type: {response.Client.ClientType}");
+            
             client.ClientType = response.Client.ClientType;
 
             switch (client.ClientType)
@@ -486,7 +502,7 @@ namespace MainServer
                     PanelChange panelChange = new PanelChange { PanelToChangeTo = "MainPanel" };
                     Log.LogInfo($"Sending: {panelChange}", this, ConsoleColor.DarkBlue);
                     Console.WriteLine($"Sending: {panelChange}");
-                    SendObject(clientServerInfo, panelChange);
+                    SendObjectToPlayer(clientServerInfo, panelChange);
                     break;
                 }
                 case ClientType.GameInstance:
@@ -494,7 +510,7 @@ namespace MainServer
                     StartServerInstance serverInstance = new StartServerInstance();
                     Log.LogInfo($"Sending: {serverInstance}", this, ConsoleColor.DarkBlue);
                     Console.WriteLine($"Sending: {serverInstance}");
-                    SendObject(clientServerInfo, serverInstance);
+                    SendObjectToPlayer(clientServerInfo, serverInstance);
                     break;   
                 }
             }
@@ -503,13 +519,12 @@ namespace MainServer
         private void HandlePlayerStateChangeRequest(PlayerStateChangeRequest request)
         {
             // Secure this
-            ClientServerInfo clientServerInfo =
-                _connectedPlayers.FirstOrDefault(c => c.Client.Id == request.PlayerId);
+            ClientServerInfo clientServerInfo = GetClientServerInfo(request.PlayerId);
             
             PlayerStateChangeResponse playerStateChangeResponse = new PlayerStateChangeResponse
                 {NewPlayerState = request.RequestedPlayerState, PlayerId = request.PlayerId};
             
-            SendObject(clientServerInfo, playerStateChangeResponse);
+            SendObjectToPlayer(clientServerInfo, playerStateChangeResponse);
         }
         
         private void ProcessFaultyClients()
@@ -556,7 +571,7 @@ namespace MainServer
             playerObject.Id = id;
         }
 
-        private void RemovePlayer(ClientServerInfo player)
+        private void QueuePlayerForRemoval(ClientServerInfo player)
         {
             try
             {
@@ -568,7 +583,7 @@ namespace MainServer
             }
         }
 
-        private void SendObject(ClientServerInfo player, ISerializable outObject)
+        private void SendObjectToPlayer(ClientServerInfo player, ISerializable outObject)
         {
             try
             {
@@ -587,9 +602,19 @@ namespace MainServer
                 Console.WriteLine("Removing faulty client!");
                 if (!player.TcpClient.Connected)
                 {
-                    RemovePlayer(player);
+                    QueuePlayerForRemoval(player);
                 }
             }
+        }
+
+        private Room GetRoom(string pRoomCode)
+        {
+            return _rooms.FirstOrDefault(r => r.RoomCode == pRoomCode);
+        }
+
+        private ClientServerInfo GetClientServerInfo(int pClientId)
+        {
+            return _connectedPlayers.FirstOrDefault(c => c.Client.Id == pClientId);
         }
     }
 }
