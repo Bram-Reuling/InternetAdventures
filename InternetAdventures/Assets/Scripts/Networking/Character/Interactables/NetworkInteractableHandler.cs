@@ -45,6 +45,7 @@ public class NetworkInteractableHandler : NetworkBehaviour
                     _activeGameobject = currentGameObject;
                     _currentIndexInList = currentIndex;
                     currentGameObject.SetActive(true);
+                    UnlockInitialWeapon(currentGameObject);
                 }
                 else currentGameObject.SetActive(false);
 
@@ -120,14 +121,37 @@ public class NetworkInteractableHandler : NetworkBehaviour
         //Debug.Log("Scroll");
         //Info: Checks whether a weapon is currently in use and changes if not.
         if (networkCharacterMovement.weaponInUse) return;
-        _currentIndexInList += scrollValue < 0 ? -1 : 1;
-        //This is a quick check to avoid IndexOutOfRange's
-        if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
-        else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;
+
+        do
+        {
+            _currentIndexInList += scrollValue < 0 ? -1 : 1;
+            //This is a quick check to avoid IndexOutOfRange's
+            if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
+            else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;   
+        } while (_interactables.ElementAt(_currentIndexInList).GetComponent<Interactable>().IsLocked);
+
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
         SetAnimatorLayer(_activeGameobject.name);
+    }
+
+    [ServerCallback]
+    private void UnlockInitialWeapon(GameObject pWeapon)
+    {
+        pWeapon.GetComponent<Interactable>().UnlockWeapon();
+    }
+
+    [ServerCallback]
+    public void UnlockInteractable(InteractableEnum pInteractableEnum)
+    {
+        foreach (GameObject interactable in _interactables)
+        {
+            if (interactable.GetComponent<Interactable>().interactableType == pInteractableEnum)
+            {
+                interactable.GetComponent<Interactable>().UnlockWeapon();
+            }
+        }
     }
     
     #endregion
