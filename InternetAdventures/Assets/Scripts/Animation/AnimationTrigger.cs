@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationTrigger : MonoBehaviour
@@ -10,8 +8,7 @@ public class AnimationTrigger : MonoBehaviour
     {
         if (other.tag.Equals("Character"))
         {
-            foreach (var currentAnimation in animation)
-            {
+            foreach (var currentAnimation in animation) {
                 currentAnimation.enabled = true;
             }
             Destroy(gameObject);
