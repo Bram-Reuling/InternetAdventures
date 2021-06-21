@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{b78d7ef8-d59f-4424-8839-8edc4aa26caa}">
+		<property name="assetPath">
+			<value>570193__sodaderz__weak-footstep.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>16.757891156462584</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a1a714e5-49aa-4b39-a202-e31fc1c42651}</destination>
+		</relationship>
+	</object>
+</objects>
