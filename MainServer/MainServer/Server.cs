@@ -30,7 +30,7 @@ namespace MainServer
         private ClientPacketsHandler clientPacketsHandler;
         private ServerPacketsHandler serverPacketsHandler;
         private LobbyPacketsHandler lobbyPacketsHandler;
-        
+
         public static void Main(string[] args)
         {
             Server server = new Server();
@@ -45,7 +45,7 @@ namespace MainServer
             serverPacketsHandler = new ServerPacketsHandler(this);
             lobbyPacketsHandler = new LobbyPacketsHandler(this);
         }
-        
+
         private void RunServer()
         {
             try
@@ -153,6 +153,33 @@ namespace MainServer
             foreach (ClientServerInfo faultyClient in faultyClients)
             {
                 Console.WriteLine("Removing player!");
+
+                // Check the client state
+                if (faultyClient.Client.PlayerState is PlayerState.InLobby or PlayerState.InGame)
+                {
+                    // if the client state is in lobby or game, send
+                    // LobbyDataResponse to the other player.   
+                    
+                    // Get the room the player is in
+                    Room room = GetRoom(faultyClient.Client.JoinedRoomCode);
+                    if (room != null)
+                    {
+                        room.Players.Remove(faultyClient.Client);
+                        
+                        foreach (Client player in room.Players)
+                        {
+                            if (player.Id != faultyClient.Client.Id)
+                            {
+                                ClientServerInfo otherPlayer = GetClientServerInfo(player.Id);
+
+                                LobbyDataResponse lobbyDataResponse = new LobbyDataResponse {Lobby = room};
+                                
+                                SendPacketToClient(otherPlayer, lobbyDataResponse);
+                            }
+                        }
+                    }
+                }
+
                 faultyClient.TcpClient.Close();
                 ConnectedPlayers.Remove(faultyClient);
             }
@@ -242,7 +269,7 @@ namespace MainServer
             playerObject.Id = id;
         }
 
-        private void QueuePlayerForRemoval(ClientServerInfo player)
+        public void QueuePlayerForRemoval(ClientServerInfo player)
         {
             try
             {
