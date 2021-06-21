@@ -12,6 +12,9 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField] protected float cameraShakeDuration;
     [SerializeField] protected PlayerInput playerInput;
     [SerializeField] protected Animator characterAnimator;
+    public InteractableEnum interactableType;
+    public bool IsLocked { get; private set; } = true;
+    
 
     protected void ApplyCameraShake()
     {
@@ -20,5 +23,10 @@ public abstract class Interactable : MonoBehaviour
             Camera.main.DOShakePosition(cameraShakeDuration, cameraShakeStrength);
             Camera.main.DOShakeRotation(cameraShakeDuration, cameraShakeStrength);   
         }
+    }
+
+    public void UnlockWeapon()
+    {
+        IsLocked = false;
     }
 }
