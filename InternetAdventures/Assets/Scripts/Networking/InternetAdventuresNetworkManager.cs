@@ -78,6 +78,7 @@ namespace Networking
                     _client = new TcpClient();
                     _client.Connect(_mainServerAddress, _mainServerPort);
                     Debug.Log("Connected new instance to main server!");
+                    StartCoroutine(SendIsAlive());
                 }
                 catch (Exception e)
                 {
@@ -90,6 +91,16 @@ namespace Networking
                 Debug.Log("Starting Client!");
                 EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanelEvent;
                 StartClient();
+            }
+        }
+
+        IEnumerator SendIsAlive()
+        {
+            while (_client.Connected)
+            {
+                IsAlive isAlive = new IsAlive();
+                SendObject(isAlive);
+                yield return new WaitForSeconds(5f);
             }
         }
 
