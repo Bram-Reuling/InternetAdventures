@@ -144,6 +144,8 @@ public class CharacterMovement : MonoBehaviour
                 _currentlyCollidingGameObject = hit.gameObject;
                 _externalMovement = _currentlyCollidingGameObject.GetComponent<MovementData>().MovementVector;
                 _externalRotation = _currentlyCollidingGameObject.GetComponent<MovementData>().DeltaRotation;
+                _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
+                _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
                 _collideEveryFrame = true;
                 break;
             case "PhysicsPlatform":
@@ -176,6 +178,8 @@ public class CharacterMovement : MonoBehaviour
                 _collideEveryFrame = false;
                 _externalMovement = Vector3.zero;
                 _externalRotation = Quaternion.identity;
+                _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(true);
+                _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(false);
                 break;
             case "PhysicsPlatform":
                 _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<PhysicsPlatform>().RemoveCharacter(gameObject);
