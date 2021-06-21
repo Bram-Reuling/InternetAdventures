@@ -50,6 +50,7 @@ namespace Networking
             UserInputAllowed = true;
             
             ClientStart();
+            ServerStart();
         }
         
         public Vector3 GetVelocity()
@@ -66,6 +67,16 @@ namespace Networking
         
         #region Server Functions
 
+        [ServerCallback]
+        private void ServerStart()
+        {
+            NetworkScammerBlackboard networkScammerBlackboard = FindObjectOfType<NetworkScammerBlackboard>();
+            
+            if (networkScammerBlackboard == null) return;
+            
+            networkScammerBlackboard.PopulateStartingNode(this);
+        }
+        
         [ServerCallback]
         private void Update()
         {
