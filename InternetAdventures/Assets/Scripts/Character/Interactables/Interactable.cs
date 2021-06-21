@@ -14,6 +14,7 @@ public abstract class Interactable : MonoBehaviour
     [SerializeField] protected Animator characterAnimator;
     public InteractableEnum interactableType;
     public bool IsLocked { get; private set; } = true;
+    [SerializeField] private bool isLocked = true;
     
 
     protected void ApplyCameraShake()
@@ -27,6 +28,8 @@ public abstract class Interactable : MonoBehaviour
 
     public void UnlockWeapon()
     {
+        Debug.Log("Unlocking weapon.");
         IsLocked = false;
+        isLocked = false;
     }
 }

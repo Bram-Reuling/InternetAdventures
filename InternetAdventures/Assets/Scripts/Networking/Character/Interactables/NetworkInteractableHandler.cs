@@ -25,6 +25,12 @@ public class NetworkInteractableHandler : NetworkBehaviour
 
     #region Global Functions
 
+    private void UnlockWeapon(GameObject pWeapon)
+    {
+        Debug.Log("Unlocking: " + pWeapon.name);
+        pWeapon.GetComponent<NetworkInteractable>().UnlockWeapon();
+    }
+    
     private void Start()
     {
         _activeGameobject = initialInteractable;
@@ -45,7 +51,7 @@ public class NetworkInteractableHandler : NetworkBehaviour
                     _activeGameobject = currentGameObject;
                     _currentIndexInList = currentIndex;
                     currentGameObject.SetActive(true);
-                    UnlockInitialWeapon(currentGameObject);
+                    UnlockWeapon(currentGameObject);
                 }
                 else currentGameObject.SetActive(false);
 
@@ -95,16 +101,26 @@ public class NetworkInteractableHandler : NetworkBehaviour
     [ClientCallback]
     private void SetIndexInList(int oldIndex, int newIndex)
     {
-        _currentIndexInList = newIndex;
-        //This is a quick check to avoid IndexOutOfRange's
-        if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
-        else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;
+        do
+        {
+            _currentIndexInList = newIndex;
+            //This is a quick check to avoid IndexOutOfRange's
+            if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
+            else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;   
+        } while (_interactables.ElementAt(_currentIndexInList).GetComponent<NetworkInteractable>().IsLocked);
+        
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
         SetAnimatorLayer(_activeGameobject.name);
     }
-    
+
+    [TargetRpc]
+    private void RpcUnlockWeapon(int pWeaponIndex)
+    {
+        Debug.Log("Unlocking weapon at index:" + pWeaponIndex);
+        UnlockWeapon(_interactables[pWeaponIndex]);
+    }
     #endregion
 
     #region Server Functions
@@ -128,7 +144,7 @@ public class NetworkInteractableHandler : NetworkBehaviour
             //This is a quick check to avoid IndexOutOfRange's
             if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
             else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;   
-        } while (_interactables.ElementAt(_currentIndexInList).GetComponent<Interactable>().IsLocked);
+        } while (_interactables.ElementAt(_currentIndexInList).GetComponent<NetworkInteractable>().IsLocked);
 
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
@@ -137,20 +153,19 @@ public class NetworkInteractableHandler : NetworkBehaviour
     }
 
     [ServerCallback]
-    private void UnlockInitialWeapon(GameObject pWeapon)
-    {
-        pWeapon.GetComponent<Interactable>().UnlockWeapon();
-    }
-
-    [ServerCallback]
     public void UnlockInteractable(InteractableEnum pInteractableEnum)
     {
+        int index = 0;
+        Debug.Log("Unlock Interactable called for: " + pInteractableEnum);
         foreach (GameObject interactable in _interactables)
         {
-            if (interactable.GetComponent<Interactable>().interactableType == pInteractableEnum)
+            if (interactable.GetComponent<NetworkInteractable>().interactableType == pInteractableEnum)
             {
-                interactable.GetComponent<Interactable>().UnlockWeapon();
+                interactable.GetComponent<NetworkInteractable>().UnlockWeapon();
+                RpcUnlockWeapon(index);
             }
+
+            index++;
         }
     }
     
