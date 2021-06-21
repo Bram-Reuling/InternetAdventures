@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractableTrigger : MonoBehaviour
@@ -12,6 +9,7 @@ public class InteractableTrigger : MonoBehaviour
         if (other.tag.Equals("Character"))
         {
             other.transform.GetChild(1).GetComponent<InteractableHandler>().UnlockInteractable(Interactable);
+            Destroy(gameObject);
         }
     }
 }
