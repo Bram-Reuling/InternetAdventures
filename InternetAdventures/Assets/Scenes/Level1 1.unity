@@ -1889,6 +1889,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: opening ground door
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b74b09525e8776e44bcb343da4ab9cda, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b74b09525e8776e44bcb343da4ab9cda, type: 3}
 --- !u!1 &146262590
@@ -14935,7 +14939,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491799555}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: aa9bd071ff2fc76438faf2bb52b13463, type: 2}
   m_CullingMode: 0
@@ -16428,7 +16432,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608239074}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 05c37d67a069aba40bd97d9c72574f48, type: 2}
   m_CullingMode: 0
@@ -35953,6 +35957,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: gun holders 2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 57468247ec269a442914d8454c2bf806, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5353719761956312629, guid: 57468247ec269a442914d8454c2bf806, type: 3}
       propertyPath: m_LocalPosition.y
       value: -713.4457
@@ -36526,7 +36534,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153941133}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 63341c1f78533724c817db0126e9aff5, type: 2}
   m_CullingMode: 0
@@ -36537,6 +36545,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!4 &1153941136 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 57468247ec269a442914d8454c2bf806, type: 3}
+  m_PrefabInstance: {fileID: 1110619707}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1173321567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41757,6 +41770,95 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1814c5a2e1817d745a0616837e37dd7b, type: 3}
+--- !u!1001 &1270571815
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1153941136}
+    m_Modifications:
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3146.6392
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 851.37994
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1474.0172
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.448608
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -198.36426
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 74.00002
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 917115239485843222, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976605883807222520, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: animation
+      value: 
+      objectReference: {fileID: 1153941134}
+    - target: {fileID: 1976605883807222520, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: animation.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976605883807222520, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: animation.Array.data[0]
+      value: 
+      objectReference: {fileID: 1153941134}
+    - target: {fileID: 1976605883807222520, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: animation.Array.data[1]
+      value: 
+      objectReference: {fileID: 608239075}
+    - target: {fileID: 1976605883807222520, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: animation.Array.data[2]
+      value: 
+      objectReference: {fileID: 491799556}
+    - target: {fileID: 3263375855773791090, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
+      propertyPath: m_Name
+      value: WeaponStandAnimationTrigger
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1a72e2d3daac59a4297f63d3570468c8, type: 3}
 --- !u!1 &1276677360 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 002aad209296b1b48bb25b46d18ad50d, type: 3}
