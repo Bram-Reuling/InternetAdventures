@@ -79,7 +79,7 @@ namespace MainServer.PacketHandlers
             ClientServerInfo serverClient = serverInstance.GetClientServerInfo(request.ServerId);
             if (serverClient == null) return;
             room.Server = new Client();
-            serverInstance.ConnectedPlayers.Remove(serverClient);
+            serverInstance.QueuePlayerForRemoval(serverClient);
         }
     }
 }
