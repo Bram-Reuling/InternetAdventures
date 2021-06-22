@@ -7,12 +7,20 @@ using UnityEngine;
 public class NetworkInteractableTrigger : NetworkBehaviour
 {
     [SerializeField] private InteractableEnum Interactable;
-    
+    [SerializeField] private GameObject interactable;
+    private int timesPickedUp;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Character"))
         {
             other.transform.GetComponent<NetworkInteractableHandler>().UnlockInteractable(Interactable);
+            timesPickedUp++;
+            if (timesPickedUp > 1)
+            {
+                Destroy(interactable);
+                Destroy(gameObject);
+            }
         }
     }
 }
