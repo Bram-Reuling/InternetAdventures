@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{0ec9f3d1-46ef-415b-b63d-820cf073adc2}">
+		<property name="assetPath">
+			<value>556665__sieuamthanh__anrobo10-60.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.9134920634920634</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a1a714e5-49aa-4b39-a202-e31fc1c42651}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -20,7 +20,6 @@ public class InteractableHandler : MonoBehaviour
     private void Start()
     {
         //Setup input
-        //playerInput = transform.parent.GetComponent<PlayerInput>();
         playerInput.actions.FindAction("Scroll").performed += ChangeInteractable;
 
         //Iterates through all children and saves all with the tag 'Interactable' in a list to scroll through
@@ -35,10 +34,22 @@ public class InteractableHandler : MonoBehaviour
                     _activeGameobject = currentGameObject;
                     _currentIndexInList = currentIndex;
                     currentGameObject.SetActive(true);
+                    currentGameObject.GetComponent<Interactable>().UnlockWeapon();
                 }
                 else currentGameObject.SetActive(false);
                 _interactables.Add(currentGameObject);
                 currentIndex++;
+            }
+        }
+    }
+
+    public void UnlockInteractable(InteractableEnum pInteractableEnum)
+    {
+        foreach (var interactable in _interactables)
+        {
+            if (interactable.GetComponent<Interactable>().interactableType == pInteractableEnum)
+            {
+                interactable.GetComponent<Interactable>().UnlockWeapon();
             }
         }
     }
@@ -48,10 +59,14 @@ public class InteractableHandler : MonoBehaviour
         //Info: Checks whether a weapon is currently in use and changes if not.
         if (CharacterMovement.weaponInUse) return;
         _currentScrollValue = pCallback.ReadValue<Vector2>().y;
-        _currentIndexInList += _currentScrollValue < 0 ? -1 : 1;
-        //This is a quick check to avoid IndexOutOfRange's
-        if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
-        else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;
+        do
+        {
+            _currentIndexInList += _currentScrollValue < 0 ? -1 : 1;
+            //This is a quick check to avoid IndexOutOfRange's
+            if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
+            else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;
+        } while (_interactables.ElementAt(_currentIndexInList).GetComponent<Interactable>().IsLocked);
+
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
@@ -73,4 +88,12 @@ public class InteractableHandler : MonoBehaviour
                 break;
         }
     }
+}
+
+public enum InteractableEnum
+{
+    Hands,
+    GravityGun,
+    ShockwaveGun,
+    BanHammer
 }

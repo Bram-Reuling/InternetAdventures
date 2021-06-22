@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class FollowObjectNode : Node
 {
@@ -18,55 +20,66 @@ public class FollowObjectNode : Node
     
     public override State EvaluateState()
     {
-        Vector3 scammerToObjectVec = _objectToFollow.transform.position - _scammerBlackboard.transform.position;
-        NavMeshPath navMeshPath = new NavMeshPath();
-        if (scammerToObjectVec.magnitude > _distanceToObject)
+        try
         {
-            nodeState = State.Success;
-            if (_scammerBlackboard.NavAgent.CalculatePath(_objectToFollow.transform.position - scammerToObjectVec.normalized * _distanceToObject, navMeshPath)
-            && (navMeshPath.corners[navMeshPath.corners.Length - 1] - _objectToFollow.transform.position).magnitude < 3.0f)
+            Vector3 scammerToObjectVec = _objectToFollow.transform.position - _scammerBlackboard.transform.position;
+            NavMeshPath navMeshPath = new NavMeshPath();
+            if (scammerToObjectVec.magnitude > _distanceToObject)
             {
-                _scammerBlackboard.NavAgent.SetPath(navMeshPath);
-                _placementTries = 0;
-            }
-            else
-            {
-                if (!_objectToFollow.GetComponent<CharacterController>().isGrounded)
+                nodeState = State.Success;
+                if (_scammerBlackboard.NavAgent.CalculatePath(_objectToFollow.transform.position - scammerToObjectVec.normalized * _distanceToObject,
+                        navMeshPath)
+                    && (navMeshPath.corners[navMeshPath.corners.Length - 1] - _objectToFollow.transform.position).magnitude < 3.0f)
                 {
-                    nodeState = State.Failure;
-                    _characterJumped = true;
+                    _scammerBlackboard.NavAgent.SetPath(navMeshPath);
                     _placementTries = 0;
-                    return nodeState;
                 }
+                else
+                {
+                    if (!_objectToFollow.GetComponent<CharacterController>().isGrounded)
+                    {
+                        nodeState = State.Failure;
+                        _characterJumped = true;
+                        _placementTries = 0;
+                        return nodeState;
+                    }
 
-                if (!_characterJumped)
-                {
-                    nodeState = State.Failure;
-                    return nodeState;
-                }
-                //Teleport
-                Vector3 targetPosition;
-                NavMeshHit navMeshHit;
-                int itr = 0;
-                do
-                {
-                    targetPosition = _objectToFollow.transform.position + new Vector3(Random.Range(-2.0f, 2.0f), 
-                        _objectToFollow.transform.position.y, Random.Range(-2.0f, 2.0f));
-                    itr++;
-                } while (!NavMesh.SamplePosition(targetPosition, out navMeshHit, 3, NavMesh.AllAreas) && itr < 5);
+                    if (!_characterJumped)
+                    {
+                        nodeState = State.Failure;
+                        return nodeState;
+                    }
 
-                _placementTries++;
-                if (_placementTries == 5) _characterJumped = false;
-                if (itr < 5)
-                {
-                    _scammerBlackboard.NavAgent.enabled = false;
-                    _scammerBlackboard.transform.position = targetPosition;
-                    _scammerBlackboard.NavAgent.enabled = true;   
+                    //Teleport
+                    Vector3 targetPosition;
+                    NavMeshHit navMeshHit;
+                    int itr = 0;
+                    do
+                    {
+                        targetPosition = _objectToFollow.transform.position + new Vector3(Random.Range(-2.0f, 2.0f),
+                            _objectToFollow.transform.position.y, Random.Range(-2.0f, 2.0f));
+                        itr++;
+                    } while (!NavMesh.SamplePosition(targetPosition, out navMeshHit, 3, NavMesh.AllAreas) && itr < 5);
+
+                    _placementTries++;
+                    if (_placementTries == 5) _characterJumped = false;
+                    if (itr < 5)
+                    {
+                        _scammerBlackboard.NavAgent.enabled = false;
+                        _scammerBlackboard.transform.position = targetPosition;
+                        _scammerBlackboard.NavAgent.enabled = true;
+                    }
                 }
             }
-        }
-        else nodeState = State.Failure;
+            else nodeState = State.Failure;
 
-        return nodeState;
+            return nodeState;
+        }
+        catch(Exception e)
+        {
+            Debug.LogError("FollowToObject node has no object assigned! Exception: " + e);
+            nodeState = State.Failure;
+            return nodeState;
+        }
     }
 }

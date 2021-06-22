@@ -23,13 +23,13 @@ namespace MainServer.PacketHandlers
             // Start a new game process.
             Room room = serverInstance.GetRoom(request.RoomCode);
 
-            //TODO: make it debian compatible
+            // Create new game server instance
             Process gameInstance = new Process
             {
                 StartInfo =
                 {
-                    FileName =
-                        "../LinuxServer/InternetAdventuresServer.x86_64",
+                    //FileName = "../LinuxServer/InternetAdventuresServer.x86_64",
+                    FileName = "C:\\Repositories\\InternetAdventures\\InternetAdventures\\Builds\\Individual Presentation\\Game Server\\InternetAdventures.exe",
                     Arguments = $"-server {port} {request.RoomCode}",
                     CreateNoWindow = false,
                     WindowStyle = ProcessWindowStyle.Normal,
@@ -79,7 +79,7 @@ namespace MainServer.PacketHandlers
             ClientServerInfo serverClient = serverInstance.GetClientServerInfo(request.ServerId);
             if (serverClient == null) return;
             room.Server = new Client();
-            serverInstance.ConnectedPlayers.Remove(serverClient);
+            serverInstance.QueuePlayerForRemoval(serverClient);
         }
     }
 }

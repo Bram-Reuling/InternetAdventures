@@ -11,6 +11,8 @@ public static class EventBroker
 
     public delegate void CharacterDelegate(string pCharacterName);
 
+    public delegate void SceneChangeDelegate(string pSceneName);
+
     public delegate void PanelDelegate(string pPanel);
 
     public delegate void LobbyDataDelegate(LobbyDataResponse pLobby, int thisClientId);
@@ -38,7 +40,15 @@ public static class EventBroker
     public static event Action LeaveEvent;
     public static event Action StartMatchEvent;
 
+    public static event SceneChangeDelegate SceneChangeEvent;
+
     // Functions
+
+    public static void CallSceneChangeEvent(string pValue)
+    {
+        SceneChangeEvent?.Invoke(pValue);
+    }
+    
     public static void CallExampleEvent(int pValue)
     {
         ExampleEvent?.Invoke(pValue);

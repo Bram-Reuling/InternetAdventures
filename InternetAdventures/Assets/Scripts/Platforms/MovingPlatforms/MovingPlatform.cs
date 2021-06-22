@@ -40,9 +40,16 @@ public class MovingPlatform : MonoBehaviour
             }
             else
             {
-                transform.DOMove(_stations.ElementAt(_currentPlatform).position, _duration).SetEase(Ease.Linear);
-                //CurrentMovementVector = ((_stations.ElementAt(_currentPlatform).position - 
-                                         //_stations.ElementAt(_currentPlatform - 1 < 0 ? _stations.Count - 1 : _currentPlatform -1).position) / _duration) * Time.deltaTime;
+                try
+                {
+                    transform.DOMove(_stations.ElementAt(_currentPlatform).position, _duration).SetEase(Ease.Linear);
+                    //CurrentMovementVector = ((_stations.ElementAt(_currentPlatform).position - 
+                    //_stations.ElementAt(_currentPlatform - 1 < 0 ? _stations.Count - 1 : _currentPlatform -1).position) / _duration) * Time.deltaTime;
+                }
+                catch
+                {
+                    Debug.LogError("Couldn't find station to move on game object " + gameObject.name);
+                }
             }
         }
     }

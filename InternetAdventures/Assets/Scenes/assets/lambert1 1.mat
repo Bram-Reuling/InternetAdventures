@@ -141,6 +141,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Emission_Intensity: 10000
+    - Exposure: 1
+    - Fresnel_amount: 1
     - GlitchPower: -1.08
     - Vector1_BD5E18B2: 0.5
     - _AORemapMax: 1
@@ -267,8 +270,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_1F0F9056: {r: 0.09019608, g: 0.34901962, b: 0.6509804, a: 1}
-    - Color_5CF9EFAC: {r: 0, g: 4.0395875, b: 62.258884, a: 0.003921569}
+    - Color_1F0F9056: {r: 0.5844431, g: 0, b: 1, a: 1}
+    - Color_5CF9EFAC: {r: 0, g: 7.786535, b: 65.08492, a: 1}
     - Vector2_2C9431E3: {r: 1, g: 3, b: 0, a: 0}
     - _BaseColor: {r: 0.66518503, g: 0.66518503, b: 0.66518503, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}

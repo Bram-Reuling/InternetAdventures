@@ -61,6 +61,8 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
         {
             _timePassed = 0;
         }
+
+        if (_startingNode == null) return;
         
         _startingNode.EvaluateState();
         animator.SetFloat(MovementSpeed, NavAgent.velocity.magnitude);
