@@ -69,7 +69,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7844889371300025652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad45cf9512b248f3aa771ed0c4d9b0dd, type: 3}
   m_Name: 
@@ -97,6 +97,22 @@ MonoBehaviour:
   maximalTimeForImageChange: 10
   imageSlot: {fileID: 7844889372429885867}
   lastImageIndex: 100000
+--- !u!114 &7754710077013554040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7844889371300025652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434a5cf56bad4de09094086802e8542a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  canvas: {fileID: 7844889371814717403}
+  objectToLookAt: {fileID: 0}
 --- !u!114 &7762147940321120478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,22 +136,6 @@ MonoBehaviour:
   animator: {fileID: 782762075553004144}
   objectToFollow: {fileID: 0}
   distanceToObject: 2.5
---- !u!114 &7754710077013554040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7844889371300025652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 434a5cf56bad4de09094086802e8542a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  canvas: {fileID: 7844889371814717403}
-  objectToLookAt: {fileID: 0}
 --- !u!1001 &5500605366071699225
 PrefabInstance:
   m_ObjectHideFlags: 0

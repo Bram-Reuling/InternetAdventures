@@ -8,7 +8,6 @@ using Shared.model;
 using Shared.protocol;
 using Shared.protocol.Match;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Networking
 {
@@ -28,6 +27,11 @@ namespace Networking
         private int _clientId = 0;
         private int _playersInEndZone = 0;
         private bool _endMatchPacketSend = false;
+        
+        private bool SceneChanged = false;
+        private string sceneChangedTo = "";
+        private int sceneChangedForClients = 0;
+        private bool loadedObjects = false;
 
         public override void Awake()
         {
@@ -72,6 +76,7 @@ namespace Networking
             {
                 EventBroker.PlayerEnterMatchEndZoneEvent += PlayerEnterMatchEndZoneEvent;
                 EventBroker.PlayerExitMatchEndZoneEvent += PlayerExitMatchEndZoneEvent;
+                EventBroker.SceneChangeEvent += ChangeSceneOnServer;
                 
                 try
                 {
@@ -94,6 +99,23 @@ namespace Networking
             }
         }
 
+        private void ChangeSceneOnServer(string pScene)
+        {
+            ServerChangeScene(pScene);
+            SceneChanged = true;
+            sceneChangedTo = pScene;
+        }
+        
+        public override void OnClientSceneChanged(NetworkConnection conn)
+        {
+            base.OnClientSceneChanged(conn);
+
+            if (SceneChanged)
+            {
+                sceneChangedForClients++;
+            }
+        }
+        
         IEnumerator SendIsAlive()
         {
             while (_client.Connected)
@@ -121,6 +143,12 @@ namespace Networking
         
         private void Update()
         {
+            if (!loadedObjects)
+            {
+                NetworkServer.SpawnObjects();
+                loadedObjects = true;
+            }
+            
             try
             {
                 if (!IsServer) return;
