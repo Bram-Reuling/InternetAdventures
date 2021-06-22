@@ -28,7 +28,7 @@ TagManager:
   - Character
   - HammerMoveable
   - AI
-  - 
+  - NavMeshIgnore
   - 
   - 
   - 
