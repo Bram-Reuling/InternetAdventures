@@ -28,8 +28,8 @@ namespace MainServer.PacketHandlers
             {
                 StartInfo =
                 {
-                    FileName = "../LinuxServer/InternetAdventuresServer.x86_64",
-                    //FileName = "C:\\Repositories\\InternetAdventures\\InternetAdventures\\Builds\\Individual Presentation\\Game Server\\InternetAdventures.exe",
+                    //FileName = "../LinuxServer/InternetAdventuresServer.x86_64",
+                    FileName = "C:\\Repositories\\InternetAdventures\\InternetAdventures\\Builds\\Individual Presentation\\Game Server\\InternetAdventures.exe",
                     Arguments = $"-server {port} {request.RoomCode}",
                     CreateNoWindow = false,
                     WindowStyle = ProcessWindowStyle.Normal,
