@@ -59,7 +59,8 @@ public class NetworkFollowObjectNode : Node
                 {
                     Debug.Log("Sample Position");
                     targetPosition = _objectToFollow.transform.position + new Vector3(Random.Range(-2.0f, 2.0f), 
-                        _objectToFollow.transform.position.y, Random.Range(-2.0f, 2.0f));
+                        0, Random.Range(-2.0f, 2.0f));
+                    Debug.Log(targetPosition);
                     itr++;
                 } while (!NavMesh.SamplePosition(targetPosition, out navMeshHit, 3, NavMesh.AllAreas) && itr < 5);
 
