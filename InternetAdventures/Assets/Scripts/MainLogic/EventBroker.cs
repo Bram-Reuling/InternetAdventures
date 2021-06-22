@@ -5,7 +5,7 @@ using UnityEngine;
 public static class EventBroker
 {
     // Custom Delegates
-    public delegate void ExampleDelegate(int pValue);
+    public delegate void ChangeFmodParamDelegate(int pValue);
 
     public delegate void SetCheckPointDelegate(Vector3 pPosition, string pCharacterName);
 
@@ -18,7 +18,7 @@ public static class EventBroker
     public delegate void LobbyDataDelegate(LobbyDataResponse pLobby, int thisClientId);
 
     // Events
-    public static event ExampleDelegate ExampleEvent;
+    public static event ChangeFmodParamDelegate ChangeFmodParamEvent;
 
     public static event SetCheckPointDelegate SetCheckPointEvent;
 
@@ -49,9 +49,9 @@ public static class EventBroker
         SceneChangeEvent?.Invoke(pValue);
     }
     
-    public static void CallExampleEvent(int pValue)
+    public static void CallFmodParamEvent(int pValue)
     {
-        ExampleEvent?.Invoke(pValue);
+        ChangeFmodParamEvent?.Invoke(pValue);
     }
 
     public static void CallSetCheckPointEvent(Vector3 pPosition, string pCharacterName)
