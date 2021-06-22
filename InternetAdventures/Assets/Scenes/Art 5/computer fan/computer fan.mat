@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4290307934726621238
+--- !u!114 &-3218568571425998285
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: computer fan
+  m_Name: Computer fan
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT _EMISSIVE_COLOR_MAP _MASKMAP _NORMALMAP
     _NORMALMAP_TANGENT_SPACE
@@ -43,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 1a5e6b943cf90d44a846709eed2794a8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 74ce2e4ab4963254798315d425534649, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -63,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
-        m_Texture: {fileID: 2800000, guid: 5f00bcd6082f5214fa0b391b6ae3e6c4, type: 3}
+        m_Texture: {fileID: 2800000, guid: ae02ee7160d75914482cfb151aa57e0c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -79,15 +79,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1a5e6b943cf90d44a846709eed2794a8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 74ce2e4ab4963254798315d425534649, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 819f3f85bdf64e748a17dfe2e7aa3b8c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 389d98747dc46854caaa86b44ba4b383, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 7df2deb266e87f74d9b08aeb1e517ade, type: 3}
+        m_Texture: {fileID: 2800000, guid: dd368da670ee09a409188e384e8c3ebd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
