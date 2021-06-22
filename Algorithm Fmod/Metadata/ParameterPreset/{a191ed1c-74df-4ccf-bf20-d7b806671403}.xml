@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{a191ed1c-74df-4ccf-bf20-d7b806671403}">
+		<property name="name">
+			<value>AI 4 vol</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d9decb92-9a6d-4996-ad0b-22d5cac2641b}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{c7069e48-8c3e-4f4c-9814-0c66848994de}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{c7069e48-8c3e-4f4c-9814-0c66848994de}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

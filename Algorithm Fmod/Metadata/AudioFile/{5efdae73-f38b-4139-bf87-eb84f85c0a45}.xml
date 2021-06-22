@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{5efdae73-f38b-4139-bf87-eb84f85c0a45}">
+		<property name="assetPath">
+			<value>473700__joao-janz__city-ambience-at-night-2.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>26.0443125</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a1a714e5-49aa-4b39-a202-e31fc1c42651}</destination>
+		</relationship>
+	</object>
+</objects>
