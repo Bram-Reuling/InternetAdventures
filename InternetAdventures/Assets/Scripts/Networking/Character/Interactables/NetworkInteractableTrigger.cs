@@ -7,7 +7,7 @@ using UnityEngine;
 public class NetworkInteractableTrigger : NetworkBehaviour
 {
     [SerializeField] private InteractableEnum Interactable;
-    [SerializeField] private GameObject interactable;
+    [SerializeField] private GameObject pickUpInteractable;
     private int timesPickedUp;
 
     private void OnTriggerEnter(Collider other)
@@ -18,7 +18,7 @@ public class NetworkInteractableTrigger : NetworkBehaviour
             timesPickedUp++;
             if (timesPickedUp > 1)
             {
-                Destroy(interactable);
+                Destroy(pickUpInteractable);
                 Destroy(gameObject);
             }
         }
