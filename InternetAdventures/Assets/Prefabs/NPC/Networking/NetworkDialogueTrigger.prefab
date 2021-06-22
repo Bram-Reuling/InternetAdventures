@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 419233845594309302}
   - component: {fileID: 4647943891618521668}
   - component: {fileID: 3603655659174619187}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: NetworkDialogueTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,8 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301032531b0c480faf4bfa80d4e3b7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   talkerName: 
   dialog:
   - This is a placeholder sentence!
