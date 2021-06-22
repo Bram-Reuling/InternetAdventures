@@ -77,6 +77,7 @@ namespace Networking
                 EventBroker.PlayerEnterMatchEndZoneEvent += PlayerEnterMatchEndZoneEvent;
                 EventBroker.PlayerExitMatchEndZoneEvent += PlayerExitMatchEndZoneEvent;
                 EventBroker.SceneChangeEvent += ChangeSceneOnServer;
+                EventBroker.LoseWinEvent += LoseWinEvent;
                 
                 try
                 {
@@ -96,6 +97,14 @@ namespace Networking
                 Debug.Log("Starting Client!");
                 EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanelEvent;
                 StartClient();
+            }
+        }
+
+        private void LoseWinEvent(string pValue)
+        {
+            if (!_endMatchPacketSend)
+            {
+                EndMatch();
             }
         }
 
@@ -155,10 +164,7 @@ namespace Networking
 
                 if (_playersInEndZone == 2 && !_endMatchPacketSend)
                 {
-                    MatchEndRequest matchEndRequest = new MatchEndRequest {RoomCode = _serverRoomCode, ServerId = _clientId};
-                    SendObject(matchEndRequest);
-
-                    _endMatchPacketSend = true;
+                    EndMatch();
                 }
                 
                 if (_client.Available <= 0) return;
@@ -185,6 +191,14 @@ namespace Networking
                 Debug.Log(e.Message);
                 _client.Close();
             }
+        }
+
+        private void EndMatch()
+        {
+            MatchEndRequest matchEndRequest = new MatchEndRequest {RoomCode = _serverRoomCode, ServerId = _clientId};
+            SendObject(matchEndRequest);
+
+            _endMatchPacketSend = true;
         }
 
         public override void OnServerDisconnect(NetworkConnection conn)

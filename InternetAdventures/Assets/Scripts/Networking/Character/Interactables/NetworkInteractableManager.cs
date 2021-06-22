@@ -95,10 +95,10 @@ public class NetworkInteractableManager : NetworkBehaviour
 
             if (gameObjectInReach.CompareTag("AI"))
             {
-                Destroy(gameObjectInReach.GetComponent<GoodMemberBlackboard>());
-                Destroy(gameObjectInReach.GetComponent<BadMemberBlackboard>());
+                Destroy(gameObjectInReach.GetComponent<NetworkGoodMemberBlackboard>());
+                Destroy(gameObjectInReach.GetComponent<NetworkBadMemberBlackboard>());
                 gameObjectInReach.transform.GetChild(1).GetComponent<Animator>().enabled = false;
-                LoseWinHandler.RemoveFromList(gameObjectInReach);
+                NetworkLoseWinHandler.RemoveFromList(gameObjectInReach);
                 
                 //Reset tag and layer so this 'smashed' AI will not be further considered by other AIs.
                 //This is especially important since the blackboard component is getting removed and will result in an 

@@ -9,22 +9,18 @@ public static class EventBroker
 
     public delegate void SetCheckPointDelegate(Vector3 pPosition, string pCharacterName);
 
-    public delegate void CharacterDelegate(string pCharacterName);
-
-    public delegate void SceneChangeDelegate(string pSceneName);
-
-    public delegate void PanelDelegate(string pPanel);
-
     public delegate void LobbyDataDelegate(LobbyDataResponse pLobby, int thisClientId);
+
+    public delegate void StringDelegate(string pValue);
 
     // Events
     public static event ChangeFmodParamDelegate ChangeFmodParamEvent;
 
     public static event SetCheckPointDelegate SetCheckPointEvent;
 
-    public static event CharacterDelegate RespawnCharacterEvent;
+    public static event StringDelegate RespawnCharacterEvent;
 
-    public static event PanelDelegate ChangePanelEvent;
+    public static event StringDelegate ChangePanelEvent;
 
     public static event Action LoadedLobbyPanelEvent;
 
@@ -40,10 +36,17 @@ public static class EventBroker
     public static event Action LeaveEvent;
     public static event Action StartMatchEvent;
 
-    public static event SceneChangeDelegate SceneChangeEvent;
+    public static event StringDelegate SceneChangeEvent;
+
+    public static event StringDelegate LoseWinEvent;
 
     // Functions
 
+    public static void CallLoseWinEvent(string pValue)
+    {
+        LoseWinEvent?.Invoke(pValue);
+    }
+    
     public static void CallSceneChangeEvent(string pValue)
     {
         SceneChangeEvent?.Invoke(pValue);
