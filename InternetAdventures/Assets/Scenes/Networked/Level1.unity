@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5472,7 +5472,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45853934}
   m_LocalRotation: {x: -0, y: -0.59148383, z: -0, w: 0.8063169}
-  m_LocalPosition: {x: 82.19, y: 4.16, z: 6.828}
+  m_LocalPosition: {x: 82.19, y: 4.11, z: 6.828}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6727,6 +6727,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 3997537088
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7024,6 +7028,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
       propertyPath: m_Name
       value: degree pipe (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
@@ -7840,6 +7848,10 @@ PrefabInstance:
     - target: {fileID: 5652101734287021421, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: sceneId
       value: 1595225487
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9295,7 +9307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275430970}
   m_LocalRotation: {x: -0, y: -0.8698517, z: -0, w: 0.4933132}
-  m_LocalPosition: {x: 82, y: 5.387, z: 7.621}
+  m_LocalPosition: {x: 82, y: 5.337, z: 7.621}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9403,6 +9415,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
       propertyPath: m_Name
       value: straight pipe
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
@@ -10295,6 +10311,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: degree pipe (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
 --- !u!4 &376714493 stripped
@@ -10368,6 +10388,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
       propertyPath: m_Name
       value: degree pipe (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
@@ -11604,6 +11628,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1863804009
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11971,6 +11999,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1215505055
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12054,6 +12086,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
       propertyPath: m_Name
       value: degree pipe (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
@@ -12671,6 +12707,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1460742300
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.04
@@ -12836,6 +12876,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: degree pipe (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
 --- !u!4 &775246260 stripped
@@ -12981,7 +13025,7 @@ PrefabInstance:
     - target: {fileID: 7762147940321120478, guid: 529a3c47000c0a545a3110163e490321, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 23800000, guid: cf117fa88cba48a4599f37d436f4e9a0, type: 2}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7762147940321120478, guid: 529a3c47000c0a545a3110163e490321, type: 3}
       propertyPath: initialHealth
       value: 100
@@ -14056,6 +14100,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 3822083102
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -14911,7 +14959,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294934527
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -14919,9 +14967,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.25
+  m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: cf117fa88cba48a4599f37d436f4e9a0, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
 --- !u!1001 &912917664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15090,6 +15138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 924222129}
+  - component: {fileID: 924222130}
   m_Layer: 0
   m_Name: pipes
   m_TagString: Untagged
@@ -15131,6 +15180,20 @@ Transform:
   m_Father: {fileID: 2117727461}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &924222130
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924222128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &932188746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16525,6 +16588,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: straight pipe (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
 --- !u!4 &977366674 stripped
@@ -16594,6 +16661,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
       propertyPath: m_Name
       value: straight pipe (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
@@ -17240,6 +17311,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
       propertyPath: m_Name
       value: degree pipe (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
@@ -22842,6 +22917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: degree pipe (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
 --- !u!4 &1076525616 stripped
@@ -23059,6 +23138,10 @@ PrefabInstance:
     - target: {fileID: 5652101734287021421, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: sceneId
       value: 899606528
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28127,6 +28210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: straight pipe (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
 --- !u!4 &1114027558 stripped
@@ -28257,6 +28344,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 3147868385
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -28325,6 +28416,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7de4e96f3714f4644a4c8b5d41943652, type: 3}
       propertyPath: m_Name
       value: smalll plat plat
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7de4e96f3714f4644a4c8b5d41943652, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7de4e96f3714f4644a4c8b5d41943652, type: 3}
@@ -29088,6 +29183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: degree pipe
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
 --- !u!4 &1246718727 stripped
@@ -29349,6 +29448,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 292083755
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -29583,7 +29686,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264423079}
   m_LocalRotation: {x: -0, y: -0.2840471, z: -0, w: 0.9588103}
-  m_LocalPosition: {x: 82, y: 4.16, z: 8.223}
+  m_LocalPosition: {x: 82, y: 4.11, z: 8.223}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -30215,6 +30318,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
       propertyPath: m_Name
       value: degree pipe (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
@@ -47471,6 +47578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: degree pipe (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
 --- !u!4 &1514767489 stripped
@@ -47613,6 +47724,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
       propertyPath: m_Name
       value: degree pipe (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
@@ -47829,6 +47944,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
       propertyPath: m_Name
       value: straight pipe (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
@@ -54097,6 +54216,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2613435226
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -60221,6 +60344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: straight pipe (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
 --- !u!4 &1783911944 stripped
@@ -60637,6 +60764,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: straight pipe (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83bc0cb8b9b764545892c8e64d0196e6, type: 3}
 --- !u!4 &1815987619 stripped
@@ -60762,6 +60893,10 @@ PrefabInstance:
     - target: {fileID: 5652101734287021421, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: sceneId
       value: 1166944485
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
@@ -61142,6 +61277,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
       propertyPath: m_Name
       value: degree pipe (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
@@ -61999,6 +62138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: degree pipe (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9239ca1e8e3cf114da07b429b9e6dd2b, type: 3}
 --- !u!4 &1974291091 stripped
@@ -62712,6 +62855,10 @@ PrefabInstance:
     - target: {fileID: 5652101734287021421, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: sceneId
       value: 298772034
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
@@ -63495,6 +63642,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 942299934
       objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -63697,6 +63848,10 @@ PrefabInstance:
     - target: {fileID: 5652101734287021421, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: sceneId
       value: 26714463
+      objectReference: {fileID: 0}
+    - target: {fileID: 7144447315465148653, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8702032646844964207, guid: e84323fc4cef5304a9b743a919cf9713, type: 3}
       propertyPath: m_LocalPosition.x
