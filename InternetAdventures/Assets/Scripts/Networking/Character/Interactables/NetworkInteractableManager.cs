@@ -54,6 +54,7 @@ public class NetworkInteractableManager : NetworkBehaviour
     {
         RpcPlayAnimation();
         banHammerComponent.SetCoroutineRunning(true);
+        characterMovement.slammingHammer = true;
         yield return new WaitForSeconds(animationTimer);
 
         RpcPlayParticles();
@@ -115,6 +116,7 @@ public class NetworkInteractableManager : NetworkBehaviour
 
         yield return null;
         yield return new WaitWhile(() => banHammerComponent.AnimatorStateIsInteractable());
+        characterMovement.slammingHammer = false;
         banHammerComponent.SetCoroutineRunning(false);
     }
 
