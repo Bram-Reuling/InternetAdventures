@@ -81,6 +81,12 @@ namespace Networking
             base.Start();
 
             EventBroker.SceneChangeEvent += ChangeSceneOnServer;
+            EventBroker.LoseWinEvent += OnLoseWinEvent;
+        }
+
+        private void OnLoseWinEvent(string pValue)
+        {
+            Debug.LogError($"You {pValue}");
         }
 
         private void ChangeSceneOnServer(string pScene)

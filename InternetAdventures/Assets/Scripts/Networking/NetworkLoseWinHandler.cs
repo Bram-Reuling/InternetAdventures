@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class NetworkLoseWinHandler : MonoBehaviour
+public class NetworkLoseWinHandler : NetworkBehaviour
 {
     public static readonly List<GameObject> goodCommunityMembers = new List<GameObject>();
     public static readonly List<GameObject> badCommunityMembers = new List<GameObject>();
@@ -28,18 +28,24 @@ public class NetworkLoseWinHandler : MonoBehaviour
     [ServerCallback]
     public static void AddToBadList(in GameObject pMember)
     {
+        Debug.Log("Adding gameobject to bad list");
         if (goodCommunityMembers.Contains(pMember) && !badCommunityMembers.Contains(pMember))
         {
             goodCommunityMembers.Remove(pMember);
             badCommunityMembers.Add(pMember);
         }
-        if(goodCommunityMembers.Count == 0)
-            OnNoGoodMembers?.Invoke(new object(), new EventArgs());
+
+        if (goodCommunityMembers.Count == 0)
+        {
+            Debug.LogError("NO GOOD MEMBERS");
+            OnNoGoodMembers?.Invoke(new object(), new EventArgs());   
+        }
     }
 
     [ServerCallback]
     public static void RemoveFromList(in GameObject pMember)
     {
+        Debug.Log("Removing player from list");
         NetworkGoodMemberBlackboard lol;
         if (pMember.TryGetComponent<NetworkGoodMemberBlackboard>(out lol))
         {
@@ -51,24 +57,40 @@ public class NetworkLoseWinHandler : MonoBehaviour
             if (badCommunityMembers.Contains(pMember))
                 badCommunityMembers.Remove(pMember);
         }
-        
-        if(badCommunityMembers.Count <= 0)
-            OnNoBadMembers?.Invoke(new object(), new EventArgs());
-        else if(goodCommunityMembers.Count <= 0)
-            OnNoGoodMembers?.Invoke(new object(), new EventArgs());
+
+        if (badCommunityMembers.Count <= 0)
+        {
+            Debug.LogError("NO BAD MEMBERS");
+            OnNoBadMembers?.Invoke(new object(), new EventArgs()); 
+            EventBroker.CallLoseWinEvent("Won");
+        }
+        else if (goodCommunityMembers.Count <= 0)
+        {
+            Debug.LogError("NO GOOD MEMBERS");
+            OnNoGoodMembers?.Invoke(new object(), new EventArgs());   
+            EventBroker.CallLoseWinEvent("Lost");
+        }
     }
 
     [ServerCallback]
-    public static void GameLose(object pSender, EventArgs pEventArgs)
+    public void GameLose(object pSender, EventArgs pEventArgs)
     {
-        Debug.Log("Game's over!");
+        Debug.LogError("Game's over!");
         EventBroker.CallLoseWinEvent("Lost");
+        RpcLoseWin("Lost");
     }    
     
     [ServerCallback]
-    public static void GameWon(object pSender, EventArgs pEventArgs)
+    public void GameWon(object pSender, EventArgs pEventArgs)
     {
-        Debug.Log("Game's won!");
+        Debug.LogError("Game's won!");
         EventBroker.CallLoseWinEvent("Won");
+        RpcLoseWin("Won");
+    }
+
+    [ClientRpc]
+    private void RpcLoseWin(string pState)
+    {
+        EventBroker.CallLoseWinEvent(pState);
     }
 }
