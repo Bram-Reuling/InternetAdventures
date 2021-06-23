@@ -10,7 +10,6 @@ public class NetworkInteractableHandler : NetworkBehaviour
     #region Variables
 
     private List<GameObject> _interactables = new List<GameObject>();
-    private List<GameObject> _unlockedInteractables = new List<GameObject>();
     [SerializeField, SyncVar(hook = nameof(SetIndexInList))] private int _currentIndexInList;
     private GameObject _activeGameobject = null;
     private PlayerInput _playerInput;
@@ -102,18 +101,7 @@ public class NetworkInteractableHandler : NetworkBehaviour
     [ClientCallback]
     private void SetIndexInList(int oldIndex, int newIndex)
     {
-        do
-        {
-            _currentIndexInList = newIndex;
-            //This is a quick check to avoid IndexOutOfRange's
-            if (_currentIndexInList < 0) _currentIndexInList = _interactables.Count - 1;
-            else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;   
-        } while (_interactables.ElementAt(_currentIndexInList).GetComponent<NetworkInteractable>().IsLocked);
-        
-        _activeGameobject.SetActive(false);
-        _activeGameobject = _interactables.ElementAt(_currentIndexInList);
-        _activeGameobject.SetActive(true);
-        SetAnimatorLayer(_activeGameobject.name);
+        _currentIndexInList = newIndex;
     }
 
     [TargetRpc]
@@ -147,6 +135,17 @@ public class NetworkInteractableHandler : NetworkBehaviour
             else if (_currentIndexInList > _interactables.Count - 1) _currentIndexInList = 0;   
         } while (_interactables.ElementAt(_currentIndexInList).GetComponent<NetworkInteractable>().IsLocked);
 
+        _activeGameobject.SetActive(false);
+        _activeGameobject = _interactables.ElementAt(_currentIndexInList);
+        _activeGameobject.SetActive(true);
+        SetAnimatorLayer(_activeGameobject.name);
+        
+        RpcSetNewActiveGameObject();
+    }
+
+    [ClientRpc]
+    private void RpcSetNewActiveGameObject()
+    {
         _activeGameobject.SetActive(false);
         _activeGameobject = _interactables.ElementAt(_currentIndexInList);
         _activeGameobject.SetActive(true);
