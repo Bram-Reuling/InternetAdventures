@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 public class NetworkGoodMemberBlackboard : NetworkCommunityMemberBlackboard
@@ -25,6 +27,20 @@ public class NetworkGoodMemberBlackboard : NetworkCommunityMemberBlackboard
         
         //Starting Node==============================================================================================================================
         _startingNode = new SelectorNode(new List<Node>() {healthSequence, pairing});
+
+        StartCoroutine(DisableNavMeshAgent());
+    }
+
+    IEnumerator DisableNavMeshAgent()
+    {
+        yield return new WaitForSeconds(2.0f);
+        RpcDisableNavMeshAgent();
+    }
+    
+    [ClientRpc]
+    private void RpcDisableNavMeshAgent()
+    {
+        NavAgent.enabled = false;
     }
 
     public void TurnBad()

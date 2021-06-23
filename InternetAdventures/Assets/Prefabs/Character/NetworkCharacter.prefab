@@ -474,6 +474,7 @@ MonoBehaviour:
   CharacterMass: 70
   animator: {fileID: 3749694773464833736}
   weaponInUse: 0
+  slammingHammer: 0
 --- !u!114 &4761002072964296606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,7 +1050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableLayers:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 18432
   enableCameraShake: 1
   cameraShakeStrength: 1
   cameraShakeDuration: 1
