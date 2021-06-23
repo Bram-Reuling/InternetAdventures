@@ -20,7 +20,7 @@ public class NetworkAtDestinationNode : Node
                 _communityMemberBlackboard.NavAgent.pathStatus == NavMeshPathStatus.PathComplete)
             {
                 _communityMemberBlackboard.NavAgent.enabled = false;
-                _communityMemberBlackboard.NavObstacle.enabled = true;
+                //_communityMemberBlackboard.NavObstacle.enabled = true;
                 nodeState = State.Success;
             }
             else nodeState = State.Failure;

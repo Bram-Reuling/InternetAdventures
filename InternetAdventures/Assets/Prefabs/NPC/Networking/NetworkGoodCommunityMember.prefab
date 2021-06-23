@@ -29,7 +29,7 @@ MonoBehaviour:
   syncInterval: 0.1
   tickTimer: 0
   _navMeshAgent: {fileID: 3301500519476371147}
-  navMeshObstacle: {fileID: 2852201047999817891}
+  navMeshObstacle: {fileID: 0}
   _navMesh: {fileID: 0}
   initialHealth: 100
   criticalHealthThreshold: 20
@@ -90,22 +90,6 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &8490942246632813141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4202902748513433067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 0
-  animator: {fileID: 6652376766793865903}
 --- !u!114 &7239427891643569088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +113,22 @@ MonoBehaviour:
   interpolateRotation: 1
   interpolatePosition: 1
   syncScale: 1
+--- !u!114 &8490942246632813141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4202902748513433067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 6652376766793865903}
 --- !u!1001 &5679611136788810868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,6 +188,7 @@ PrefabInstance:
     - {fileID: 8395200038346799509, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
     - {fileID: 14062027309115334, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
     - {fileID: 8395200038346799514, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
+    - {fileID: 7586038150961620183, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
 --- !u!1 &4202902748513433067 stripped
 GameObject:
@@ -197,11 +198,6 @@ GameObject:
 --- !u!195 &3301500519476371147 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 7134617730179551935, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
-  m_PrefabInstance: {fileID: 5679611136788810868}
-  m_PrefabAsset: {fileID: 0}
---- !u!208 &2852201047999817891 stripped
-NavMeshObstacle:
-  m_CorrespondingSourceObject: {fileID: 7586038150961620183, guid: d0c7af172b1e88b43a62316b449ee24d, type: 3}
   m_PrefabInstance: {fileID: 5679611136788810868}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4202902749641113972 stripped

@@ -117,7 +117,7 @@ MonoBehaviour:
   syncInterval: 0.1
   tickTimer: 0
   _navMeshAgent: {fileID: 8889078322900549140}
-  navMeshObstacle: {fileID: 8149295567360624764}
+  navMeshObstacle: {fileID: 0}
   _navMesh: {fileID: 0}
   initialHealth: 0
   criticalHealthThreshold: 20
@@ -204,6 +204,7 @@ PrefabInstance:
     - {fileID: 2344323985209881128, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
     - {fileID: 9185872087111730233, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
     - {fileID: 5743715471492223207, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
+    - {fileID: 4417484002340745061, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
 --- !u!1 &7844889371300025652 stripped
 GameObject:
@@ -213,11 +214,6 @@ GameObject:
 --- !u!195 &8889078322900549140 stripped
 NavMeshAgent:
   m_CorrespondingSourceObject: {fileID: 3966064664962603277, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
-  m_PrefabInstance: {fileID: 5500605366071699225}
-  m_PrefabAsset: {fileID: 0}
---- !u!208 &8149295567360624764 stripped
-NavMeshObstacle:
-  m_CorrespondingSourceObject: {fileID: 4417484002340745061, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
   m_PrefabInstance: {fileID: 5500605366071699225}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7844889371814717403 stripped

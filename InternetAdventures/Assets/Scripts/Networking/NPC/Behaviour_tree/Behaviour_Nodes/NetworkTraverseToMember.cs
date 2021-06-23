@@ -34,22 +34,31 @@ public class NetworkTraverseToMember : Node
             foreach (var npc in allCurrentNPC)
             {
                 NetworkCommunityMemberBlackboard memberBlackboard = npc.GetComponent<NetworkCommunityMemberBlackboard>();
+
                 if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
+                
+                Debug.Log("Adding npc to potential members");
                 potentialMembers.Add(npc);
             }
 
             if (potentialMembers.Count > 0)
             {
+                Debug.Log("Potential members count is > 0");
                 GameObject memberToGoTo = potentialMembers.ElementAt(Random.Range(0, potentialMembers.Count - 1));
                 if (_communityMemberBlackboard.MemberPair != null)
+                {
                     _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair =
                         null;
+                    Debug.Log("Setting member pair to null");
+                }
                 _communityMemberBlackboard.MemberPair = memberToGoTo;
                 memberToGoTo.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = _communityMemberBlackboard.gameObject;
+                Debug.Log("Setting member position");
                 memberPosition = memberToGoTo.transform.position;
             }
             else
             {
+                Debug.Log("No potential members");
                 goRandom = true;
                 memberPosition = _communityMemberBlackboard.transform.position;
             }
@@ -57,6 +66,7 @@ public class NetworkTraverseToMember : Node
         
         if(goRandom)
         {
+            Debug.Log("GoRandom");
             if(_communityMemberBlackboard.MemberPair != null)
                 _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = null;
             _communityMemberBlackboard.MemberPair = null;
@@ -72,7 +82,7 @@ public class NetworkTraverseToMember : Node
             Vector2 randomXZDirection = Random.insideUnitCircle * 
             (goRandom ? Random.Range(_minimalOffset, 20 - i) : Random.Range(1.25f, 2.5f));
 
-            newPosition = new Vector3(randomXZDirection.x , _communityMemberBlackboard.transform.position.y, randomXZDirection.y);
+            newPosition = new Vector3(randomXZDirection.x , 0, randomXZDirection.y);
             // if (goRandom)
             // {
             //     foreach (var npc in allCurrentNPC)

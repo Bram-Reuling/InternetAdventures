@@ -4,7 +4,6 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(NavMeshObstacle))]
 
 public abstract class NetworkAIBlackboard : NetworkBehaviour
 {
@@ -18,10 +17,6 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
     //NavMeshAgent
     public NavMeshAgent NavAgent => _navMeshAgent;
     [SerializeField] private NavMeshAgent _navMeshAgent;
-
-    //NavMeshObstacle
-    public NavMeshObstacle NavObstacle => navMeshObstacle;
-    [SerializeField] private NavMeshObstacle navMeshObstacle;
 
     public NavMeshData NavMesh => _navMesh;
     [SerializeField] private NavMeshData _navMesh;
@@ -53,7 +48,7 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
     protected virtual void InitializeData()
     {
         CurrentHealth = initialHealth;
-        navMeshObstacle = GetComponent<NavMeshObstacle>();
+        //navMeshObstacle = GetComponent<NavMeshObstacle>();
         animator = transform.GetChild(1).GetComponent<Animator>();
     }
 
