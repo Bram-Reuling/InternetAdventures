@@ -71,7 +71,7 @@ namespace Networking
 
             CreateCharacterMessage createCharacterMessage = new CreateCharacterMessage {skinIndex = playerIndex};
             
-            conn.Send(createCharacterMessage);
+            //conn.Send(createCharacterMessage);
 
             playerIndex++;
         }

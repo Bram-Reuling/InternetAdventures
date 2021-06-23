@@ -21,6 +21,8 @@ namespace Networking
 
         [Scene, SerializeField] private string _lobbyScene;
 
+        private string filename = "";
+        
         private TcpClient _client;
         private string _serverRoomCode = "";
         private int _localPort = 0;
@@ -46,6 +48,8 @@ namespace Networking
             // Server
             if (arguments.Length > 1 && arguments[1] == "-server")
             {
+                Application.logMessageReceived += Log;
+                
                 Debug.Log(kcpTransport.Port);
 
                 int.TryParse(arguments[2], out var port);
@@ -104,6 +108,7 @@ namespace Networking
         {
             if (!_endMatchPacketSend)
             {
+                Debug.Log("Lose win event triggered");
                 EndMatch();
             }
         }
@@ -164,6 +169,7 @@ namespace Networking
 
                 if (_playersInEndZone == 2 && !_endMatchPacketSend)
                 {
+                    Debug.Log("Every player is in the endzone");
                     EndMatch();
                 }
                 
@@ -204,6 +210,7 @@ namespace Networking
         public override void OnServerDisconnect(NetworkConnection conn)
         {
             base.OnServerDisconnect(conn);
+            Debug.Log("Player disconnected!");
             MatchEndRequest matchEndRequest = new MatchEndRequest {RoomCode = _serverRoomCode, ServerId = _clientId};
             SendObject(matchEndRequest);
 
@@ -279,11 +286,30 @@ namespace Networking
             {
                 EventBroker.PlayerEnterMatchEndZoneEvent -= PlayerEnterMatchEndZoneEvent;
                 EventBroker.PlayerExitMatchEndZoneEvent -= PlayerExitMatchEndZoneEvent;
+                EventBroker.SceneChangeEvent += ChangeSceneOnServer;
+                EventBroker.LoseWinEvent += LoseWinEvent;
+                Application.logMessageReceived -= Log;
             }
             else
             {
                 EventBroker.LoadedLobbyPanelEvent -= LoadedLobbyPanelEvent;
             }
+        }
+        
+        public void Log(string logString, string stackTrace, LogType type)
+        {
+            if (filename == "")
+            {
+                string d = System.Environment.GetFolderPath(
+                    System.Environment.SpecialFolder.Desktop) + "/YOUR_LOGS";
+                System.IO.Directory.CreateDirectory(d);
+                filename = d + $"/server-log.txt";
+            }
+ 
+            try {
+                System.IO.File.AppendAllText(filename, logString + "\n");
+            }
+            catch { }
         }
     }
 }
