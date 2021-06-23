@@ -52,8 +52,9 @@ public class NetworkInteractableManager : NetworkBehaviour
     private IEnumerator SlamHammer(List<GameObject> _gameObjectsInTrigger, bool enableScaleEffectOnObjects,
         Vector3 _initialScale, float animationTimer)
     {
-        banHammerComponent.PlayAnimation();
+        RpcPlayAnimation();
         banHammerComponent.SetCoroutineRunning(true);
+        characterMovement.slammingHammer = true;
         yield return new WaitForSeconds(animationTimer);
 
         RpcPlayParticles();
@@ -115,10 +116,11 @@ public class NetworkInteractableManager : NetworkBehaviour
 
         yield return null;
         yield return new WaitWhile(() => banHammerComponent.AnimatorStateIsInteractable());
+        characterMovement.slammingHammer = false;
         banHammerComponent.SetCoroutineRunning(false);
     }
 
-    [TargetRpc]
+    [ClientRpc]
     private void RpcPlayAnimation()
     {
         banHammerComponent.PlayAnimation();

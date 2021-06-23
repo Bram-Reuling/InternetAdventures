@@ -140,7 +140,7 @@ namespace MainServer
             {
                 TimeSpan difference = DateTime.Now.Subtract(player.LastIsAliveTime);
 
-                if (difference.Seconds <= 7) continue;
+                if (difference.Seconds <= 20) continue;
 
                 if (!faultyClients.Contains(player))
                 {

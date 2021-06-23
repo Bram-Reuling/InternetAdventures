@@ -34,6 +34,7 @@ namespace Networking
         private bool _collideEveryFrame;
 
         public bool weaponInUse;
+        public bool slammingHammer;
 
         //Other components
         private CharacterController _characterController;
@@ -93,7 +94,7 @@ namespace Networking
             }
 
             //Move character controller
-            if (UserInputAllowed) _characterController.Move(_velocity * Time.deltaTime + _externalMovement);
+            if (UserInputAllowed && !slammingHammer) _characterController.Move(_velocity * Time.deltaTime + _externalMovement);
             //Add rotation to the character controller based on the current movement speed, so the character
             //does not rotate when not walking. The threshold is there to prevent false movement since movement has a magnitude even when
             //standing still.

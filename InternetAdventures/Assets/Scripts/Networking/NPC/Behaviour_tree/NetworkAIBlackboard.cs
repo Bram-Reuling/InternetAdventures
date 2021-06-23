@@ -36,9 +36,15 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
     private static readonly int MovementSpeed = Animator.StringToHash("MovementSpeed");
 
     protected abstract void AssembleBehaviourTree();
+    
+    private void Start()
+    {
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        ServerStart();
+    }
 
     [ServerCallback]
-    private void Start()
+    private void ServerStart()
     {
         InitializeData();
         AssembleBehaviourTree();
@@ -47,7 +53,6 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
     protected virtual void InitializeData()
     {
         CurrentHealth = initialHealth;
-        _navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshObstacle = GetComponent<NavMeshObstacle>();
         animator = transform.GetChild(1).GetComponent<Animator>();
     }

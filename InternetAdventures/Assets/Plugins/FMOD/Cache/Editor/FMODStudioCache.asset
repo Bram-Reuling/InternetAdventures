@@ -44,6 +44,29 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-8840233708664966837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Hammer
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Hammer
+  guid: 7b0c7bfcfad9b54db76bcbb6d50e4328
+  Banks:
+  - {fileID: -7331328869967065194}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &-8596339348441958815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +107,30 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-7466241282460082770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Soundtrack/Track 1
+  m_EditorClassIdentifier: 
+  Path: event:/Soundtrack/Track 1
+  guid: b6ab7ae46928bc43bb75c078cf8ce119
+  Banks:
+  - {fileID: -7331328869967065194}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 447399392061545969}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 223990
 --- !u!114 &-7412727274446835679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +151,48 @@ MonoBehaviour:
     data1: 1981196499
     data2: 4095600778
   Exists: 0
+--- !u!114 &-7331328869967065194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../Algorithm Fmod/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637599598913545135
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-7068724733070084446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Ambience
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Ambience
+  guid: 4e2f6ced60ee1e4fa05615baab99cb60
+  Banks:
+  - {fileID: -7331328869967065194}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 15500
 --- !u!114 &-6484147175340704234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +233,69 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-3796024565922687189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 2/Progression
+  m_EditorClassIdentifier: 
+  Name: Progression
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-3687001119528837544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AI noise/AI 3 vol
+  m_EditorClassIdentifier: 
+  Name: AI 3 vol
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-2590862754617985348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Footstep
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Footstep
+  guid: 455cc046b9a3984697cde47eeca216c5
+  Banks:
+  - {fileID: -7331328869967065194}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 343
 --- !u!114 &-1693552136297014124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +335,49 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-176266752772805629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AI noise/AI 4 vol
+  m_EditorClassIdentifier: 
+  Name: AI 4 vol
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-163975262111888441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Shockwave gun
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Shockwave gun
+  guid: 2f608043a65c3a498b6946a6cda9e9f1
+  Banks:
+  - {fileID: -7331328869967065194}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2000
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,23 +391,23 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 9074878375882334760}
-  - {fileID: -1489591484854327759}
+  - {fileID: 6613804069502799408}
+  - {fileID: -7331328869967065194}
   EditorEvents:
-  - {fileID: 193360210845810449}
-  - {fileID: 2952319611907067020}
-  - {fileID: 8642848473947577772}
-  - {fileID: 7347313613756645732}
-  - {fileID: 2660198543519533094}
-  - {fileID: 7707666806625269699}
-  - {fileID: -9055493713351758959}
-  - {fileID: 3939531884382324115}
+  - {fileID: 1083339895902561647}
+  - {fileID: 703410821988025058}
+  - {fileID: -163975262111888441}
+  - {fileID: 5187554109913612929}
+  - {fileID: -2590862754617985348}
+  - {fileID: -7068724733070084446}
+  - {fileID: -8840233708664966837}
+  - {fileID: -7466241282460082770}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1489591484854327759}
+  - {fileID: -7331328869967065194}
   StringsBanks:
-  - {fileID: 9074878375882334760}
-  stringsBankWriteTime: 637599582993240609
+  - {fileID: 6613804069502799408}
+  stringsBankWriteTime: 637599598905965400
   cacheVersion: 6
 --- !u!114 &193360210845810449
 MonoBehaviour:
@@ -235,6 +430,77 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: 2598213158860313053}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 243287
+--- !u!114 &447399392061545969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 1/Progression
+  m_EditorClassIdentifier: 
+  Name: Progression
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &703410821988025058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/AI noise
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/AI noise
+  guid: 2e5e8f234b0a6641a2f0c4679a43b4d9
+  Banks:
+  - {fileID: -7331328869967065194}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5343283598524257507}
+  - {fileID: -176266752772805629}
+  - {fileID: 5181729614757662480}
+  - {fileID: -3687001119528837544}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 4000
+--- !u!114 &1083339895902561647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Soundtrack/Track 2
+  m_EditorClassIdentifier: 
+  Path: event:/Soundtrack/Track 2
+  guid: 2ccde9aa5d83c94188ba1f25505aae81
+  Banks:
+  - {fileID: -7331328869967065194}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -3796024565922687189}
   MinDistance: 0
   MaxDistance: 0
   Length: 243287
@@ -302,7 +568,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters:
   - {fileID: -1693552136297014124}
-  - {fileID: 5907002859787510264}
+  - {fileID: 0}
   - {fileID: -8596339348441958815}
   - {fileID: -8849944306465323301}
   MinDistance: 0
@@ -351,6 +617,69 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &5181729614757662480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AI noise/AI 1 vol
+  m_EditorClassIdentifier: 
+  Name: AI 1 vol
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &5187554109913612929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Gravity gun
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Gravity gun
+  guid: 3ad500ccb8621343aa179e87120284a7
+  Banks:
+  - {fileID: -7331328869967065194}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2500
+--- !u!114 &5343283598524257507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AI noise/AI 2 vol
+  m_EditorClassIdentifier: 
+  Name: AI 2 vol
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &6486599491785768520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,6 +699,27 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
+  Exists: 1
+--- !u!114 &6613804069502799408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../Algorithm Fmod/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637599598905965400
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 1302
   Exists: 1
 --- !u!114 &7347313613756645732
 MonoBehaviour:

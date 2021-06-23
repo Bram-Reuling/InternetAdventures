@@ -2,7 +2,7 @@ using System;
 using Mirror;
 using UnityEngine;
 
-public class NetworkScammerDialogue : MonoBehaviour
+public class NetworkScammerDialogue : NetworkBehaviour
 {
     public string talkerName;
     [TextArea] public string[] dialog;
