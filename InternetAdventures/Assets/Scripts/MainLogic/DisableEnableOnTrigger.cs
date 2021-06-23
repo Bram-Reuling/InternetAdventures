@@ -14,11 +14,6 @@ public class DisableEnableOnTrigger : NetworkBehaviour
         {
             foreach (var enableGO in toEnable)
             {
-                if (destroy)
-                {
-                    Destroy(enableGO);
-                    return;
-                }
                 enableGO.SetActive(true);
             }
 
@@ -42,11 +37,6 @@ public class DisableEnableOnTrigger : NetworkBehaviour
     {
         foreach (var enableGO in toEnable)
         {
-            if (destroy)
-            {
-                Destroy(enableGO);
-                return;
-            }
             enableGO.SetActive(true);
         }
 
