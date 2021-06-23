@@ -10,6 +10,7 @@ public class NetworkInteractableHandler : NetworkBehaviour
     #region Variables
 
     private List<GameObject> _interactables = new List<GameObject>();
+    private List<GameObject> _unlockedInteractables = new List<GameObject>();
     [SerializeField, SyncVar(hook = nameof(SetIndexInList))] private int _currentIndexInList;
     private GameObject _activeGameobject = null;
     private PlayerInput _playerInput;
