@@ -11,8 +11,10 @@ public class NetworkScammerDialogue : NetworkBehaviour
     [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Character"))
+        if (other.CompareTag("Character"))
+        {
             FindObjectOfType<NetworkScammerDialogueManager>().AddDialog(this);
+        }
     }
 
     private void OnDrawGizmos()

@@ -37,6 +37,7 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
         if (!coroutineRunning)
         {
             nameString = pScammerDialogue.talkerName;
+            Destroy(pScammerDialogue.gameObject);
             StartCoroutine(ShowDialogue());
         }
     }
