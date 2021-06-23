@@ -32,6 +32,7 @@ public class DisableEnableOnTrigger : NetworkBehaviour
                 disableGO.SetActive(false);
             }
             
+            RPCOnTriggerEnter();
             Destroy(gameObject);
         }
     }
