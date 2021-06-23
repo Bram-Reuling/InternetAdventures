@@ -17,6 +17,7 @@ namespace Networking.NPC
         {
             if (!alreadyUsed && other.CompareTag("Character"))
             {
+                Debug.Log("Setting scammer position");
                 scammer.transform.position = scammerSpawnPoint.transform.position;
                 alreadyUsed = true;
             }
