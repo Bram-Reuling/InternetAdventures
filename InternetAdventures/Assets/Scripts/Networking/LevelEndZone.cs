@@ -9,7 +9,21 @@ namespace Networking
     {
         [SerializeField] private bool SwitchToNewLevel = true;
         [Scene, SerializeField] private string LevelName = "";
+
+        private int numberOfPlayers = 0;
+        private bool calledEvent = false;
         
+        [ServerCallback]
+        private void Update()
+        {
+            if (!calledEvent && numberOfPlayers == 2)
+            {
+                Debug.Log("Calling Scene Change Event");
+                EventBroker.CallSceneChangeEvent(LevelName);
+                calledEvent = true;
+            }
+        }
+
         [ServerCallback]
         private void OnTriggerEnter(Collider other)
         {
@@ -22,7 +36,8 @@ namespace Networking
                 }
                 else
                 {
-                    EventBroker.CallSceneChangeEvent(LevelName);
+                    Debug.Log("Adding player");
+                    numberOfPlayers++;
                 }
             }
         }
@@ -36,6 +51,11 @@ namespace Networking
                 {
                     Debug.Log("Character exited trigger");
                     EventBroker.CallPlayerExitMatchEndZoneEvent();   
+                }
+                else
+                {
+                    Debug.Log("Removing player");
+                    numberOfPlayers--;
                 }
             }
         }
