@@ -147,7 +147,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8585622639628884344}
+  - {fileID: 6742759801813070935}
   MinDistance: 0
   MaxDistance: 0
   Length: 223990
@@ -186,7 +186,7 @@ MonoBehaviour:
   Path: ../Algorithm Fmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637601328459457865
+  lastModified: 637601339989411899
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -373,6 +373,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-5322239990791085675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AI noise/AI 1 vol
+  m_EditorClassIdentifier: 
+  Name: AI 1 vol
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-4607956630312359543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +434,26 @@ MonoBehaviour:
     data2: 0
   Exists: 1
 --- !u!114 &-3687001119528837544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AI noise/AI 3 vol
+  m_EditorClassIdentifier: 
+  Name: AI 3 vol
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-3542245578562770110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -667,7 +707,7 @@ MonoBehaviour:
   - {fileID: -7331328869967065194}
   StringsBanks:
   - {fileID: 6613804069502799408}
-  stringsBankWriteTime: 637601328459467838
+  stringsBankWriteTime: 637601339989421817
   cacheVersion: 6
 --- !u!114 &193360210845810449
 MonoBehaviour:
@@ -753,10 +793,10 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8868198745533611181}
-  - {fileID: 3972768131068999842}
-  - {fileID: 8272254067812054458}
-  - {fileID: -2285528412112968389}
+  - {fileID: 8913610780888251452}
+  - {fileID: 8312372095685632799}
+  - {fileID: -5322239990791085675}
+  - {fileID: -3542245578562770110}
   MinDistance: 0
   MaxDistance: 0
   Length: 4000
@@ -780,7 +820,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -5859212543209848417}
+  - {fileID: 4991794179346161328}
   MinDistance: 0
   MaxDistance: 0
   Length: 243287
@@ -1037,6 +1077,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &4991794179346161328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 2/Progression
+  m_EditorClassIdentifier: 
+  Name: Progression
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &5181729614757662480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1135,11 +1195,31 @@ MonoBehaviour:
   Path: ../Algorithm Fmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637601328459467838
+  lastModified: 637601339989421817
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 1302
+  Exists: 1
+--- !u!114 &6742759801813070935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Track 1/Progression
+  m_EditorClassIdentifier: 
+  Name: Progression
+  Min: 0
+  Max: 10
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
 --- !u!114 &7347313613756645732
 MonoBehaviour:
@@ -1207,6 +1287,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &8312372095685632799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AI noise/AI 4 vol
+  m_EditorClassIdentifier: 
+  Name: AI 4 vol
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &8585622639628884344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1251,6 +1351,26 @@ MonoBehaviour:
   MaxDistance: 20
   Length: 2000
 --- !u!114 &8868198745533611181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/AI noise/AI 2 vol
+  m_EditorClassIdentifier: 
+  Name: AI 2 vol
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &8913610780888251452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
