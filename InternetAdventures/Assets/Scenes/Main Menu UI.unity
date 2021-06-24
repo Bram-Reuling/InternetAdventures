@@ -303,6 +303,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4d5b37aaef3efe74490384b5367b2018, type: 3}
   - {fileID: 21300000, guid: d6946ef86583d9d4598e44558b59492c, type: 3}
   - {fileID: 21300000, guid: 4b6919238a11cfc47bfe96cbacee7d13, type: 3}
+  isButton: 1
 --- !u!1 &987229124
 GameObject:
   m_ObjectHideFlags: 0

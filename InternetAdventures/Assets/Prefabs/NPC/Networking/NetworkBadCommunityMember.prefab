@@ -120,7 +120,6 @@ MonoBehaviour:
   syncInterval: 0.1
   tickTimer: 0
   _navMeshAgent: {fileID: 8792691072740253027}
-  navMeshObstacle: {fileID: 0}
   _navMesh: {fileID: 0}
   initialHealth: 100
   criticalHealthThreshold: 20
@@ -184,6 +183,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkBadCommunityMember
       objectReference: {fileID: 0}
+    - target: {fileID: 3314969163602617710, guid: 811a8c846afbe3a4cb04c60df73fe110, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 532e6f8e159a9684c8518c65aaf28258, type: 2}
+    - target: {fileID: 3314969163602617710, guid: 811a8c846afbe3a4cb04c60df73fe110, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b6d4539e903d92b42bdfdd2f1d3a4fb1, type: 2}
+    - target: {fileID: 3314969163602617710, guid: 811a8c846afbe3a4cb04c60df73fe110, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: f3dcfa35dd2da2f419c30aaa3e6e011f, type: 2}
     m_RemovedComponents:
     - {fileID: 2882661484698770573, guid: 811a8c846afbe3a4cb04c60df73fe110, type: 3}
     - {fileID: 2882661484698770585, guid: 811a8c846afbe3a4cb04c60df73fe110, type: 3}
