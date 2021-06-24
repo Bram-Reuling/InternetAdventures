@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Networking.NPC;
 
 public abstract class NetworkCommunityMemberBlackboard : NetworkAIBlackboard
 {
@@ -8,6 +9,7 @@ public abstract class NetworkCommunityMemberBlackboard : NetworkAIBlackboard
     [SerializeField] protected float minTimer;
     [SerializeField] protected float maxTimer;
     [SerializeField] protected float memberProximity;
+    [SerializeField] public NetworkChatBubble networkChatBubble;
     
     public virtual List<GameObject> GetAllNPCs()
     {

@@ -74,13 +74,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  emojiContainer: {fileID: 11400000, guid: 7cba528cf0735f3448898ed1e31d4abd, type: 2}
+  goodContainer: {fileID: 11400000, guid: 9caca9e45ced5cb4aa0b8b463f54f244, type: 2}
+  badContainer: {fileID: 11400000, guid: 2a0ee48936e1c574d9f30285ca2fcd51, type: 2}
   displayImages: 0
   numberOfPlayersInRange: 0
   minimalTimeForImageChange: 5
   maximalTimeForImageChange: 10
   imageSlot: {fileID: 7892299976676033244}
   lastImageIndex: 100000
+  IsUsingGoodEmoji: 0
+  EmojiState: 1
 --- !u!114 &6044721516146355900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +131,7 @@ MonoBehaviour:
   minTimer: 2
   maxTimer: 5
   memberProximity: 2.5
+  networkChatBubble: {fileID: 0}
 --- !u!1001 &5009779991006292676
 PrefabInstance:
   m_ObjectHideFlags: 0

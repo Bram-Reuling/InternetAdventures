@@ -37,6 +37,7 @@ MonoBehaviour:
   minTimer: 5
   maxTimer: 8
   memberProximity: 2.5
+  networkChatBubble: {fileID: 0}
 --- !u!114 &4401260236506913052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,13 +66,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  emojiContainer: {fileID: 11400000, guid: 7cba528cf0735f3448898ed1e31d4abd, type: 2}
+  goodContainer: {fileID: 11400000, guid: 9caca9e45ced5cb4aa0b8b463f54f244, type: 2}
+  badContainer: {fileID: 11400000, guid: 2a0ee48936e1c574d9f30285ca2fcd51, type: 2}
   displayImages: 0
   numberOfPlayersInRange: 0
   minimalTimeForImageChange: 5
   maximalTimeForImageChange: 10
   imageSlot: {fileID: 4202902749641113972}
   lastImageIndex: 100000
+  EmojiState: 0
 --- !u!114 &6933766560936663329
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,8 @@ namespace Networking.NPC
     {
         #region Variables
 
-        public EmojiContainer emojiContainer;
+        public EmojiContainer goodContainer;
+        public EmojiContainer badContainer;
 
         [SerializeField, SyncVar(hook = nameof(SetImageActiveState))] private bool displayImages = false;
         private bool triggeredFunction = false;
@@ -28,6 +29,11 @@ namespace Networking.NPC
 
         [SerializeField, SyncVar(hook = nameof(SetSprite))] private int lastImageIndex = 100000;
 
+        [SerializeField,SyncVar(hook = nameof(ChangeChatBubbleState))]
+        private bool IsUsingGoodEmoji = true;
+
+        [SerializeField] private EmojiState EmojiState = EmojiState.Good;
+
         #endregion
 
         #region Global Functions
@@ -41,7 +47,18 @@ namespace Networking.NPC
         [ClientCallback]
         private void SetSprite(int oldSpriteIndex, int newSpriteIndex)
         {
-            imageSlot.sprite = emojiContainer.emojis[newSpriteIndex];  
+            imageSlot.sprite = EmojiState switch
+            {
+                EmojiState.Good => goodContainer.emojis[newSpriteIndex],
+                EmojiState.Bad => badContainer.emojis[newSpriteIndex],
+                _ => imageSlot.sprite
+            };
+        }
+
+        [ClientCallback]
+        private void ChangeChatBubbleState(bool oldState, bool newState)
+        {
+            EmojiState = newState == false ? EmojiState.Bad : EmojiState.Good;
         }
 
         [ClientCallback]
@@ -55,6 +72,13 @@ namespace Networking.NPC
 
         #region Server Functions
 
+        [ServerCallback]
+        public void ChangeToBad()
+        {
+            IsUsingGoodEmoji = false;
+            EmojiState = EmojiState.Bad;
+        }
+        
         [ServerCallback]
         public void EnableEmojis()
         {
@@ -96,9 +120,18 @@ namespace Networking.NPC
         [ServerCallback]
         private void SetSprite()
         {
-            if (!emojiContainer) return;
+            if (!goodContainer || !badContainer) return;
+
+            int pictureIndex = 0;
             
-            int pictureIndex = Random.Range(0, emojiContainer.emojis.Count);
+            if (EmojiState == EmojiState.Good)
+            {
+                pictureIndex = Random.Range(0, goodContainer.emojis.Count);   
+            }
+            else if (EmojiState == EmojiState.Bad)
+            {
+                pictureIndex = Random.Range(0, badContainer.emojis.Count);   
+            }
 
             if (pictureIndex == lastImageIndex)
             {
@@ -109,10 +142,23 @@ namespace Networking.NPC
             {
                 //Debug.Log("Unique");
                 lastImageIndex = pictureIndex;
-                imageSlot.sprite = emojiContainer.emojis[pictureIndex];   
+                if (EmojiState == EmojiState.Good)
+                {
+                    imageSlot.sprite = goodContainer.emojis[pictureIndex];     
+                }
+                else if (EmojiState == EmojiState.Bad)
+                {
+                    imageSlot.sprite = badContainer.emojis[pictureIndex];     
+                }
             }
         }
         
         #endregion
+    }
+
+    public enum EmojiState
+    {
+        Good,
+        Bad
     }
 }
