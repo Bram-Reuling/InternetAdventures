@@ -51,11 +51,11 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
         foreach (var letter in stringToCharArray)
         {
             sentenceString += letter;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.05f);
         }
         
         dialogueToShow.Dequeue();
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         if(dialogueToShow.Count > 0)
             StartCoroutine(ShowDialogue());
         else
