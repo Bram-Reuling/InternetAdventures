@@ -56,7 +56,7 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
         
         dialogueToShow.Dequeue();
         yield return new WaitForSeconds(2);
-        if(dialogueToShow.Count > 0)
+        if(dialogueToShow.Count >= 0)
             StartCoroutine(ShowDialogue());
         else
         {
