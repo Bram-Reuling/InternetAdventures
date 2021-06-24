@@ -47,4 +47,9 @@ public class SettingsMenu : MonoBehaviour {
     {
         Screen.fullScreen = isFullscreen;
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
