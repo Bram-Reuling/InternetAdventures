@@ -8,5 +8,7 @@
         public static string MenuState = "LoginPanel";
 
         public static int NoOfPlayers = 1;
+
+        public static bool PlayersAreSpawned = false;
     }
 }

@@ -102,6 +102,8 @@ namespace Networking
                 Material[] mats = new Material[] {playerTwoMaterialHead, playerTwoMaterialFace, playerTwoMaterialBody};
                 meshRenderer.materials = mats;
             }
+
+            DataHandler.PlayersAreSpawned = true;
             
             NetworkServer.AddPlayerForConnection(conn, player);
         }

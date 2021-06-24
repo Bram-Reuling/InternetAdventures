@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Networking;
 using UnityEngine;
 
 public class NetworkLoseWinHandler : NetworkBehaviour
@@ -16,7 +18,22 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     [ServerCallback]
     private void Start()
     {
-        foreach(var communityMember in GameObject.FindGameObjectsWithTag("AI"))
+        StartCoroutine(InitializeLists());
+    }
+
+    [ServerCallback]
+    IEnumerator InitializeLists()
+    {
+        yield return new WaitUntil((() => DataHandler.PlayersAreSpawned));
+        
+        Initialize();
+    }
+
+    [ServerCallback]
+    private void Initialize()
+    {
+        Debug.Log("Initialize");
+        foreach (var communityMember in GameObject.FindGameObjectsWithTag("AI"))
         {
             NetworkGoodMemberBlackboard test;
             if (communityMember.TryGetComponent<NetworkGoodMemberBlackboard>(out test))
@@ -26,12 +43,12 @@ public class NetworkLoseWinHandler : NetworkBehaviour
 
         previousBadCount = badCommunityMembers.Count;
         previousGoodCount = goodCommunityMembers.Count;
-        
+
         Debug.Log("Good: " + goodCommunityMembers.Count);
         Debug.Log("Bad: " + badCommunityMembers.Count);
-        
+
         SendChangeMemberCountEvent();
-        
+
         OnNoGoodMembers += GameLose;
         OnNoBadMembers += GameWon;
     }
@@ -41,6 +58,7 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     {
         if (previousBadCount != badCommunityMembers.Count || previousGoodCount != goodCommunityMembers.Count)
         {
+            Debug.Log("Changing bad an good counts");
             previousBadCount = badCommunityMembers.Count;
             previousGoodCount = goodCommunityMembers.Count;
             
@@ -87,9 +105,8 @@ public class NetworkLoseWinHandler : NetworkBehaviour
             Debug.LogError("NO BAD MEMBERS");
             OnNoBadMembers?.Invoke(new object(), new EventArgs()); 
             EventBroker.CallLoseWinEvent("Won");
-        }
-        
-        if (goodCommunityMembers.Count <= 0)
+        } 
+        else if (goodCommunityMembers.Count <= 0)
         {
             Debug.LogError("NO GOOD MEMBERS");
             OnNoGoodMembers?.Invoke(new object(), new EventArgs());   
@@ -101,7 +118,7 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     public static void GameLose(object pSender, EventArgs pEventArgs)
     {
         Debug.LogError("Game's over!");
-        EventBroker.CallLoseWinEvent("Lost");
+        //EventBroker.CallLoseWinEvent("Lost");
         //RpcLoseWin("Lost");
     }    
     
@@ -109,7 +126,7 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     public static void GameWon(object pSender, EventArgs pEventArgs)
     {
         Debug.LogError("Game's won!");
-        EventBroker.CallLoseWinEvent("Won");
+        //EventBroker.CallLoseWinEvent("Won");
         //RpcLoseWin("Won");
     }
 
@@ -124,15 +141,13 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     private void SendChangeMemberCountEvent()
     {
         Debug.Log("============================Calling Change Member Count Event============================");
-        EventBroker.CallChangeMembersCount(goodCommunityMembers.Count, "good");
-        EventBroker.CallChangeMembersCount(badCommunityMembers.Count, "bad");
-        RpcSendChangeMemberCountEvent();
+        RpcSendChangeMemberCountEvent(goodCommunityMembers.Count, badCommunityMembers.Count);
     }
 
     [ClientRpc]
-    private void RpcSendChangeMemberCountEvent()
+    private void RpcSendChangeMemberCountEvent(int goodCount, int badCount)
     {
-        EventBroker.CallChangeMembersCount(goodCommunityMembers.Count, "good");
-        EventBroker.CallChangeMembersCount(badCommunityMembers.Count, "bad");
+        EventBroker.CallChangeMembersCount(goodCount, "good");
+        EventBroker.CallChangeMembersCount(badCount, "bad");
     }
 }
