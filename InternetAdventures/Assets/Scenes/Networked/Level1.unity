@@ -29490,6 +29490,12 @@ MonoBehaviour:
   _mainServerAddress: localhost
   _mainServerPort: 55555
   _lobbyScene: 
+  playerOneMaterialHead: {fileID: 2100000, guid: 1cca2d6e30e704244ab601593b56798f, type: 2}
+  playerOneMaterialFace: {fileID: 2100000, guid: ddeb7f1031a43224ab72f7dae9e55d1b, type: 2}
+  playerOneMaterialBody: {fileID: 2100000, guid: 55e9e40de1795b744aefa19918bda45d, type: 2}
+  playerTwoMaterialHead: {fileID: 2100000, guid: 85f0d3772446b974b802d592021f6dde, type: 2}
+  playerTwoMaterialFace: {fileID: 2100000, guid: 8ad861c93381d384eb208a19c780d895, type: 2}
+  playerTwoMaterialBody: {fileID: 2100000, guid: 05da4547ba5232f4da603b89be33c156, type: 2}
 --- !u!114 &1237487877
 MonoBehaviour:
   m_ObjectHideFlags: 0

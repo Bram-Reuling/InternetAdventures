@@ -34,6 +34,14 @@ namespace Networking
         private string sceneChangedTo = "";
         private int sceneChangedForClients = 0;
         private bool loadedObjects = false;
+        
+        [SerializeField] private Material playerOneMaterialHead;
+        [SerializeField] private Material playerOneMaterialFace;
+        [SerializeField] private Material playerOneMaterialBody;
+        
+        [SerializeField] private Material playerTwoMaterialHead;
+        [SerializeField] private Material playerTwoMaterialFace;
+        [SerializeField] private Material playerTwoMaterialBody;
 
         public override void Awake()
         {
@@ -153,6 +161,36 @@ namespace Networking
         private void PlayerExitMatchEndZoneEvent()
         {
             _playersInEndZone--;
+        }
+        
+        public override void OnServerAddPlayer(NetworkConnection conn)
+        {
+            Transform startPos = GetStartPosition();
+            GameObject player = startPos != null
+                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+                : Instantiate(playerPrefab);
+
+            // instantiating a "Player" prefab gives it the name "Player(clone)"
+            // => appending the connectionId is WAY more useful for debugging!
+            player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
+
+            // Trigger event on the client based on how many players have been added
+
+            SkinnedMeshRenderer meshRenderer = player.transform.GetChild(1).GetChild(0).GetComponent<SkinnedMeshRenderer>();
+            
+            if (DataHandler.NoOfPlayers == 1)
+            {
+                Material[] mats = new Material[] {playerOneMaterialHead, playerOneMaterialFace, playerOneMaterialBody};
+                meshRenderer.materials = mats;
+                DataHandler.NoOfPlayers = 2;
+            }
+            else
+            {
+                Material[] mats = new Material[] {playerTwoMaterialHead, playerTwoMaterialFace, playerTwoMaterialBody};
+                meshRenderer.materials = mats;
+            }
+            
+            NetworkServer.AddPlayerForConnection(conn, player);
         }
         
         private void Update()
