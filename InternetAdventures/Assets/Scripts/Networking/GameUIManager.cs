@@ -26,6 +26,7 @@ namespace Networking
         {
             goodMembers = newCount;
             spGoodCommText.text = $"Good Community Members: {goodMembers}";
+            geGoodCommText.text = $"Good Members Left: {goodMembers}";
         }
         
         [ClientCallback]
@@ -33,6 +34,7 @@ namespace Networking
         {
             badMembers = newCount;
             spBadCommText.text = $"Bad Community Members: {badMembers}";
+            geBadCommText.text = $"Bad Members Left: {badMembers}";
         }
         
         [ServerCallback]

@@ -65,11 +65,27 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     public static void GameLose(object pSender, EventArgs pEventArgs)
     {
         Debug.LogError("Game's over!");
+        DisableAIs();
     }    
     
     [ServerCallback]
     public static void GameWon(object pSender, EventArgs pEventArgs)
     {
         Debug.LogError("Game's won!");
+        DisableAIs();
+    }
+
+    [ServerCallback]
+    private static void DisableAIs()
+    {
+        foreach (var goodMember in goodCommunityMembers)
+        {
+            goodMember.SetActive(false);
+        }
+
+        foreach (var badMember in badCommunityMembers)
+        {
+            badMember.SetActive(false);
+        }
     }
 }
