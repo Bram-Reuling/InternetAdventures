@@ -178,6 +178,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (21)
@@ -5347,6 +5351,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (74)
@@ -5620,6 +5628,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (17)
@@ -5964,6 +5976,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (66)
@@ -6350,6 +6366,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (25)
@@ -6551,6 +6571,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (56)
@@ -6674,6 +6698,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (53)
@@ -7373,6 +7401,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (76)
@@ -7654,6 +7686,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (65)
@@ -7839,6 +7875,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (82)
@@ -8049,6 +8089,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2096662371
       objectReference: {fileID: 0}
+    - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (5)
@@ -8188,6 +8232,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (31)
@@ -8254,6 +8302,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (6)
@@ -8890,6 +8942,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (2)
@@ -9292,6 +9348,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (67)
@@ -9526,6 +9586,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (78)
@@ -9592,6 +9656,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (4)
@@ -9732,6 +9800,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (70)
@@ -9989,6 +10061,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (2)
@@ -10265,7 +10341,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (3)
@@ -10792,6 +10868,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (64)
@@ -10932,6 +11012,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (29)
@@ -10998,6 +11082,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (57)
@@ -11387,6 +11475,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2531913974
       objectReference: {fileID: 0}
+    - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (3)
@@ -12408,7 +12500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &407494475
 Transform:
   m_ObjectHideFlags: 0
@@ -12512,6 +12604,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (54)
@@ -12581,7 +12677,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (2)
@@ -12764,6 +12860,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (83)
@@ -12915,7 +13015,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (8)
@@ -13190,6 +13290,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (5)
@@ -13256,6 +13360,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (7)
@@ -13481,6 +13589,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (33)
@@ -13609,6 +13721,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (63)
@@ -14005,7 +14121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.050995
+      value: 4.0590057
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14057,6 +14173,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (14)
@@ -14329,7 +14449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.050995
+      value: 5.0590057
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14381,6 +14501,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (6)
@@ -14533,6 +14657,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (32)
@@ -14883,6 +15011,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (3)
@@ -14975,7 +15107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.050995
+      value: 11.163
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15035,6 +15167,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (84)
@@ -15450,6 +15586,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (77)
@@ -15516,6 +15656,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (72)
@@ -16243,7 +16387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730359541}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 62.70912, y: 13.314887, z: -0.029052734}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 828556029}
@@ -16362,6 +16506,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (39)
@@ -16428,6 +16576,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (12)
@@ -16494,6 +16646,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (47)
@@ -16560,6 +16716,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (38)
@@ -16755,7 +16915,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (9)
@@ -16896,6 +17056,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (49)
@@ -17098,7 +17262,7 @@ PrefabInstance:
     - target: {fileID: 7762147940321120478, guid: 529a3c47000c0a545a3110163e490321, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7762147940321120478, guid: 529a3c47000c0a545a3110163e490321, type: 3}
       propertyPath: initialHealth
       value: 100
@@ -17885,6 +18049,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (45)
@@ -17951,6 +18119,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (46)
@@ -18132,6 +18304,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (18)
@@ -18638,6 +18814,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 878023258
       objectReference: {fileID: 0}
+    - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (2)
@@ -19009,7 +19189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909528115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 209.04088, y: -3.564887, z: 9.47905}
+  m_LocalPosition: {x: 209.04088, y: -8.097877, z: 9.47905}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 730359542}
@@ -19444,6 +19624,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (30)
@@ -19536,7 +19720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.050995
+      value: 4.059
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20056,7 +20240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &964300969
 Transform:
   m_ObjectHideFlags: 0
@@ -20291,7 +20475,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (10)
@@ -20567,7 +20751,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (6)
@@ -20634,6 +20818,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (68)
@@ -20703,7 +20891,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (1)
@@ -21130,6 +21318,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (71)
@@ -21609,6 +21801,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1953940818
       objectReference: {fileID: 0}
+    - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (4)
@@ -26920,6 +27116,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (27)
@@ -27103,6 +27303,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (86)
@@ -27888,6 +28092,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (85)
@@ -28116,7 +28324,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (5)
@@ -33063,6 +33271,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (15)
@@ -33170,6 +33382,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (10)
@@ -33638,7 +33854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.050995
+      value: 11.162994
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -33805,7 +34021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.050995
+      value: 12.162994
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -34693,6 +34909,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (28)
@@ -35222,6 +35442,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (13)
@@ -35288,6 +35512,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (60)
@@ -35640,6 +35868,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1792812391
       objectReference: {fileID: 0}
+    - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (6)
@@ -35773,6 +36005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkCommunityMember (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7683566438136540431, guid: a4f6e62e72c4c42439241952052f5c99, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4f6e62e72c4c42439241952052f5c99, type: 3}
 --- !u!4 &1294669089 stripped
@@ -35787,6 +36023,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (50)
@@ -35853,6 +36093,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (55)
@@ -35919,6 +36163,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (79)
@@ -41123,6 +41371,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (1)
@@ -46336,6 +46588,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (69)
@@ -46484,6 +46740,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (41)
@@ -46734,6 +46994,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (42)
@@ -46800,6 +47064,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (8)
@@ -47179,6 +47447,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (80)
@@ -47245,6 +47517,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (23)
@@ -47583,7 +47859,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (4)
@@ -47650,6 +47926,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (59)
@@ -47806,6 +48086,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1496227953
       objectReference: {fileID: 0}
+    - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (1)
@@ -53179,6 +53463,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (40)
@@ -53884,7 +54172,7 @@ PrefabInstance:
     - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (2)
@@ -54095,6 +54383,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (75)
@@ -59913,6 +60205,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (20)
@@ -60005,7 +60301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.050995
+      value: 12.162994
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -60065,6 +60361,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (52)
@@ -60131,6 +60431,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (1)
@@ -60368,7 +60672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.050995
+      value: 11.162994
       objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -60447,6 +60751,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (16)
@@ -65538,6 +65846,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (44)
@@ -65915,6 +66227,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (73)
@@ -66097,6 +66413,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (43)
@@ -66342,6 +66662,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (51)
@@ -66465,6 +66789,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (58)
@@ -67019,6 +67347,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1306076503
       objectReference: {fileID: 0}
+    - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (2)
@@ -67143,6 +67475,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (48)
@@ -67383,6 +67719,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (5)
@@ -67702,6 +68042,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (4)
@@ -67931,6 +68275,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (19)
@@ -68209,6 +68557,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (26)
@@ -68481,6 +68833,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (37)
@@ -68721,7 +69077,7 @@ PrefabInstance:
     - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (7)
@@ -68885,6 +69241,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (62)
@@ -68951,6 +69311,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (9)
@@ -69110,6 +69474,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (3)
@@ -69180,6 +69548,10 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2321965170
       objectReference: {fileID: 0}
+    - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (1)
@@ -69242,6 +69614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (35)
@@ -69386,6 +69762,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (61)
@@ -69707,6 +70087,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (11)
@@ -69859,6 +70243,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (36)
@@ -70470,6 +70858,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (24)
@@ -70755,6 +71147,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (81)
@@ -70828,7 +71224,7 @@ PrefabInstance:
     - target: {fileID: 7370298695670752367, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: _navMesh
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 7892299975523153475, guid: 095868261cb13f049b7744c1fd7cb031, type: 3}
       propertyPath: m_Name
       value: NetworkBadCommunityMember (1)
@@ -70988,6 +71384,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (22)
@@ -71332,6 +71732,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 65b3914ada3485d48a30aba13724298d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -146166714534454858, guid: 65b3914ada3485d48a30aba13724298d, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 245029589631592800, guid: 65b3914ada3485d48a30aba13724298d, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -72169,6 +72573,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1212029813}
     m_Modifications:
+    - target: {fileID: 3130996942800614186, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
+      propertyPath: _navMesh
+      value: 
+      objectReference: {fileID: 23800000, guid: 1744da8e285594f449105fb4aa0f1bed, type: 2}
     - target: {fileID: 4202902748513433067, guid: ce7e9ca17af87054a9dda75f5c48f299, type: 3}
       propertyPath: m_Name
       value: NetworkGoodCommunityMember (34)

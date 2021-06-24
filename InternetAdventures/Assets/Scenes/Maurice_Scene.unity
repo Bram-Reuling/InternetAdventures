@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -191,6 +191,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5294192360560163384}
     m_Modifications:
+    - target: {fileID: -2725168866808002264, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
+      propertyPath: sceneId
+      value: 2523074192
+      objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1606,6 +1610,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5294192360560163384}
     m_Modifications:
+    - target: {fileID: -2725168866808002264, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
+      propertyPath: sceneId
+      value: 2989181429
+      objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2101,6 +2109,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5294192360560163384}
     m_Modifications:
+    - target: {fileID: -2725168866808002264, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
+      propertyPath: sceneId
+      value: 4216893747
+      objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3236,6 +3248,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5294192360560163384}
     m_Modifications:
+    - target: {fileID: -2725168866808002264, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
+      propertyPath: sceneId
+      value: 2783341411
+      objectReference: {fileID: 0}
     - target: {fileID: 889993502733237612, guid: 1fb9cc17b8524194390c701ac36003b3, type: 3}
       propertyPath: m_RootOrder
       value: 0
