@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4407201459251491073}
   - component: {fileID: 4407201459251491072}
   - component: {fileID: 4407201459251491077}
+  - component: {fileID: 554376350044256996}
   m_Layer: 0
   m_Name: ah yes v2
   m_TagString: Untagged
@@ -116,3 +117,15 @@ MonoBehaviour:
     - Name: Progression
       Value: 1
   TriggerEvent: 3
+--- !u!114 &554376350044256996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4407201459251491075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3379c2ae8d11f0749a7fabd2fd2dd9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

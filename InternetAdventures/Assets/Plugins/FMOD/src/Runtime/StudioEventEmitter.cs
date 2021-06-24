@@ -18,6 +18,7 @@ namespace FMODUnity
         public bool OverrideAttenuation = false;
         public float OverrideMinDistance = -1.0f;
         public float OverrideMaxDistance = -1.0f;
+        public bool ok = false;
 
         protected FMOD.Studio.EventDescription eventDescription;
         public  FMOD.Studio.EventDescription EventDescription { get { return eventDescription; } }
