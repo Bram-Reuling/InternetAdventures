@@ -13,7 +13,6 @@ public class NetworkAnimationTrigger : NetworkBehaviour
             {
                 currentAnimation.enabled = true;
             }
-            Destroy(gameObject);
         }
     }
 }
