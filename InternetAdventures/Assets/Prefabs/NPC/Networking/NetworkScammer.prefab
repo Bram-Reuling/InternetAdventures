@@ -117,7 +117,6 @@ MonoBehaviour:
   syncInterval: 0.1
   tickTimer: 0
   _navMeshAgent: {fileID: 8889078322900549140}
-  navMeshObstacle: {fileID: 0}
   _navMesh: {fileID: 0}
   initialHealth: 0
   criticalHealthThreshold: 20
@@ -142,6 +141,10 @@ PrefabInstance:
     - target: {fileID: 2344323983636119745, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2344323984115631794, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2344323985209881129, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
       propertyPath: m_RootOrder
