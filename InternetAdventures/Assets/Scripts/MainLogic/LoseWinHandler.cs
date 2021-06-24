@@ -40,8 +40,8 @@ public class LoseWinHandler : MonoBehaviour
 
     public static void RemoveFromList(in GameObject pMember)
     {
-        NetworkGoodMemberBlackboard lol;
-        if (pMember.TryGetComponent<NetworkGoodMemberBlackboard>(out lol))
+        GoodMemberBlackboard lol;
+        if (pMember.TryGetComponent<GoodMemberBlackboard>(out lol))
         {
             if (goodCommunityMembers.Contains(pMember))
                 goodCommunityMembers.Remove(pMember);
