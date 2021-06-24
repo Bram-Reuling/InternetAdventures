@@ -41,6 +41,9 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     {
         if (previousBadCount != badCommunityMembers.Count || previousGoodCount != goodCommunityMembers.Count)
         {
+            previousBadCount = badCommunityMembers.Count;
+            previousGoodCount = goodCommunityMembers.Count;
+            
             SendChangeMemberCountEvent();
         }
     }
@@ -120,6 +123,7 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     [ServerCallback]
     private void SendChangeMemberCountEvent()
     {
+        Debug.Log("============================Calling Change Member Count Event============================");
         EventBroker.CallChangeMembersCount(goodCommunityMembers.Count, "good");
         EventBroker.CallChangeMembersCount(badCommunityMembers.Count, "bad");
         RpcSendChangeMemberCountEvent();

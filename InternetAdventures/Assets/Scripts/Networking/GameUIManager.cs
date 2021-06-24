@@ -1,11 +1,12 @@
 ﻿using System;
+using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Networking
 {
-    public class GameUIManager : MonoBehaviour
+    public class GameUIManager : NetworkBehaviour
     {
         [SerializeField] private GameObject statPanel;
         [SerializeField] private TMP_Text spBadCommText;
@@ -20,6 +21,7 @@ namespace Networking
         private int goodMembers = 0;
         private int badMembers = 0;
 
+        [ClientCallback]
         private void Start()
         {
             EventBroker.LoseWinEvent += LoseWinEvent;
@@ -27,6 +29,7 @@ namespace Networking
             geEndGameButton.onClick.AddListener(EventBroker.CallMatchEndEvent);
         }
 
+        [ClientCallback]
         private void ChangeMembersCount(int pIntValue, string pStringValue)
         {
             switch (pStringValue)
@@ -42,6 +45,7 @@ namespace Networking
             }
         }
 
+        [ClientCallback]
         private void LoseWinEvent(string pValue)
         {
             Debug.LogError("Switching panels!");
@@ -55,12 +59,14 @@ namespace Networking
 
         }
 
+        [ClientCallback]
         private void Update()
         {
             spBadCommText.text = $"Bad Community Members: {badMembers}";
             spGoodCommText.text = $"Good Community Members: {goodMembers}";
         }
 
+        [ClientCallback]
         private void OnDestroy()
         {
             EventBroker.LoseWinEvent -= LoseWinEvent;
