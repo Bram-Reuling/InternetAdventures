@@ -14,8 +14,8 @@ public class LoseWinHandler : MonoBehaviour
     {
         foreach(var communityMember in GameObject.FindGameObjectsWithTag("AI"))
         {
-            NetworkGoodMemberBlackboard test;
-            if (communityMember.TryGetComponent<NetworkGoodMemberBlackboard>(out test))
+            GoodMemberBlackboard test;
+            if (communityMember.TryGetComponent<GoodMemberBlackboard>(out test))
                 goodCommunityMembers.Add(communityMember);
             else badCommunityMembers.Add(communityMember);
         }
@@ -40,8 +40,8 @@ public class LoseWinHandler : MonoBehaviour
 
     public static void RemoveFromList(in GameObject pMember)
     {
-        NetworkGoodMemberBlackboard lol;
-        if (pMember.TryGetComponent<NetworkGoodMemberBlackboard>(out lol))
+        GoodMemberBlackboard lol;
+        if (pMember.TryGetComponent<GoodMemberBlackboard>(out lol))
         {
             if (goodCommunityMembers.Contains(pMember))
                 goodCommunityMembers.Remove(pMember);
