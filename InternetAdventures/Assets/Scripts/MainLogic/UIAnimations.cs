@@ -15,6 +15,7 @@ namespace MainLogic
         [SerializeField] private bool isButton = false;
 
         private bool playAnimation = true;
+        private Sprite startImage;
         
         private Image imageComponent;
         private int index = 0;
@@ -24,6 +25,7 @@ namespace MainLogic
         private void Start()
         {
             imageComponent = GetComponent<Image>();
+            startImage = imageComponent.sprite;
 
             if (isButton)
             {
@@ -55,6 +57,7 @@ namespace MainLogic
         {
             if (isButton)
             {
+                imageComponent.sprite = startImage;
                 playAnimation = false;
             }
         }
