@@ -13,11 +13,12 @@ public class NetworkScammerDialogue : NetworkBehaviour
     {
         if (other.CompareTag("Character"))
         {
-            if (characterMovedIn == null || other.gameObject == characterMovedIn)
+            if (characterMovedIn != null)
             {
-                characterMovedIn = other.gameObject;
                 return;
             }
+
+            characterMovedIn = other.gameObject;
             FindObjectOfType<NetworkScammerDialogueManager>().AddDialog(this);
         }
     }

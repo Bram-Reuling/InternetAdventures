@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public class NetworkTraverseToMember : Node
 {
     //Positional
-    private float _minimalOffset = 2.0f;
+    private float _minimalOffset = 1.5f;
     private float _memberProximity;
     private NetworkCommunityMemberBlackboard _communityMemberBlackboard;
 
@@ -36,7 +36,7 @@ public class NetworkTraverseToMember : Node
             foreach (var npc in allCurrentNPC)
             {
                 NetworkCommunityMemberBlackboard memberBlackboard = npc.GetComponent<NetworkCommunityMemberBlackboard>();
-
+                if(memberBlackboard == null) Debug.Log("Kankerkop");
                 if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
                 
                 Debug.Log("Adding npc to potential members");
@@ -72,6 +72,7 @@ public class NetworkTraverseToMember : Node
             if(_communityMemberBlackboard.MemberPair != null)
                 _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = null;
             _communityMemberBlackboard.MemberPair = null;
+            memberPosition = _communityMemberBlackboard.transform.position;
         }
         
         NavMeshPath navMeshPath = new NavMeshPath();
@@ -83,7 +84,7 @@ public class NetworkTraverseToMember : Node
         {
             randomPointInMemberProximity = false;
             Vector2 randomXZDirection = Random.insideUnitCircle * 
-            (goRandom ? Random.Range(_minimalOffset, 20 - i) : Random.Range(1.25f, 2.5f));
+            (goRandom ? Random.Range(_minimalOffset, 10 - i) : Random.Range(1.25f, 2.5f));
 
             newPosition = new Vector3(randomXZDirection.x , 0, randomXZDirection.y);
             //NavMesh.SamplePosition(newPosition, out navMeshHit, Single.PositiveInfinity, NavMesh.AllAreas);
@@ -97,11 +98,10 @@ public class NetworkTraverseToMember : Node
             //     }
             // }
             i++;
-        } while ((!_communityMemberBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) &&
-                  (Mathf.Abs((newPosition - navMeshPath.corners[navMeshPath.corners.Length - 1]).magnitude) < 0.2f) || randomPointInMemberProximity) && i < 
-                  20);
+        } while (!_communityMemberBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) && i < 20);
 
         if(i == 20) Debug.Log("Couldn't find path");
+        Debug.Log(memberPosition + newPosition);
         _communityMemberBlackboard.NavAgent.SetPath(navMeshPath);
     }
 }

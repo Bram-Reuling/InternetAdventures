@@ -107,6 +107,11 @@ public class NetworkInteractableManager : NetworkBehaviour
                 gameObjectInReach.tag = "Untagged";
                 gameObjectInReach.layer = new int();
             }
+
+            if (gameObjectInReach.CompareTag("HammerMovable"))
+            {
+                gameObjectInReach.SetActive(false);
+            }
             
             //Add impulse upwards if there's a rigidbody.
             Rigidbody rigidbody = gameObjectInReach.GetComponent<Rigidbody>();
