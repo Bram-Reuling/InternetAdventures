@@ -29,7 +29,7 @@ public class NetworkBadMemberBlackboard : NetworkCommunityMemberBlackboard
         //Starting Node==============================================================================================================================
         _startingNode = new SelectorNode(new List<Node>() {healthSequence, pairing});
         
-        //StartCoroutine(DisableNavMeshAgent());
+        StartCoroutine(DisableNavMeshAgent());
     }
     
     IEnumerator DisableNavMeshAgent()
