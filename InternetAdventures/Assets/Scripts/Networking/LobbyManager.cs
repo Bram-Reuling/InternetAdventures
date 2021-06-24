@@ -76,7 +76,7 @@ namespace Networking
                 return;
             }
             
-            _roomCodeText.text = $"Code: {pLobbyDataResponse.Lobby.RoomCode}";
+            _roomCodeText.text = $"Room ID: {pLobbyDataResponse.Lobby.RoomCode}";
             _roomCodeText.enabled = true;
 
             if (pLobbyDataResponse.Lobby.Players.Count == 2)

@@ -5,8 +5,10 @@ namespace Networking
     public class MenuManager : MonoBehaviour
     {
         [SerializeField] private GameObject _loginPanel;
-        [SerializeField] private GameObject _mainPanel;
+        [SerializeField] private GameObject[] _mainPanel;
         [SerializeField] private GameObject _joinHostPanel;
+
+        [SerializeField] private GameObject _startButton;
 
         private void Start()
         {
@@ -35,7 +37,7 @@ namespace Networking
                     break;
                 case "JoinHostPanel":
                     Debug.Log("Enabling Host Join Panel");
-                    EnableHostJoinPanel();
+                    EnableMainPanel();
                     break;
                 default:
                     break;
@@ -45,8 +47,14 @@ namespace Networking
         private void EnableMainPanel()
         {
             _loginPanel.SetActive(false);
-            _mainPanel.SetActive(true);
 
+            foreach (GameObject o in _mainPanel)
+            {
+                o.SetActive(true);
+            }
+
+            _startButton.SetActive(false);
+            
             DataHandler.MenuState = "MainPanel";
         }
 

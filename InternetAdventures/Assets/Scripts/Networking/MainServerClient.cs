@@ -305,8 +305,10 @@ public class MainServerClient : MonoBehaviour
 
     public void CreateLobby()
     {
+        Debug.Log("Creating lobby");
         if (string.IsNullOrEmpty(_descriptionInput.text)) return;
 
+        
         LobbyCreateRequest lobbyCreateRequest = new LobbyCreateRequest
         {
             LobbyDescription = _descriptionInput.text, RequestingPlayerId = _clientId
@@ -317,6 +319,7 @@ public class MainServerClient : MonoBehaviour
 
     public void JoinLobby()
     {
+        Debug.Log("Joining lobby");
         if (string.IsNullOrEmpty(_roomCodeInput.text)) return;
 
         LobbyJoinRequest lobbyJoinRequest = new LobbyJoinRequest
