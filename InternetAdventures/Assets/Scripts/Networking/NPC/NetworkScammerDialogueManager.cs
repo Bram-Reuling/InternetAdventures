@@ -46,7 +46,14 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
     private IEnumerator ShowDialogue()
     {
         coroutineRunning = true;
-        sentenceString = dialogueToShow.Peek();
+        char[] stringToCharArray = dialogueToShow.Peek().ToCharArray();
+        sentenceString = " ";
+        foreach (var letter in stringToCharArray)
+        {
+            sentenceString += letter;
+            yield return new WaitForSeconds(0.2f);
+        }
+        
         dialogueToShow.Dequeue();
         yield return new WaitForSeconds(5);
         if(dialogueToShow.Count > 0)
@@ -55,7 +62,7 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
         {
             _characterMovement.UserInputAllowed = true;
             coroutineRunning = false;
-            sentenceString = "";
+            sentenceString = " ";
         }
     }
 
