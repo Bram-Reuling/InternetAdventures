@@ -14,7 +14,6 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
     [SyncVar(hook = nameof(SetSentence))] private string sentenceString;
     private NetworkCharacterMovement _characterMovement;
     private bool coroutineRunning;
-    private bool setNullstringOnce;
 
     [ServerCallback]
     private void Start()
@@ -38,7 +37,7 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
         if (!coroutineRunning)
         {
             nameString = pScammerDialogue.talkerName;
-            Destroy(pScammerDialogue.gameObject);
+            //Destroy(pScammerDialogue.gameObject);
             StartCoroutine(ShowDialogue());
         }
     }
@@ -48,23 +47,23 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
     {
         coroutineRunning = true;
         char[] stringToCharArray = dialogueToShow.Peek().ToCharArray();
-        sentenceString = " ";
         foreach (var letter in stringToCharArray)
         {
             sentenceString += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.03f);
         }
         
         dialogueToShow.Dequeue();
         yield return new WaitForSeconds(2);
-        if(dialogueToShow.Count > 0 || !setNullstringOnce)
-            StartCoroutine(ShowDialogue());
-        else
+        sentenceString = " ";
+        if (dialogueToShow.Count > 0)
         {
-            _characterMovement.UserInputAllowed = true;
+            StartCoroutine(ShowDialogue());
+        }
+        if(dialogueToShow.Count <= 0){
+            //_characterMovement.UserInputAllowed = true;
             coroutineRunning = false;
             sentenceString = " ";
-            setNullstringOnce = true;
         }
     }
 

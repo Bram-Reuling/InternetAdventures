@@ -13,6 +13,7 @@ TagManager:
   - PressurePlate
   - PressurePlatform
   - CommunityMembersGO
+  - HammerMovable
   layers:
   - Default
   - TransparentFX
