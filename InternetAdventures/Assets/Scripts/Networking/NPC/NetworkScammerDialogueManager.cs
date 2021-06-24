@@ -14,6 +14,7 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
     [SyncVar(hook = nameof(SetSentence))] private string sentenceString;
     private NetworkCharacterMovement _characterMovement;
     private bool coroutineRunning;
+    private bool setNullstringOnce;
 
     [ServerCallback]
     private void Start()
@@ -56,13 +57,14 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
         
         dialogueToShow.Dequeue();
         yield return new WaitForSeconds(2);
-        if(dialogueToShow.Count >= 0)
+        if(dialogueToShow.Count > 0 || !setNullstringOnce)
             StartCoroutine(ShowDialogue());
         else
         {
             _characterMovement.UserInputAllowed = true;
             coroutineRunning = false;
             sentenceString = " ";
+            setNullstringOnce = true;
         }
     }
 
