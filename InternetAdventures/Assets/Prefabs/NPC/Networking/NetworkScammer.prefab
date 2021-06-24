@@ -198,6 +198,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkScammer
       objectReference: {fileID: 0}
+    - target: {fileID: 2776699528934263748, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a3f895341ddb5848bbde64ef10164b0, type: 2}
+    - target: {fileID: 2776699528934263748, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b50c748db96995c48879396311d7f695, type: 2}
+    - target: {fileID: 2776699528934263748, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0cce337d183514448b5236116f9f255f, type: 2}
     - target: {fileID: 5127719215681680830, guid: b72e02442cb40224b99f1436dc117d2f, type: 3}
       propertyPath: m_Enabled
       value: 0
