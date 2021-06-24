@@ -6,12 +6,19 @@ public class DisableEnableOnTrigger : NetworkBehaviour
     [SerializeField] private GameObject[] toEnable;
     [SerializeField] private GameObject[] toDisable;
     [SerializeField] private bool destroy;
+    private GameObject firstCharacter;
     
     [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Character"))
         {
+            if (firstCharacter == null || other.gameObject == firstCharacter)
+            {
+                firstCharacter = other.gameObject;
+                return;
+            }
+            
             foreach (var enableGO in toEnable)
             {
                 enableGO.SetActive(true);

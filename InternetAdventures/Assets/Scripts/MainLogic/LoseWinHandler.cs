@@ -14,8 +14,8 @@ public class LoseWinHandler : MonoBehaviour
     {
         foreach(var communityMember in GameObject.FindGameObjectsWithTag("AI"))
         {
-            NetworkGoodMemberBlackboard test;
-            if (communityMember.TryGetComponent<NetworkGoodMemberBlackboard>(out test))
+            GoodMemberBlackboard test;
+            if (communityMember.TryGetComponent<GoodMemberBlackboard>(out test))
                 goodCommunityMembers.Add(communityMember);
             else badCommunityMembers.Add(communityMember);
         }
