@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -34633,7 +34633,7 @@ MonoBehaviour:
   spawnPrefabs: []
   _mainServerAddress: localhost
   _mainServerPort: 55555
-  _lobbyScene: 
+  _lobbyScene: Assets/Scenes/Networked/LobbyScene.unity
   playerOneMaterialHead: {fileID: 2100000, guid: 1cca2d6e30e704244ab601593b56798f, type: 2}
   playerOneMaterialFace: {fileID: 2100000, guid: ddeb7f1031a43224ab72f7dae9e55d1b, type: 2}
   playerOneMaterialBody: {fileID: 2100000, guid: 55e9e40de1795b744aefa19918bda45d, type: 2}
@@ -36244,7 +36244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1301375822
 Transform:
   m_ObjectHideFlags: 0
@@ -67710,6 +67710,10 @@ PrefabInstance:
     - target: {fileID: 47633940542246782, guid: a151cb879d20d9f458198ae4fba56f91, type: 3}
       propertyPath: m_Name
       value: LoseWin
+      objectReference: {fileID: 0}
+    - target: {fileID: 47633940542246782, guid: a151cb879d20d9f458198ae4fba56f91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a151cb879d20d9f458198ae4fba56f91, type: 3}
