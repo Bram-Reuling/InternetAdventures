@@ -12,6 +12,7 @@ TagManager:
   - AI
   - PressurePlate
   - PressurePlatform
+  - CommunityMembersGO
   layers:
   - Default
   - TransparentFX

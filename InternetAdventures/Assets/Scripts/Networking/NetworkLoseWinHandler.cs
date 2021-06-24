@@ -15,6 +15,7 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     {
         foreach(var communityMember in GameObject.FindGameObjectsWithTag("AI"))
         {
+            if (!communityMember.transform.parent.CompareTag("CommunityMembersGO")) continue;
             NetworkGoodMemberBlackboard test;
             if (communityMember.TryGetComponent<NetworkGoodMemberBlackboard>(out test))
                 goodCommunityMembers.Add(communityMember);

@@ -1,4 +1,3 @@
-using System;
 using Mirror;
 using UnityEngine;
 
@@ -7,15 +6,18 @@ public class NetworkScammerDialogue : NetworkBehaviour
     public string talkerName;
     [TextArea] public string[] dialog;
     public bool lockCharacterMovement;
-    private GameObject characterMovedIn;
+    private GameObject characterMovedIn = null;
 
     [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Character"))
         {
-            if (characterMovedIn != null) return;
-            characterMovedIn = other.gameObject;
+            if (characterMovedIn == null || other.gameObject == characterMovedIn)
+            {
+                characterMovedIn = other.gameObject;
+                return;
+            }
             FindObjectOfType<NetworkScammerDialogueManager>().AddDialog(this);
         }
     }
