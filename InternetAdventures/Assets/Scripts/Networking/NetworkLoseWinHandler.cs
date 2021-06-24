@@ -8,6 +8,9 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     public static readonly List<GameObject> goodCommunityMembers = new List<GameObject>();
     public static readonly List<GameObject> badCommunityMembers = new List<GameObject>();
 
+    private int previousGoodCount = 0;
+    private int previousBadCount = 0;
+
     public static event EventHandler OnNoGoodMembers, OnNoBadMembers;
     
     [ServerCallback]
@@ -21,10 +24,27 @@ public class NetworkLoseWinHandler : NetworkBehaviour
             else badCommunityMembers.Add(communityMember);
         }
 
+        previousBadCount = badCommunityMembers.Count;
+        previousGoodCount = goodCommunityMembers.Count;
+        
+        Debug.Log("Good: " + goodCommunityMembers.Count);
+        Debug.Log("Bad: " + badCommunityMembers.Count);
+        
+        SendChangeMemberCountEvent();
+        
         OnNoGoodMembers += GameLose;
         OnNoBadMembers += GameWon;
     }
-    
+
+    [ServerCallback]
+    private void Update()
+    {
+        if (previousBadCount != badCommunityMembers.Count || previousGoodCount != goodCommunityMembers.Count)
+        {
+            SendChangeMemberCountEvent();
+        }
+    }
+
     [ServerCallback]
     public static void AddToBadList(in GameObject pMember)
     {
@@ -39,6 +59,7 @@ public class NetworkLoseWinHandler : NetworkBehaviour
         {
             Debug.LogError("NO GOOD MEMBERS");
             OnNoGoodMembers?.Invoke(new object(), new EventArgs());   
+            EventBroker.CallLoseWinEvent("Lost");
         }
     }
 
@@ -64,7 +85,8 @@ public class NetworkLoseWinHandler : NetworkBehaviour
             OnNoBadMembers?.Invoke(new object(), new EventArgs()); 
             EventBroker.CallLoseWinEvent("Won");
         }
-        else if (goodCommunityMembers.Count <= 0)
+        
+        if (goodCommunityMembers.Count <= 0)
         {
             Debug.LogError("NO GOOD MEMBERS");
             OnNoGoodMembers?.Invoke(new object(), new EventArgs());   
@@ -73,24 +95,40 @@ public class NetworkLoseWinHandler : NetworkBehaviour
     }
 
     [ServerCallback]
-    public void GameLose(object pSender, EventArgs pEventArgs)
+    public static void GameLose(object pSender, EventArgs pEventArgs)
     {
         Debug.LogError("Game's over!");
         EventBroker.CallLoseWinEvent("Lost");
-        RpcLoseWin("Lost");
+        //RpcLoseWin("Lost");
     }    
     
     [ServerCallback]
-    public void GameWon(object pSender, EventArgs pEventArgs)
+    public static void GameWon(object pSender, EventArgs pEventArgs)
     {
         Debug.LogError("Game's won!");
         EventBroker.CallLoseWinEvent("Won");
-        RpcLoseWin("Won");
+        //RpcLoseWin("Won");
     }
 
     [ClientRpc]
     private void RpcLoseWin(string pState)
     {
+        Debug.Log("TEST");
         EventBroker.CallLoseWinEvent(pState);
+    }
+
+    [ServerCallback]
+    private void SendChangeMemberCountEvent()
+    {
+        EventBroker.CallChangeMembersCount(goodCommunityMembers.Count, "good");
+        EventBroker.CallChangeMembersCount(badCommunityMembers.Count, "bad");
+        RpcSendChangeMemberCountEvent();
+    }
+
+    [ClientRpc]
+    private void RpcSendChangeMemberCountEvent()
+    {
+        EventBroker.CallChangeMembersCount(goodCommunityMembers.Count, "good");
+        EventBroker.CallChangeMembersCount(badCommunityMembers.Count, "bad");
     }
 }

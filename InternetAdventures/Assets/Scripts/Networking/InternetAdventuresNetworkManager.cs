@@ -89,7 +89,7 @@ namespace Networking
                 EventBroker.PlayerEnterMatchEndZoneEvent += PlayerEnterMatchEndZoneEvent;
                 EventBroker.PlayerExitMatchEndZoneEvent += PlayerExitMatchEndZoneEvent;
                 EventBroker.SceneChangeEvent += ChangeSceneOnServer;
-                EventBroker.LoseWinEvent += LoseWinEvent;
+                EventBroker.MatchEndEvent += LoseWinEvent;
                 
                 try
                 {
@@ -112,7 +112,7 @@ namespace Networking
             }
         }
 
-        private void LoseWinEvent(string pValue)
+        private void LoseWinEvent()
         {
             if (!_endMatchPacketSend)
             {
@@ -325,7 +325,7 @@ namespace Networking
                 EventBroker.PlayerEnterMatchEndZoneEvent -= PlayerEnterMatchEndZoneEvent;
                 EventBroker.PlayerExitMatchEndZoneEvent -= PlayerExitMatchEndZoneEvent;
                 EventBroker.SceneChangeEvent += ChangeSceneOnServer;
-                EventBroker.LoseWinEvent += LoseWinEvent;
+                EventBroker.MatchEndEvent += LoseWinEvent;
                 Application.logMessageReceived -= Log;
             }
             else

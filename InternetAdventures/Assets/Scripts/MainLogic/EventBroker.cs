@@ -13,6 +13,8 @@ public static class EventBroker
 
     public delegate void StringDelegate(string pValue);
 
+    public delegate void IntStringDelegate(int pIntValue, string pStringValue);
+
     // Events
     public static event ChangeFmodParamDelegate ChangeFmodParamEvent;
 
@@ -36,12 +38,26 @@ public static class EventBroker
     public static event Action LeaveEvent;
     public static event Action StartMatchEvent;
 
+    public static event Action MatchEndEvent;
+
     public static event StringDelegate SceneChangeEvent;
 
     public static event StringDelegate LoseWinEvent;
 
+    public static event IntStringDelegate ChangeMembersCount;
+
     // Functions
 
+    public static void CallMatchEndEvent()
+    {
+        MatchEndEvent?.Invoke();
+    }
+    
+    public static void CallChangeMembersCount(int pIntValue, string pStringValue)
+    {
+        ChangeMembersCount?.Invoke(pIntValue, pStringValue);
+    }
+    
     public static void CallLoseWinEvent(string pValue)
     {
         LoseWinEvent?.Invoke(pValue);
