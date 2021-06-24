@@ -7,12 +7,15 @@ public class NetworkScammerDialogue : NetworkBehaviour
     public string talkerName;
     [TextArea] public string[] dialog;
     public bool lockCharacterMovement;
+    private GameObject characterMovedIn;
 
     [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Character"))
         {
+            if (characterMovedIn != null) return;
+            characterMovedIn = other.gameObject;
             FindObjectOfType<NetworkScammerDialogueManager>().AddDialog(this);
         }
     }
