@@ -18,34 +18,49 @@ namespace Networking
         [SerializeField] private TMP_Text geGoodCommText;
         [SerializeField] private Button geEndGameButton;
 
-        private int goodMembers = 0;
-        private int badMembers = 0;
+        [SyncVar(hook = nameof(SyncGoodCount))] private int goodMembers = 0;
+        [SyncVar(hook = nameof(SyncBadCount))] private int badMembers = 0;
 
         [ClientCallback]
+        private void SyncGoodCount(int oldCount, int newCount)
+        {
+            goodMembers = newCount;
+            spGoodCommText.text = $"Good Community Members: {goodMembers}";
+        }
+        
+        [ClientCallback]
+        private void SyncBadCount(int oldCount, int newCount)
+        {
+            badMembers = newCount;
+            spBadCommText.text = $"Bad Community Members: {badMembers}";
+        }
+        
+        [ServerCallback]
         private void Start()
         {
-            EventBroker.LoseWinEvent += LoseWinEvent;
-            EventBroker.ChangeMembersCount += ChangeMembersCount;
+            //EventBroker.LoseWinEvent += LoseWinEvent;
             geEndGameButton.onClick.AddListener(EventBroker.CallMatchEndEvent);
+            
+            NetworkLoseWinHandler.OnNoGoodMembers += NetworkLoseWinHandlerOnOnNoGoodMembers;
+            NetworkLoseWinHandler.OnNoBadMembers += NetworkLoseWinHandlerOnOnNoBadMembers;
+
+            badMembers = NetworkLoseWinHandler.badCommunityMembers.Count;
+            goodMembers = NetworkLoseWinHandler.goodCommunityMembers.Count;
         }
 
-        [ClientCallback]
-        private void ChangeMembersCount(int pIntValue, string pStringValue)
+        [ServerCallback]
+        private void NetworkLoseWinHandlerOnOnNoBadMembers(object sender, EventArgs e)
         {
-            switch (pStringValue)
-            {
-                case "good":
-                    goodMembers = pIntValue;
-                    break;
-                case "bad":
-                    badMembers = pIntValue;
-                    break;
-                default:
-                    break;
-            }
+            LoseWinEvent("Win");
         }
 
-        [ClientCallback]
+        [ServerCallback]
+        private void NetworkLoseWinHandlerOnOnNoGoodMembers(object sender, EventArgs e)
+        {
+            LoseWinEvent("Lost");
+        }
+
+        [ServerCallback]
         private void LoseWinEvent(string pValue)
         {
             Debug.LogError("Switching panels!");
@@ -56,21 +71,40 @@ namespace Networking
             geGoodCommText.text = $"Good Members Left: {goodMembers}";
             
             gameEndPanel.SetActive(true);
-
+            RpcLoseWinEvent(pValue);
         }
 
-        [ClientCallback]
+        [ClientRpc]
+        private void RpcLoseWinEvent(string pValue)
+        {
+            Debug.LogError("Switching panels!");
+            statPanel.SetActive(false);
+
+            geWinLoseText.text = $"You {pValue}!";
+            geBadCommText.text = $"Bad Members Left: {badMembers}";
+            geGoodCommText.text = $"Good Members Left: {goodMembers}";
+            
+            gameEndPanel.SetActive(true);
+        }
+        
         private void Update()
         {
             spBadCommText.text = $"Bad Community Members: {badMembers}";
             spGoodCommText.text = $"Good Community Members: {goodMembers}";
+            ServerUpdate();
         }
 
-        [ClientCallback]
+        [ServerCallback]
+        private void ServerUpdate()
+        {
+            badMembers = NetworkLoseWinHandler.badCommunityMembers.Count;
+            goodMembers = NetworkLoseWinHandler.goodCommunityMembers.Count;
+        }
+
+        [ServerCallback]
         private void OnDestroy()
         {
             EventBroker.LoseWinEvent -= LoseWinEvent;
-            EventBroker.ChangeMembersCount -= ChangeMembersCount;
         }
     }
 }
