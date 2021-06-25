@@ -16,11 +16,18 @@ namespace Networking.NPC
         private void Start()
         {
             Init();
+            StartBubble();
         }
 
         private void Init()
         {
             chatBubble = GetComponent<NetworkChatBubble>();
+        }
+
+        [ServerCallback]
+        private void StartBubble()
+        {
+            chatBubble.EnableEmojis();
         }
 
         #endregion
@@ -30,20 +37,6 @@ namespace Networking.NPC
         #endregion
 
         #region Server Functions
-
-        [ServerCallback]
-        private void OnTriggerEnter(Collider other)
-        {
-            if (!other.CompareTag("Character")) return;
-            chatBubble.EnableEmojis();
-        }
-
-        [ServerCallback]
-        private void OnTriggerExit(Collider other)
-        {
-            if (!other.CompareTag("Character")) return;
-            chatBubble.DisableEmojis();
-        }
 
         #endregion
     }

@@ -29,7 +29,7 @@ namespace Networking.NPC
 
         [SerializeField, SyncVar(hook = nameof(SetSprite))] private int lastImageIndex = 100000;
 
-        [SerializeField,SyncVar(hook = nameof(ChangeChatBubbleState))]
+        [SerializeField]
         private bool IsUsingGoodEmoji = true;
 
         [SerializeField] private EmojiState EmojiState = EmojiState.Good;
@@ -55,10 +55,11 @@ namespace Networking.NPC
             };
         }
 
-        [ClientCallback]
-        private void ChangeChatBubbleState(bool oldState, bool newState)
+        [ClientRpc]
+        private void RpcChangeChatBubbleState(bool newState, EmojiState emojiState)
         {
-            EmojiState = newState == false ? EmojiState.Bad : EmojiState.Good;
+            IsUsingGoodEmoji = newState;
+            EmojiState = emojiState;
         }
 
         [ClientCallback]
@@ -77,6 +78,7 @@ namespace Networking.NPC
         {
             IsUsingGoodEmoji = false;
             EmojiState = EmojiState.Bad;
+            RpcChangeChatBubbleState(false, EmojiState.Bad);
         }
         
         [ServerCallback]
