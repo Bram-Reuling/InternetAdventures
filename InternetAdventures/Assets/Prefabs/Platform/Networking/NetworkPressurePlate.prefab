@@ -91,6 +91,8 @@ MonoBehaviour:
   localScaleSensitivity: 0.01
   compressRotation: 0
   interpolateScale: 0
+  interpolateRotation: 1
+  interpolatePosition: 1
   syncScale: 0
   target: {fileID: 3158484259728261369}
 --- !u!1 &3134592836013806958
@@ -318,7 +320,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 7bb00c9b773d29b4ea3997792970e15e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
