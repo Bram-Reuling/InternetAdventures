@@ -18,7 +18,7 @@ public class NetworkConvertToBadNode : Node
         if (_oldMember != _communityMemberBlackboard.MemberPair)
         {
             _oldMember = _communityMemberBlackboard.MemberPair;
-            if (Random.Range(0.0f, 1.0f) <= 0.75f)
+            if (Random.Range(0.0f, 1.0f) <= 0.15f)
             {
                 //Convinced to turn bad
                 try
