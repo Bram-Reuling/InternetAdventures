@@ -20,7 +20,6 @@ using UnityEngine.SceneManagement;
 public class MainServerClient : MonoBehaviour
 {
     [SerializeField] private TMP_InputField _nameInput;
-    [SerializeField] private TMP_InputField _descriptionInput;
     [SerializeField] private TMP_InputField _roomCodeInput;
     [SerializeField] private string _server = "";
     [SerializeField] private int _port = 55555;
@@ -54,15 +53,14 @@ public class MainServerClient : MonoBehaviour
         else
         {
             // Give data to already existing one
-            DataHandler.MainServerClientInstance.SetInputFields(_nameInput, _descriptionInput, _roomCodeInput);
+            DataHandler.MainServerClientInstance.SetInputFields(_nameInput, _roomCodeInput);
             DestroyImmediate(this.gameObject);
         }
     }
 
-    public void SetInputFields(TMP_InputField name, TMP_InputField desc, TMP_InputField code)
+    public void SetInputFields(TMP_InputField name, TMP_InputField code)
     {
         _nameInput = name;
-        _descriptionInput = desc;
         _roomCodeInput = code;
     }
     
@@ -306,12 +304,10 @@ public class MainServerClient : MonoBehaviour
     public void CreateLobby()
     {
         Debug.Log("Creating lobby");
-        if (string.IsNullOrEmpty(_descriptionInput.text)) return;
 
-        
         LobbyCreateRequest lobbyCreateRequest = new LobbyCreateRequest
         {
-            LobbyDescription = _descriptionInput.text, RequestingPlayerId = _clientId
+            LobbyDescription = "", RequestingPlayerId = _clientId
         };
         
         SendObject(lobbyCreateRequest);
