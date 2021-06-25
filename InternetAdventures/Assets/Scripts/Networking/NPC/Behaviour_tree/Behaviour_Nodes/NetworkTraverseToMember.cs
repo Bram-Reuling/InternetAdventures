@@ -36,7 +36,14 @@ public class NetworkTraverseToMember : Node
             foreach (var npc in allCurrentNPC)
             {
                 NetworkCommunityMemberBlackboard memberBlackboard = npc.GetComponent<NetworkCommunityMemberBlackboard>();
-                if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
+                try
+                {
+                    if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
+                }
+                catch
+                {
+                    continue;
+                }
                 
                 Debug.Log("Adding npc to potential members");
                 potentialMembers.Add(npc);
