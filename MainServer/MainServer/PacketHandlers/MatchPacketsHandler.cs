@@ -30,7 +30,7 @@ namespace MainServer.PacketHandlers
                 {
                     //FileName = "../LinuxServer/InternetAdventuresServer.x86_64",
                     //FileName = "C:\\Repositories\\InternetAdventures\\InternetAdventures\\Builds\\Individual Presentation\\Game Server\\InternetAdventures.exe",
-                    FileName = "C:\\Users\\Mauri\\Desktop\\New folder\\InternetAdventures.exe",
+                    FileName = "C:\\Users\\Mauri\\Desktop\\Server\\TheAlgorithm.exe",
                     Arguments = $"-server {port} {request.RoomCode}",
                     CreateNoWindow = false,
                     WindowStyle = ProcessWindowStyle.Normal,
