@@ -9636,7 +9636,7 @@ MonoBehaviour:
   _menuScene: Assets/Scenes/Networked/MainMenuUI.unity
   _gameScene: Assets/Scenes/Networked/Level1.unity
   _lobbyScene: Assets/Scenes/Networked/LobbySceneUI.unity
-  UseLocalhost: 1
+  UseLocalhost: 0
   _clientName: Bram
 --- !u!1 &2056029201
 GameObject:
