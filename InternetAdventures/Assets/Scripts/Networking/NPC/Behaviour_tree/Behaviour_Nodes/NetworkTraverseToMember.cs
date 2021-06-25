@@ -63,7 +63,7 @@ public class NetworkTraverseToMember : Node
                 Debug.Log("No potential members");
                 goRandom = true;
                 memberPosition = _communityMemberBlackboard.transform.position;
-            }
+            } //lel
         }
         
         if(goRandom)
