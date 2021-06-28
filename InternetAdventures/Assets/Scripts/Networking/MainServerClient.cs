@@ -103,6 +103,9 @@ public class MainServerClient : MonoBehaviour
     public void ConnectToMainServer()
     {
         if (string.IsNullOrEmpty(_nameInput.text)) return;
+
+        DataHandler.PlayerName = _nameInput.text;
+        
         try
         {
             Debug.Log("Setting the client name.");

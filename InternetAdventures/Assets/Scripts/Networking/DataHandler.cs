@@ -10,5 +10,7 @@
         public static int NoOfPlayers = 1;
 
         public static bool PlayersAreSpawned = false;
+
+        public static string PlayerName = "Bram";
     }
 }
