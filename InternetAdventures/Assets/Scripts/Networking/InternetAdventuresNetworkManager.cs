@@ -112,9 +112,35 @@ namespace Networking
             {
                 Debug.Log("Starting Client!");
                 EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanelEvent;
+                
+                NetworkClient.RegisterHandler<SkinMessage>(ChangeSkin);
                 // Need to retrieve the player name and pass it to the server and sync it over the network
                 StartClient();
                 StartCoroutine(SendNetworkNameMessage());
+            }
+        }
+
+        private void ChangeSkin(NetworkConnection connection, SkinMessage message)
+        {
+            Debug.Log("Received skin change");
+            GameObject player = NetworkClient.localPlayer.gameObject;
+
+            SkinnedMeshRenderer meshRenderer = player.transform.GetChild(1).GetChild(0).GetComponent<SkinnedMeshRenderer>();
+
+            Material[] mats;
+            
+            switch (message.SkinIndex)
+            {
+                case 1:
+                    mats = new Material[] {playerOneMaterialHead, playerOneMaterialFace, playerOneMaterialBody};
+                    meshRenderer.materials = mats;
+                    break;
+                case 2:
+                    mats = new Material[] {playerTwoMaterialHead, playerTwoMaterialFace, playerTwoMaterialBody};
+                    meshRenderer.materials = mats;
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -220,8 +246,18 @@ namespace Networking
                 Material[] mats = new Material[] {playerTwoMaterialHead, playerTwoMaterialFace, playerTwoMaterialBody};
                 meshRenderer.materials = mats;
             }
-            
-            NetworkServer.AddPlayerForConnection(conn, player);
+
+            if (NetworkServer.AddPlayerForConnection(conn, player))
+            {
+                Debug.Log("Sending Skin change to player");
+                
+                SkinMessage skinMessage = new SkinMessage
+                {
+                    SkinIndex = DataHandler.NoOfPlayers
+                };
+                
+                conn.Send(skinMessage);
+            }
         }
         
         private void Update()
