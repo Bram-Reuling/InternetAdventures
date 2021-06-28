@@ -85,11 +85,7 @@ public class NetworkInteractableManager : NetworkBehaviour
             else
             {
                 gameObjectInReach.transform.DOKill();
-                //gameObjectInReach.transform.localScale = _initialScale;
-                //gameObjectInReach.transform.DOShakeScale(1, 1.0f);
                 gameObjectInReach.transform.DOScaleY(0.1f, 0.2f);
-                //gameObjectInReach.transform.GetComponent<CapsuleCollider>().height = 0.1f;
-                //gameObjectInReach.transform.GetComponent<CapsuleCollider>().radius = 0.1f;
                 //RpcSetCapsuleColliderProperties(gameObjectInReach);
             }
 
