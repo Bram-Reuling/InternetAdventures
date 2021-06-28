@@ -2,6 +2,7 @@
 using Mirror;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Networking
@@ -17,6 +18,14 @@ namespace Networking
         [SerializeField] private TMP_Text geBadCommText;
         [SerializeField] private TMP_Text geGoodCommText;
         [SerializeField] private Button geEndGameButton;
+
+        [SerializeField] private GameObject pausePanel;
+        [SerializeField] private Button pauseGoToLobbyButton;
+
+        private PlayerInput playerInput;
+
+        private bool menuActivated = false;
+        private bool gameIsLost = false;
 
         [SyncVar(hook = nameof(SyncGoodCount))] private int goodMembers = 0;
         [SyncVar(hook = nameof(SyncBadCount))] private int badMembers = 0;
@@ -37,12 +46,50 @@ namespace Networking
             geBadCommText.text = $"Bad Members Left: {badMembers}";
         }
         
-        [ServerCallback]
         private void Start()
         {
-            //EventBroker.LoseWinEvent += LoseWinEvent;
-            geEndGameButton.onClick.AddListener(EventBroker.CallMatchEndEvent);
+            ServerStart();
+            ClientStart();
+        }
+
+        [ClientCallback]
+        private void ClientStart()
+        {
+            playerInput = GetComponent<PlayerInput>();
+            playerInput.actions.FindAction("PauseGame").performed += ControlPauseMenu;
             
+            geEndGameButton.onClick.AddListener(CmdOndEndGameButtonClicked);
+            pauseGoToLobbyButton.onClick.AddListener(CmdOndEndGameButtonClicked);
+        }
+
+        [ClientCallback]
+        private void ControlPauseMenu(InputAction.CallbackContext obj)
+        {
+            if (gameIsLost) return;
+            
+            if (menuActivated)
+            {
+                pausePanel.SetActive(false);
+                statPanel.SetActive(true);
+                menuActivated = false;
+            }
+            else
+            {
+                pausePanel.SetActive(true);
+                statPanel.SetActive(false);
+                menuActivated = true;
+            }
+        }
+
+        [Command]
+        private void CmdOndEndGameButtonClicked()
+        {
+            EventBroker.CallMatchEndEvent();
+        }
+
+        [ServerCallback]
+        private void ServerStart()
+        {
             NetworkLoseWinHandler.OnNoGoodMembers += NetworkLoseWinHandlerOnOnNoGoodMembers;
             NetworkLoseWinHandler.OnNoBadMembers += NetworkLoseWinHandlerOnOnNoBadMembers;
 
@@ -67,6 +114,7 @@ namespace Networking
         {
             Debug.LogError("Switching panels!");
             statPanel.SetActive(false);
+            pausePanel.SetActive(false);
 
             geWinLoseText.text = $"You {pValue}!";
             geBadCommText.text = $"Bad Members Left: {badMembers}";
@@ -81,12 +129,15 @@ namespace Networking
         {
             Debug.LogError("Switching panels!");
             statPanel.SetActive(false);
+            pausePanel.SetActive(false);
 
             geWinLoseText.text = $"You {pValue}!";
             geBadCommText.text = $"Bad Members Left: {badMembers}";
             geGoodCommText.text = $"Good Members Left: {goodMembers}";
             
             gameEndPanel.SetActive(true);
+
+            gameIsLost = true;
         }
         
         private void Update()

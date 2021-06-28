@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Net.Sockets;
 using kcp2k;
 using Mirror;
 using Shared;
 using Shared.model;
 using Shared.protocol;
+using Shared.protocol.Lobby;
 using Shared.protocol.Match;
 using UnityEngine;
 
@@ -91,6 +93,8 @@ namespace Networking
                 EventBroker.SceneChangeEvent += ChangeSceneOnServer;
                 EventBroker.MatchEndEvent += LoseWinEvent;
                 
+                NetworkServer.RegisterHandler<NameMessage>(ChangeUserName);
+                
                 try
                 {
                     _client = new TcpClient();
@@ -108,7 +112,34 @@ namespace Networking
             {
                 Debug.Log("Starting Client!");
                 EventBroker.LoadedLobbyPanelEvent += LoadedLobbyPanelEvent;
+                // Need to retrieve the player name and pass it to the server and sync it over the network
                 StartClient();
+                StartCoroutine(SendNetworkNameMessage());
+            }
+        }
+
+        IEnumerator SendNetworkNameMessage()
+        {
+            yield return new WaitUntil(() => NetworkClient.isConnected);
+
+            NameMessage nameMessage = new NameMessage
+            {
+                PlayerName = DataHandler.PlayerName
+            };
+
+            NetworkClient.Send(nameMessage);
+        }
+
+        private void ChangeUserName(NetworkConnection connection, NameMessage message)
+        {
+            Debug.Log("CHANGING NAME");
+            foreach (var ownedObject in connection.clientOwnedObjects)
+            {
+                PlayerName playerName = ownedObject.GetComponent<PlayerName>();
+                
+                if (playerName == null) continue;
+                
+                playerName.ChangePlayerName(message.PlayerName);
             }
         }
 
@@ -227,6 +258,8 @@ namespace Networking
                         break;
                     case StartServerInstance startServerInstance:
                         StartGameInstanceServer();
+                        break;
+                    case LobbyDataResponse response:
                         break;
                 }
             }

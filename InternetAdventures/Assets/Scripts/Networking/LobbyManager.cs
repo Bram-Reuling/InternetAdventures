@@ -14,6 +14,8 @@ namespace Networking
         [SerializeField] private TMP_Text _roomCodeText;
         [SerializeField] private TMP_Text _playerOneText;
         [SerializeField] private TMP_Text _playerTwoText;
+        [SerializeField] private TMP_Text _playerOneReadyText;
+        [SerializeField] private TMP_Text _playerTwoReadyText;
         [SerializeField] private GameObject _matchMakingButtonGameObject;
         [SerializeField] private Button _matchMakingButton;
         [SerializeField] private Button _readyButton;
@@ -81,13 +83,18 @@ namespace Networking
 
             if (pLobbyDataResponse.Lobby.Players.Count == 2)
             {
-                _playerOneText.text = CheckReadyStateOfPlayer(pLobbyDataResponse.Lobby.Players[0]);
-                _playerTwoText.text = CheckReadyStateOfPlayer(pLobbyDataResponse.Lobby.Players[1]);
+                _playerOneText.text = pLobbyDataResponse.Lobby.Players[0].Name;
+                _playerTwoText.text = pLobbyDataResponse.Lobby.Players[1].Name;
+
+                _playerOneReadyText.text = CheckReadyStateOfPlayer(pLobbyDataResponse.Lobby.Players[0]);
+                _playerTwoReadyText.text = CheckReadyStateOfPlayer(pLobbyDataResponse.Lobby.Players[1]);
             }
             else if (pLobbyDataResponse.Lobby.Players.Count == 1)
             {
-                _playerOneText.text = CheckReadyStateOfPlayer(pLobbyDataResponse.Lobby.Players[0]);
+                _playerOneText.text = pLobbyDataResponse.Lobby.Players[0].Name;
+                _playerOneReadyText.text = CheckReadyStateOfPlayer(pLobbyDataResponse.Lobby.Players[0]);
                 _playerTwoText.text = "Waiting for player..";
+                _playerTwoReadyText.text = "";
             }
 
             Client thisClient = pLobbyDataResponse.Lobby.Players.FirstOrDefault(c => c.Id == pClientId);
@@ -102,9 +109,9 @@ namespace Networking
         {
             return player.ReadyState switch
             {
-                ReadyState.Ready => $"<color=green>{player.Name}</color>",
-                ReadyState.NotReady => $"<color=red>{player.Name}</color>",
-                _ => $"{player.Name}"
+                ReadyState.Ready => "<color=green>Ready</color>",
+                ReadyState.NotReady => "<color=red>Not Ready</color>",
+                _ => ""
             };
         }
 

@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Shared.model;
 using Shared.protocol;
+using Shared.protocol.Lobby;
 using Shared.protocol.Match;
 using Shared.protocol.protocol;
 
@@ -40,6 +41,15 @@ namespace MainServer.PacketHandlers
                 serverInstance.SendPacketToClient(clientServerInfo, playerStateChangeResponse);
                 serverInstance.SendPacketToClient(clientServerInfo, sceneChange);
             }
+            
+            // Send the players details to the server.
+            // Used for displaying the players names.
+
+            LobbyDataResponse lobbyDataResponse = new LobbyDataResponse {Lobby = room};
+
+            ClientServerInfo serverInstanceInfo = serverInstance.GetClientServerInfo(room.Server.Id);
+            
+            serverInstance.SendPacketToClient(serverInstanceInfo, lobbyDataResponse);
         }
     }
 }
