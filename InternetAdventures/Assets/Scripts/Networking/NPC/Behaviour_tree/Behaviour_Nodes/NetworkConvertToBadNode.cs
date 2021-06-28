@@ -26,7 +26,7 @@ public class NetworkConvertToBadNode : Node
                     NetworkGoodMemberBlackboard goodMemberBlackboard = _communityMemberBlackboard.MemberPair.GetComponent<NetworkGoodMemberBlackboard>();
                     goodMemberBlackboard.TurnBad();
                     NetworkLoseWinHandler.AddToBadList(_communityMemberBlackboard.MemberPair);
-                    _communityMemberBlackboard.networkChatBubble.ChangeToBad();
+                    //_communityMemberBlackboard.networkChatBubble.ChangeToBad();
                     _oldMember = _communityMemberBlackboard.MemberPair;
                     nodeState = State.Success;
                 }

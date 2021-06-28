@@ -118,7 +118,7 @@ MonoBehaviour:
   minTimer: 2
   maxTimer: 5
   memberProximity: 2.5
-  networkChatBubble: {fileID: 0}
+  networkChatBubble: {fileID: 2256470484372098034}
 --- !u!1001 &5009779991006292676
 PrefabInstance:
   m_ObjectHideFlags: 0
