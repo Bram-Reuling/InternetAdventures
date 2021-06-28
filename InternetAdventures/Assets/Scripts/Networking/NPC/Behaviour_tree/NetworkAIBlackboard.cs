@@ -18,6 +18,9 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
     public NavMeshAgent NavAgent => _navMeshAgent;
     [SerializeField] private NavMeshAgent _navMeshAgent;
 
+    public NavMeshObstacle NavObstacle => _navMeshObstacle;
+    [SerializeField] private NavMeshObstacle _navMeshObstacle;
+    
     public NavMeshData NavMesh => _navMesh;
     [SerializeField] private NavMeshData _navMesh;
 
