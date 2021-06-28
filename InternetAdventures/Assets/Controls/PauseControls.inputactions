@@ -1,0 +1,45 @@
+{
+    "name": "PauseControls",
+    "maps": [
+        {
+            "name": "PauseControls",
+            "id": "c7d59132-549d-4703-8955-d891005a1cab",
+            "actions": [
+                {
+                    "name": "PauseGame",
+                    "type": "Button",
+                    "id": "cd45940d-41c3-42c0-a294-4c76bf34bd61",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c9d9447e-247e-436b-95c8-d6efb1fb6ccc",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PauseScheme",
+                    "action": "PauseGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PauseScheme",
+            "bindingGroup": "PauseScheme",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
