@@ -36,15 +36,7 @@ public class NetworkTraverseToMember : Node
             foreach (var npc in allCurrentNPC)
             {
                 NetworkCommunityMemberBlackboard memberBlackboard = npc.GetComponent<NetworkCommunityMemberBlackboard>();
-                try
-                {
-                    if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
-                }
-                catch
-                {
-                    continue;
-                }
-                
+                if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
                 potentialMembers.Add(npc);
             }
 
@@ -54,8 +46,7 @@ public class NetworkTraverseToMember : Node
                 GameObject memberToGoTo = potentialMembers.ElementAt(Random.Range(0, potentialMembers.Count - 1));
                 if (_communityMemberBlackboard.MemberPair != null)
                 {
-                    _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair =
-                        null;
+                    _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = null;
                     //Debug.Log("Setting member pair to null");
                 }
                 _communityMemberBlackboard.MemberPair = memberToGoTo;
@@ -65,15 +56,12 @@ public class NetworkTraverseToMember : Node
             }
             else
             {
-                //Debug.Log("No potential members");
                 goRandom = true;
-                memberPosition = _communityMemberBlackboard.transform.position;
-            } //lel
+            } 
         }
         
         if(goRandom)
         {
-            //Debug.Log("GoRandom");
             if(_communityMemberBlackboard.MemberPair != null)
                 _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = null;
             _communityMemberBlackboard.MemberPair = null;
@@ -82,12 +70,15 @@ public class NetworkTraverseToMember : Node
         
         NavMeshPath navMeshPath = new NavMeshPath();
         Vector3 newPosition = Vector3.zero;
+        //bool randomPointInMemberProximity;
         int i = 0;
-        //NavMeshHit navMeshHit;
         do
         {
-            Vector2 randomXZDirection = Random.insideUnitCircle * (goRandom ? Random.Range(_minimalOffset, 15 - i) : Random.Range(1.75f, 2.75f));
+            //randomPointInMemberProximity = false;
+            Vector2 randomXZDirection = Random.insideUnitCircle.normalized * (goRandom ? Random.Range(_minimalOffset, 20 - i) : Random.Range(1.75f, 2.75f));
 
+            Debug.Log("GoRandom was: " + goRandom + " and it's random value was: " + randomXZDirection);
+            
             newPosition = new Vector3(randomXZDirection.x, 0, randomXZDirection.y);
 
             // if (goRandom)
@@ -99,8 +90,8 @@ public class NetworkTraverseToMember : Node
             //     }
             // }
             
-            //_communityMemberBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath);
-        } while ((!_communityMemberBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) || !(navMeshPath.corners[navMeshPath.corners.Length - 1] == (memberPosition + newPosition))) && i++ < 20);
+        } while ((!_communityMemberBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) || !(navMeshPath
+        .corners[navMeshPath.corners.Length - 1] == (memberPosition + newPosition))) && i++ < 20);
         if(i == 20) Debug.Log("Couldn't find path");
         _communityMemberBlackboard.NavAgent.SetPath(navMeshPath);
     }

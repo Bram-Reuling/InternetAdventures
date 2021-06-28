@@ -38,8 +38,8 @@ MonoBehaviour:
   criticalHealthThreshold: 20
   animator: {fileID: 6652376766793865903}
   MemberPair: {fileID: 0}
-  minTimer: 5
-  maxTimer: 8
+  minTimer: 8
+  maxTimer: 13
   memberProximity: 2.5
   networkChatBubble: {fileID: 0}
 --- !u!114 &4401260236506913052
