@@ -31,7 +31,7 @@ namespace Networking
         private Quaternion _externalRotation = Quaternion.identity;
         private Quaternion _newRotation;
         private GameObject _currentlyCollidingGameObject;
-        private bool _collideEveryFrame;
+        private MovementData _currentMovementData;
 
         public bool weaponInUse;
         public bool slammingHammer;
@@ -82,6 +82,7 @@ namespace Networking
         private void Update()
         {
             Decelerate();
+            ApplyExternalMovement();
             //Add current input movement to actual movement
             _velocity += _inputMovement;
             Vector3 xzMovement = ConstrainXZMovement();
@@ -137,6 +138,14 @@ namespace Networking
         }
         
         [ServerCallback]
+        private void ApplyExternalMovement()
+        {
+            if (_currentMovementData == null) return;
+            _externalMovement = _currentMovementData.MovementVector;
+            _externalRotation = _currentMovementData.DeltaRotation;
+        }
+        
+        [ServerCallback]
         private void OnCollisionLeave()
         {
             //Note: This case is only true, when the character jumps.
@@ -144,8 +153,8 @@ namespace Networking
             switch (_currentlyCollidingGameObject.transform.tag)
             {
                 case "Platform":
-                    _collideEveryFrame = false;
-                    _externalMovement = Vector3.zero;
+                    _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(true);
+                    _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(false);
                     break;
                 case "PhysicsPlatform":
                     _currentlyCollidingGameObject.transform.GetChild(0).GetComponent<NetworkPhysicsPlatform>().RemoveCharacter(gameObject);
@@ -154,12 +163,14 @@ namespace Networking
                     _currentlyCollidingGameObject.transform.parent.GetComponent<NetworkPressurePlateHandler>().RemoveGameObject(gameObject);
                     break;
                 case "PressurePlatform":
-                    _collideEveryFrame = false;
-                    _externalMovement = Vector3.zero;
-                    _externalRotation = Quaternion.identity;
+                    _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(true);
+                    _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(false);
                     break;
             }
 
+            _currentMovementData = null;
+            _externalMovement = Vector3.zero;
+            _externalRotation = Quaternion.identity;
             _currentlyCollidingGameObject = null;
         }
         
@@ -167,14 +178,16 @@ namespace Networking
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             //Note: Only recognize collision once, 'OnControllerColliderHit' is being called every frame.
-            if (_currentlyCollidingGameObject == hit.gameObject && !_collideEveryFrame) return;
+            if (_currentlyCollidingGameObject == hit.gameObject) return;
+            if(_characterController != null) OnCollisionLeave();
             switch (hit.gameObject.transform.tag)
             {
                 case "Platform":
                     //TODO: Cache this thing.
                     _currentlyCollidingGameObject = hit.gameObject;
-                    _externalMovement = _currentlyCollidingGameObject.GetComponent<NetworkMovingPlatform>().CurrentMovementVector;
-                    _collideEveryFrame = true;
+                    _currentMovementData = _currentlyCollidingGameObject.GetComponent<MovementData>();
+                    _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
+                    _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
                     break;
                 case "PhysicsPlatform":
                     _currentlyCollidingGameObject = hit.gameObject;
@@ -186,12 +199,12 @@ namespace Networking
                     break;
                 case "PressurePlatform":
                     _currentlyCollidingGameObject = hit.gameObject;
-                    _externalMovement = _currentlyCollidingGameObject.GetComponent<MovementData>().MovementVector;
-                    _externalRotation = _currentlyCollidingGameObject.GetComponent<MovementData>().DeltaRotation;
-                    _collideEveryFrame = true;
+                    _currentMovementData = _currentlyCollidingGameObject.GetComponent<MovementData>();
+                    _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
+                    _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
                     break;
                 default:
-                    OnCollisionLeave();
+                    if(_currentlyCollidingGameObject != null) OnCollisionLeave();
                     break;
             }
         }

@@ -30,6 +30,5 @@ public abstract class Interactable : MonoBehaviour
     {
         Debug.Log("Unlocking weapon.");
         IsLocked = false;
-        isLocked = false;
     }
 }

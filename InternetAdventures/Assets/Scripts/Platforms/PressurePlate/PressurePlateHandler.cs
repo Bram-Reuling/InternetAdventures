@@ -64,8 +64,9 @@ public class PressurePlateHandler : MonoBehaviour
     {
         if(!drawDebug) return;
         Gizmos.color = Color.cyan;
-        Gizmos.DrawCube(targetTransform.position, platformToMove.transform.localScale);
-        Gizmos.DrawLine(platformToMove.transform.position, targetTransform.position);
+        Transform childPlatform = platformToMove.transform.GetChild(0).transform;
+        Gizmos.DrawCube(targetTransform.position, childPlatform.transform.localScale);
+        Gizmos.DrawLine(targetTransform.transform.position, childPlatform.position);
     }
 }
 

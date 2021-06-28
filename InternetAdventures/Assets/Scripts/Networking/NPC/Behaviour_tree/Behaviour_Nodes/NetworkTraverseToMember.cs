@@ -45,28 +45,27 @@ public class NetworkTraverseToMember : Node
                     continue;
                 }
                 
-                Debug.Log("Adding npc to potential members");
                 potentialMembers.Add(npc);
             }
 
             if (potentialMembers.Count > 0)
             {
-                Debug.Log("Potential members count is > 0");
+                //Debug.Log("Potential members count is > 0");
                 GameObject memberToGoTo = potentialMembers.ElementAt(Random.Range(0, potentialMembers.Count - 1));
                 if (_communityMemberBlackboard.MemberPair != null)
                 {
                     _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair =
                         null;
-                    Debug.Log("Setting member pair to null");
+                    //Debug.Log("Setting member pair to null");
                 }
                 _communityMemberBlackboard.MemberPair = memberToGoTo;
                 memberToGoTo.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = _communityMemberBlackboard.gameObject;
-                Debug.Log("Setting member position");
+                //Debug.Log("Setting member position");
                 memberPosition = memberToGoTo.transform.position;
             }
             else
             {
-                Debug.Log("No potential members");
+                //Debug.Log("No potential members");
                 goRandom = true;
                 memberPosition = _communityMemberBlackboard.transform.position;
             } //lel
@@ -74,7 +73,7 @@ public class NetworkTraverseToMember : Node
         
         if(goRandom)
         {
-            Debug.Log("GoRandom");
+            //Debug.Log("GoRandom");
             if(_communityMemberBlackboard.MemberPair != null)
                 _communityMemberBlackboard.MemberPair.GetComponent<NetworkCommunityMemberBlackboard>().MemberPair = null;
             _communityMemberBlackboard.MemberPair = null;
@@ -111,7 +110,6 @@ public class NetworkTraverseToMember : Node
         i < 20);
 
         if(i == 20) Debug.Log("Couldn't find path");
-        Debug.Log(memberPosition + newPosition);
         _communityMemberBlackboard.NavAgent.SetPath(navMeshPath);
     }
 }

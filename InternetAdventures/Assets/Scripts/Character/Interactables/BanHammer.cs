@@ -96,6 +96,7 @@ public class BanHammer : Interactable
             //Only add game object when its in the interactable layers.
             if ((interactableLayers.value & (1 << other.gameObject.layer)) > 0)
             {
+                Debug.Log("Game object added");
                 _gameObjectsInTrigger.Add(other.gameObject);
             }
         }

@@ -23,7 +23,7 @@ public class CharacterMovement : MonoBehaviour
     private Quaternion _externalRotation = Quaternion.identity;
     private Quaternion _newRotation;
     private GameObject _currentlyCollidingGameObject;
-    private bool _collideEveryFrame;
+    private MovementData _currentMovementData;
 
     public static bool weaponInUse;
     
@@ -51,6 +51,7 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         Decelerate();
+        ApplyExternalMovement();
         //Add current input movement to actual movement
         _velocity += _inputMovement;
         Vector3 XZMovement = ConstrainXZMovement();
@@ -132,21 +133,27 @@ public class CharacterMovement : MonoBehaviour
     {
         return _velocity;
     }
+
+    private void ApplyExternalMovement()
+    {
+        if (_currentMovementData == null) return;
+        _externalMovement = _currentMovementData.MovementVector;
+        _externalRotation = _currentMovementData.DeltaRotation;
+    }
     
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         //Note: Only recognize collision once, 'OnControllerColliderHit' is being called every frame.
-        if (_currentlyCollidingGameObject == hit.gameObject && !_collideEveryFrame) return;
+        if (_currentlyCollidingGameObject == hit.gameObject) return;
+        if(_currentlyCollidingGameObject != null) OnCollisionLeave();
         switch (hit.gameObject.transform.tag)
         {
             case "Platform":
                 //TODO: Cache this thing.
                 _currentlyCollidingGameObject = hit.gameObject;
-                _externalMovement = _currentlyCollidingGameObject.GetComponent<MovementData>().MovementVector;
-                _externalRotation = _currentlyCollidingGameObject.GetComponent<MovementData>().DeltaRotation;
+                _currentMovementData = _currentlyCollidingGameObject.GetComponent<MovementData>();
                 _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
                 _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
-                _collideEveryFrame = true;
                 break;
             case "PhysicsPlatform":
                 _currentlyCollidingGameObject = hit.gameObject;
@@ -158,12 +165,12 @@ public class CharacterMovement : MonoBehaviour
                 break;
             case "PressurePlatform":
                 _currentlyCollidingGameObject = hit.gameObject;
-                _externalMovement = _currentlyCollidingGameObject.GetComponent<MovementData>().MovementVector;
-                _externalRotation = _currentlyCollidingGameObject.GetComponent<MovementData>().DeltaRotation;
-                _collideEveryFrame = true;
+                _currentMovementData = _currentlyCollidingGameObject.GetComponent<MovementData>();
+                _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
+                _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
                 break;
             default:
-                OnCollisionLeave();
+                if(_currentlyCollidingGameObject != null) OnCollisionLeave();
                 break;
         }
     }
@@ -175,9 +182,6 @@ public class CharacterMovement : MonoBehaviour
         switch (_currentlyCollidingGameObject.transform.tag)
         {
             case "Platform":
-                _collideEveryFrame = false;
-                _externalMovement = Vector3.zero;
-                _externalRotation = Quaternion.identity;
                 _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(true);
                 _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(false);
                 break;
@@ -186,14 +190,17 @@ public class CharacterMovement : MonoBehaviour
                 break;
             case "PressurePlate":
                 _currentlyCollidingGameObject.transform.parent.GetComponent<PressurePlateHandler>().RemoveGameObject(gameObject);
+                Debug.Log("Game object was removed");
                 break;
             case "PressurePlatform":
-                _collideEveryFrame = false;
-                _externalMovement = Vector3.zero;
-                _externalRotation = Quaternion.identity;
+                _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(true);
+                _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(false);
                 break;
         }
 
+        _currentMovementData = null;
+        _externalMovement = Vector3.zero;
+        _externalRotation = Quaternion.identity;
         _currentlyCollidingGameObject = null;
     }
 

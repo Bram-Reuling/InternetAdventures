@@ -85,13 +85,12 @@ public class NetworkInteractableManager : NetworkBehaviour
             else
             {
                 gameObjectInReach.transform.DOKill();
-                gameObjectInReach.transform.localScale = _initialScale;
+                //gameObjectInReach.transform.localScale = _initialScale;
                 //gameObjectInReach.transform.DOShakeScale(1, 1.0f);
-                gameObjectInReach.transform.DOScaleY(0.1f, 1);
-                gameObjectInReach.transform.GetComponent<CapsuleCollider>().height = 0.1f;
-                gameObjectInReach.transform.GetComponent<CapsuleCollider>().radius = 0.1f;
-
-                RpcSetCapsuleColliderProperties(gameObjectInReach);
+                gameObjectInReach.transform.DOScaleY(0.1f, 0.2f);
+                //gameObjectInReach.transform.GetComponent<CapsuleCollider>().height = 0.1f;
+                //gameObjectInReach.transform.GetComponent<CapsuleCollider>().radius = 0.1f;
+                //RpcSetCapsuleColliderProperties(gameObjectInReach);
             }
 
             if (gameObjectInReach.CompareTag("AI"))
@@ -108,11 +107,6 @@ public class NetworkInteractableManager : NetworkBehaviour
                 gameObjectInReach.layer = new int();
             }
 
-            if (gameObjectInReach.CompareTag("HammerMovable"))
-            {
-                gameObjectInReach.SetActive(false);
-            }
-            
             //Add impulse upwards if there's a rigidbody.
             Rigidbody rigidbody = gameObjectInReach.GetComponent<Rigidbody>();
             if (rigidbody != null)

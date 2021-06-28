@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 183589566303122960}
   - component: {fileID: 6544693422178865410}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Hands
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -52,6 +52,8 @@ MonoBehaviour:
   cameraShakeDuration: 1
   playerInput: {fileID: 0}
   characterAnimator: {fileID: 0}
+  interactableType: 0
+  isLocked: 1
   handMode: 1
   forceOnLeave: 25000
 --- !u!1 &6024748194640639824
@@ -65,7 +67,7 @@ GameObject:
   - component: {fileID: 6168699100056057629}
   - component: {fileID: 5446650864604076943}
   - component: {fileID: 1812448249540097074}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

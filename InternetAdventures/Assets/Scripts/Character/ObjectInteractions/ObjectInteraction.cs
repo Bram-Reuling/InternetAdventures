@@ -15,8 +15,11 @@ public class ObjectInteraction : MonoBehaviour
     {
         if (hit.rigidbody != null)
         {
-            if((interactableLayers & (1 << hit.gameObject.layer)) > 0)
+            if ((interactableLayers & (1 << hit.gameObject.layer)) > 0)
+            {
                 hit.rigidbody.AddForce((hit.transform.position - transform.position) * pushForce);
+                Debug.Log("Successfully transferred force");
+            }
         }
     }
 }

@@ -134,6 +134,8 @@ MonoBehaviour:
   cameraShakeDuration: 1
   playerInput: {fileID: 0}
   characterAnimator: {fileID: 0}
+  interactableType: 1
+  isLocked: 1
   range: 15
   gravityRadius: 2
   attractionSpeed: 1
