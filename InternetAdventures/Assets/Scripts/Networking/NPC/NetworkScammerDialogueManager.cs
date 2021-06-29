@@ -16,12 +16,6 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
     private bool coroutineRunning;
 
     [ServerCallback]
-    private void Start()
-    {
-        _characterMovement = FindObjectOfType<NetworkCharacterMovement>();
-    }
-    
-    [ServerCallback]
     public void AddDialog(NetworkScammerDialogue pScammerDialogue)
     {
         foreach (var sentence in pScammerDialogue.dialog)
@@ -31,6 +25,8 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
 
         if (pScammerDialogue.lockCharacterMovement)
         {
+            if(_characterMovement == null)
+                _characterMovement = FindObjectOfType<NetworkCharacterMovement>();
             _characterMovement.UserInputAllowed = false;
         }
 
@@ -39,6 +35,7 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
             nameString = pScammerDialogue.talkerName;
             //Destroy(pScammerDialogue.gameObject);
             StartCoroutine(ShowDialogue());
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 
@@ -61,9 +58,11 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
             StartCoroutine(ShowDialogue());
         }
         if(dialogueToShow.Count <= 0){
-            //_characterMovement.UserInputAllowed = true;
+            if(_characterMovement != null)
+                _characterMovement.UserInputAllowed = true;
             coroutineRunning = false;
             sentenceString = " ";
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 

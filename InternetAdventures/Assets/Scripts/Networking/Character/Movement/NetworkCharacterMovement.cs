@@ -84,7 +84,7 @@ namespace Networking
             Decelerate();
             ApplyExternalMovement();
             //Add current input movement to actual movement
-            _velocity += _inputMovement;
+            _velocity += UserInputAllowed ? _inputMovement : Vector3.zero;
             Vector3 xzMovement = ConstrainXZMovement();
             //Apply jump force only when character is grounded.
             if (!_characterController.isGrounded)
@@ -95,7 +95,7 @@ namespace Networking
             }
 
             //Move character controller
-            if (UserInputAllowed && !slammingHammer) _characterController.Move(_velocity * Time.deltaTime + _externalMovement);
+            if (!slammingHammer) _characterController.Move(_velocity * Time.deltaTime + _externalMovement);
             //Add rotation to the character controller based on the current movement speed, so the character
             //does not rotate when not walking. The threshold is there to prevent false movement since movement has a magnitude even when
             //standing still.
@@ -117,7 +117,7 @@ namespace Networking
         [ServerCallback]
         private void Decelerate()
         {
-            if (!(_inputMovement.magnitude <= 0.1f)) return;
+            if (_inputMovement.magnitude <= 0.1f && UserInputAllowed) return;
             _velocity.x *= deceleration;
             _velocity.z *= deceleration;
         }
