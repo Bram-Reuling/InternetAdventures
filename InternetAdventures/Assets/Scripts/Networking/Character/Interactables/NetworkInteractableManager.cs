@@ -85,7 +85,7 @@ public class NetworkInteractableManager : NetworkBehaviour
             else
             {
                 gameObjectInReach.transform.DOKill();
-                gameObjectInReach.transform.DOScaleY(0.1f, 0.2f);
+                gameObjectInReach.transform.DOScaleY(0.05f, 0.1f);
                 //RpcSetCapsuleColliderProperties(gameObjectInReach);
             }
 
