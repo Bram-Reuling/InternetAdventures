@@ -1396,9 +1396,9 @@ MonoBehaviour:
   criticalHealthThreshold: 20
   animator: {fileID: 1334179642309416667}
   MemberPair: {fileID: 0}
-  minTimer: 5
-  maxTimer: 8
-  memberProximity: 2.5
+  minTimer: 8
+  maxTimer: 12
+  memberProximity: 2.75
 --- !u!114 &8395200038346799514
 MonoBehaviour:
   m_ObjectHideFlags: 0
