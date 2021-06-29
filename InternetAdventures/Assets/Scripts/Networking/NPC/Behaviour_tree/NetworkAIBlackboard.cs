@@ -24,6 +24,8 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
     public NavMeshData NavMesh => _navMesh;
     [SerializeField] private NavMeshData _navMesh;
 
+    [SerializeField] protected bool alwaysGoRandom;
+    
     //Health
     public float CurrentHealth { get; private set; }
     [SerializeField] protected float initialHealth;

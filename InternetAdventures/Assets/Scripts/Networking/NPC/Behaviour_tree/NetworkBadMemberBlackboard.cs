@@ -16,7 +16,7 @@ public class NetworkBadMemberBlackboard : NetworkCommunityMemberBlackboard
         
         NetworkRandomTimerAtPositionNode randomTimerAtPositionNode = new NetworkRandomTimerAtPositionNode(this, minTimer, maxTimer);
         NetworkPotentialMemberNode potentialMemberNode = new NetworkPotentialMemberNode(this, memberProximity);
-        NetworkTraverseToMember traverseToMember = new NetworkTraverseToMember(this, memberProximity);
+        NetworkTraverseToMember traverseToMember = new NetworkTraverseToMember(this, memberProximity, alwaysGoRandom);
         SequenceNode findNewMember = new SequenceNode(new List<Node>(){atDestinationNode, randomTimerAtPositionNode, potentialMemberNode, traverseToMember});
 
         NetworkHasMemberNode hasMemberNode = new NetworkHasMemberNode(this);
