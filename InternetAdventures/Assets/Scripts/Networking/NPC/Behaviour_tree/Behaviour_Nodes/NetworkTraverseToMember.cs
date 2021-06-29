@@ -11,11 +11,13 @@ public class NetworkTraverseToMember : Node
     private float _minimalOffset = 3.5f;
     private float _memberProximity;
     private NetworkCommunityMemberBlackboard _communityMemberBlackboard;
+    private bool _alwaysGoRandom;
 
-    public NetworkTraverseToMember(NetworkCommunityMemberBlackboard pAIBlackboard, float pMemberProximity)
+    public NetworkTraverseToMember(NetworkCommunityMemberBlackboard pAIBlackboard, float pMemberProximity, bool pAlwaysGoRandom)
     {
         _communityMemberBlackboard = pAIBlackboard;
         _memberProximity = pMemberProximity;
+        _alwaysGoRandom = pAlwaysGoRandom;
     }
     
     public override State EvaluateState()
@@ -27,7 +29,7 @@ public class NetworkTraverseToMember : Node
     private void GetDestinationInMemberProximity()
     {
         //If I move on I consider moving randomly by 35%.
-        bool goRandom = Random.Range(0.0f, 1.0f) < 0.35f;
+        bool goRandom = _alwaysGoRandom || Random.Range(0.0f, 1.0f) < 0.35f;
         Vector3 memberPosition = Vector3.zero; 
         List<GameObject> potentialMembers = new List<GameObject>();
         List<GameObject> allCurrentNPC = _communityMemberBlackboard.GetAllNPCs();
@@ -70,28 +72,26 @@ public class NetworkTraverseToMember : Node
         
         NavMeshPath navMeshPath = new NavMeshPath();
         Vector3 newPosition = Vector3.zero;
-        //bool randomPointInMemberProximity;
+        bool notInMemberProximty;
         int i = 0;
         do
         {
-            //randomPointInMemberProximity = false;
-            Vector2 randomXZDirection = Random.insideUnitCircle.normalized * (goRandom ? Random.Range(_minimalOffset, 20 - i) : Random.Range(1.75f, 2.75f));
+            notInMemberProximty = true;
+            Vector2 randomXZDirection = Random.insideUnitCircle.normalized * (goRandom ? Random.Range(_minimalOffset, 20.0f + _minimalOffset - i) 
+                : Random.Range(1.75f, _memberProximity));
 
-            Debug.Log("GoRandom was: " + goRandom + " and it's random value was: " + randomXZDirection);
-            
             newPosition = new Vector3(randomXZDirection.x, 0, randomXZDirection.y);
 
-            // if (goRandom)
-            // {
-            //     foreach (var npc in allCurrentNPC)
-            //     {
-            //         if (((memberPosition + newPosition) - npc.GetComponent<AIBlackboard>().NavAgent.destination).magnitude < _memberProximity)
-            //             randomPointInMemberProximity = true;
-            //     }
-            // }
+            if (goRandom)
+            {
+                foreach (var npc in allCurrentNPC)
+                {
+                    if (((memberPosition + newPosition) - npc.GetComponent<NetworkAIBlackboard>().NavAgent.destination).magnitude < _memberProximity)
+                        notInMemberProximty = false;
+                }
+            }
             
-        } while ((!_communityMemberBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) || !(navMeshPath
-        .corners[navMeshPath.corners.Length - 1] == (memberPosition + newPosition))) && i++ < 20);
+        } while ((!_communityMemberBlackboard.NavAgent.CalculatePath(memberPosition + newPosition, navMeshPath) || !(navMeshPath.corners[navMeshPath.corners.Length - 1] == (memberPosition + newPosition)) || !notInMemberProximty) && i++ < 20);
         if(i == 20) Debug.Log("Couldn't find path");
         _communityMemberBlackboard.NavAgent.SetPath(navMeshPath);
     }

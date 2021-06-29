@@ -24,7 +24,8 @@ public class NetworkPotentialMemberNode : Node
                 _memberProximity)
             {
                 //Checks if the AI is still traversing, meaning it walks towards me.
-                if (currentNavAgent.velocity.magnitude > 0.1f) nodeState = State.Failure;
+                if (currentNavAgent.velocity.magnitude > 0.1f || currentNavAgent.pathStatus != NavMeshPathStatus.PathComplete) 
+                    nodeState = State.Failure;
                 //If close-by but standing still, I consider moving on by 10%.
                 else if (Random.Range(0.0f, 1.0f) < 0.1f) nodeState = State.Success;
                 else nodeState = State.Failure;
