@@ -116,7 +116,7 @@ namespace Networking
                 NetworkClient.RegisterHandler<SkinMessage>(ChangeSkin);
                 // Need to retrieve the player name and pass it to the server and sync it over the network
                 StartClient();
-                StartCoroutine(SendNetworkNameMessage());
+                //StartCoroutine(SendNetworkNameMessage());
             }
         }
 
@@ -220,45 +220,45 @@ namespace Networking
             _playersInEndZone--;
         }
         
-        public override void OnServerAddPlayer(NetworkConnection conn)
-        {
-            Transform startPos = GetStartPosition();
-            GameObject player = startPos != null
-                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                : Instantiate(playerPrefab);
-
-            // instantiating a "Player" prefab gives it the name "Player(clone)"
-            // => appending the connectionId is WAY more useful for debugging!
-            player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
-
-            // Trigger event on the client based on how many players have been added
-
-            SkinnedMeshRenderer meshRenderer = player.transform.GetChild(1).GetChild(0).GetComponent<SkinnedMeshRenderer>();
-            
-            if (DataHandler.NoOfPlayers == 1)
-            {
-                Material[] mats = new Material[] {playerOneMaterialHead, playerOneMaterialFace, playerOneMaterialBody};
-                meshRenderer.materials = mats;
-                DataHandler.NoOfPlayers = 2;
-            }
-            else
-            {
-                Material[] mats = new Material[] {playerTwoMaterialHead, playerTwoMaterialFace, playerTwoMaterialBody};
-                meshRenderer.materials = mats;
-            }
-
-            if (NetworkServer.AddPlayerForConnection(conn, player))
-            {
-                Debug.Log("Sending Skin change to player");
-                
-                SkinMessage skinMessage = new SkinMessage
-                {
-                    SkinIndex = DataHandler.NoOfPlayers
-                };
-                
-                conn.Send(skinMessage);
-            }
-        }
+        // public override void OnServerAddPlayer(NetworkConnection conn)
+        // {
+        //     Transform startPos = GetStartPosition();
+        //     GameObject player = startPos != null
+        //         ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
+        //         : Instantiate(playerPrefab);
+        //
+        //     // instantiating a "Player" prefab gives it the name "Player(clone)"
+        //     // => appending the connectionId is WAY more useful for debugging!
+        //     player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
+        //
+        //     // Trigger event on the client based on how many players have been added
+        //
+        //     SkinnedMeshRenderer meshRenderer = player.transform.GetChild(1).GetChild(0).GetComponent<SkinnedMeshRenderer>();
+        //     
+        //     if (DataHandler.NoOfPlayers == 1)
+        //     {
+        //         Material[] mats = new Material[] {playerOneMaterialHead, playerOneMaterialFace, playerOneMaterialBody};
+        //         meshRenderer.materials = mats;
+        //         DataHandler.NoOfPlayers = 2;
+        //     }
+        //     else
+        //     {
+        //         Material[] mats = new Material[] {playerTwoMaterialHead, playerTwoMaterialFace, playerTwoMaterialBody};
+        //         meshRenderer.materials = mats;
+        //     }
+        //
+        //     if (NetworkServer.AddPlayerForConnection(conn, player))
+        //     {
+        //         Debug.Log("Sending Skin change to player");
+        //         
+        //         SkinMessage skinMessage = new SkinMessage
+        //         {
+        //             SkinIndex = DataHandler.NoOfPlayers
+        //         };
+        //         
+        //         conn.Send(skinMessage);
+        //     }
+        // }
         
         private void Update()
         {
