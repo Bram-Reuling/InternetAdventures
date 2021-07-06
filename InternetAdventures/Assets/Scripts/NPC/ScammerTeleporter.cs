@@ -7,6 +7,7 @@ public class ScammerTeleporter : NetworkBehaviour
     [SerializeField] private Transform placementPosition;
     [SerializeField] private bool showDebug;
     
+    [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Character"))
@@ -16,6 +17,7 @@ public class ScammerTeleporter : NetworkBehaviour
         }
     }
 
+    [ServerCallback]
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Character"))
