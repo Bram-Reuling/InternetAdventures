@@ -693,8 +693,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2344323985209881129}
   - component: {fileID: 2344323985209881132}
-  - component: {fileID: 2344323985209881127}
-  - component: {fileID: 2344323985209881128}
   m_Layer: 0
   m_Name: Scammer
   m_TagString: Untagged
@@ -732,36 +730,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2344323985209881127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2344323985209881133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c1113e447f28cb45ad78edca67751bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimumTriggerSpan: 10
-  cameraRig: {fileID: 0}
---- !u!114 &2344323985209881128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2344323985209881133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2ac504aa28d98f4b91731a9ca4d8b68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emojiContainer: {fileID: 11400000, guid: 7cba528cf0735f3448898ed1e31d4abd, type: 2}
-  minimalTimeForImageChange: 5
-  maximalTimeForImageChange: 10
-  imageSlot: {fileID: 2344323984115631794}
 --- !u!1 &2613391402455166347
 GameObject:
   m_ObjectHideFlags: 0
