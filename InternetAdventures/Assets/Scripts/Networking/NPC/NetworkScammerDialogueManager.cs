@@ -52,12 +52,12 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
         
         dialogueToShow.Dequeue();
         yield return new WaitForSeconds(2);
-        sentenceString = " ";
         if (dialogueToShow.Count > 0)
         {
             StartCoroutine(ShowDialogue());
         }
-        if(dialogueToShow.Count <= 0){
+        else
+        {
             if(_characterMovement != null)
                 _characterMovement.UserInputAllowed = true;
             coroutineRunning = false;

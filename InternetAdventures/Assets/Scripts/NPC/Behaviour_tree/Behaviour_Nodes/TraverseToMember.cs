@@ -34,6 +34,7 @@ public class TraverseToMember : Node
             foreach (var npc in allCurrentNPC)
             {
                 CommunityMemberBlackboard memberBlackboard = npc.GetComponent<CommunityMemberBlackboard>();
+                Debug.LogError(npc.gameObject.name);
                 if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
                 potentialMembers.Add(npc);
             }

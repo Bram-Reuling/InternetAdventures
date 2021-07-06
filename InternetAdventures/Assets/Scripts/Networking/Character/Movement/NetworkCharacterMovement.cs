@@ -117,7 +117,7 @@ namespace Networking
         [ServerCallback]
         private void Decelerate()
         {
-            if (_inputMovement.magnitude <= 0.1f && UserInputAllowed) return;
+            if (_inputMovement.magnitude >= 0.1f) return;
             _velocity.x *= deceleration;
             _velocity.z *= deceleration;
         }

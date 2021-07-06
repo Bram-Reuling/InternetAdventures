@@ -1,7 +1,7 @@
 using Mirror;
 using UnityEngine;
 
-public class NetworkBoxTrigger : NetworkBehaviour
+public class NetworkBoxTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject hands;
     [SerializeField] private GameObject banHammer;
@@ -14,7 +14,6 @@ public class NetworkBoxTrigger : NetworkBehaviour
         _banHammer = banHammer.GetComponent<NetworkBanHammer>();
     }
     
-    [ServerCallback]
     private void OnTriggerEnter(Collider other)
     {
         if (_hands == null || _banHammer == null) return;
@@ -27,8 +26,7 @@ public class NetworkBoxTrigger : NetworkBehaviour
             _banHammer.AddOnTriggerEnter(other);
         }
     }
-
-    [ServerCallback]
+    
     private void OnTriggerExit(Collider other)
     {
         if (_hands == null || _banHammer == null) return;

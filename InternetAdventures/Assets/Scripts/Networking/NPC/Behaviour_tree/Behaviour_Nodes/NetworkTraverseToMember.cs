@@ -86,6 +86,7 @@ public class NetworkTraverseToMember : Node
             {
                 foreach (var npc in allCurrentNPC)
                 {
+                    Debug.LogWarning(npc.gameObject.name);
                     if (((memberPosition + newPosition) - npc.GetComponent<NetworkAIBlackboard>().NavAgent.destination).magnitude < _memberProximity)
                         notInMemberProximty = false;
                 }
