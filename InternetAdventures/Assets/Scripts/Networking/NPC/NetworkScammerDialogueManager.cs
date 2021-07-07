@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
@@ -14,6 +15,7 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
     [SyncVar(hook = nameof(SetSentence))] private string sentenceString;
     private NetworkCharacterMovement _characterMovement;
     private bool coroutineRunning;
+    [SerializeField] private GameObject objectToDisable;
 
     [ServerCallback]
     public void AddDialog(NetworkScammerDialogue pScammerDialogue)
@@ -32,10 +34,10 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
 
         if (!coroutineRunning)
         {
+            objectToDisable.SetActive(true);
             nameString = pScammerDialogue.talkerName;
             //Destroy(pScammerDialogue.gameObject);
             StartCoroutine(ShowDialogue());
-            gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 
@@ -62,7 +64,7 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
                 _characterMovement.UserInputAllowed = true;
             coroutineRunning = false;
             sentenceString = " ";
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            objectToDisable.SetActive(false);
         }
     }
 
