@@ -27,14 +27,16 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
 
         if (pScammerDialogue.lockCharacterMovement)
         {
-            if(_characterMovement == null)
-                _characterMovement = FindObjectOfType<NetworkCharacterMovement>();
-            _characterMovement.UserInputAllowed = false;
+            foreach (var character in GameObject.FindGameObjectsWithTag("Character"))
+            {
+                character.GetComponent<NetworkCharacterMovement>().UserInputAllowed = false;
+            }
         }
 
         if (!coroutineRunning)
         {
             objectToDisable.SetActive(true);
+            SetObjectActive(true);
             nameString = pScammerDialogue.talkerName;
             //Destroy(pScammerDialogue.gameObject);
             StartCoroutine(ShowDialogue());
@@ -49,25 +51,35 @@ public class NetworkScammerDialogueManager : NetworkBehaviour
         foreach (var letter in stringToCharArray)
         {
             sentenceString += letter;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.05f);
         }
         
         dialogueToShow.Dequeue();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3.0f);
+        sentenceString = " ";
         if (dialogueToShow.Count > 0)
         {
             StartCoroutine(ShowDialogue());
         }
         else
         {
-            if(_characterMovement != null)
-                _characterMovement.UserInputAllowed = true;
+            foreach (var character in GameObject.FindGameObjectsWithTag("Character"))
+            {
+                character.GetComponent<NetworkCharacterMovement>().UserInputAllowed = true;
+            }
             coroutineRunning = false;
             sentenceString = " ";
             objectToDisable.SetActive(false);
+            SetObjectActive(false);
         }
     }
 
+    [ClientRpc]
+    private void SetObjectActive(bool pValue)
+    {
+        objectToDisable.SetActive(pValue);
+    }
+    
     [ClientCallback]
     private void SetName(string oldName, string newName)
     {

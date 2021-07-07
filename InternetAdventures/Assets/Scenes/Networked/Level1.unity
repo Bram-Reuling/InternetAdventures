@@ -84458,6 +84458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed25e7d183848a0b40d5205b371fcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   name: {fileID: 2671855529810836816}
   sentence: {fileID: 8076403631580853422}
   objectToDisable: {fileID: 7925657562929515577}

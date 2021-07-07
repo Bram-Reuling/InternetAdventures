@@ -117,7 +117,6 @@ namespace Networking
         [ServerCallback]
         private void Decelerate()
         {
-            if (_inputMovement.magnitude >= 0.1f) return;
             _velocity.x *= deceleration;
             _velocity.z *= deceleration;
         }
@@ -231,7 +230,7 @@ namespace Networking
         {
             Debug.Log("CmdOnJump");
             //Apply jump force
-            if (_characterController.isGrounded) AddJumpForce();
+            if (_characterController.isGrounded && UserInputAllowed) AddJumpForce();
         }
 
         [ServerCallback]

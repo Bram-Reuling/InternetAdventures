@@ -1,4 +1,3 @@
-using System;
 using Mirror;
 using UnityEngine;
 
@@ -22,11 +21,13 @@ public class ScammerTeleporter : NetworkBehaviour
     }
 
     [ServerCallback]
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Character"))
+        if (characterToLookAt != null)
         {
-            scammer.transform.LookAt(characterToLookAt.transform.position);
+            Vector3 directionToLookAt = characterToLookAt.transform.position - scammer.transform.position;
+            directionToLookAt.y = 0;
+            scammer.transform.rotation = Quaternion.LookRotation(directionToLookAt.normalized, Vector3.up);
         }
     }
     
