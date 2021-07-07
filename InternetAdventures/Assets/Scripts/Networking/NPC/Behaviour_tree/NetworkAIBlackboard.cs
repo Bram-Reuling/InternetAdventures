@@ -16,13 +16,13 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
 
     //NavMeshAgent
     public NavMeshAgent NavAgent => _navMeshAgent;
-    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] protected NavMeshAgent _navMeshAgent;
 
     public NavMeshObstacle NavObstacle => _navMeshObstacle;
-    [SerializeField] private NavMeshObstacle _navMeshObstacle;
+    [SerializeField] protected NavMeshObstacle _navMeshObstacle;
     
     public NavMeshData NavMesh => _navMesh;
-    [SerializeField] private NavMeshData _navMesh;
+    [SerializeField] protected NavMeshData _navMesh;
 
     [SerializeField] protected bool alwaysGoRandom;
     
@@ -39,7 +39,6 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
     
     private void Start()
     {
-        _navMeshAgent = GetComponent<NavMeshAgent>();
         ServerStart();
     }
 
@@ -52,9 +51,12 @@ public abstract class NetworkAIBlackboard : NetworkBehaviour
 
     protected virtual void InitializeData()
     {
+        initialHealth = 100;
         CurrentHealth = initialHealth;
-        //navMeshObstacle = GetComponent<NavMeshObstacle>();
         animator = transform.GetChild(1).GetComponent<Animator>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _navMeshObstacle = GetComponent<NavMeshObstacle>();
+        criticalHealthThreshold = 20;
     }
 
     [ServerCallback]

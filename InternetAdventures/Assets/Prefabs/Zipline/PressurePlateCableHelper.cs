@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class PressurePlateCableHelper : NetworkBehaviour
 {
     [SerializeField] private GameObject pressurePlate, platform;

@@ -28,7 +28,6 @@ public class NetworkRandomTimerAtPositionNode : Node
             _currentTimer = Random.Range(_minTime, _maxTime);
             _communityMemberBlackboard.NavAgent.enabled = true;
         }
-
         if (_timePassed >= _currentTimer * 0.95f)
             _communityMemberBlackboard.NavObstacle.enabled = false;
 

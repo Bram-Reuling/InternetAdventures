@@ -91,7 +91,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 52380a18218794b429af74f5b1f8cea6, type: 2}
+  - {fileID: 2100000, guid: 7bb00c9b773d29b4ea3997792970e15e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6918911324143996060
 Transform:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 253e5267874ec5e47aeca569da13dfb9, type: 2}
+  - {fileID: 2100000, guid: 928fc51382285ec4f99463fb08ea2642, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2057,6 +2057,7 @@ GameObject:
   - component: {fileID: 3905974448851898537}
   - component: {fileID: 3905974448851898550}
   - component: {fileID: 3063987374084482318}
+  - component: {fileID: 1342903275748549008}
   m_Layer: 0
   m_Name: PressurePlate
   m_TagString: PressurePlate
@@ -2111,9 +2112,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0aa5f26c67090d43a02f6b328603d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   pressurePlate: {fileID: 3905974450739347311}
   platform: {fileID: 2119307845414531770}
   cable: {fileID: 25946536630615391}
+--- !u!114 &1342903275748549008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905974448851898551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &3905974448981731293
 GameObject:
   m_ObjectHideFlags: 0

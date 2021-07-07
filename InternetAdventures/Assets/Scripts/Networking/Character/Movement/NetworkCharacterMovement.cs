@@ -199,8 +199,8 @@ namespace Networking
                 case "PressurePlatform":
                     _currentlyCollidingGameObject = hit.gameObject;
                     _currentMovementData = _currentlyCollidingGameObject.GetComponent<MovementData>();
-                    _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
-                    _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
+                    //_currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
+                    //_currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
                     break;
                 default:
                     if(_currentlyCollidingGameObject != null) OnCollisionLeave();

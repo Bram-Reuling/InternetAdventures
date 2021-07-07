@@ -48,8 +48,7 @@ public class NetworkGoodMemberBlackboard : NetworkCommunityMemberBlackboard
         //Turn bad called
         Debug.Log(gameObject.name + " turned bad!");
         networkChatBubble.ChangeToBad();
-        gameObject.AddComponent<NetworkBadMemberBlackboard>().InitializeData(minTimer, maxTimer, MemberPair);
+        gameObject.AddComponent<NetworkBadMemberBlackboard>().InitializeData(minTimer, maxTimer, MemberPair, NavMesh);
         Destroy(this);
-        gameObject.AddComponent<NetworkBadMemberBlackboard>();
     }
 }

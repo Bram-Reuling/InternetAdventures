@@ -76,7 +76,7 @@ namespace Networking.NPC
         [ServerCallback]
         public void ChangeToBad()
         {
-            Debug.Log("Change to bad");
+            Debug.Log("Change emojis to bad");
             IsUsingGoodEmoji = false;
             EmojiState = EmojiState.Bad;
             RpcChangeChatBubbleState(false, EmojiState.Bad);

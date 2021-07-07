@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Networking.NPC;
+using UnityEngine.AI;
 
 public abstract class NetworkCommunityMemberBlackboard : NetworkAIBlackboard
 {
@@ -18,11 +19,13 @@ public abstract class NetworkCommunityMemberBlackboard : NetworkAIBlackboard
         return allNPCS;
     }
     
-    public void InitializeData(float pMinTimer, float pMaxTimer, GameObject pMemberPair)
+    public void InitializeData(float pMinTimer, float pMaxTimer, GameObject pMemberPair, NavMeshData pNavMesh)
     {
-        base.InitializeData();
         minTimer = pMinTimer;
         maxTimer = pMaxTimer;
         MemberPair = pMemberPair;
+        _navMesh = pNavMesh;
+        networkChatBubble = GetComponent<NetworkChatBubble>();
+        base.InitializeData();
     }
 }

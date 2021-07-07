@@ -35,10 +35,17 @@ public class NetworkTraverseToMember : Node
         List<GameObject> allCurrentNPC = _communityMemberBlackboard.GetAllNPCs();
         if (!goRandom)
         {
+            NavMeshPath navMeshPaff = new NavMeshPath();
             foreach (var npc in allCurrentNPC)
             {
                 NetworkCommunityMemberBlackboard memberBlackboard = npc.GetComponent<NetworkCommunityMemberBlackboard>();
-                if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f) continue;
+                if (memberBlackboard.MemberPair != null || memberBlackboard.NavAgent.velocity.magnitude > 0.1f || Mathf.Abs
+                        (_communityMemberBlackboard.transform.position.y - npc.transform.position.y) > 1.0f ||
+                    !_communityMemberBlackboard.NavAgent.CalculatePath(npc.transform.position, navMeshPaff) || navMeshPaff
+                        .corners[navMeshPaff.corners.Length - 1] != npc.transform.position)
+                {
+                    continue;
+                }
                 potentialMembers.Add(npc);
             }
 
@@ -86,7 +93,6 @@ public class NetworkTraverseToMember : Node
             {
                 foreach (var npc in allCurrentNPC)
                 {
-                    Debug.LogWarning(npc.gameObject.name);
                     if (((memberPosition + newPosition) - npc.GetComponent<NetworkAIBlackboard>().NavAgent.destination).magnitude < _memberProximity)
                         notInMemberProximty = false;
                 }
