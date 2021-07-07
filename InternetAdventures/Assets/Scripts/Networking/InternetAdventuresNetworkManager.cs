@@ -233,31 +233,19 @@ namespace Networking
         
             // Trigger event on the client based on how many players have been added
         
-            SkinnedMeshRenderer meshRenderer = player.transform.GetChild(1).GetChild(0).GetComponent<SkinnedMeshRenderer>();
+            PlayerSkin playerSkin = player.GetComponent<PlayerSkin>();
             
             if (DataHandler.NoOfPlayers == 1)
             {
-                Material[] mats = new Material[] {playerOneMaterialHead, playerOneMaterialFace, playerOneMaterialBody};
-                meshRenderer.materials = mats;
+                playerSkin.ChangeSkinIndex(1);
                 DataHandler.NoOfPlayers = 2;
             }
             else
             {
-                Material[] mats = new Material[] {playerTwoMaterialHead, playerTwoMaterialFace, playerTwoMaterialBody};
-                meshRenderer.materials = mats;
+                playerSkin.ChangeSkinIndex(2);
             }
-        
-            if (NetworkServer.AddPlayerForConnection(conn, player))
-            {
-                Debug.Log("Sending Skin change to player");
-                
-                SkinMessage skinMessage = new SkinMessage
-                {
-                    SkinIndex = DataHandler.NoOfPlayers
-                };
-                
-                conn.Send(skinMessage);
-            }
+
+            NetworkServer.AddPlayerForConnection(conn, player);
         }
         
         private void Update()

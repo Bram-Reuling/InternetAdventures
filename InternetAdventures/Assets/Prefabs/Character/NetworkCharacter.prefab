@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 6861740392027051690}
   - component: {fileID: 8448709137098924226}
   - component: {fileID: 6349700381371955363}
+  - component: {fileID: 1914394818139868901}
   m_Layer: 12
   m_Name: NetworkCharacter
   m_TagString: Character
@@ -538,6 +539,28 @@ MonoBehaviour:
   syncInterval: 0.1
   playerName: 
   playerNameText: {fileID: 1035904689682305041}
+--- !u!114 &1914394818139868901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102272659099837518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56792fdffc4946dca8306c9ae25776ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  skinIndex: 0
+  meshRenderer: {fileID: 2950769711595290049}
+  playerOneMaterialHead: {fileID: 2100000, guid: 1cca2d6e30e704244ab601593b56798f, type: 2}
+  playerOneMaterialFace: {fileID: 2100000, guid: ddeb7f1031a43224ab72f7dae9e55d1b, type: 2}
+  playerOneMaterialBody: {fileID: 2100000, guid: 55e9e40de1795b744aefa19918bda45d, type: 2}
+  playerTwoMaterialHead: {fileID: 2100000, guid: 85f0d3772446b974b802d592021f6dde, type: 2}
+  playerTwoMaterialFace: {fileID: 2100000, guid: 8ad861c93381d384eb208a19c780d895, type: 2}
+  playerTwoMaterialBody: {fileID: 2100000, guid: 05da4547ba5232f4da603b89be33c156, type: 2}
 --- !u!1 &1102272659777378852
 GameObject:
   m_ObjectHideFlags: 0
