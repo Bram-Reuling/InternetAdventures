@@ -171,7 +171,6 @@ namespace Networking
             _currentlyCollidingGameObject = null;
         }
         
-        [ServerCallback]
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             //Note: Only recognize collision once, 'OnControllerColliderHit' is being called every frame.

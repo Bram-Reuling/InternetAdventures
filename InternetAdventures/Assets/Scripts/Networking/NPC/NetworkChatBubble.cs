@@ -73,8 +73,7 @@ namespace Networking.NPC
         #endregion
 
         #region Server Functions
-
-        [ServerCallback]
+        
         public void ChangeToBad()
         {
             Debug.Log("Change emojis to bad");
@@ -83,7 +82,6 @@ namespace Networking.NPC
             RpcChangeChatBubbleState(false, EmojiState.Bad);
         }
         
-        [ServerCallback]
         public void EnableEmojis()
         {
             numberOfPlayersInRange++;
@@ -109,8 +107,7 @@ namespace Networking.NPC
             imageSlot.enabled = false;
             //Debug.Log("Disabled Emojis");   
         }
-
-        [ServerCallback]
+        
         private IEnumerator EmojiCoroutine()
         {
             while (displayImages)
@@ -121,7 +118,6 @@ namespace Networking.NPC
             }
         }
         
-        [ServerCallback]
         private void SetSprite()
         {
             if (!goodContainer || !badContainer) return;
