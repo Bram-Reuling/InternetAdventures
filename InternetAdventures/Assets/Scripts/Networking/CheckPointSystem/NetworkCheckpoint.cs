@@ -6,17 +6,22 @@ namespace Networking.CheckPointSystem
 {
     public class NetworkCheckpoint : NetworkBehaviour
     {
+        private GameObject firstPlayer;
+        
         [ServerCallback]
         private void OnTriggerEnter(Collider other)
         {
-            // Get NetworkPlayerLogic from collider
-            NetworkPlayerLogic playerLogic = other.GetComponent<NetworkPlayerLogic>();
-
-            // Check if the component is there.
-            if (playerLogic)
+            if (other.gameObject.CompareTag("Character"))
             {
-                // If it is call the SetCheckpoint method
-                playerLogic.SetCheckPoint(transform.position);
+                if (firstPlayer == null || other.gameObject == firstPlayer)
+                {
+                    firstPlayer = other.gameObject;
+                    return;
+                }
+                
+                
+                firstPlayer.GetComponent<NetworkPlayerLogic>().SetCheckPoint(transform.position);
+                other.gameObject.GetComponent<NetworkPlayerLogic>().SetCheckPoint(transform.position);
             }
         }
     }

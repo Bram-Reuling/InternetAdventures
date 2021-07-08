@@ -36,6 +36,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "IngameMenu",
+                    "type": "Button",
+                    "id": "6c1205ed-61a2-4604-a7c6-ff885e4ca4d2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -124,6 +132,17 @@
                     "processors": "",
                     "groups": "CharacterWASD",
                     "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e51e17e-ffa4-4346-ac86-41e3babb1c74",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "CharacterWASD",
+                    "action": "IngameMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

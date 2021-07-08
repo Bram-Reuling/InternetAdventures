@@ -1,6 +1,7 @@
 ﻿using System;
 using Mirror;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -56,10 +57,16 @@ namespace Networking
         private void ClientStart()
         {
             playerInput = GetComponent<PlayerInput>();
-            playerInput.actions.FindAction("PauseGame").performed += ControlPauseMenu;
+            foreach (var character in GameObject.FindGameObjectsWithTag("Character"))
+            {
+                playerInput = character.GetComponent<PlayerInput>();
+                if (playerInput != null) break;
+            }
             
-            geEndGameButton.onClick.AddListener(CmdOndEndGameButtonClicked);
-            pauseGoToLobbyButton.onClick.AddListener(CmdOndEndGameButtonClicked);
+            playerInput.actions.FindAction("IngameMenu").performed += ControlPauseMenu;
+            
+            geEndGameButton.onClick.AddListener(OnEndGameButtonClicked);
+            pauseGoToLobbyButton.onClick.AddListener(OnEndGameButtonClicked);
         }
 
         [ClientCallback]
@@ -81,9 +88,18 @@ namespace Networking
             }
         }
 
+        [ClientCallback]
+        private void OnEndGameButtonClicked()
+        {
+            Debug.Log("To Lobby Clicked!");
+            NetworkClient.Disconnect();
+            //CmdOndEndGameButtonClicked();
+        }
+        
         [Command]
         private void CmdOndEndGameButtonClicked()
         {
+            Debug.Log("To Lobby Clicked Server");
             EventBroker.CallMatchEndEvent();
         }
 

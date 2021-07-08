@@ -162,8 +162,6 @@ namespace Networking
                     _currentlyCollidingGameObject.transform.parent.GetComponent<NetworkPressurePlateHandler>().RemoveGameObject(gameObject);
                     break;
                 case "PressurePlatform":
-                    _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(true);
-                    _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(false);
                     break;
             }
 
@@ -199,15 +197,15 @@ namespace Networking
                 case "PressurePlatform":
                     _currentlyCollidingGameObject = hit.gameObject;
                     _currentMovementData = _currentlyCollidingGameObject.GetComponent<MovementData>();
-                    //_currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
-                    //_currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
+                    _currentlyCollidingGameObject.transform.GetChild(0).gameObject.SetActive(false);
+                    _currentlyCollidingGameObject.transform.GetChild(1).gameObject.SetActive(true);
                     break;
                 default:
                     if(_currentlyCollidingGameObject != null) OnCollisionLeave();
                     break;
             }
         }
-        
+
         [Command]
         private void CmdOnMoveDown(Vector2 movementVector)
         {

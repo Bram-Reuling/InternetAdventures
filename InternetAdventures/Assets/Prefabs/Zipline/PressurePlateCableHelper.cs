@@ -8,6 +8,7 @@ public class PressurePlateCableHelper : NetworkBehaviour
     [SerializeField] private GameObject pressurePlate, platform;
     [SerializeField] private GameObject cable;
     
+    [ServerCallback]
     private void Update()
     {
         Vector3 post1ToPost2 = (platform.transform.position - new Vector3(0, 0.1f, 0)) - pressurePlate.transform.position;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5321360641263186192}
   - component: {fileID: 2401036308895454210}
   - component: {fileID: 7218588378837978946}
-  - component: {fileID: 2864353317425498719}
+  - component: {fileID: 7114509994483396118}
   m_Layer: 0
   m_Name: NetworkPressurePlate
   m_TagString: Untagged
@@ -115,7 +115,7 @@ MonoBehaviour:
   pressurePlate: {fileID: 3134592836013806958}
   platform: {fileID: 2426932044431532995}
   cable: {fileID: 2811734952919736121}
---- !u!114 &2864353317425498719
+--- !u!114 &7114509994483396118
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
   compressRotation: 0
-  interpolateScale: 0
+  interpolateScale: 1
   interpolateRotation: 1
   interpolatePosition: 1
   syncScale: 1

@@ -6113,8 +6113,6 @@ GameObject:
   - component: {fileID: 3480456585577802580}
   - component: {fileID: 1967273924258422627}
   - component: {fileID: 4505294132494557022}
-  - component: {fileID: 903354295}
-  - component: {fileID: 903354296}
   m_Layer: 0
   m_Name: Scammer
   m_TagString: Untagged
@@ -6175,39 +6173,7 @@ MonoBehaviour:
   syncInterval: 0.1
   name: {fileID: 1828309196741028769}
   sentence: {fileID: 5502842091682701919}
---- !u!114 &903354295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7096706856520263584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ed25e7d183848a0b40d5205b371fcd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  name: {fileID: 1828309196741028769}
-  sentence: {fileID: 5502842091682701919}
---- !u!114 &903354296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7096706856520263584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 
-  hasSpawned: 0
+  objectToDisable: {fileID: 0}
 --- !u!1 &7598186340822564982
 GameObject:
   m_ObjectHideFlags: 0

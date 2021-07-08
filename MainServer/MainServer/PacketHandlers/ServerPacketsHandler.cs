@@ -45,11 +45,11 @@ namespace MainServer.PacketHandlers
             // Send the players details to the server.
             // Used for displaying the players names.
 
-            LobbyDataResponse lobbyDataResponse = new LobbyDataResponse {Lobby = room};
+            //LobbyDataResponse lobbyDataResponse = new LobbyDataResponse {Lobby = room};
 
-            ClientServerInfo serverInstanceInfo = serverInstance.GetClientServerInfo(room.Server.Id);
+            //ClientServerInfo serverInstanceInfo = serverInstance.GetClientServerInfo(room.Server.Id);
             
-            serverInstance.SendPacketToClient(serverInstanceInfo, lobbyDataResponse);
+            //serverInstance.SendPacketToClient(serverInstanceInfo, lobbyDataResponse);
         }
     }
 }

@@ -252,7 +252,7 @@ namespace Networking
         {
             if (!loadedObjects)
             {
-                NetworkServer.SpawnObjects();
+                //NetworkServer.SpawnObjects();
                 loadedObjects = true;
             }
             
@@ -296,6 +296,7 @@ namespace Networking
 
         private void EndMatch()
         {
+            Debug.Log("Ending match");
             MatchEndRequest matchEndRequest = new MatchEndRequest {RoomCode = _serverRoomCode, ServerId = _clientId};
             SendObject(matchEndRequest);
 
