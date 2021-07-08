@@ -58,6 +58,7 @@ namespace Networking.NPC
         [ClientRpc]
         private void RpcChangeChatBubbleState(bool newState, EmojiState emojiState)
         {
+            Debug.Log("Changed emoji state");
             IsUsingGoodEmoji = newState;
             EmojiState = emojiState;
         }
